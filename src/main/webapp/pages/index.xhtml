@@ -1,0 +1,199 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html">
+<h:head><title>test</title></h:head>
+<h:head>
+    <title>Trippy Traveler</title>
+    <!-- css -->
+    <h:outputStylesheet library="css" name="bootstrap.css"/>
+    <h:outputStylesheet library="css" name="bootstrap-responsive.css"/>
+    <h:outputStylesheet library="css" name="main.css"/>
+</h:head>
+<h:body>
+    <!-- menu -->
+    <div class="topmenu">
+        <div class="container">
+            <div class="pull-left"><h1>Trippy Traveler</h1></div>
+            <h:form class="navbar-form pull-right">
+                <p>
+                    <h:link class="btn  btn-primary btn-mini" value="Sign in with facebook"/>
+                    or
+                </p>
+                <h:inputText id="email" class="span2" type="text"/>
+
+                <h:inputText id="password" class="span2" type="password"/>
+
+                <h:commandButton class="btn" type="submit" value="Sign in"/>
+                <br/>
+
+            </h:form>
+
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+
+            <!-- trips / my trips -->
+            <div class="span3">
+                <div id="tabContainerTrips" class="tabContainer">
+                    <ul>
+                        <li>
+                            <a class="active" href="#tripsTab">Trips</a>
+                        </li>
+                        <li>
+                            <a href="#myTripsTab">My trips</a>
+                        </li>
+                    </ul>
+                    <!-- //Tab buttons -->
+                    <div class="tabDetails">
+                        <div id="tripsTab" class="tabContentsTrips">
+                            <h:form class="navbar-form">
+                                <h:inputText class="span2" type="text" placeholder="Search a trip"/>
+
+                                <h:commandButton class="btn btn-success" type="submit" value="Search"/>
+
+                            </h:form>
+
+                            <div class="box">
+                                <div><a href="#">Trip1</a></div>
+                                <div><a href="#">Trip2</a></div>
+                            </div>
+                        </div>
+                        <!-- //tripsTab -->
+                        <div id="myTripsTab" class="tabContentsTrips">
+                            <h:form class="navbar-form">
+                                <h:inputText class="span2" type="text" placeholder="Search a trip"/>
+
+                                <h:commandButton class="btn btn-success" type="submit" value="Search"/>
+                            </h:form>
+
+                            <div class="box">
+
+                            </div>
+                        </div>
+                        <!-- //myTripsTab -->
+                    </div>
+                    <!-- //tab Details -->
+                </div>
+            </div>
+
+            <!-- trip info -->
+            <div class="span9">
+                <div id="tabContainerTrip" class="tabContainer">
+                    <ul>
+                        <li>
+                            <a class="active" href="#tripTab">Trip1</a>
+                        </li>
+                        <li>
+                            <a href="#stopsTab">Stops</a>
+                        </li>
+                        <li>
+                            <a href="#partTab">Participants</a>
+                        </li>
+                        <li>
+                            <a href="#accesTab">Accessories</a>
+                        </li>
+                        <li>
+                            <a href="#costsTab">Costs</a>
+                        </li>
+                        <li>
+                            <a href="#stylingTab">Styling</a>
+                        </li>
+                       <li>
+                           <a id="register" href="#registerTab"> Registreer</a>
+                       </li>
+                    </ul>
+                    <!-- //Tab buttons -->
+                    <div class="tabDetails">
+                        <div id="tripTab" class="tabContentsTrip">
+                            <div class="box">
+
+                            </div>
+                        </div>
+                        <!-- //tripTab -->
+                        <div id="stopsTab" class="tabContentsTrip">
+                            <div class="box">
+
+                            </div>
+                        </div>
+                        <!-- //stopsTab -->
+                        <div id="partTab" class="tabContentsTrip">
+                            <div class="box">
+
+                            </div>
+                        </div>
+                        <!-- //partTab -->
+                        <div id="accesTab" class="tabContentsTrip">
+                            <div class="box">
+
+                            </div>
+                        </div>
+                        <!-- //accesTab -->
+                        <div id="costsTab" class="tabContentsTrip">
+                            <div class="box">
+
+                            </div>
+                        </div>
+                        <!-- //costsTab -->
+                        <div id="stylingTab" class="tabContentsTrip">
+                            <div class="box">
+
+                            </div>
+                        </div>
+                        <div id="registerTab" class="tabContentsTrip">
+                            <div class="box">
+                                <h:form>
+                                    <h:outputLabel value="email "/>
+                                    <h:inputText id="email" class="span2"/>
+                                    <h:outputLabel value="password "/>
+                                    <h:inputText id="password" class="span2"/>
+                                    <h:outputLabel value="password2 "/>
+                                    <h:inputText id="password2" class="span2"/>
+                                    <h:outputLabel value="firstname "/>
+                                    <h:inputText id="firstname" class="span2"/>
+                                    <h:outputLabel value="lastname "/>
+                                    <h:inputText id="lastname" class="span2"/>
+                                    <h:outputLabel value="dateOfBirth "/>
+                                    <h:inputText id="dateOfBirth" class="span2"/>
+                                    <h:outputLabel value="phoneNumber "/>
+                                    <h:inputText id="phoneNumber" class="span2"/>
+                                    <h:outputLabel value="gender "/>
+                                    <h:inputText id="gender" class="span2"/>
+                                    <h:outputLabel value="zipcode "/>
+                                    <h:inputText id="zipcode" class="span2"/>
+                                    <h:outputLabel value="street "/>
+                                    <h:inputText id="street" class="span2"/>
+                                    <h:outputLabel value="streetnumber "/>
+                                    <h:inputText id="streetnumber" class="span2"/>
+                                    <h:outputLabel value="city "/>
+                                    <h:inputText id="city" class="span2"/>
+                                    <h:commandButton class="btn" value="Register" action="#{userBean.addUser}"/>
+                                </h:form>
+                            </div>
+                        </div>
+
+                        <!-- //stylingTab -->
+                    </div>
+                    <!-- //tab Details -->
+                </div>
+            </div>
+
+        </div>
+
+
+        <footer>
+            <p>
+                © Trippy Traveler 2013
+            </p>
+        </footer>
+
+    </div>
+    <!-- /container -->
+
+    <!-- javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <h:outputScript name="js/jquery-1.9.0.min.js"/>
+    <h:outputScript name="js/main.js"/>
+</h:body>
+</html> 
