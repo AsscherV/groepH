@@ -3,6 +3,7 @@ package be.kdg.groeph.bean;
 import be.kdg.groeph.model.Address;
 import be.kdg.groeph.model.User;
 import be.kdg.groeph.service.UserService;
+import org.apache.log4j.Logger;
 import org.apache.myfaces.extensions.cdi.core.api.scope.conversation.ViewAccessScoped;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
@@ -17,9 +18,7 @@ import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import java.io.Serializable;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -30,6 +29,7 @@ import java.util.Date;
 @Named
 @ManagedBean(name="userBean")
 public class UserBean implements Serializable {
+    static Logger logger = Logger.getLogger(UserBean.class);
 
     @ManagedProperty(value="#{userService}")
     @Autowired
@@ -202,7 +202,8 @@ public class UserBean implements Serializable {
         setRole("User");
         setDateRegistered(new Date());
         //todo dees nog aanpasse met die datum...
-        User user = new User(getFirstName(), getLastName(), getDateOfBirth(), getPhoneNumber(), getGender(),getEmail(),getPassword(),address,getDateRegistered(),getRole());
+        //todo hier hebbek ook een encrypt method zetten voor password.
+        User user = new User(getFirstName(), getLastName(), getDateOfBirth(), getPhoneNumber(), getGender(),getEmail(), getPassword(),address,getDateRegistered(),getRole());
         if(confirmPassword()){
             userService.addUser(user);
         }
