@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/security
+           http://www.springframework.org/schema/security/spring-security-2.0.xsd">
+
+    <!--
+    <http auto-config="true" access-denied-page="/visitor/accessDenied.jsp">
+        <intercept-url pattern="/visitor/**" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        <intercept-url pattern="/user/**" access="ROLE_USER"/>
+        <form-login login-page="/visitor/register.jsp" default-target-url="/user/welcome.xhtml"
+                    authentication-failure-url="/visitor/loginFailure.xhtml"/>
+        <logout invalidate-session="true" logout-success-url="/visitor/register.xhtml" logout-url="/logout"/>
+        <concurrent-session-control max-sessions="1" expired-url="/visitor/sessionExpired.xhtml"/>
+    </http>
+
+    <authentication-provider user-service-ref="userService">
+    </authentication-provider>
+
+-->
+</beans:beans>
