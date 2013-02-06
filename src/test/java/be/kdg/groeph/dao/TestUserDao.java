@@ -1,12 +1,5 @@
 package be.kdg.groeph.dao;
 
-import be.kdg.groeph.model.User;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.transaction.annotation.Transactional;
-
 /**
  * To change this template use File | Settings | File Templates.
  */
@@ -21,7 +14,7 @@ public class TestUserDao {
 
     /*
     @Test
-    public void createValidUser(){
+    public void addValidUser(){
 
     }
 

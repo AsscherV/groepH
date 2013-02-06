@@ -12,37 +12,25 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
 http://www.springframework.org/schema/context
 http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 
-   <!-- <context:component-scan base-package="be.kdg.groeph.controller"/> -->
     <context:component-scan base-package="be.kdg.groeph.service"/>
     <context:component-scan base-package="be.kdg.groeph.dao"/>
     <context:component-scan base-package="be.kdg.groeph.model"/>
     <context:component-scan base-package="be.kdg.groeph.bean"/>
 
-
-
     <!-- Activates annotation-based bean configuration -->
     <context:annotation-config/>
 
-
     <!-- Data Source Declaration -->
-    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
-        <property name="driverClass" value="com.mysql.jdbc.Driver"/>
-        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/groepH"/>
-        <property name="user" value="groepH"/>
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/groepH"/>
+        <property name="username" value="groepH"/>
         <property name="password" value="groepH2013"/>
-        <property name="maxPoolSize" value="10"/>
-        <property name="maxStatements" value="0"/>
-        <property name="minPoolSize" value="5"/>
     </bean>
 
     <!-- Session Factory Declaration -->
     <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <property name="annotatedClasses">
-            <list>
-                <value>be.kdg.groeph.model.User</value>
-            </list>
-        </property>
         <property name="hibernateProperties">
             <props>
                 <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
@@ -53,17 +41,20 @@ http://www.springframework.org/schema/context/spring-context-3.1.xsd">
         <property name="packagesToScan">
             <list>
                 <value>be.kdg.groeph.model</value>
+                <value>be.kdg.groeph.dao</value>
+                <value>be.kdg.groeph.bean</value>
+                <value>be.kdg.groeph.service</value>
             </list>
         </property>
     </bean>
 
-    <!-- Enable the configuration of transactional behavior based on annotations -->
-    <tx:annotation-driven transaction-manager="txManager"/>
-
     <!-- Transaction Manager is defined -->
-    <bean id="txManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
+
+    <!-- Enable the configuration of transactional behavior based on annotations -->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
 
     <bean id="messageSource"
           class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
@@ -71,10 +62,6 @@ http://www.springframework.org/schema/context/spring-context-3.1.xsd">
         <property name="defaultEncoding" value="UTF-8"/>
     </bean>
 
-
     <context:annotation-config />
     <mvc:annotation-driven />
-
-
-
 </beans>

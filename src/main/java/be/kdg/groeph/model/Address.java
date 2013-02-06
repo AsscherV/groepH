@@ -17,8 +17,8 @@ public class Address implements Nullable, Serializable {
     private int id;
     @Column(name="street", nullable = true, length = 100)
     private String street;
-    @Column(name="number", nullable = true, length = 20)
-    private String number;
+    @Column(name="streetNumber", nullable = true, length = 20)
+    private String streetNumber;
     @Column(name="zipcode", nullable = true, length = 20)
     private String zipcode;
     @Column(name="city", nullable = true, length = 50)
@@ -28,9 +28,9 @@ public class Address implements Nullable, Serializable {
     public Address() {
     }
 
-    public Address(String street, String number, String zipcode, String city) {
+    public Address(String street, String streetNumber, String zipcode, String city) {
         this.street = street;
-        this.number = number;
+        this.streetNumber = streetNumber;
         this.zipcode = zipcode;
         this.city = city;
     }
@@ -51,12 +51,12 @@ public class Address implements Nullable, Serializable {
         this.street = street;
     }
 
-    public String getNumber() {
-        return number;
+    public String getStreetNumber() {
+        return streetNumber;
     }
 
-    public void setNumber(String number) {
-        this.number = number;
+    public void setStreetNumber(String number) {
+        this.streetNumber = number;
     }
 
     public String getZipcode() {
@@ -101,7 +101,7 @@ public class Address implements Nullable, Serializable {
         StringBuilder sb = new StringBuilder();
         sb.append(street);
         sb.append(" ");
-        sb.append(number);
+        sb.append(streetNumber);
         sb.append(" ");
         sb.append(zipcode);
         sb.append(" ");

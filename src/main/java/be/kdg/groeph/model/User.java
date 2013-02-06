@@ -2,17 +2,9 @@ package be.kdg.groeph.model;
 
 import be.kdg.groeph.model.Null.NullUser;
 import be.kdg.groeph.model.Null.Nullable;
-import org.hibernate.annotations.*;
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -28,43 +20,30 @@ import java.util.Date;
 public class User implements Nullable, Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull(message = "{id} {notempty}")
     private int id;
-    @NotEmpty(message = "{firstName} {notempty}")
-    @Length(max=50, message = "{firstName} {length}")
-    @NotNull(message = "{firstName} {notempty}")
-    @Column(name="firstName", nullable = false, length = 100)
+    @Column(name="firstName", nullable = true, length = 100)
     private String firstName;
-    @NotEmpty(message = "{lastName} {notempty}")
-    @Length(max=50, message = "{lastName} {length}")
-    @Column (name="lastName", nullable = false, length = 50)
+    @Column(name="lastName", nullable = true, length = 50)
     private String lastName;
-    @NotNull(message = "{dateOfBirth} {notempty}")
-    @Past(message = "{dateOfBirth} {past}")
     @Column(name="dateOfBirth", nullable = true, length = 100)
     private Date dateOfBirth;
-    @Length(max=30, message = "{phoneNumber} {length}")
     @Column(name="phoneNumber", nullable = true, length = 100)
     private String phoneNumber;
-    @Column(name="gender", nullable = true, length = 100)
+    @Column(name="gender", nullable = true, length = 100)        //true
     private char gender;
-    //@NotEmpty(message = "{email} {notempty}")
-    //@Email(message = "{email} {validEmail}")
-    //@Length(max=100, message = "{email} {length}")
     @Column(name="email", nullable = true, length = 100)
     private String email;
-    //@NotEmpty(message = "{password} {notempty}")
     @Column(name="password", nullable = true, length = 100)
     private String password;
-    //@NotEmpty(message = "{firstName} {notempty}")
+    @Column(name="role", nullable = true, length = 100)
+    private String role;
     @Column(name="dateRegistered", nullable = true, length = 100)
     private Date dateRegistered;
 
-    //@Valid
-    //@ManyToOne
-    //@JoinColumn(name = "address")
-    //@Cascade({org.hibernate.annotations.CascadeType.ALL})
-    //private Address address;
+    @ManyToOne
+    @JoinColumn(name = "address")
+    @Cascade({org.hibernate.annotations.CascadeType.ALL})
+    private Address address;
 
     /*
         @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
@@ -76,7 +55,7 @@ public class User implements Nullable, Serializable {
     public User() {
     }
 
-    public User(String firstName, String lastName, Date dateOfBirth, String phoneNumber, char gender, String email, String password, Address address, Date dateRegistered) {
+    public User(String firstName, String lastName, Date dateOfBirth, String phoneNumber, char gender, String email, String password, Address address, Date dateRegistered, String role) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
@@ -84,8 +63,9 @@ public class User implements Nullable, Serializable {
         this.gender = gender;
         this.email = email;
         this.password = password;
-        //this.address = address;
+        this.address = address;
         this.dateRegistered = dateRegistered;
+        this.role = role;
     }
 
     public int getId() {
@@ -152,22 +132,28 @@ public class User implements Nullable, Serializable {
         this.password = password;
     }
 
-    /*
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
-    }
-    */
-
     public Date getDateRegistered() {
         return dateRegistered;
     }
 
     public void setDateRegistered(Date dateRegistered) {
         this.dateRegistered = dateRegistered;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     @Override

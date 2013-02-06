@@ -144,29 +144,29 @@
                             <div class="box">
                                 <h:form>
                                     <h:outputLabel value="email "/>
-                                    <h:inputText id="email" class="span2"/>
+                                    <h:inputText id="email" value="#{userBean.email}" class="span2"/>
                                     <h:outputLabel value="password "/>
-                                    <h:inputText id="password" class="span2"/>
+                                    <h:inputText id="password" value="#{userBean.password}" class="span2"/>
                                     <h:outputLabel value="password2 "/>
-                                    <h:inputText id="password2" class="span2"/>
+                                    <h:inputText id="password2" value="#{userBean.secondPassword}" class="span2"/>
                                     <h:outputLabel value="firstname "/>
-                                    <h:inputText id="firstname" class="span2"/>
+                                    <h:inputText id="firstname" value="#{userBean.firstName}" class="span2"/>
                                     <h:outputLabel value="lastname "/>
-                                    <h:inputText id="lastname" class="span2"/>
+                                    <h:inputText id="lastname" value="#{userBean.lastName}" class="span2"/>
                                     <h:outputLabel value="dateOfBirth "/>
-                                    <h:inputText id="dateOfBirth" class="span2"/>
+                                    <h:inputText id="dateOfBirth" value="#{userBean.dateOfBirth}" class="span2"/>
                                     <h:outputLabel value="phoneNumber "/>
-                                    <h:inputText id="phoneNumber" class="span2"/>
+                                    <h:inputText id="phoneNumber" value="#{userBean.phoneNumber}" class="span2"/>
                                     <h:outputLabel value="gender "/>
-                                    <h:inputText id="gender" class="span2"/>
+                                    <h:inputText id="gender" value="#{userBean.gender}" class="span2"/>
                                     <h:outputLabel value="zipcode "/>
-                                    <h:inputText id="zipcode" class="span2"/>
+                                    <h:inputText id="zipcode" value="#{userBean.zipcode}" class="span2"/>
                                     <h:outputLabel value="street "/>
-                                    <h:inputText id="street" class="span2"/>
+                                    <h:inputText id="street" value="#{userBean.street}" class="span2"/>
                                     <h:outputLabel value="streetnumber "/>
-                                    <h:inputText id="streetnumber" class="span2"/>
+                                    <h:inputText id="streetnumber" value="#{userBean.streetNumber}" class="span2"/>
                                     <h:outputLabel value="city "/>
-                                    <h:inputText id="city" class="span2"/>
+                                    <h:inputText id="city" value="#{userBean.city}" class="span2"/>
                                     <h:commandButton class="btn" value="Register" action="#{userBean.addUser}"/>
                                 </h:form>
                             </div>

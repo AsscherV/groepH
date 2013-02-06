@@ -9,11 +9,8 @@
     <!-- Spring Context Configuration' s Path definition -->
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>/WEB-INF/applicationContext.xml
-
-            /WEB-INF/spring-security.xml</param-value>
+        <param-value>/WEB-INF/applicationContext.xml</param-value>
     </context-param>
-
 
     <!-- Spring Listeners -->
     <listener>
@@ -31,6 +28,7 @@
     </context-param>
     -->
 
+    <!-- Start-up file -->
     <welcome-file-list>
         <welcome-file>pages/index.xhtml</welcome-file>
     </welcome-file-list>
@@ -41,6 +39,7 @@
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
+
     <!-- JSF URL Mapping -->
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
@@ -71,24 +70,5 @@
         <filter-name>hibernateFilter</filter-name>
         <filter-class>org.springframework.orm.hibernate4.support.OpenSessionInViewFilter</filter-class>
     </filter>
-
-    <filter-mapping>
-        <filter-name>hibernateFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
-     -->
-
-    <!-- Spring Security filter
-    <filter>
-        <filter-name>springSecurityFilterChain</filter-name>
-        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-    </filter>
-
-    <filter-mapping>
-        <filter-name>springSecurityFilterChain</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
     -->
-
-
 </web-app>

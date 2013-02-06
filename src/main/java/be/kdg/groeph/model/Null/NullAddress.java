@@ -1,6 +1,7 @@
 package be.kdg.groeph.model.Null;
 
 import be.kdg.groeph.model.Address;
+
 /**
  * To change this template use File | Settings | File Templates.
  */
