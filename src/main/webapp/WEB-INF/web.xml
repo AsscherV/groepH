@@ -52,11 +52,7 @@
         <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
         <init-param>
             <param-name>com.sun.jersey.config.property.packages</param-name>
-            <param-value>my.package.api</param-value>
-            <!-- Wa moet hier nu staan? ^
-            Replace my.package.api with the
-            real package you intend to use
-            for your resource-classes.-->
+            <param-value>be.kdg.groeph</param-value>
         </init-param>
     </servlet>
 
