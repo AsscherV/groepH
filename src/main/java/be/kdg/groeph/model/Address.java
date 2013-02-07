@@ -99,13 +99,13 @@ public class Address implements Nullable, Serializable {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(street);
+        sb.append(getStreet());
         sb.append(" ");
-        sb.append(streetNumber);
+        sb.append(getStreetNumber());
         sb.append(" ");
-        sb.append(zipcode);
+        sb.append(getZipcode());
         sb.append(" ");
-        sb.append(city);
+        sb.append(getCity());
         return sb.toString();
     }
 }

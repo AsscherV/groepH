@@ -1,5 +1,6 @@
-package be.kdg.groeph.dao;
+package be.kdg.groeph.service;
 
+import be.kdg.groeph.mockMother.UserMother;
 import be.kdg.groeph.model.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,7 +10,9 @@ import org.springframework.test.context.junit4.AbstractTransactionalJUnit4Spring
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.*;
 
 /**
@@ -19,18 +22,21 @@ import static org.junit.Assert.*;
 @Transactional
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:daoContext.xml"})
-public class TestUserDao extends AbstractTransactionalJUnit4SpringContextTests {
+public class TestUserService extends AbstractTransactionalJUnit4SpringContextTests {
     @Autowired
-    private UserDao userDao;
+    UserService userService;
 
     private User user1;
     private User user2;
 
     @Test
-    public void testInvalidEmail(){
-        assertEquals(User.INVALID_USER(), userDao.getUserByEmail("geenemail"));
+    public void testAddUser(){
+        user1 = UserMother.validUser1();
+        user2 = UserMother.validUser2();
+        assertTrue(userService.addUser(user1));
+        assertFalse(userService.addUser(user1));
+        assertTrue(userService.addUser(user2));
     }
-
 
 
 }

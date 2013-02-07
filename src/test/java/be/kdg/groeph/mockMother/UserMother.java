@@ -25,5 +25,23 @@ public class UserMother {
         Address address=new Address("TestStreet","TestStreetNumber","TestZipcode","TestCity");
         return new User("Greg", "Deckers", cal.getTime(),"0477879057", 'M',"greg.deckers@student.kdg.be","wachtwoord",address, new Date(), "User");
     }
+    /*
+    public static User invalidPasswordUser(){
+
+        Calendar cal;
+        cal = Calendar.getInstance();
+        cal.set(1988, Calendar.DECEMBER, 10);
+        Address address=new Address("TestStreet","TestStreetNumber","TestZipcode","TestCity");
+        return new User("Greg", "Deckers", cal.getTime(),"0477879057", 'M',"greg.deckers@student.kdg.be","",address, new Date(), "User");
+    }
+    */
+    public static User invalidEmailUser(){
+
+        Calendar cal;
+        cal = Calendar.getInstance();
+        cal.set(1988, Calendar.DECEMBER, 10);
+        Address address=new Address("TestStreet","TestStreetNumber","TestZipcode","TestCity");
+        return new User("Greg", "Deckers", cal.getTime(),"0477879057", 'M',"","wachtwoord",address, new Date(), "User");
+    }
 
 }

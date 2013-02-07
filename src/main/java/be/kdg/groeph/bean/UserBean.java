@@ -27,7 +27,6 @@ import java.util.Date;
 @Component
 @ViewAccessScoped
 @Named
-@ManagedBean(name="userBean")
 public class UserBean implements Serializable {
     static Logger logger = Logger.getLogger(UserBean.class);
 
@@ -70,7 +69,10 @@ public class UserBean implements Serializable {
     @NotEmpty(message = "{firstName} {notempty}")
     private String role;
 
+    private boolean registered;
+
     public UserBean() {
+        registered = false;
     }
 
     public String getFirstName() {
@@ -186,7 +188,7 @@ public class UserBean implements Serializable {
     }
 
     public boolean confirmPassword() {
-        return password.equals(secondPassword);
+        return password.equals(getSecondPassword());
     }
 
     public UserService getUserService() {
@@ -197,8 +199,16 @@ public class UserBean implements Serializable {
         this.userService = userService;
     }
 
-    public void addUser() throws ParseException {
-        Address address = new Address(street, streetNumber,zipcode,city);
+    public boolean isRegistered() {
+        return registered;
+    }
+
+    public void setRegistered(boolean registered) {
+        this.registered = registered;
+    }
+
+    public String addUser() throws ParseException {
+        Address address = new Address(getStreet(), getStreetNumber(),getZipcode(),getCity());
         setRole("User");
         setDateRegistered(new Date());
         //todo dees nog aanpasse met die datum...
@@ -206,16 +216,10 @@ public class UserBean implements Serializable {
         User user = new User(getFirstName(), getLastName(), getDateOfBirth(), getPhoneNumber(), getGender(),getEmail(), getPassword(),address,getDateRegistered(),getRole());
         if(confirmPassword()){
             userService.addUser(user);
-        }
-
-        /*
-        if(userService.addUser(user)){
+            registered = true;
             return "SUCCESS";
-        }else{
-            return "FALSE";
         }
-        */
-
+        return "FAILURE";
     }
 
 

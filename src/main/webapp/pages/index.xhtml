@@ -24,7 +24,7 @@
                     <h:outputLabel value="Password"/>
                     <h:inputSecret id="password" styleClass="span2 loginInput" />
                     <h:commandButton class="btn btn-mini" type="submit" value="Sign in"/>
-                    <a id="register" href="#registerTab">Register</a>
+                    <a id="register" href="register.xhtml">Register</a>
                     </h:panelGrid>
                     
                 </h:form>
@@ -85,22 +85,22 @@
                         <ul>
                             <!-- Tab buttons -->
                             <li>
-                                <a class="button active" href="#tripTab">Trip1</a>
+                                <a class="button active" href="index.xhtml">Trip1</a>
                             </li>
                             <li>
-                                <a class="button" href="#stopsTab">Stops</a>
+                                <a class="button" href="stops.xhtml">Stops</a>
                             </li>
                             <li>
-                                <a class="button" href="#partTab">Participants</a>
+                                <a class="button" href="participants.xhtml">Participants</a>
                             </li>
                             <li>
-                                <a class="button" href="#accesTab">Accessories</a>
+                                <a class="button" href="accessories.xhtml">Accessories</a>
                             </li>
                             <li>
-                                <a class="button" href="#costsTab">Costs</a>
+                                <a class="button" href="costs.xhtml">Costs</a>
                             </li>
                             <li>
-                                <a class="button" href="#stylingTab">Styling</a>
+                                <a class="button" href="styling.xhtml">Styling</a>
                             </li>
                         </ul>
                         <!-- Tab content -->
@@ -110,94 +110,6 @@
 
                                 </div>
                             </div>
-                            <div id="stopsTab" class="tabContentsTrip">
-                                <div class="box">
-
-                                </div>
-                            </div>
-                            <div id="partTab" class="tabContentsTrip">
-                                <div class="box">
-
-                                </div>
-                            </div>
-                            <div id="accesTab" class="tabContentsTrip">
-                                <div class="box">
-
-                                </div>
-                            </div>
-                            <div id="costsTab" class="tabContentsTrip">
-                                <div class="box">
-
-                                </div>
-                            </div>
-                            <div id="stylingTab" class="tabContentsTrip">
-                                <div class="box">
-
-                                </div>
-                            </div>
-                            <div id="registerTab" class="tabContentsTrip">
-                                <div class="box">
-                                        <h:form>
-                                            <h:panelGrid columns="3" border="0" >  
-
-                                                <h:outputLabel value="Email"/>
-                                                <h:inputText id="email"  required="true" styleClass="span2"/>
-                                                <h:message for="email" styleClass="error" />
-
-                                                <h:outputLabel value="Password"/>
-                                                <h:inputText id="password"  required="true" styleClass="span2"/>
-                                                <h:message for="password" styleClass="error" />
-
-                                                <h:outputLabel value="Second Password "/>
-                                                <h:inputText id="password2"  required="true" styleClass="span2"/>
-                                                <h:message for="password2" styleClass="error" />
-
-                                                <h:outputLabel value="Firstname"/>
-                                                <h:inputText id="firstname"  required="true" styleClass="span2"/>
-                                                <h:message for="firstname" styleClass="error" />
-
-                                                <h:outputLabel value="Lastname "/>
-                                                <h:inputText id="lastname"  required="true" styleClass="span2"/>
-                                                <h:message for="lastname" styleClass="error" />
-
-                                                <h:outputLabel value="Date of birth"/>
-                                                <h:inputText id="dateOfBirth"  required="true" styleClass="span2"/>
-                                                <h:message for="dateOfBirth" styleClass="error" />
-
-                                                <h:outputLabel value="Phone number"/>
-                                                <h:inputText id="phoneNumber" required="true" styleClass="span2"/>
-                                                <h:message for="phoneNumber" styleClass="error" />
-
-                                                <h:outputLabel value="Gender"/>
-                                                <h:selectOneRadio value="male">
-                                                    <f:selectItem itemValue="male" itemLabel="Male" />
-                                                    <f:selectItem itemValue="female" itemLabel="Female" />                                                    
-                                                </h:selectOneRadio>   
-                                                <!-- gender radios -->
-
-                                                <h:outputLabel value="Street"/>
-                                                <h:inputText id="street" required="true" styleClass="span2"/>
-                                                <h:message for="street" styleClass="error" />
-
-                                                <h:outputLabel value="Streetnumber"/>
-                                                <h:inputText id="streetnumber"  required="true" styleClass="span2"/>
-                                                <h:message for="streetnumber" styleClass="error" />
-
-                                                <h:outputLabel value="Zipcode"/>
-                                                <h:inputText id="zipcode"  required="true" styleClass="span2"/>
-                                                <h:message for="zipcode" styleClass="error" />
-
-                                                <h:outputLabel value="city "/>
-                                                <h:inputText id="city"  required="true" styleClass="span2"/>
-                                                <h:message for="city" styleClass="error" />
-
-                                            </h:panelGrid>
-                                            <h:commandButton  type="submit"  class="btn btn-success" value="Register" />
-                                        </h:form>
-                                </div>
-                            </div>
-
-                            <!-- //stylingTab -->
                         </div>
                         <!-- //tab Details -->
                     </div>

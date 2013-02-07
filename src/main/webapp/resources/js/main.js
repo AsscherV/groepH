@@ -15,22 +15,4 @@ $(document).ready(function(){
 
                        $(".button").fadeIn(); // show unvisible trip tabs
 	});
-
-	$("#tabContainerTrip ul li a").click(function(){ //Fire the click event
-
-		var activeTab = $(this).attr("href"); // Catch the click link
-		$("#tabContainerTrip ul li a").removeClass("active"); // Remove pre-highlighted link
-		$(this).addClass("active"); // set clicked link to highlight state
-		$(".tabContentsTrip").hide(); // hide currently visible tab content div
-		$(activeTab).fadeIn(); // show the target tab content div by matching clicked link.
-	});
-
-         $("#register").click(function(){ //Fire the click event
-
-		var activeTab = $(this).attr("href"); // Catch the click link
-		$("#tabContainerTrip ul li a").removeClass("active"); // Remove pre-highlighted link
-        $(".button").hide(); // hide visible tabs
-		$(".tabContentsTrip").hide(); // hide currently visible tab content div
-		$(activeTab).fadeIn(); // show the target tab content div by matching clicked link.
-	});
 });
