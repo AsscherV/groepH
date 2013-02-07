@@ -18,6 +18,8 @@ http://www.springframework.org/schema/beans/spring-beans-3.1.xsd http://www.spri
     <context:component-scan base-package="be.kdg.groeph.dao" />
     <context:component-scan base-package="be.kdg.groeph.bean" />
     <context:component-scan base-package="be.kdg.groeph.model" />
+    <context:component-scan base-package="be.kdg.groeph.util" />
+
 
     <context:annotation-config />
     <mvc:annotation-driven />

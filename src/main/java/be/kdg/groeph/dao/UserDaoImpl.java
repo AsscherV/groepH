@@ -4,9 +4,12 @@ import be.kdg.groeph.model.User;
 import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
+import org.hibernate.exception.DataException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public class UserDaoImpl implements UserDao {
@@ -27,8 +30,9 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     @SuppressWarnings("unchecked")
-    public void addUser(User user) {
+    public boolean addUser(User user) {
         getSessionFactory().getCurrentSession().saveOrUpdate(user);
+        return true;
     }
 
     @Override

@@ -196,7 +196,7 @@ public class User implements Nullable, Serializable {
 
     @Override
     public String toString() {
-        return firstName + " " + lastName;
+        return firstName + " " + lastName + " ";
     }
 
     public static User INVALID_USER() {
