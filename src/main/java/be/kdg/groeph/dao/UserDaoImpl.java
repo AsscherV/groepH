@@ -1,6 +1,7 @@
 package be.kdg.groeph.dao;
 
 import be.kdg.groeph.model.User;
+import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class UserDaoImpl implements UserDao {
+    static Logger logger = Logger.getLogger(UserDaoImpl.class);
 
     @Qualifier("sessionFactory")
     @Autowired

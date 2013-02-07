@@ -1,7 +1,8 @@
 package be.kdg.groeph.bean;
 
-import be.kdg.groeph.model.Address;
+import be.kdg.groeph.mockMother.UserMother;
 import be.kdg.groeph.model.User;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,12 +11,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.Calendar;
-import java.util.Date;
-
-import static junit.framework.Assert.assertFalse;
-import static junit.framework.Assert.assertTrue;
-import static junit.framework.TestCase.assertNotSame;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotSame;
 
 /**
  * To change this template use File | Settings | File Templates.
@@ -23,7 +21,7 @@ import static junit.framework.TestCase.assertNotSame;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:daoContext.xml"})
-public class UserTest extends AbstractTransactionalJUnit4SpringContextTests{                   //extends AbstractTransactionalJUnit4SpringContextTests
+public class UserTest extends AbstractTransactionalJUnit4SpringContextTests{
 
 
     @Qualifier("userBean")
@@ -33,8 +31,15 @@ public class UserTest extends AbstractTransactionalJUnit4SpringContextTests{    
     private User user1;
     private User user2;
 
+    @Before
+    public void init(){
+        user1 = UserMother.validUser1();
+        user2 = UserMother.validUser2();
+    }
+
     @Test
     public void insertUser(){
+        /*
         Calendar cal;
         cal = Calendar.getInstance();
         cal.set(1988, Calendar.DECEMBER, 10);
@@ -42,6 +47,8 @@ public class UserTest extends AbstractTransactionalJUnit4SpringContextTests{    
         user1 = new User("Gunther", "Laurijssens", cal.getTime(),"0498216718", 'M',"guntherlaurijssens@gmail.com","wachtwoord",address, new Date(), "User");
         user2 = new User("Gunther2", "Laurijssens", cal.getTime(),"0498216718", 'M',"guntherlaurijssens@gmail.com","wachtwoord",address, new Date(), "User");
         assertNotSame(user1.getFirstName(), user2.getLastName());
+        */
+        assertNotSame(user1, user2);
     }
 
 
@@ -49,7 +56,6 @@ public class UserTest extends AbstractTransactionalJUnit4SpringContextTests{    
     public void testValidPassword(){
         userBean.setPassword("wachtwoord");
         userBean.setSecondPassword("wachtwoord");
-        //assertEquals(userBean.getPassword(),userBean.getSecondPassword());
         assertTrue(userBean.confirmPassword());
     }
 
