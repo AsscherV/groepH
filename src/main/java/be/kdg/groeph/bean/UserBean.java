@@ -4,6 +4,7 @@ import be.kdg.groeph.model.Address;
 import be.kdg.groeph.model.User;
 import be.kdg.groeph.service.UserService;
 import org.apache.log4j.Logger;
+import org.apache.myfaces.extensions.cdi.core.api.scope.conversation.Conversation;
 import org.apache.myfaces.extensions.cdi.core.api.scope.conversation.ViewAccessScoped;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
