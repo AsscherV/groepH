@@ -52,9 +52,13 @@ public class TestTripBean extends AbstractTransactionalJUnit4SpringContextTests 
     }
 
     private void setTripBean(boolean isValid,boolean isPublic) {
+
+
         if(isValid)
         {
             tripBean.setTitle(title);
+        }  else {
+            tripBean.setTitle("");
         }
         tripBean.setDescription(description);
         tripBean.addLabel(strand);
@@ -62,12 +66,13 @@ public class TestTripBean extends AbstractTransactionalJUnit4SpringContextTests 
         tripBean.addLabel(uitstap);
         tripBean.setType(timebound);
         tripBean.setStartTime(cal.getTime());
-        tripBean.setPublic(true);
+        tripBean.setPublic(isPublic);
     }
 
     @Test
     public void insertInvalidPublicTripNoTitle()
     {
+
         setTripBean(false,true);
         assertEquals("addTrip result should be FAILURE","FAILURE",tripBean.addTrip());
     }
