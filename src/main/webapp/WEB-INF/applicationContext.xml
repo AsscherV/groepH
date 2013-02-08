@@ -16,6 +16,7 @@
     <context:component-scan base-package="be.kdg.groeph.dao"/>
     <context:component-scan base-package="be.kdg.groeph.model"/>
     <context:component-scan base-package="be.kdg.groeph.bean"/>
+    <context:component-scan base-package="be.kdg.groeph.util"/>
 
     <!-- Activates annotation-based bean configuration -->
     <context:annotation-config/>
@@ -51,6 +52,7 @@
                 <value>be.kdg.groeph.service</value>
                 <value>be.kdg.groeph.dao</value>
                 <value>be.kdg.groeph.model</value>
+                <value>be.kdg.groeph.util</value>
             </list>
         </property>
     </bean>

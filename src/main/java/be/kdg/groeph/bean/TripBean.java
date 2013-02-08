@@ -28,6 +28,9 @@ import java.util.Set;
 @ManagedBean(name="tripBean")
 public class TripBean implements Serializable {
     static Logger logger = Logger.getLogger(TripBean.class);
+    private static final String SUCCESS = "SUCCESS";
+    private static final String FAILURE = "FAILURE";
+
     @ManagedProperty(value="#{tripService}")
     @Autowired
     TripService tripService;
@@ -45,7 +48,7 @@ public class TripBean implements Serializable {
 
     public String addTrip(){
         Trip trip = new Trip(title,description,labels,startTime,isPublic);
-        return tripService.addTrip(trip)? "SUCCESS":"FAILURE";
+        return tripService.addTrip(trip)? SUCCESS:FAILURE;
     }
 
     public void setTitle(String title) {

@@ -34,7 +34,7 @@ public class UserServiceImpl  implements UserService {
         if(userByEmail.isNull()){
             getUserDao().addUser(user);
             logger.info("User " + user.getEmail() + " created");
-            userByEmail =userDao.getUserByEmail(user.getEmail());
+            //userByEmail =userDao.getUserByEmail(user.getEmail());
             return  true;
         }
         logger.warn("Failed to create user: " + user.getEmail());

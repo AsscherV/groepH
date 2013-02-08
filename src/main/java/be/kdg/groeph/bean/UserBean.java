@@ -3,6 +3,7 @@ package be.kdg.groeph.bean;
 import be.kdg.groeph.model.Address;
 import be.kdg.groeph.model.User;
 import be.kdg.groeph.service.UserService;
+import be.kdg.groeph.util.SHAEncryption;
 import org.apache.log4j.Logger;
 import org.apache.myfaces.extensions.cdi.core.api.scope.conversation.Conversation;
 import org.apache.myfaces.extensions.cdi.core.api.scope.conversation.ViewAccessScoped;
@@ -32,6 +33,9 @@ import java.util.Date;
 public class UserBean implements Serializable {
     static Logger logger = Logger.getLogger(UserBean.class);
 
+    private static final String SUCCESS = "SUCCESS";
+    private static final String FAILURE = "FAILURE";
+
     @ManagedProperty(value="#{userService}")
     @Autowired
     UserService userService;
@@ -51,7 +55,6 @@ public class UserBean implements Serializable {
     @NotEmpty(message = "{email} {notempty}")
     @Email(message = "{email} {validEmail}")
     @Length(max=100, message = "{email} {length}")
-    @Column(name="email", nullable = true, length = 100)
     private String email;
     @NotEmpty(message = "{password} {notempty}")
     private String password;
@@ -216,13 +219,13 @@ public class UserBean implements Serializable {
         //todo hier hebbek ook een encrypt method zetten voor password.
         //
         boolean isAdmin = false;
-        User user = new User(getFirstName(), getLastName(), getDateOfBirth(), getPhoneNumber(), getGender(),getEmail(), getPassword(),address,getDateRegistered(),getRole(), isAdmin);
+        User user = new User(getFirstName(), getLastName(), getDateOfBirth(), getPhoneNumber(), getGender(),getEmail(), SHAEncryption.encrypt(getPassword()),address,getDateRegistered(),getRole(), isAdmin);
         if(confirmPassword()){
             userService.addUser(user);
             registered = true;
-            return "SUCCESS";
+            return SUCCESS;
         }
-        return "FAILURE";
+        return FAILURE;
     }
 
 
