@@ -14,17 +14,40 @@
     	</el-resolver>
   	</application>
 
-    <!-- configuration of navigation rules
+    <!-- configuration of navigation rules  -->
     <navigation-rule>
-        <from-view-id>/pages/index.xhtml</from-view-id>
+        <from-view-id>/pages/register.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>success</from-outcome>
-            <to-view-id>/pages/success.xhtml</to-view-id>
+            <to-view-id>/pages/register.xhtml</to-view-id>
         </navigation-case>
+        <!--
         <navigation-case>
-            <from-outcome>error</from-outcome>
+            <from-outcome>failure</from-outcome>
             <to-view-id>/pages/error.xhtml</to-view-id>
         </navigation-case>
+        -->
     </navigation-rule>
-     -->
+
+    <!--
+    <navigation-rule>
+        <from-view-id>/pages/index.xhtml</from-view-id>
+        <from-action>#{loginBean.validateUser}</from-action>
+        <navigation-case>
+            <from-outcome>failure</from-outcome>
+            <to-view-id>/pages/index.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>ADMIN</from-outcome>
+            <to-view-id>/pages/admin/admin.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>CUSTOMER</from-outcome>
+            <to-view-id>/users/products.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    -->
+
 </faces-config>

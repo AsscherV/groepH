@@ -27,7 +27,6 @@ public class UserDaoImpl implements UserDao {
         this.sessionFactory = sessionFactory;
     }
 
-
     @Override
     @SuppressWarnings("unchecked")
     public boolean addUser(User user) {
@@ -44,4 +43,7 @@ public class UserDaoImpl implements UserDao {
         }
         return (User) query.uniqueResult();
     }
+
+
+
 }

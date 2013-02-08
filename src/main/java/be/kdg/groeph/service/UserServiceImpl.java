@@ -18,6 +18,9 @@ import java.util.Date;
 public class UserServiceImpl  implements UserService {
     static Logger logger = Logger.getLogger(UserServiceImpl.class);
 
+    @Autowired
+    UserDao userDao;
+
     public UserDao getUserDao() {
         return userDao;
     }
@@ -26,17 +29,13 @@ public class UserServiceImpl  implements UserService {
         this.userDao = userDao;
     }
 
-    @Autowired
-    UserDao userDao;
-
-
     public boolean addUser(User user){
-        if(userDao.getUserByEmail(user.getEmail()).isNull()){
-            //todo HIER encrypten
-            //siteUser.setPassword(SHAEncryption.encrypt(siteUser.getPassword()));
+        User userByEmail = userDao.getUserByEmail(user.getEmail());
+        if(userByEmail.isNull()){
             getUserDao().addUser(user);
             logger.info("User " + user.getEmail() + " created");
-            return true;
+            userByEmail =userDao.getUserByEmail(user.getEmail());
+            return  true;
         }
         logger.warn("Failed to create user: " + user.getEmail());
         return false;

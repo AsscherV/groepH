@@ -46,6 +46,11 @@
                             <artifactId>cobertura-maven-plugin</artifactId>
                             <version>2.5.1</version>
                         </plugin>
+                        <plugin>
+                            <groupId>org.codehaus.mojo</groupId>
+                            <artifactId>findbugs-maven-plugin</artifactId>
+                            <version>2.4.0</version>
+                        </plugin>
                     </reportPlugins>
                 </configuration>
             </plugin>
@@ -379,6 +384,13 @@
             <groupId>javax.inject</groupId>
             <artifactId>javax.inject</artifactId>
             <version>1</version>
+        </dependency>
+
+        <!-- Voor date picker-->
+        <dependency>
+            <groupId>org.apache.myfaces.trinidad</groupId>
+            <artifactId>trinidad-api</artifactId>
+            <version>1.0.1</version>
         </dependency>
     </dependencies>
 </project>
