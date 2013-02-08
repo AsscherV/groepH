@@ -38,7 +38,6 @@ public class UserBean implements Serializable {
 
     @NotEmpty(message = "{firstName} {notempty}")
     @Length(max=50, message = "{firstName} {length}")
-    @NotNull(message = "{firstName} {notempty}")
     private String firstName;
     @NotEmpty(message = "{lastName} {notempty}")
     @Length(max=50, message = "{lastName} {length}")
@@ -215,7 +214,9 @@ public class UserBean implements Serializable {
         setDateRegistered(new Date());
         //todo dees nog aanpasse met die datum...
         //todo hier hebbek ook een encrypt method zetten voor password.
-        User user = new User(getFirstName(), getLastName(), getDateOfBirth(), getPhoneNumber(), getGender(),getEmail(), getPassword(),address,getDateRegistered(),getRole());
+        //
+        boolean isAdmin = false;
+        User user = new User(getFirstName(), getLastName(), getDateOfBirth(), getPhoneNumber(), getGender(),getEmail(), getPassword(),address,getDateRegistered(),getRole(), isAdmin);
         if(confirmPassword()){
             userService.addUser(user);
             registered = true;

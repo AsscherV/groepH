@@ -71,7 +71,6 @@
           <element id="library" level="project" name="Maven: javax.ws.rs:jsr311-api:1.0" />
           <element id="library" level="project" name="Maven: javax.transaction:jta:1.1" />
           <element id="library" level="project" name="Maven: javax.inject:javax.inject:1" />
-          <element id="library" level="project" name="Maven: org.apache.myfaces.trinidad:trinidad-api:1.0.1" />
         </element>
       </element>
     </root>

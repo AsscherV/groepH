@@ -1,0 +1,45 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+    <title>Trippy Traveler</title>
+    <!-- css -->
+    <h:outputStylesheet library="css" name="bootstrap.css"/>
+    <h:outputStylesheet library="css" name="bootstrap-responsive.css"/>
+    <h:outputStylesheet library="css" name="main.css"/>
+</h:head>
+<h:body>
+    <ui:composition>
+        <div class="topmenu">
+            <div class="container">
+                <div class="pull-left"><h1>Trippy Traveler</h1></div>
+                <h:form class="navbar-form pull-right">
+                    <h:panelGrid rendered="#{not loginBean.loggedIn}">
+                        <h:link class="btn  btn-primary btn-mini" value="Sign in with facebook"/>
+                    </h:panelGrid>
+                    <h:panelGrid columns="5" border="0" rendered="#{not loginBean.loggedIn}">
+
+                        <h:outputLabel value="Email"/>
+                        <h:inputText id="email" styleClass="span2 loginInput" value="#{loginBean.email}"/>
+                        <h:outputLabel value="Password"/>
+                        <h:inputSecret id="password" styleClass="span2 loginInput" value="#{loginBean.password}"/>
+                        <h:commandButton class="btn btn-mini" type="submit" value="Sign in"
+                                         action="#{loginBean.loginUser}"/>
+                    </h:panelGrid>
+
+
+                    <h:panelGrid rendered="#{loginBean.loggedIn}">
+                        <h1>Welkom #{loginBean.user.firstName}</h1>
+                    </h:panelGrid>
+                    <a id="register" href="register.xhtml">Register</a>
+                </h:form>
+
+            </div>
+        </div>
+    </ui:composition>
+    <!-- Placed at the end of the document so the pages load faster -->
+    <h:outputScript name="js/jquery-1.9.0.min.js"/>
+    <h:outputScript name="js/main.js"/>
+</h:body>
+</html> 

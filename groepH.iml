@@ -117,7 +117,6 @@
     <orderEntry type="library" name="Maven: javax.ws.rs:jsr311-api:1.0" level="project" />
     <orderEntry type="library" name="Maven: javax.transaction:jta:1.1" level="project" />
     <orderEntry type="library" name="Maven: javax.inject:javax.inject:1" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.myfaces.trinidad:trinidad-api:1.0.1" level="project" />
   </component>
 </module>
 

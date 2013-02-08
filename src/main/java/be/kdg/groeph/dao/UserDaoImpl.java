@@ -44,6 +44,4 @@ public class UserDaoImpl implements UserDao {
         return (User) query.uniqueResult();
     }
 
-
-
 }

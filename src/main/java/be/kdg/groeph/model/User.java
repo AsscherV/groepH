@@ -39,6 +39,8 @@ public class User implements Nullable, Serializable {
     private String role;
     @Column(name="dateRegistered", nullable = false, length = 100)
     private Date dateRegistered;
+    @Column (name="isAdmin", nullable = false)
+    private Boolean isAdmin;
 
     @ManyToOne
     @JoinColumn(name = "address")
@@ -55,7 +57,7 @@ public class User implements Nullable, Serializable {
     public User() {
     }
 
-    public User(String firstName, String lastName, Date dateOfBirth, String phoneNumber, char gender, String email, String password, Address address, Date dateRegistered, String role) {
+    public User(String firstName, String lastName, Date dateOfBirth, String phoneNumber, char gender, String email, String password, Address address, Date dateRegistered, String role, Boolean isAdmin) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
@@ -66,6 +68,15 @@ public class User implements Nullable, Serializable {
         this.address = address;
         this.dateRegistered = dateRegistered;
         this.role = role;
+        this.isAdmin = isAdmin;
+    }
+
+    public Boolean getAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(Boolean admin) {
+        isAdmin = admin;
     }
 
     public int getId() {
@@ -168,6 +179,7 @@ public class User implements Nullable, Serializable {
         result += 31 * (getDateOfBirth() != null ? getDateOfBirth().hashCode() : 0);
         result += 17 * (getPhoneNumber() != null ? phoneNumber.hashCode() : 0);
         result += 31 * (getEmail() != null ? getEmail().hashCode() : 0);
+
         return result;
     }
 

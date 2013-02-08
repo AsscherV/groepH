@@ -9,4 +9,5 @@ public interface UserDao {
     boolean addUser(User user);
 
     User getUserByEmail(String email);
+
 }
