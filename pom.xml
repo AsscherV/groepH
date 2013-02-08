@@ -385,5 +385,12 @@
             <artifactId>javax.inject</artifactId>
             <version>1</version>
         </dependency>
+
+        <!-- Voor date picker-->
+        <dependency>
+            <groupId>org.apache.myfaces.trinidad</groupId>
+            <artifactId>trinidad-api</artifactId>
+            <version>1.0.1</version>
+        </dependency>
     </dependencies>
 </project>
