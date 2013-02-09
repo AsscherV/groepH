@@ -50,6 +50,7 @@ public class UserBean implements Serializable {
     @Past(message = "{dateOfBirth} {past}")
     private Date dateOfBirth;
     @Length(max=30, message = "{phoneNumber} {length}")
+    @NotEmpty(message = "{phoneNumber} {notempty}")
     private String phoneNumber;
     private char gender;
     @NotEmpty(message = "{email} {notempty}")

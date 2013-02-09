@@ -14,6 +14,18 @@
     	</el-resolver>
   	</application>
 
+    <application>
+        <locale-config>
+            <default-locale>en</default-locale>
+            <supported-locale>nl</supported-locale>
+            <supported-locale>en</supported-locale>
+        </locale-config>
+        <resource-bundle>
+            <base-name>messages</base-name>
+            <var>msgs</var>
+        </resource-bundle>
+    </application>
+
     <navigation-rule>
         <from-view-id>/pages/index.xhtml</from-view-id>
         <navigation-case>

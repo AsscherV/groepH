@@ -92,60 +92,59 @@
                                 <div class="box">
                                         <h:form rendered="#{not userBean.registered}">
                                             <h:panelGrid columns="3" border="0" >
-
-                                                <h:outputLabel value="Email"/>
+                                                <h:outputLabel value="#{msgs.email}"/>
                                                 <h:inputText id="email" styleClass="span2" value="#{userBean.email}"/>
                                                 <h:message for="email" styleClass="error" />
 
-                                                <h:outputLabel value="Password"/>
+                                                <h:outputLabel value="#{msgs.password}"/>
                                                 <h:inputSecret id="password" styleClass="span2" value="#{userBean.password}"/>
                                                 <h:message for="password" styleClass="error" />
 
-                                                <h:outputLabel value="Second Password "/>
+                                                <h:outputLabel value="#{msgs.confirmPassword}"/>
                                                 <h:inputSecret id="password2" styleClass="span2" value="#{userBean.secondPassword}"/>
                                                 <h:message for="password2" styleClass="error" />
 
-                                                <h:outputLabel value="Firstname"/>
+                                                <h:outputLabel value="#{msgs.firstName}"/>
                                                 <h:inputText id="firstname" styleClass="span2" value="#{userBean.firstName}"/>
                                                 <h:message for="firstname" styleClass="error" />
 
-                                                <h:outputLabel value="Lastname "/>
+                                                <h:outputLabel value="#{msgs.lastName} "/>
                                                 <h:inputText id="lastname" styleClass="span2" value="#{userBean.lastName}"/>
                                                 <h:message for="lastname" styleClass="error" />
 
-                                                <h:outputLabel value="Date of birth"/>
+                                                <h:outputLabel value="#{msgs.dateOfBirth}"/>
                                                 <h:inputText id="dateOfBirth" styleClass="span2" value="#{userBean.dateOfBirth}"> <f:convertDateTime pattern="dd/MM/yyyy"/> </h:inputText>
                                                 <h:message for="dateOfBirth" styleClass="error" />
 
-                                                <h:outputLabel value="Phone number"/>
+                                                <h:outputLabel value="#{msgs.phoneNumber}"/>
                                                 <h:inputText id="phoneNumber" styleClass="span2" value="#{userBean.phoneNumber}"/>
                                                 <h:message for="phoneNumber" styleClass="error" />
 
-                                                <h:outputLabel value="Gender"/>
+                                                <h:outputLabel value="#{msgs.gender}"/>
                                                 <h:selectOneRadio value="#{userBean.gender}">
-                                                    <f:selectItem itemValue="M" itemLabel="Male" />
-                                                    <f:selectItem itemValue="F" itemLabel="Female"/>
+                                                    <f:selectItem itemValue="M" itemLabel="#{msgs.male}" />
+                                                    <f:selectItem itemValue="F" itemLabel="#{msgs.female}"/>
                                                 </h:selectOneRadio>
                                                 <!-- gender radios -->
 
-                                                <h:outputLabel value="Street"/>
+                                                <h:outputLabel value="#{msgs.street}"/>
                                                 <h:inputText id="street" styleClass="span2" value="#{userBean.street}"/>
                                                 <h:message for="street" styleClass="error" />
 
-                                                <h:outputLabel value="Streetnumber" />
+                                                <h:outputLabel value="#{msgs.streetNumber}" />
                                                 <h:inputText id="streetnumber" styleClass="span2" value="#{userBean.streetNumber}"/>
                                                 <h:message for="streetnumber" styleClass="error" />
 
-                                                <h:outputLabel value="Zipcode"/>
+                                                <h:outputLabel value="#{msgs.zipcode}"/>
                                                 <h:inputText id="zipcode" styleClass="span2" value="#{userBean.zipcode}"/>
                                                 <h:message for="zipcode" styleClass="error" />
 
-                                                <h:outputLabel value="city "/>
+                                                <h:outputLabel value="#{msgs.city}"/>
                                                 <h:inputText id="city" styleClass="span2" value="#{userBean.city}"/>
                                                 <h:message for="city" styleClass="error" />
 
                                             </h:panelGrid>
-                                            <h:commandButton  type="submit" action="#{userBean.addUser}" class="btn btn-success" value="Register" />
+                                            <h:commandButton  type="submit" action="#{userBean.addUser}" class="btn btn-success" value="#{msgs.register}" />
                                         </h:form>
 
                                     <!-- Internationalisatie -->

@@ -1,8 +1,7 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="groepH:war exploded">
-    <output-path>$PROJECT_DIR$/target/groepH-1.0-SNAPSHOT</output-path>
+    <output-path>$PROJECT_DIR$/classes/artifacts/groepH_war_exploded</output-path>
     <root id="root">
-      <element id="javaee-facet-resources" facet="groepH/web/Web" />
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
           <element id="module-output" name="groepH" />
@@ -73,6 +72,7 @@
           <element id="library" level="project" name="Maven: javax.inject:javax.inject:1" />
         </element>
       </element>
+      <element id="javaee-facet-resources" facet="groepH/web/Web" />
     </root>
   </artifact>
 </component>
