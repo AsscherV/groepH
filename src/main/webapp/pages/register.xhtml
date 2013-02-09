@@ -93,7 +93,7 @@
                                         <h:form rendered="#{not userBean.registered}">
                                             <h:panelGrid columns="3" border="0" >
                                                 <h:outputLabel value="#{msgs.email}"/>
-                                                <h:inputText id="email" styleClass="span2" value="#{userBean.email}"/>
+                                                <h:inputText id="email" styleClass="span2" value="#{userBean.email}" />
                                                 <h:message for="email" styleClass="error" />
 
                                                 <h:outputLabel value="#{msgs.password}"/>

@@ -40,7 +40,7 @@ public class UserBean implements Serializable {
     @Autowired
     UserService userService;
 
-    @NotEmpty(message = "{firstName} {notempty}")
+    @NotEmpty(message = "{firstName} {NotEmpty}")
     @Length(max=50, message = "{firstName} {length}")
     private String firstName;
     @NotEmpty(message = "{lastName} {notempty}")

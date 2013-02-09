@@ -18,7 +18,7 @@
         <locale-config>
             <default-locale>en</default-locale>
             <supported-locale>nl</supported-locale>
-            <supported-locale>en</supported-locale>
+            <supported-locale>en_US</supported-locale>
         </locale-config>
         <resource-bundle>
             <base-name>messages</base-name>
