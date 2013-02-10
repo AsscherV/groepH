@@ -67,6 +67,6 @@ public class TestRest {
     }
 
     public static URI getBaseURI() {
-        return UriBuilder.fromUri("http://localhost:8080/groepH-1.0-SNAPSHOT/api").build();
+        return UriBuilder.fromUri("http://localhost:8080/groepH_war_exploded/api").build();
     }
 }
