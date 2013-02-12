@@ -1,15 +1,12 @@
 package be.kdg.groeph.dao;
 
-import be.kdg.groeph.model.User;
+import be.kdg.groeph.model.TripUser;
 import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
-import org.hibernate.exception.DataException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
 
 @Repository
 public class UserDaoImpl implements UserDao {
@@ -29,19 +26,19 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     @SuppressWarnings("unchecked")
-    public boolean addUser(User user) {
+    public boolean addUser(TripUser user) {
         getSessionFactory().getCurrentSession().saveOrUpdate(user);
         return true;
     }
 
     @Override
-    public User getUserByEmail(String email) {
-        Query query = sessionFactory.getCurrentSession().createQuery("from User where email=:email");
+    public TripUser getUserByEmail(String email) {
+        Query query = sessionFactory.getCurrentSession().createQuery("from TripUser where email=:email");
         query.setParameter("email",email);
         if (query.uniqueResult()==null) {
-            return User.INVALID_USER();
+            return TripUser.INVALID_USER();
         }
-        return (User) query.uniqueResult();
+        return (TripUser) query.uniqueResult();
     }
 
 }
