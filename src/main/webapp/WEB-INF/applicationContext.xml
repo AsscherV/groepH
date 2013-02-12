@@ -2,14 +2,39 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:context="http://www.springframework.org/schema/context"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans
-				http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       xmlns:sec="http://www.springframework.org/schema/security"
+       xsi:schemaLocation="
+       	        http://www.springframework.org/schema/security
+       	        http://www.springframework.org/schema/security/spring-security-3.1.xsd
+	            http://www.springframework.org/schema/beans
+				http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
 				http://www.springframework.org/schema/tx
-		        http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+		        http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
 		        http://www.springframework.org/schema/context
-		        http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+		        http://www.springframework.org/schema/context/spring-context-3.1.xsd ">
 
-    <!-- Spring will scan your classpath for the Spring Annotations
+    <!-- Spring Security -->
+    <sec:global-method-security secured-annotations="enabled" jsr250-annotations="enabled" />
+
+    <sec:http auto-config="true" access-denied-page="/pages/accessDenied.xhtml">
+        <!--<sec:intercept-url pattern="/faces/pages/visitor/**" access="IS_AUTHENTICATED_ANONYMOUSLY"/> -->
+        <sec:intercept-url pattern="/pages/user/**" access="ROLE_USER"/>
+        <sec:intercept-url pattern="/pages/admin/**" access="ROLE_ADMIN"/>
+        <sec:form-login login-page="/pages/index.xhtml" default-target-url="/pages/user/styling.xhtml" authentication-failure-url="/pages/index.xhtml"/>
+        <!--<sec:logout invalidate-session="true" logout-success-url="/pages/index.xhtml" logout-url="/logout"/>
+        <sec:concurrent-session-control max-sessions="1" expired-url="/faces/pages/visitor/login.xhmtl"/>      -->
+    </sec:http>
+    <!--
+    manager responsible for loading user account with assigned roles
+    -->
+    <sec:authentication-manager alias="authenticationManager">
+        <sec:authentication-provider user-service-ref="userService"/>
+    </sec:authentication-manager>
+
+    <bean class="org.springframework.security.authentication.event.LoggerListener"
+          id="loggerListener"/>
+
+<!-- Spring will scan your classpath for the Spring Annotations
         in your classes and will automatically create service
         implementation instances, inject dependencies , etc-->
     <context:component-scan base-package="be.kdg.groeph.service"/>
@@ -32,13 +57,6 @@
     <!-- Session Factory Declaration -->
     <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <!--
-        <property name="annotatedClasses">
-            <list>
-                <value>be.kdg.groeph.model.User</value>
-            </list>
-        </property>
-        -->
         <property name="hibernateProperties">
             <props>
                 <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
