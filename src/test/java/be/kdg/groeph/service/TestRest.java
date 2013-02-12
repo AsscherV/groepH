@@ -18,7 +18,7 @@ import javax.ws.rs.core.UriBuilder;
 import java.net.URI;
 
 
-import static junit.framework.Assert.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created with IntelliJ IDEA.

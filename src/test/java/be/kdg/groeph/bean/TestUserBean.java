@@ -1,7 +1,7 @@
 package be.kdg.groeph.bean;
 
 import be.kdg.groeph.mockMother.UserMother;
-import be.kdg.groeph.model.User;
+import be.kdg.groeph.model.TripUser;
 import be.kdg.groeph.service.UserService;
 import org.junit.Before;
 import org.junit.Test;
@@ -36,8 +36,8 @@ public class TestUserBean extends AbstractTransactionalJUnit4SpringContextTests{
     @Autowired
     UserService userService;
 
-    private User user1;
-    private User user2;
+    private TripUser user1;
+    private TripUser user2;
 
     @Before
     public void init(){
