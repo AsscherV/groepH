@@ -1,13 +1,13 @@
 package be.kdg.groeph.dao;
 
-import be.kdg.groeph.model.User;
+import be.kdg.groeph.model.TripUser;
 
 /**
  * To change this template use File | Settings | File Templates.
  */
 public interface UserDao {
-    boolean addUser(User user);
+    boolean addUser(TripUser user);
 
-    User getUserByEmail(String email);
+    TripUser getUserByEmail(String email);
 
 }

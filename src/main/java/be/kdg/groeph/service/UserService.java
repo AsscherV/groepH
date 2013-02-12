@@ -1,8 +1,7 @@
 package be.kdg.groeph.service;
 
-import be.kdg.groeph.model.User;
+import be.kdg.groeph.model.TripUser;
 
 public interface UserService {
-    boolean addUser(User user);
-
+    boolean addUser(TripUser user);
 }

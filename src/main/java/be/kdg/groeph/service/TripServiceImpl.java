@@ -15,6 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 public class TripServiceImpl implements TripService {
     @Override
     public boolean addTrip(Trip trip) {
-        return trip.getTitle() != null && !trip.getTitle().isEmpty()? true : false;
+        return trip.getTitle() != null && !trip.getTitle().isEmpty();
     }
 }
