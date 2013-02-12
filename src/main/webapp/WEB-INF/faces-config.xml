@@ -14,19 +14,30 @@
     	</el-resolver>
   	</application>
 
-    <!-- configuration of navigation rules  -->
+    <application>
+        <locale-config>
+            <default-locale>en</default-locale>
+            <supported-locale>nl</supported-locale>
+            <supported-locale>en_US</supported-locale>
+        </locale-config>
+        <resource-bundle>
+            <base-name>messages</base-name>
+            <var>msgs</var>
+        </resource-bundle>
+    </application>
+
     <navigation-rule>
-        <from-view-id>/pages/register.xhtml</from-view-id>
+        <from-view-id>/pages/index.xhtml</from-view-id>
         <navigation-case>
-            <from-outcome>success</from-outcome>
-            <to-view-id>/pages/register.xhtml</to-view-id>
+            <from-action>#{loginBean.loginUser}</from-action>
+            <from-outcome>SUCCESS</from-outcome>
+            <to-view-id>/pages/stops.xhtml</to-view-id>
         </navigation-case>
-        <!--
         <navigation-case>
-            <from-outcome>failure</from-outcome>
-            <to-view-id>/pages/error.xhtml</to-view-id>
+            <from-action>#{loginBean.loginUser}</from-action>
+            <from-outcome>FAILURE</from-outcome>
+            <to-view-id>/pages/stops.xhtml</to-view-id>
         </navigation-case>
-        -->
     </navigation-rule>
 
     <!--

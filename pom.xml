@@ -38,6 +38,7 @@
                         <plugin>
                             <groupId>org.apache.maven.plugins</groupId>
                             <artifactId>maven-surefire-report-plugin</artifactId>
+                            <configuration> <argLine>-XX:-UseSplitVerifier</argLine> </configuration>
                             <version>2.6</version>
                         </plugin>
                         <!-- Plugin om code coverage rapport van de testen te genereren -->
@@ -386,11 +387,17 @@
             <version>1</version>
         </dependency>
 
-        <!-- Voor date picker-->
+        <!-- Voor date picker-
         <dependency>
             <groupId>org.apache.myfaces.trinidad</groupId>
             <artifactId>trinidad-api</artifactId>
             <version>1.0.1</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.myfaces.trinidad</groupId>
+            <artifactId>trinidad</artifactId>
+            <version>2.0.1</version>
+        </dependency>
+        -->
     </dependencies>
 </project>
