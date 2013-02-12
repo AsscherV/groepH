@@ -2,9 +2,8 @@ package be.kdg.groeph.bean;
 
 import be.kdg.groeph.model.Label;
 import be.kdg.groeph.model.Trip;
+import be.kdg.groeph.model.TripType;
 import be.kdg.groeph.service.TripService;
-import be.kdg.groeph.service.TripServiceImpl;
-import be.kdg.groeph.util.TripType;
 import org.apache.log4j.Logger;
 import org.apache.myfaces.extensions.cdi.core.api.scope.conversation.ViewAccessScoped;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +13,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.inject.Named;
 import java.io.Serializable;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Date: 7/02/13
@@ -25,30 +22,26 @@ import java.util.Set;
 @Component
 @ViewAccessScoped
 @Named
-@ManagedBean(name="tripBean")
+@ManagedBean(name = "tripBean")
 public class TripBean implements Serializable {
     static Logger logger = Logger.getLogger(TripBean.class);
     private static final String SUCCESS = "SUCCESS";
     private static final String FAILURE = "FAILURE";
 
-    @ManagedProperty(value="#{tripService}")
+    @ManagedProperty(value = "#{tripService}")
     @Autowired
     TripService tripService;
 
     private String title;
-    private Set<Label> labels;
-    private TripType type;
+    private List<Label> labels;
+    private String tripType;
     private String description;
     private Date startTime;
-    private boolean isPublic;
+    private Date endTime;
+
 
     public TripBean() {
-        labels=new HashSet<Label>();
-    }
-
-    public String addTrip(){
-        Trip trip = new Trip(title,description,labels,startTime,isPublic);
-        return tripService.addTrip(trip)? SUCCESS:FAILURE;
+        labels = new ArrayList<Label>();
     }
 
     public void setTitle(String title) {
@@ -64,12 +57,12 @@ public class TripBean implements Serializable {
         labels.add(new Label(label));
     }
 
-    public void setType(TripType type) {
-        this.type = type;
+    public void setType(String tripType) {
+        this.tripType = tripType;
     }
 
-    public TripType getType() {
-        return type;
+    public String getTripType() {
+        return tripType;
     }
 
 
@@ -82,15 +75,46 @@ public class TripBean implements Serializable {
     }
 
     public void setStartTime(Date time) {
-           this.startTime =time;
+        this.startTime = time;
 
     }
 
-    public void setPublic(boolean aPublic) {
-        this.isPublic = aPublic;
+    public Date getStartTime() {
+        return startTime;
     }
 
-    public boolean isPublic() {
-        return isPublic;
+    public TripService getTripService() {
+        return tripService;
     }
+
+    public void setTripService(TripService tripService) {
+        this.tripService = tripService;
+    }
+
+    public List<Label> getLabels() {
+        return labels;
+    }
+
+    public void setLabels(List<Label> labels) {
+        this.labels = labels;
+    }
+
+    public Date getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
+    }
+
+    public String addTrip() {
+        Trip trip = new Trip(getTitle(), getDescription(), getStartTime(), getEndTime(), getTripType(), getLabels());
+        if (tripService.addTrip(trip)) {
+            return SUCCESS;
+        } else {
+            return FAILURE;
+        }
+        //return tripService.addTrip(trip) ? SUCCESS : FAILURE;
+    }
+
 }

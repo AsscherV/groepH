@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false">
+    <file url="file://$PROJECT_DIR$/src/main/java/be/kdg/groeph/dao/TripDaoImpl.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/be/kdg/groeph/dao/UserDaoImpl.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/be/kdg/groeph/model/Address.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/be/kdg/groeph/model/Null/NullAddress.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/be/kdg/groeph/model/Null/NullTrip.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/be/kdg/groeph/model/Null/NullUser.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/be/kdg/groeph/model/Null/Nullable.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources/messages.properties" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/messages.properties" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources/messages_en_US.properties" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/messages_en_US.properties" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/messages_nl.properties" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources/messages_nl.properties" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/test/resources/daoContext.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/test/resources/serviceContext.xml" charset="UTF-8" />

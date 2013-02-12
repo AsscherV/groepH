@@ -39,7 +39,7 @@ public class TripUser implements Nullable, Serializable {
     private String role;
     @Column(name="dateRegistered", nullable = false, length = 100)
     private Date dateRegistered;
-    @Column (name="isAdmin", nullable = false)
+    @Column(name="isAdmin", nullable = false)
     private Boolean isAdmin;
 
     @ManyToOne
