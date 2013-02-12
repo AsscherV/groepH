@@ -40,6 +40,7 @@ public class TripBean implements Serializable {
     private Date endTime;
 
 
+
     public TripBean() {
         labels = new ArrayList<Label>();
     }
