@@ -2,10 +2,10 @@ package be.kdg.groeph.bean;
 
 import be.kdg.groeph.model.Address;
 import be.kdg.groeph.model.TripUser;
+import be.kdg.groeph.model.TripUser;
 import be.kdg.groeph.service.UserService;
 import be.kdg.groeph.util.SHAEncryption;
 import org.apache.log4j.Logger;
-import org.apache.myfaces.extensions.cdi.core.api.scope.conversation.ViewAccessScoped;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -26,12 +26,12 @@ import java.util.Date;
  * To change this template use File | Settings | File Templates.
  */
 @Component
-//@ViewAccessScoped
 @RequestScoped
+//@ViewAccessScoped
 @Named
-@ManagedBean(name="userBean")
-public class UserBean implements Serializable {
-    static Logger logger = Logger.getLogger(UserBean.class);
+@ManagedBean(name="registerBean")
+public class RegisterBean implements Serializable {
+    static Logger logger = Logger.getLogger(RegisterBean.class);
 
     private static final String SUCCESS = "SUCCESS";
     private static final String FAILURE = "FAILURE";
@@ -76,7 +76,7 @@ public class UserBean implements Serializable {
 
     private boolean registered;
 
-    public UserBean() {
+    public RegisterBean() {
         registered = false;
     }
 
@@ -226,6 +226,4 @@ public class UserBean implements Serializable {
         }
         return FAILURE;
     }
-
-
 }
