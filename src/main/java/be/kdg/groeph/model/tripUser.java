@@ -17,7 +17,7 @@ import java.util.Date;
 
 @Entity
 @Table(name="t_user")
-public class User implements Nullable, Serializable {
+public class TripUser implements Nullable, Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -54,10 +54,10 @@ public class User implements Nullable, Serializable {
      */
 
 
-    public User() {
+    public TripUser() {
     }
 
-    public User(String firstName, String lastName, Date dateOfBirth, String phoneNumber, char gender, String email, String password, Address address, Date dateRegistered, String role, Boolean isAdmin) {
+    public TripUser(String firstName, String lastName, Date dateOfBirth, String phoneNumber, char gender, String email, String password, Address address, Date dateRegistered, String role, Boolean isAdmin) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
@@ -188,7 +188,7 @@ public class User implements Nullable, Serializable {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
 
-        User user = (User) obj;
+        TripUser user = (TripUser) obj;
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         String dob = "";
         String userdob = "";
@@ -211,7 +211,7 @@ public class User implements Nullable, Serializable {
         return getFirstName() + " " + getLastName() + " ";
     }
 
-    public static User INVALID_USER() {
+    public static TripUser INVALID_USER() {
         return new NullUser();
     }
 }
