@@ -7,7 +7,9 @@
     <!-- css -->
     <h:outputStylesheet library="css" name="bootstrap.css"/>
     <h:outputStylesheet library="css" name="bootstrap-responsive.css"/>
+    <h:outputStylesheet library="css" name="jquery-ui.css"/>
     <h:outputStylesheet library="css" name="main.css"/>
+
 </h:head>
 <h:body>
     <ui:insert name="header">
@@ -119,7 +121,7 @@
                                         <h:message for="lastname" styleClass="error" />
 
                                         <h:outputLabel value=".dateOfBirth}"/>
-                                        <h:inputText id="dateOfBirth" styleClass="span2" value="#{registerBean.dateOfBirth}"> <f:convertDateTime pattern="dd/MM/yyyy"/> </h:inputText>
+                                        <h:inputText id="dateOfBirth" styleClass="span2 datepicker" value="#{registerBean.dateOfBirth}"> <f:convertDateTime pattern="dd/MM/yyyy"/> </h:inputText>
                                         <h:message for="dateOfBirth" styleClass="error" />
 
                                         <h:outputLabel value="#.phoneNumber}"/>
@@ -181,6 +183,7 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <h:outputScript name="js/jquery-1.9.0.min.js"/>
+    <h:outputScript name="js/jquery-ui.js"/>
     <h:outputScript name="js/main.js"/>
 </h:body>
 </html> 

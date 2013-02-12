@@ -14,14 +14,8 @@ $(document).ready(function(){
 		$(activeTab).fadeIn(); // show the target tab content div by matching clicked link.
 
                        $(".button").fadeIn(); // show unvisible trip tabs
-
-        //datetimepicker
-        $("#dateOfBirth").datepicker({
-                minDate: 0,
-                onSelect: function(selected_date) {
-                    $("#dateOfBirth").datepicker("option", "minDate", selected_date);
-                    $('#dateOfBirth').val(selected_date);
-                }
-            });
 	});
+
+    //datetimepicker
+            $(".datepicker").datepicker();
 });
