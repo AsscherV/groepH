@@ -12,7 +12,7 @@
 <h:body>
 
     <ui:insert name="header">
-        <ui:include src="../header.xhtml"/>
+        <ui:include src="header.xhtml"/>
     </ui:insert>
 
     <div class="container">
@@ -72,20 +72,20 @@
                         </li>
                         <h:panelGroup rendered="#{loginBean.loggedIn}">
                             <li>
-                                <a class="button" href="../user/stops.xhtml">Stops</a>
+                                <a class="button" href="user/stops.xhtml">Stops</a>
                             </li>
                             <li>
-                                <a class="button" href="../user/participants.xhtml">Participants</a>
+                                <a class="button" href="user/participants.xhtml">Participants</a>
                             </li>
                             <li>
-                                <a class="button" href="../user/accessories.xhtml">Accessories</a>
+                                <a class="button" href="user/accessories.xhtml">Accessories</a>
                             </li>
                             <li>
-                                <a class="button" href="../user/styling.xhtml">Styling</a>
+                                <a class="button" href="user/styling.xhtml">Styling</a>
                             </li>
                             <h:panelGroup rendered="#{loginBean.user.admin}">
                                 <li>
-                                    <a class="button" href="costs.xhtml">Costs</a>
+                                    <a class="button" href="admin/costs.xhtml">Costs</a>
                                 </li>
                             </h:panelGroup>
 
