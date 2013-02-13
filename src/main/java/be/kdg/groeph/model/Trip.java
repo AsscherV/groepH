@@ -12,12 +12,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
-/**
- * Created with IntelliJ IDEA.
- * <p/>
- * Date: 7/02/13
- * Time: 15:19
- */
 @Entity
 @Table(name = "t_trip")
 public class Trip implements Nullable, Serializable {

@@ -16,9 +16,6 @@ import javax.inject.Named;
 import javax.security.auth.login.LoginException;
 import java.io.Serializable;
 
-/**
- * To change this template use File | Settings | File Templates.
- */
 @Component
 @Named
 @SessionScoped

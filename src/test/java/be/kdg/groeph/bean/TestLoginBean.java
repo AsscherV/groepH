@@ -17,9 +17,6 @@ import javax.security.auth.login.LoginException;
 
 import static org.junit.Assert.*;
 
-/**
- * To change this template use File | Settings | File Templates.
- */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:daoContext.xml"})
 public class TestLoginBean extends AbstractTransactionalJUnit4SpringContextTests {
@@ -63,5 +60,7 @@ public class TestLoginBean extends AbstractTransactionalJUnit4SpringContextTests
         assertEquals("SUCCESS",loginBean.logOut());
 
     }
+
+    //hier nog test, die test op die exception
 
 }

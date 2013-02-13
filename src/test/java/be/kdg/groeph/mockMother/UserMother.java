@@ -7,9 +7,6 @@ import be.kdg.groeph.util.SHAEncryption;
 import java.util.Calendar;
 import java.util.Date;
 
-/**
- * To change this template use File | Settings | File Templates.
- */
 public class UserMother {
     public static TripUser validUser1(){
         Calendar cal;

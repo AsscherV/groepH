@@ -20,13 +20,6 @@ import java.net.URI;
 
 import static org.junit.Assert.assertEquals;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Frederik
- * Date: 6/02/13
- * Time: 11:09
- * To change this template use File | Settings | File Templates.
- */
 public class TestRest {
 
     private final String password = "def";

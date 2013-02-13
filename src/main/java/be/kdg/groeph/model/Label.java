@@ -7,12 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.util.List;
 
-/**
- * Created with IntelliJ IDEA.
- * <p/>
- * Date: 7/02/13
- * Time: 15:34
- */
 @Entity
 @Table(name="t_label")
 public class Label {

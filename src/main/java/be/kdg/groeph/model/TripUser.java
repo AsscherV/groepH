@@ -9,12 +9,6 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/**
- * To change this template use File | Settings | File Templates.
- */
-
-
-
 @Entity
 @Table(name="t_user")
 public class TripUser implements Nullable, Serializable {

@@ -9,12 +9,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created with IntelliJ IDEA.
- * <p/>
- * Date: 7/02/13
- * Time: 15:19
- */
 @Entity
 @Table(name = "t_tripType")
 public class TripType implements Serializable, Nullable {

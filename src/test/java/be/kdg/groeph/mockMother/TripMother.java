@@ -1,19 +1,7 @@
 package be.kdg.groeph.mockMother;
 
 import be.kdg.groeph.model.*;
-import be.kdg.groeph.model.TripTypeEnum;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-
-/**
- * Created with IntelliJ IDEA.
- * <p/>
- * Date: 8/02/13
- * Time: 11:01
- */
 public class TripMother {
 
 

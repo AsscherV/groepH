@@ -14,9 +14,6 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotSame;
 
-/**
- * To change this template use File | Settings | File Templates.
- */
 
 @Transactional
 @RunWith(SpringJUnit4ClassRunner.class)

@@ -15,9 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 
-/**
- * To change this template use File | Settings | File Templates.
- */
 @Transactional
 @Service("loginService")
 public class LoginServiceImpl implements LoginService {

@@ -6,6 +6,7 @@ import be.kdg.groeph.model.TripUser;
 import be.kdg.groeph.service.UserService;
 import be.kdg.groeph.util.SHAEncryption;
 import org.apache.log4j.Logger;
+import org.apache.myfaces.extensions.cdi.core.api.scope.conversation.ViewAccessScoped;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -22,12 +23,9 @@ import java.io.Serializable;
 import java.text.ParseException;
 import java.util.Date;
 
-/**
- * To change this template use File | Settings | File Templates.
- */
 @Component
 @RequestScoped
-//@ViewAccessScoped
+@ViewAccessScoped
 @Named
 @ManagedBean(name="registerBean")
 public class RegisterBean implements Serializable {

@@ -15,10 +15,6 @@ import javax.inject.Named;
 import java.io.Serializable;
 import java.util.*;
 
-/**
- * Date: 7/02/13
- * Time: 15:05
- */
 @Component
 @ViewAccessScoped
 @Named
@@ -115,7 +111,6 @@ public class TripBean implements Serializable {
         } else {
             return FAILURE;
         }
-        //return tripService.addTrip(trip) ? SUCCESS : FAILURE;
     }
 
 }

@@ -17,9 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.Collection;
 
-/**
- * To change this template use File | Settings | File Templates.
- */
 @Transactional
 @Service("userService")
 public class UserServiceImpl  implements UserService, UserDetailsService {

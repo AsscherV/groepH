@@ -8,12 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-/**
- * Created with IntelliJ IDEA.
- * <p/>
- * Date: 8/02/13
- * Time: 11:53
- */
 @Transactional
 @Service("tripService")
 public class TripServiceImpl implements TripService {
@@ -25,6 +19,7 @@ public class TripServiceImpl implements TripService {
     @Override
     public boolean addTrip(Trip trip) {
         //hier checken of het nen valid trip is
+        logger.info("Trip: " + trip.getTitle() + " created");
         return tripDao.addTrip(trip);
     }
 }

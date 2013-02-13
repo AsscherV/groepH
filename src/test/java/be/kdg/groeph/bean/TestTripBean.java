@@ -17,14 +17,6 @@ import java.util.Date;
 
 import static org.junit.Assert.assertEquals;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Frederik
- * Date: 7/02/13
- * Time: 15:03
- */
-
-
 public class TestTripBean {
 
 }
