@@ -9,9 +9,9 @@
     <h:outputStylesheet library="css" name="bootstrap-responsive.css"/>
     <h:outputStylesheet library="css" name="jquery-ui.css"/>
     <h:outputStylesheet library="css" name="main.css"/>
-
 </h:head>
 <h:body>
+    <f:loadBundle basename="messages" var="msgs"/>
     <ui:insert name="header">
         <ui:include src="header.xhtml"/>
     </ui:insert>
@@ -104,7 +104,7 @@
                                         <h:inputText id="email" styleClass="span2" value="#{registerBean.email}" />
                                         <h:message for="email" styleClass="error" />
 
-                                        <h:outputLabel value=".password}"/>
+                                        <h:outputLabel value="#{msgs.password}"/>
                                         <h:inputSecret id="password" styleClass="span2" value="#{registerBean.password}"/>
                                         <h:message for="password" styleClass="error" />
 

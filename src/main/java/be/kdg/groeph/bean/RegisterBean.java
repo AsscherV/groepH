@@ -38,7 +38,7 @@ public class RegisterBean implements Serializable {
     @Autowired
     UserService userService;
 
-    @NotEmpty(message = "{firstName} {NotEmpty}")
+    @NotEmpty(message = "{firstName} {notempty}")
     @Length(max=50, message = "{firstName} {length}")
     private String firstName;
     @NotEmpty(message = "{lastName} {notempty}")
@@ -59,17 +59,16 @@ public class RegisterBean implements Serializable {
     private String password;
     @NotEmpty(message = "{password} {notempty}")
     private String secondPassword;
-    @NotEmpty(message = "{firstName} {notempty}")
+    @NotEmpty(message = "{dateRegistered} {notempty}")
     private Date dateRegistered;
-    @NotEmpty(message = "{firstName} {notempty}")
+    @NotEmpty(message = "{zipcode} {notempty}")
     private String zipcode;
-    @NotEmpty(message = "{firstName} {notempty}")
+    @NotEmpty(message = "{street} {notempty}")
     private String street;
-    @NotEmpty(message = "{firstName} {notempty}")
+    @NotEmpty(message = "{streetNumber} {notempty}")
     private String streetNumber;
-    @NotEmpty(message = "{firstName} {notempty}")
+    @NotEmpty(message = "{city} {notempty}")
     private String city;
-    @NotEmpty(message = "{firstName} {notempty}")
     private String role;
 
     private boolean registered;
@@ -214,7 +213,6 @@ public class RegisterBean implements Serializable {
         Address address = new Address(getStreet(), getStreetNumber(),getZipcode(),getCity());
         setRole("ROLE_USER");
         setDateRegistered(new Date());
-
         TripUser user = new TripUser(getFirstName(), getLastName(), getDateOfBirth(), getPhoneNumber(), getGender(),getEmail(), SHAEncryption.encrypt(getPassword()),address,getDateRegistered(),getRole());
         user.setAccountNonExpired(true);
         user.setAccountNonLocked(true);

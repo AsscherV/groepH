@@ -4,6 +4,7 @@ import be.kdg.groeph.model.TripUser;
 import be.kdg.groeph.service.LoginService;
 import be.kdg.groeph.util.SHAEncryption;
 import org.apache.log4j.Logger;
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -30,6 +31,7 @@ public class LoginBean implements Serializable {
     LoginService loginService;
 
     @NotEmpty(message = "{email} {notempty}")
+    @Email(message = "{email} {validEmail}")
     private String email;
     @NotEmpty(message = "{password} {notempty}")
     private String password;
