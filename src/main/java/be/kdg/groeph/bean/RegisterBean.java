@@ -215,8 +215,12 @@ public class RegisterBean implements Serializable {
         setRole("ROLE_USER");
         setDateRegistered(new Date());
 
-        boolean isAdmin = false;
-        TripUser user = new TripUser(getFirstName(), getLastName(), getDateOfBirth(), getPhoneNumber(), getGender(),getEmail(), SHAEncryption.encrypt(getPassword()),address,getDateRegistered(),getRole(), isAdmin);
+        TripUser user = new TripUser(getFirstName(), getLastName(), getDateOfBirth(), getPhoneNumber(), getGender(),getEmail(), SHAEncryption.encrypt(getPassword()),address,getDateRegistered(),getRole());
+        user.setAccountNonExpired(true);
+        user.setAccountNonLocked(true);
+        user.setCredentialsNonExpired(true);
+        user.setEnabled(true);
+
         if(confirmPassword()){
             userService.addUser(user);
             registered = true;

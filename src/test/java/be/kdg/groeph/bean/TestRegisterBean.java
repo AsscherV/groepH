@@ -42,42 +42,15 @@ public class TestRegisterBean extends AbstractTransactionalJUnit4SpringContextTe
 
     @Test
     public void insertValidUser() throws ParseException {
-        //userBean.setRole("User");
-        registerBean.setGender('M');
-        registerBean.setFirstName("Gunther");
-        registerBean.setLastName("Laurijssens");
-        registerBean.setEmail("guntherlaurijssens@gmail.com");
-        registerBean.setPassword("testpassword");
-        registerBean.setSecondPassword("testpassword");
-        Calendar cal;
-        cal = Calendar.getInstance();
-        cal.set(1988, Calendar.DECEMBER, 10);
-        registerBean.setDateOfBirth(cal.getTime());
-        registerBean.setStreet("grote Baan");
-        registerBean.setStreetNumber("7");
-        registerBean.setZipcode("2380");
-        registerBean.setCity("Ravels");
-        registerBean.setPhoneNumber("04989898989");
+        fillRegisterBean();
         assertEquals("SUCCESS",registerBean.addUser());
     }
 
     @Test
     public void insertInValidUser() throws ParseException {
-        registerBean.setGender('M');
-        registerBean.setFirstName("Gunther");
-        registerBean.setLastName("Laurijssens");
-        registerBean.setEmail("guntherlaurijssens@gmail.com");
+        fillRegisterBean();
         registerBean.setPassword("testpassword");
         registerBean.setSecondPassword("testpasswordooo");
-        Calendar cal;
-        cal = Calendar.getInstance();
-        cal.set(1988, Calendar.DECEMBER, 10);
-        registerBean.setDateOfBirth(cal.getTime());
-        registerBean.setStreet("grote Baan");
-        registerBean.setStreetNumber("7");
-        registerBean.setZipcode("2380");
-        registerBean.setCity("Ravels");
-        registerBean.setPhoneNumber("04989898989");
         assertEquals("FAILURE",registerBean.addUser());
     }
 
@@ -93,6 +66,24 @@ public class TestRegisterBean extends AbstractTransactionalJUnit4SpringContextTe
         registerBean.setPassword("wachtwoord");
         registerBean.setSecondPassword("wachtwoordo");
         assertFalse(registerBean.confirmPassword());
+    }
+
+    public void fillRegisterBean(){
+        registerBean.setGender('M');
+        registerBean.setFirstName("Gunther");
+        registerBean.setLastName("Laurijssens");
+        registerBean.setEmail("guntherlaurijssens@gmail.com");
+        registerBean.setPassword("testpassword");
+        registerBean.setSecondPassword("testpassword");
+        Calendar cal;
+        cal = Calendar.getInstance();
+        cal.set(1988, Calendar.DECEMBER, 10);
+        registerBean.setDateOfBirth(cal.getTime());
+        registerBean.setStreet("grote Baan");
+        registerBean.setStreetNumber("7");
+        registerBean.setZipcode("2380");
+        registerBean.setCity("Ravels");
+        registerBean.setPhoneNumber("04989898989");
     }
 
 

@@ -24,12 +24,7 @@ public class UserServiceImpl  implements UserService, UserDetailsService {
 
     @Autowired
     UserDao userDao;
-
     private Collection<GrantedAuthority> authorities;
-    private boolean accountNonExpired;
-    private boolean accountNonLocked;
-    private boolean credentialsNonExpired;
-    private boolean enabled;
 
     public UserDao getUserDao() {
         return userDao;
@@ -52,18 +47,20 @@ public class UserServiceImpl  implements UserService, UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException, DataAccessException {
-        TripUser userDB = userDao.getUserByEmail(email);
-        User user = new User("test", "test",
-                enabled,accountNonExpired, credentialsNonExpired, accountNonLocked,getDefaultAuthority());
+        boolean accountNonExpired = true;
+        boolean accountNonLocked = true;
+        boolean credentialsNonExpired = true;
+        boolean enabled = true;
+        User user = new User("test", "test", enabled, accountNonExpired, credentialsNonExpired, accountNonLocked,getDefaultAuthority());
 
-        setFullyEnable();
+        TripUser userDB = userDao.getUserByEmail(email);
 
         if(userDB.getRole().equals("ROLE_ADMIN")){
             user = new User(userDB.getEmail(), userDB.getPassword(),
-                    enabled,accountNonExpired, credentialsNonExpired, accountNonLocked, getAdminAuthority());
+                    userDB.isEnabled(),userDB.isAccountNonExpired(), userDB.isCredentialsNonExpired(), userDB.isAccountNonLocked(), getAdminAuthority());
         }  else if(userDB.getRole().equals("ROLE_USER")){
             user = new User(userDB.getEmail(), userDB.getPassword(),
-                    enabled,accountNonExpired, credentialsNonExpired, accountNonLocked,getDefaultAuthority());
+                    userDB.isEnabled(),userDB.isAccountNonExpired(), userDB.isCredentialsNonExpired(), userDB.isAccountNonLocked(),getDefaultAuthority());
         }
         return user;
     }
@@ -78,12 +75,6 @@ public class UserServiceImpl  implements UserService, UserDetailsService {
         userAuthorities.add(new SimpleGrantedAuthority("ROLE_USER"));
         userAuthorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
         return userAuthorities;
-    }
-    public void setFullyEnable() {
-        accountNonExpired = true;
-        credentialsNonExpired = true;
-        enabled = true;
-        accountNonLocked = true;
     }
 
 

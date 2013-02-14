@@ -36,7 +36,7 @@ public class LoginBean implements Serializable {
 
     private boolean isLoggedIn;
 
-    TripUser user;// = User.INVALID_USER();
+    TripUser user;
 
     public String getPassword() {
         return password;

@@ -15,6 +15,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.security.auth.login.LoginException;
 
+import java.text.ParseException;
+import java.util.Calendar;
+
 import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -24,6 +27,9 @@ public class TestLoginBean extends AbstractTransactionalJUnit4SpringContextTests
     @Qualifier("loginBean")
     @Autowired
     LoginBean loginBean;
+    @Qualifier("registerBean")
+    @Autowired
+    RegisterBean registerBean;
     @Autowired
     UserService userService;
     @Autowired
@@ -32,9 +38,11 @@ public class TestLoginBean extends AbstractTransactionalJUnit4SpringContextTests
     TripUser validUser;
 
     @Before
-    public void init(){
-        validUser =  UserMother.validUser2();
-        userDao.addUser(validUser);
+    public void init() throws ParseException {
+        //validUser =  UserMother.validUser2();
+        fillRegisterBean();
+        registerBean.addUser();
+        //userDao.addUser(validUser);
     }
 
     @Test
@@ -58,9 +66,31 @@ public class TestLoginBean extends AbstractTransactionalJUnit4SpringContextTests
         loginBean.setPassword("password");
         loginBean.loginUser();
         assertEquals("SUCCESS",loginBean.logOut());
-
     }
 
-    //hier nog test, die test op die exception
+    @Test
+    public void testIsAdmin(){
+        assertFalse("User has no admin rights",loginBean.user.isAdmin());
+    }
+
+    public void fillRegisterBean(){
+        registerBean.setGender('M');
+        registerBean.setFirstName("Greg");
+        registerBean.setLastName("Deckers");
+        registerBean.setEmail("greg.deckers@student.kdg.be");
+        registerBean.setPassword("password");
+        registerBean.setSecondPassword("password");
+        Calendar cal;
+        cal = Calendar.getInstance();
+        cal.set(1988, Calendar.DECEMBER, 10);
+        registerBean.setDateOfBirth(cal.getTime());
+        registerBean.setStreet("test");
+        registerBean.setStreetNumber("test");
+        registerBean.setZipcode("test");
+        registerBean.setCity("test");
+        registerBean.setPhoneNumber("04989898989");
+    }
+
+
 
 }
