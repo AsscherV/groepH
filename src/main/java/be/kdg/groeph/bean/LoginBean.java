@@ -20,7 +20,6 @@ import java.io.Serializable;
 @Component
 @Named
 @SessionScoped
-@ManagedBean(name="loginBean")
 public class LoginBean implements Serializable {
     static Logger logger = Logger.getLogger(LoginBean.class);
     private static final String SUCCESS = "SUCCESS";

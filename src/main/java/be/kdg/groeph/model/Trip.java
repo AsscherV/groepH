@@ -26,28 +26,63 @@ public class Trip implements Nullable, Serializable {
     private Date startTime;
     @Column(name = "endTime", nullable = false)
     private Date endTime;
+    @Column(name = "isPubic", nullable = false)
+    private boolean isPublic;
 
-    //@ManyToOne
-    //@JoinColumn(name = "tripType")
-    //@Cascade({org.hibernate.annotations.CascadeType.ALL})
-    //private TripType tripType;
-    @Column(name = "tripType", nullable = false)
-    private String tripType;
-
-    @OneToMany(mappedBy = "trip", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "trip")
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     private List<Label> labels = new ArrayList<Label>();
 
+    @ManyToOne
+    @JoinColumn(name = "tripType", nullable = true)
+    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
+    private TripType tripType;
+
+
     public Trip() {
     }
-                                                                                 //TripType triptype
-    public Trip(String title, String description, Date startTime, Date endTime, String tripType, List<Label> labels) {
+
+    public Trip(String title, String description, Date startTime, Date endTime, ArrayList<Label> labels, TripType tripType, boolean isPublic) {
         this.title = title;
         this.description = description;
         this.startTime = startTime;
         this.endTime = endTime;
         this.labels = labels;
         this.tripType = tripType;
+        this.isPublic = isPublic;
+    }
+
+    public void addLabel(Label label) {
+        label.setTrip(this);
+        labels.add(label);
+    }
+
+    public boolean isPublic() {
+        return isPublic;
+    }
+
+    public void setPublic(boolean aPublic) {
+        isPublic = aPublic;
+    }
+
+    public TripType getTripType() {
+        return tripType;
+    }
+
+    public void setTripType(TripType tripType) {
+        this.tripType = tripType;
+    }
+
+    public List<Label> getLabels() {
+        return labels;
+    }
+
+    public void setLabels(List<Label> labels) {
+        this.labels = labels;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getTitle() {
@@ -62,11 +97,6 @@ public class Trip implements Nullable, Serializable {
     public static Trip INVALID_TRIP() {
         return new NullTrip();
     }
-
-    public void addLabel (Label label) {
-        labels.add(label);
-    }
-
     public int getId() {
         return id;
     }
@@ -83,14 +113,6 @@ public class Trip implements Nullable, Serializable {
         this.description = description;
     }
 
-    public List<Label> getLabels() {
-        return labels;
-    }
-
-    public void setLabels(List<Label> labels) {
-        this.labels = labels;
-    }
-
     public Date getStartTime() {
         return startTime;
     }
@@ -105,13 +127,5 @@ public class Trip implements Nullable, Serializable {
 
     public void setEndTime(Date endTime) {
         this.endTime = endTime;
-    }
-
-    public String getTripType() {
-        return tripType;
-    }
-
-    public void setTripType(String tripType) {
-        this.tripType = tripType;
     }
 }

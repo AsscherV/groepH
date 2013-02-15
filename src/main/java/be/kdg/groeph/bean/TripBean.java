@@ -6,19 +6,20 @@ import be.kdg.groeph.model.TripType;
 import be.kdg.groeph.service.TripService;
 import org.apache.log4j.Logger;
 import org.apache.myfaces.extensions.cdi.core.api.scope.conversation.ViewAccessScoped;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.inject.Named;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.*;
 
 @Component
 @ViewAccessScoped
 @Named
-@ManagedBean(name = "tripBean")
 public class TripBean implements Serializable {
     static Logger logger = Logger.getLogger(TripBean.class);
     private static final String SUCCESS = "SUCCESS";
@@ -27,18 +28,30 @@ public class TripBean implements Serializable {
     @ManagedProperty(value = "#{tripService}")
     @Autowired
     TripService tripService;
-
+    @NotEmpty(message = "{title} {notempty}")
     private String title;
-    private List<Label> labels;
-    private String tripType;
+    @NotEmpty(message = "{description} {notempty}")
     private String description;
+    @NotNull(message = "{startTime} {notempty}")
     private Date startTime;
+    @NotNull(message = "{endTime} {notempty}")
     private Date endTime;
-
-
+    @NotEmpty(message = "{label} {notempty}")
+    private String label;
+    private ArrayList<Label> labels = new ArrayList<Label>();
+    @NotEmpty(message = "{tripType} {notempty}")
+    private String tripType;
+    private String isPublic;
 
     public TripBean() {
-        labels = new ArrayList<Label>();
+    }
+
+    public String getPublic() {
+        return isPublic;
+    }
+
+    public void setPublic(String aPublic) {
+        isPublic = aPublic;
     }
 
     public void setTitle(String title) {
@@ -48,20 +61,6 @@ public class TripBean implements Serializable {
     public String getTitle() {
         return title;
     }
-
-
-    public void addLabel(String label) {
-        labels.add(new Label(label));
-    }
-
-    public void setType(String tripType) {
-        this.tripType = tripType;
-    }
-
-    public String getTripType() {
-        return tripType;
-    }
-
 
     public void setDescription(String description) {
         this.description = description;
@@ -88,14 +87,6 @@ public class TripBean implements Serializable {
         this.tripService = tripService;
     }
 
-    public List<Label> getLabels() {
-        return labels;
-    }
-
-    public void setLabels(List<Label> labels) {
-        this.labels = labels;
-    }
-
     public Date getEndTime() {
         return endTime;
     }
@@ -104,8 +95,45 @@ public class TripBean implements Serializable {
         this.endTime = endTime;
     }
 
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
+    }
+
+    public ArrayList<Label> getLabels() {
+        return labels;
+    }
+
+    public void setLabels(ArrayList<Label> labels) {
+        this.labels = labels;
+    }
+
+    public String getTripType() {
+        return tripType;
+    }
+
+    public void setTripType(String tripType) {
+        this.tripType = tripType;
+    }
+
+    //TODO: Callen met ajax call
+    public void newLabel() {
+        labels.add(new Label(label));
+        label = "";
+    }
+
     public String addTrip() {
-        Trip trip = new Trip(getTitle(), getDescription(), getStartTime(), getEndTime(), getTripType(), getLabels());
+        boolean p;
+        if(isPublic.equalsIgnoreCase("public")){
+             p = true;
+        } else {
+             p =  false;
+        }
+
+        Trip trip = new Trip(getTitle(), getDescription(), getStartTime(), getEndTime(),getLabels(),new TripType(getTripType()), p);
         if (tripService.addTrip(trip)) {
             return SUCCESS;
         } else {

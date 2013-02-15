@@ -18,6 +18,10 @@ public class TripType implements Serializable, Nullable {
     @Column(name = "type", nullable = false, length = 100)
     private String type;
 
+    @OneToMany(mappedBy = "tripType")
+    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
+    private List<Trip> trips = new ArrayList<Trip>();
+
     public TripType() {
 
     }
@@ -25,7 +29,18 @@ public class TripType implements Serializable, Nullable {
         this.type = type;
     }
 
+    public List<Trip> getTrips() {
+        return trips;
+    }
 
+    public void setTrips(List<Trip> trips) {
+        this.trips = trips;
+    }
+
+    public void addTrip(Trip trip){
+        trip.setTripType(this);
+        trips.add(trip);
+    }
 
     public int getId() {
         return id;

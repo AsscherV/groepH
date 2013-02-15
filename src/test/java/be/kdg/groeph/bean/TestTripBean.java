@@ -17,13 +17,9 @@ import java.util.Date;
 
 import static org.junit.Assert.assertEquals;
 
-public class TestTripBean {
-
-}
-/*
-//@RunWith(SpringJUnit4ClassRunner.class)
-//@ContextConfiguration(locations = {"classpath:daoContext.xml"})
-public class TestTripBean {//extends AbstractTransactionalJUnit4SpringContextTests
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"classpath:daoContext.xml"})
+public class TestTripBean extends AbstractTransactionalJUnit4SpringContextTests {//extends AbstractTransactionalJUnit4SpringContextTests
 
     @Qualifier("tripBean")
     @Autowired
@@ -35,17 +31,7 @@ public class TestTripBean {//extends AbstractTransactionalJUnit4SpringContextTes
     @Before
     public void init()
     {
-        trip1 = TripMother.validOpenTrip1();
     }
-
-
-    //@Test
-    //public void insertValidPublicTrip()
-    //{
-      //  setTripBean(true,true);
-       // assertEquals("addTrip result should be SUCCESS","SUCCESS",tripBean.addTrip());
-    //}
-
 
     @Test
     public void testAddValidOpenTrip(){
@@ -53,47 +39,23 @@ public class TestTripBean {//extends AbstractTransactionalJUnit4SpringContextTes
         Calendar cal;
         cal = Calendar.getInstance();
         cal.set(2013, Calendar.MARCH, 29, 12, 00);
-        tripBean.setTitle("Lekker int antwaarps zonneke gon ligge op't mooiste strand vant land");
-        tripBean.setType("Publiek");   //
+        tripBean.setTitle("Lekker int antwaarps");
         tripBean.setDescription("Een publieke test trip");
-        tripBean.setStartTime(new Date());
+        tripBean.setStartTime(cal.getTime());
         cal.set(2013, Calendar.MARCH, 29, 12, 00);
-        tripBean.setEndTime(new Date());
-        tripBean.addLabel("Strand");
-        tripBean.addLabel("Antwerpen");
-        tripBean.addLabel("Slecht weer");
+        tripBean.setEndTime(cal.getTime());
+        tripBean.setLabel("Test");
+        tripBean.newLabel();
+        tripBean.setLabel("Test2");
+        tripBean.newLabel();
+        tripBean.setLabel("Test3");
+        tripBean.newLabel();
+        tripBean.setTripType("tijdspanne");
+        tripBean.setPublic("Public");
 
         assertEquals("addTrip result should be SUCCESS for Open Trip","SUCCESS",tripBean.addTrip());
     }
 
 
-    //private void setTripBean(boolean isValid,boolean isPublic) {
-
-
-        //if(isValid)
-        //{
-        //    tripBean.setTitle(title);
-        //}  else {
-        //    tripBean.setTitle("");
-        //}
-        //tripBean.setDescription(description);
-        //tripBean.addLabel(strand);
-        //tripBean.addLabel(antwerpen);
-        //tripBean.addLabel(uitstap);
-        //tripBean.setType(timebound);
-        //tripBean.setStartTime(cal.getTime());
-        //tripBean.setPublic(isPublic);
-    //}
-
-
-    //@Test
-    //public void insertInvalidPublicTripNoTitle()
-    //{
-
-        //setTripBean(false,true);
-        //assertEquals("addTrip result should be FAILURE","FAILURE",tripBean.addTrip());
-    //}
-
 
 }
-*/

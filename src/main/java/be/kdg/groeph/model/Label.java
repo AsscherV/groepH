@@ -16,22 +16,9 @@ public class Label {
     @Column(name="name", nullable = false, length = 100)
     private String name;
 
-    /*
     @ManyToOne
-    @JoinColumn(name = "trip", nullable = false)
+    @JoinColumn(name = "trip", nullable = true)
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    private Trip trip;
-      */
-    /*
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "t_trip_label", joinColumns = {@JoinColumn(name = "trips")},
-            inverseJoinColumns = {@JoinColumn(name = "id")})
-    @Column(name = "trips", nullable = true)
-    private List<Trip> trips;
-    */
-    @ManyToOne
-    @JoinColumn(name = "trip", nullable = false)
-    @Cascade({org.hibernate.annotations.CascadeType.ALL})
     private Trip trip;
 
     public Label() {

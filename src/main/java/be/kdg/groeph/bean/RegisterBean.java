@@ -24,10 +24,8 @@ import java.text.ParseException;
 import java.util.Date;
 
 @Component
-@RequestScoped
 @ViewAccessScoped
 @Named
-@ManagedBean(name="registerBean")
 public class RegisterBean implements Serializable {
     static Logger logger = Logger.getLogger(RegisterBean.class);
 
