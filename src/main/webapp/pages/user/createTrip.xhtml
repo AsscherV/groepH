@@ -11,6 +11,7 @@
         <h:outputStylesheet library="css" name="main.css"/>
     </h:head>
     <h:body>
+        <f:loadBundle basename="messages" var="msgs"/>
         <ui:insert name="header">
             <ui:include src="../header.xhtml"/>
         </ui:insert>
@@ -97,11 +98,11 @@
                                 <div class="box">
                                     <h:form>
                                         <h:panelGrid columns="3" border="0" >
-                                            <h:outputLabel value="Title"/>
+                                            <h:outputLabel value="#{msgs.tripTitle}"/>
                                             <h:inputText id="titel" styleClass="span2" value="#{tripBean.title}" />
                                             <h:message for="titel" styleClass="error" />
 
-                                            <h:outputLabel value="Description"/>
+                                            <h:outputLabel value="#{msgs.tripDescription}"/>
                                             <h:inputText id="description" styleClass="span2" value="#{tripBean.description}"/>
                                             <h:message for="description" styleClass="error" />
 
@@ -113,24 +114,24 @@
                                             <h:column></h:column>
                                             <h:column></h:column>
 
-                                            <h:outputLabel value="Type "/>
+                                            <h:outputLabel value="#{msgs.tripType}"/>
                                             <h:inputText id="type" styleClass="span2" value="#{tripBean.tripType}"/>
                                             <h:message for="type" styleClass="error" />
 
-                                            <h:outputLabel value="Start time"/>
+                                            <h:outputLabel value="#{msgs.tripStartTime}"/>
                                             <h:inputText id="startTime" styleClass="span2 datepicker" value="#{tripBean.startTime}"> <f:convertDateTime pattern="dd/MM/yyyy"/> </h:inputText>
                                             <h:message for="startTime" styleClass="error" />
 
-                                            <h:outputLabel value="End time"/>
+                                            <h:outputLabel value="#{msgs.tripEndTime}"/>
                                             <h:inputText id="endTime" styleClass="span2 datepicker" value="#{tripBean.endTime}"> <f:convertDateTime pattern="dd/MM/yyyy"/> </h:inputText>
                                             <h:message for="endTime" styleClass="error" />
 
-                                            <h:outputLabel value="Label"/>
+                                            <h:outputLabel value="#{msgs.tripLabel}"/>
                                             <h:inputText id="label" styleClass="span2" value="#{tripBean.label}"/>
                                             <h:message for="label" styleClass="error" />
 
                                         </h:panelGrid>
-                                        <h:commandButton  type="submit" action="#{tripBean.addTrip}" class="btn btn-success" value="add trip" />
+                                        <h:commandButton  type="submit" action="#{tripBean.addTrip}" class="btn btn-success" value="#{msgs.addTrip}" />
                                     </h:form>
                                 </div>
                             </div>
@@ -154,6 +155,7 @@
         ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->
         <h:outputScript name="js/jquery-1.9.0.min.js"/>
+        <h:outputScript name="js/jquery-ui.js"/>
         <h:outputScript name="js/main.js"/>
     </h:body>
 </html> 

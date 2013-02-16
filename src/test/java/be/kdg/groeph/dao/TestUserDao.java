@@ -1,6 +1,7 @@
 package be.kdg.groeph.dao;
 
 import be.kdg.groeph.model.TripUser;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +19,6 @@ import static org.junit.Assert.*;
 public class TestUserDao extends AbstractTransactionalJUnit4SpringContextTests {
     @Autowired
     private UserDao userDao;
-
-    private TripUser user1;
-    private TripUser user2;
 
     @Test
     public void testInvalidEmail(){
