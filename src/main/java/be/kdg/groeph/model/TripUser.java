@@ -2,6 +2,8 @@ package be.kdg.groeph.model;
 
 import be.kdg.groeph.model.Null.NullUser;
 import be.kdg.groeph.model.Null.Nullable;
+import org.codehaus.jackson.annotate.JsonAutoDetect;
+import org.codehaus.jackson.map.util.JSONPObject;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;

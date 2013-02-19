@@ -2,6 +2,7 @@ package be.kdg.groeph.service;
 
 
 
+import be.kdg.groeph.model.TripUser;
 import com.sun.jersey.api.client.Client;
 
 import com.sun.jersey.api.client.WebResource;
@@ -12,7 +13,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
+import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 
 import javax.ws.rs.core.MediaType;
@@ -23,7 +26,11 @@ import java.net.URI;
 
 import static org.junit.Assert.assertEquals;
 
-public class TestRest {
+@Transactional
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"classpath:daoContext.xml"})
+
+public class TestRest extends AbstractTransactionalJUnit4SpringContextTests {
 
     private final String password = "def";
     private final String username = "test@test.com";
