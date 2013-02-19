@@ -1,16 +1,20 @@
 package be.kdg.groeph.service;
 
 import be.kdg.groeph.dao.UserDao;
-import be.kdg.groeph.model.User;
-import be.kdg.groeph.util.SHAEncryption;
+import be.kdg.groeph.model.TripUser;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.UnexpectedRollbackException;
 import org.springframework.transaction.annotation.Transactional;
 
-/**
- * To change this template use File | Settings | File Templates.
- */
+import javax.annotation.Resource;
+
 @Transactional
 @Service("loginService")
 public class LoginServiceImpl implements LoginService {
@@ -19,23 +23,34 @@ public class LoginServiceImpl implements LoginService {
     @Autowired
     UserDao userDao;
 
+    @Autowired
+    @Resource(name = "authenticationManager")
+    private AuthenticationManager authenticationManager; // specific for Spring Security
+
+
     @Override
-    public User loginUser(String email, String password) {
-
-        User user = userDao.getUserByEmail(email);
-        if(user.isNull()){
-            logger.warn("Login failure.");
-            return User.INVALID_USER();
-        } else {
-            if(password.equals(user.getPassword())){
-                logger.info("User " + user.getEmail() + " has logged in.");
-                return user;
-
-            } else {
-                logger.warn("Login failure.");
-                return User.INVALID_USER();
+    public TripUser loginUser(String email, String password) {
+        TripUser user = userDao.getUserByEmail(email);
+        if (user.getEmail().equals(email) && user.getPassword().equals(password)) { //  if (!userDao.getUserByEmail(email).isNull() && ) {
+            try {
+                Authentication authenticate = authenticationManager.authenticate(
+                        new UsernamePasswordAuthenticationToken(email, password));
+                if (authenticate.isAuthenticated()) {
+                    SecurityContextHolder.getContext().setAuthentication(
+                            authenticate);
+                    logger.info("Login Success.");
+                    logger.info("User( " + email + " ) has logged in.");
+                    return userDao.getUserByEmail(email);
+                }
+            } catch (AuthenticationException e) {
+                logger.error("AuthenticationException: " + e.getMessage());
+                return TripUser.INVALID_USER();
+            } catch (UnexpectedRollbackException rollback) {
+                logger.error("UnexpectedRollbackException: " + rollback.getMessage());
+                return TripUser.INVALID_USER();
             }
-
         }
+        logger.warn("Login failure.");
+        return TripUser.INVALID_USER();
     }
 }

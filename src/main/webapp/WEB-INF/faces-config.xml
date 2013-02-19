@@ -5,14 +5,14 @@
     xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
     http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
     version="2.0">
-  	
-  	<!-- JSF and Spring are integrated -->
+
+    <!-- JSF and Spring are integrated -->
     <!-- Spring Annotations -->
-  	<application>
-    	<el-resolver>
-    		org.springframework.web.jsf.el.SpringBeanFacesELResolver
-    	</el-resolver>
-  	</application>
+    <application>
+        <el-resolver>
+            org.springframework.web.jsf.el.SpringBeanFacesELResolver
+        </el-resolver>
+    </application>
 
     <application>
         <locale-config>
@@ -26,39 +26,15 @@
         </resource-bundle>
     </application>
 
-    <navigation-rule>
-        <from-view-id>/pages/index.xhtml</from-view-id>
-        <navigation-case>
-            <from-action>#{loginBean.loginUser}</from-action>
-            <from-outcome>SUCCESS</from-outcome>
-            <to-view-id>/pages/stops.xhtml</to-view-id>
-        </navigation-case>
-        <navigation-case>
-            <from-action>#{loginBean.loginUser}</from-action>
-            <from-outcome>FAILURE</from-outcome>
-            <to-view-id>/pages/stops.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
 
-    <!--
     <navigation-rule>
-        <from-view-id>/pages/index.xhtml</from-view-id>
-        <from-action>#{loginBean.validateUser}</from-action>
+        <!--<from-view-id>/pages/index.xhtml</from-view-id>  -->
         <navigation-case>
-            <from-outcome>failure</from-outcome>
+            <from-action>#{loginBean.logOut}</from-action>
+            <from-outcome>SUCCESS</from-outcome>
             <to-view-id>/pages/index.xhtml</to-view-id>
-        </navigation-case>
-        <navigation-case>
-            <from-outcome>ADMIN</from-outcome>
-            <to-view-id>/pages/admin/admin.xhtml</to-view-id>
-            <redirect/>
-        </navigation-case>
-        <navigation-case>
-            <from-outcome>CUSTOMER</from-outcome>
-            <to-view-id>/users/products.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
     </navigation-rule>
-    -->
 
 </faces-config>

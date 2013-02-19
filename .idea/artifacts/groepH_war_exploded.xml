@@ -1,7 +1,8 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="groepH:war exploded">
-    <output-path>$PROJECT_DIR$/classes/artifacts/groepH_war_exploded</output-path>
+    <output-path>$PROJECT_DIR$/target/groepH-1.0</output-path>
     <root id="root">
+      <element id="javaee-facet-resources" facet="groepH/web/Web" />
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
           <element id="module-output" name="groepH" />
@@ -15,9 +16,9 @@
           <element id="library" level="project" name="Maven: org.springframework:spring-aop:3.1.1.RELEASE" />
           <element id="library" level="project" name="Maven: aopalliance:aopalliance:1.0" />
           <element id="library" level="project" name="Maven: org.springframework:spring-context:3.1.1.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-context-support:3.1.1.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-web:3.1.1.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-webmvc:3.1.1.RELEASE" />
-          <element id="library" level="project" name="Maven: org.springframework:spring-context-support:3.1.1.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework.webflow:spring-faces:2.3.1.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework.webflow:spring-binding:2.3.1.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework.webflow:spring-js:2.3.1.RELEASE" />
@@ -28,11 +29,16 @@
           <element id="library" level="project" name="Maven: org.springframework:spring-orm:3.1.1.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-test:3.1.1.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework.security:spring-security-core:3.1.1.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework.security:spring-security-config:3.1.1.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework.security:spring-security-web:3.1.1.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework.security:spring-security-taglibs:3.1.1.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework.security:spring-security-acl:3.1.1.RELEASE" />
           <element id="library" level="project" name="Maven: com.sun.faces:jsf-api:2.1.6" />
           <element id="library" level="project" name="Maven: com.sun.faces:jsf-impl:2.1.6" />
           <element id="library" level="project" name="Maven: org.apache.myfaces.extensions.cdi.bundles:myfaces-extcdi-bundle-jsf20:1.0.5" />
           <element id="library" level="project" name="Maven: javax.servlet:jstl:1.2" />
-          <element id="library" level="project" name="Maven: javax.persistence:persistence-api:1.0" />
+          <element id="library" level="project" name="Maven: javax.mail:mail:1.4.3" />
+          <element id="library" level="project" name="Maven: javax.activation:activation:1.1" />
           <element id="library" level="project" name="Maven: org.hibernate:hibernate-core:4.1.0.Final" />
           <element id="library" level="project" name="Maven: commons-collections:commons-collections:3.2.1" />
           <element id="library" level="project" name="Maven: antlr:antlr:2.7.7" />
@@ -48,7 +54,7 @@
           <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.6.4" />
           <element id="library" level="project" name="Maven: org.hibernate:hibernate-entitymanager:4.1.0.Final" />
           <element id="library" level="project" name="Maven: javassist:javassist:3.12.1.GA" />
-          <element id="library" level="project" name="Maven: mysql:mysql-connector-java:5.1.17" />
+          <element id="library" level="project" name="Maven: mysql:mysql-connector-java:5.1.22" />
           <element id="library" level="project" name="Maven: c3p0:c3p0:0.9.1.2" />
           <element id="library" level="project" name="Maven: log4j:log4j:1.2.16" />
           <element id="library" level="project" name="Maven: org.slf4j:slf4j-log4j12:1.6.4" />
@@ -72,7 +78,6 @@
           <element id="library" level="project" name="Maven: javax.inject:javax.inject:1" />
         </element>
       </element>
-      <element id="javaee-facet-resources" facet="groepH/web/Web" />
     </root>
   </artifact>
 </component>

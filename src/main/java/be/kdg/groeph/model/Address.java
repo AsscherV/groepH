@@ -6,9 +6,6 @@ import be.kdg.groeph.model.Null.Nullable;
 import javax.persistence.*;
 import java.io.Serializable;
 
-/**
- * To change this template use File | Settings | File Templates.
- */
 @Entity
 @Table(name="t_address")
 public class Address implements Nullable, Serializable {

@@ -1,0 +1,161 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        <title>Trippy Traveler</title>
+        <!-- css -->
+        <h:outputStylesheet library="css" name="bootstrap.css"/>
+        <h:outputStylesheet library="css" name="bootstrap-responsive.css"/>
+        <h:outputStylesheet library="css" name="jquery-ui.css"/>
+        <h:outputStylesheet library="css" name="main.css"/>
+    </h:head>
+    <h:body>
+        <f:loadBundle basename="messages" var="msgs"/>
+        <ui:insert name="header">
+            <ui:include src="../header.xhtml"/>
+        </ui:insert>
+        <div class="container">
+            <div class="row">
+
+                <!-- trips / my trips -->
+                <div class="span3">
+                    <div id="tabContainerTrips" class="tabContainer">
+                        <ul>
+                            <li>
+                                <a class="active" href="#tripsTab">Trips</a>
+                            </li>
+                            <li>
+                                <a href="#myTripsTab">My trips</a>
+                            </li>
+                        </ul>
+                        <!-- //Tab buttons -->
+                        <div class="tabDetails">
+                            <div id="tripsTab" class="tabContentsTrips">
+                                <h:form class="navbar-form">
+                                    <h:inputText  type="text" styleClass="span2"/>
+
+                                    <h:commandButton class="btn btn-success" type="submit" value="Search"/>
+
+                                </h:form>
+
+                                <div class="box">
+                                    <div><a href="#">Trip1</a></div>
+                                    <div><a href="#">Trip2</a></div>
+                                </div>
+                            </div>
+                            <!-- //tripsTab -->
+                            <div id="myTripsTab" class="tabContentsTrips">
+                                <h:form class="navbar-form">
+                                    <h:inputText  type="text" styleClass="span2"/>
+
+                                    <h:commandButton class="btn btn-success" type="submit" value="Search"/>
+                                </h:form>
+
+                                <div class="box">
+
+                                </div>
+                            </div>
+                            <!-- //myTripsTab -->
+                        </div>
+                        <!-- //tab Details -->
+                    </div>
+                </div>
+
+                <!-- trip info -->
+                <div class="span9">
+                    <div id="tabContainerTrip" class="tabContainer">
+                        <ul>
+                            <!-- Tab buttons -->
+                            <li>
+                                <a class="button " href="../index.xhtml">Trip1</a>
+                            </li>
+                            <h:panelGroup rendered="#{loginBean.loggedIn}">
+                                <li>
+                                    <a class="button" href="stops.xhtml">Stops</a>
+                                </li>
+                                <li>
+                                    <a class="button active" href="participants.xhtml">Participants</a>
+                                </li>
+                                <li>
+                                    <a class="button" href="accessories.xhtml">Accessories</a>
+                                </li>
+                                <li>
+                                    <a class="button" href="styling.xhtml">Styling</a>
+                                </li>
+                                <h:panelGroup rendered="#{loginBean.user.admin}">
+                                    <li>
+                                        <a class="button" href="../admin/costs.xhtml">Costs</a>
+                                    </li>
+                                </h:panelGroup>
+
+                            </h:panelGroup>
+                        </ul>
+                        <!-- Tab content -->
+                            <div class="tabDetails">
+
+                            <div id="partTab" class="tabContentsTrip">
+                                <div class="box">
+                                    <h:form>
+                                        <h:panelGrid columns="3" border="0" >
+                                            <h:outputLabel value="#{msgs.tripTitle}"/>
+                                            <h:inputText id="titel" styleClass="span2" value="#{tripBean.title}" />
+                                            <h:message for="titel" styleClass="error" />
+
+                                            <h:outputLabel value="#{msgs.tripDescription}"/>
+                                            <h:inputText id="description" styleClass="span2" value="#{tripBean.description}"/>
+                                            <h:message for="description" styleClass="error" />
+
+
+                                            <h:selectOneRadio value="#{tripBean.public}">
+                                                <f:selectItem itemValue="Public" itemLabel="Public" />
+                                                <f:selectItem itemValue="Private" itemLabel="Private"/>
+                                            </h:selectOneRadio>
+                                            <h:column></h:column>
+                                            <h:column></h:column>
+
+                                            <h:outputLabel value="#{msgs.tripType}"/>
+                                            <h:inputText id="type" styleClass="span2" value="#{tripBean.tripType}"/>
+                                            <h:message for="type" styleClass="error" />
+
+                                            <h:outputLabel value="#{msgs.tripStartTime}"/>
+                                            <h:inputText id="startTime" styleClass="span2 datepicker" value="#{tripBean.startTime}"> <f:convertDateTime pattern="dd/MM/yyyy"/> </h:inputText>
+                                            <h:message for="startTime" styleClass="error" />
+
+                                            <h:outputLabel value="#{msgs.tripEndTime}"/>
+                                            <h:inputText id="endTime" styleClass="span2 datepicker" value="#{tripBean.endTime}"> <f:convertDateTime pattern="dd/MM/yyyy"/> </h:inputText>
+                                            <h:message for="endTime" styleClass="error" />
+
+                                            <h:outputLabel value="#{msgs.tripLabel}"/>
+                                            <h:inputText id="label" styleClass="span2" value="#{tripBean.label}"/>
+                                            <h:message for="label" styleClass="error" />
+
+                                        </h:panelGrid>
+                                        <h:commandButton  type="submit" action="#{tripBean.addTrip}" class="btn btn-success" value="#{msgs.addTrip}" />
+                                    </h:form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <footer>
+                <p>
+                    © Trippy Traveler 2013
+                </p>
+            </footer>
+
+        </div>
+        <!-- /container -->
+
+        <!-- javascript
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <h:outputScript name="js/jquery-1.9.0.min.js"/>
+        <h:outputScript name="js/jquery-ui.js"/>
+        <h:outputScript name="js/main.js"/>
+    </h:body>
+</html> 

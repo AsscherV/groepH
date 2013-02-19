@@ -1,11 +1,12 @@
 package be.kdg.groeph.bean;
 
 import be.kdg.groeph.model.Address;
-import be.kdg.groeph.model.User;
+import be.kdg.groeph.model.TripUser;
+import be.kdg.groeph.model.TripUser;
+import be.kdg.groeph.service.MailService;
 import be.kdg.groeph.service.UserService;
 import be.kdg.groeph.util.SHAEncryption;
 import org.apache.log4j.Logger;
-import org.apache.myfaces.extensions.cdi.core.api.scope.conversation.Conversation;
 import org.apache.myfaces.extensions.cdi.core.api.scope.conversation.ViewAccessScoped;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
@@ -15,68 +16,67 @@ import org.springframework.stereotype.Component;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.inject.Inject;
+import javax.faces.bean.RequestScoped;
 import javax.inject.Named;
-import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import java.io.Serializable;
 import java.text.ParseException;
 import java.util.Date;
 
-/**
- * To change this template use File | Settings | File Templates.
- */
 @Component
 @ViewAccessScoped
 @Named
-public class UserBean implements Serializable {
-    static Logger logger = Logger.getLogger(UserBean.class);
+public class RegisterBean implements Serializable {
+    static Logger logger = Logger.getLogger(RegisterBean.class);
 
     private static final String SUCCESS = "SUCCESS";
     private static final String FAILURE = "FAILURE";
 
-    @ManagedProperty(value="#{userService}")
+    @ManagedProperty(value = "#{userService}")
     @Autowired
     UserService userService;
 
-    @NotEmpty(message = "{firstName} {NotEmpty}")
-    @Length(max=50, message = "{firstName} {length}")
+    @ManagedProperty(value = "#{mailService}")
+    @Autowired
+    MailService mailService;
+
+    @NotEmpty(message = "{firstName} {notempty}")
+    @Length(max = 50, message = "{firstName} {length}")
     private String firstName;
     @NotEmpty(message = "{lastName} {notempty}")
-    @Length(max=50, message = "{lastName} {length}")
+    @Length(max = 50, message = "{lastName} {length}")
     private String lastName;
     @NotNull(message = "{dateOfBirth} {notempty}")
     @Past(message = "{dateOfBirth} {past}")
     private Date dateOfBirth;
-    @Length(max=30, message = "{phoneNumber} {length}")
+    @Length(max = 30, message = "{phoneNumber} {length}")
     @NotEmpty(message = "{phoneNumber} {notempty}")
     private String phoneNumber;
     private char gender;
     @NotEmpty(message = "{email} {notempty}")
     @Email(message = "{email} {validEmail}")
-    @Length(max=100, message = "{email} {length}")
+    @Length(max = 100, message = "{email} {length}")
     private String email;
     @NotEmpty(message = "{password} {notempty}")
     private String password;
     @NotEmpty(message = "{password} {notempty}")
     private String secondPassword;
-    @NotEmpty(message = "{firstName} {notempty}")
+    @NotEmpty(message = "{dateRegistered} {notempty}")
     private Date dateRegistered;
-    @NotEmpty(message = "{firstName} {notempty}")
+    @NotEmpty(message = "{zipcode} {notempty}")
     private String zipcode;
-    @NotEmpty(message = "{firstName} {notempty}")
+    @NotEmpty(message = "{street} {notempty}")
     private String street;
-    @NotEmpty(message = "{firstName} {notempty}")
+    @NotEmpty(message = "{streetNumber} {notempty}")
     private String streetNumber;
-    @NotEmpty(message = "{firstName} {notempty}")
+    @NotEmpty(message = "{city} {notempty}")
     private String city;
-    @NotEmpty(message = "{firstName} {notempty}")
     private String role;
 
     private boolean registered;
 
-    public UserBean() {
+    public RegisterBean() {
         registered = false;
     }
 
@@ -196,14 +196,6 @@ public class UserBean implements Serializable {
         return password.equals(getSecondPassword());
     }
 
-    public UserService getUserService() {
-        return userService;
-    }
-
-    public void setUserService(UserService userService) {
-        this.userService = userService;
-    }
-
     public boolean isRegistered() {
         return registered;
     }
@@ -213,21 +205,37 @@ public class UserBean implements Serializable {
     }
 
     public String addUser() throws ParseException {
-        Address address = new Address(getStreet(), getStreetNumber(),getZipcode(),getCity());
-        setRole("User");
+        Address address = new Address(getStreet(), getStreetNumber(), getZipcode(), getCity());
+        setRole("ROLE_USER");
         setDateRegistered(new Date());
-        //todo dees nog aanpasse met die datum...
-        //todo hier hebbek ook een encrypt method zetten voor password.
-        //
-        boolean isAdmin = false;
-        User user = new User(getFirstName(), getLastName(), getDateOfBirth(), getPhoneNumber(), getGender(),getEmail(), SHAEncryption.encrypt(getPassword()),address,getDateRegistered(),getRole(), isAdmin);
-        if(confirmPassword()){
-            userService.addUser(user);
-            registered = true;
-            return SUCCESS;
+        TripUser user = new TripUser(getFirstName(), getLastName(), getDateOfBirth(), getPhoneNumber(), getGender(), getEmail(), SHAEncryption.encrypt(getPassword()), address, getDateRegistered(), getRole());
+        user.setAccountNonExpired(true);
+        user.setAccountNonLocked(true);
+        user.setCredentialsNonExpired(true);
+        user.setEnabled(true);
+
+        if (confirmPassword()) {
+            boolean result = userService.addUser(user);
+            if (result) {
+                userService.addUser(user);
+                mailService.uponSuccessfulRegistration(user.getEmail());
+                registered = true;
+                return SUCCESS;
+            }
+            return FAILURE;
         }
         return FAILURE;
     }
 
+   /*
 
+    public UserService getUserService() {
+        return userService;
+    }
+
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
+
+    */
 }

@@ -15,4 +15,15 @@ $(document).ready(function(){
 
                        $(".button").fadeIn(); // show unvisible trip tabs
 	});
+
+    //datetimepicker
+            $(".datepicker").datepicker({
+                dateFormat: 'dd/mm/yy',
+                changeMonth: true,
+                changeYear: true,
+                showOtherMonths: true,
+                selectOtherMonths: true,
+                yearRange: '-100y:c+nn',
+                maxDate: '-1d'
+            });
 });

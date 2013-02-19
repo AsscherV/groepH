@@ -7,9 +7,6 @@ import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-/**
- * To change this template use File | Settings | File Templates.
- */
 public final class SHAEncryption {
     static Logger logger = Logger.getLogger(SHAEncryption.class);
 

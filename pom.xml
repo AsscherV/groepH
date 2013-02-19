@@ -5,18 +5,19 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>be.kdg.groepH</groupId>
 	<artifactId>groepH</artifactId>
-	<packaging>war</packaging>
-    <version>1.0-SNAPSHOT</version>
+	<packaging>war</packaging>   <!-- war  -->
+    <version>1.0</version>   <!-- -SNAPSHOT -->
 	<name>groepH</name>
 	<url>http://maven.apache.org</url>
 
     <build>
+
         <plugins>
             <!-- Nodig om met versie 1.7 te kunnen compileren -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.3.2</version>
+                <version>3.0</version>
                 <configuration>
                     <source>1.7</source>
                     <target>1.7</target>
@@ -32,25 +33,39 @@
                         <plugin>
                             <groupId>org.apache.maven.plugins</groupId>
                             <artifactId>maven-javadoc-plugin</artifactId>
-                            <version>2.7</version>
+                            <version>2.9</version>
                         </plugin>
                         <!-- Plugin om overzicht testen te genereren -->
                         <plugin>
                             <groupId>org.apache.maven.plugins</groupId>
                             <artifactId>maven-surefire-report-plugin</artifactId>
                             <configuration> <argLine>-XX:-UseSplitVerifier</argLine> </configuration>
-                            <version>2.6</version>
+                            <version>2.13</version>
                         </plugin>
                         <!-- Plugin om code coverage rapport van de testen te genereren -->
                         <plugin>
                             <groupId>org.codehaus.mojo</groupId>
                             <artifactId>cobertura-maven-plugin</artifactId>
-                            <version>2.5.1</version>
+                            <version>2.5.2</version>
                         </plugin>
                         <plugin>
                             <groupId>org.codehaus.mojo</groupId>
                             <artifactId>findbugs-maven-plugin</artifactId>
-                            <version>2.4.0</version>
+                            <version>2.5.2</version>
+                        </plugin>
+                        <plugin>
+                            <groupId>org.codehaus.mojo</groupId>
+                            <artifactId>versions-maven-plugin</artifactId>
+                            <version>2.0</version>
+                            <reportSets>
+                                <reportSet>
+                                    <reports>
+                                        <report>dependency-updates-report</report>
+                                        <report>plugin-updates-report</report>
+                                        <report>property-updates-report</report>
+                                    </reports>
+                                </reportSet>
+                            </reportSets>
                         </plugin>
                     </reportPlugins>
                 </configuration>
@@ -113,6 +128,12 @@
 			<artifactId>spring-context</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
 
         <!--
             Web application development utilities applicable to both Servlet and Portlet Environments
@@ -189,6 +210,24 @@
             <version>${spring.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-taglibs</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
 		<!-- JSF 2 API library  -->
 		<dependency>
 		  <groupId>com.sun.faces</groupId>
@@ -221,12 +260,20 @@
             <version>2.5</version>
             <scope>provided</scope>
         </dependency>
-
+         <!--
         <dependency>
             <groupId>javax.persistence</groupId>
             <artifactId>persistence-api</artifactId>
             <version>1.0</version>
         </dependency>
+        -->
+
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>1.4.3</version>
+        </dependency>
+
 
         <!--
         <dependency>
@@ -267,7 +314,7 @@
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.17</version>
+			<version>5.1.22</version>
 		</dependency>
 
 		<dependency>
@@ -386,18 +433,5 @@
             <artifactId>javax.inject</artifactId>
             <version>1</version>
         </dependency>
-
-        <!-- Voor date picker-
-        <dependency>
-            <groupId>org.apache.myfaces.trinidad</groupId>
-            <artifactId>trinidad-api</artifactId>
-            <version>1.0.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.myfaces.trinidad</groupId>
-            <artifactId>trinidad</artifactId>
-            <version>2.0.1</version>
-        </dependency>
-        -->
     </dependencies>
 </project>

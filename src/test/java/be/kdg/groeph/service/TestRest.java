@@ -9,7 +9,10 @@ import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 
 import org.junit.Test;
-
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 
 import javax.ws.rs.core.MediaType;
@@ -18,15 +21,8 @@ import javax.ws.rs.core.UriBuilder;
 import java.net.URI;
 
 
-import static junit.framework.Assert.assertEquals;
+import static org.junit.Assert.assertEquals;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Frederik
- * Date: 6/02/13
- * Time: 11:09
- * To change this template use File | Settings | File Templates.
- */
 public class TestRest {
 
     private final String password = "def";
@@ -67,6 +63,6 @@ public class TestRest {
     }
 
     public static URI getBaseURI() {
-        return UriBuilder.fromUri("http://localhost:8080/groepH_war_exploded/api").build();
+        return UriBuilder.fromUri("http://localhost:8080/groepH-1.0/api").build();
     }
 }

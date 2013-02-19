@@ -11,8 +11,9 @@
     </h:head>
     <h:body>
         <ui:insert name="header">
-            <ui:include src="header.xhtml"/>
+            <ui:include src="../header.xhtml"/>
         </ui:insert>
+
         <div class="container">
             <div class="row">
 
@@ -51,7 +52,7 @@
                                 </h:form>
 
                                 <div class="box">
-
+                                             U BENT INGELOGD
                                 </div>
                             </div>
                             <!-- //myTripsTab -->
@@ -66,33 +67,40 @@
                         <ul>
                             <!-- Tab buttons -->
                             <li>
-                                <a class="button " href="index.xhtml">Trip1</a>
+                                <a class="button " href="../index.xhtml">Trip1</a>
                             </li>
-                            <li>
-                                <a class="button" href="stops.xhtml">Stops</a>
-                            </li>
-                            <li>
-                                <a class="button active" href="participants.xhtml">Participants</a>
-                            </li>
-                            <li>
-                                <a class="button" href="accessories.xhtml">Accessories</a>
-                            </li>
-                            <li>
-                                <a class="button" href="costs.xhtml">Costs</a>
-                            </li>
-                            <li>
-                                <a class="button" href="styling.xhtml">Styling</a>
-                            </li>
+                            <h:panelGroup rendered="#{loginBean.loggedIn}">
+                                <li>
+                                    <a class="button active" href="stops.xhtml">Stops</a>
+                                </li>
+                                <li>
+                                    <a class="button" href="participants.xhtml">Participants</a>
+                                </li>
+                                <li>
+                                    <a class="button" href="accessories.xhtml">Accessories</a>
+                                </li>
+                                <li>
+                                    <a class="button" href="styling.xhtml">Styling</a>
+                                </li>
+                                <h:panelGroup rendered="#{loginBean.user.admin}">
+                                    <li>
+                                        <a class="button" href="../admin/costs.xhtml">Costs</a>
+                                    </li>
+                                </h:panelGroup>
+
+                            </h:panelGroup>
                         </ul>
                         <!-- Tab content -->
-                            <div class="tabDetails">
+                        <div class="tabDetails">
 
-                            <div id="partTab" class="tabContentsTrip">
+                            <div id="stopsTab" class="tabContentsTrip">
                                 <div class="box">
 
                                 </div>
                             </div>
+
                         </div>
+                        <!-- //tab Details -->
                     </div>
                 </div>
 

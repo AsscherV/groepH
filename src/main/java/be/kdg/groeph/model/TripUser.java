@@ -9,15 +9,9 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/**
- * To change this template use File | Settings | File Templates.
- */
-
-
-
 @Entity
 @Table(name="t_user")
-public class User implements Nullable, Serializable {
+public class TripUser implements Nullable, Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -39,13 +33,22 @@ public class User implements Nullable, Serializable {
     private String role;
     @Column(name="dateRegistered", nullable = false, length = 100)
     private Date dateRegistered;
-    @Column (name="isAdmin", nullable = false)
-    private Boolean isAdmin;
+    //@Column(name="isAdmin", nullable = false)
+    //private Boolean isAdmin;
 
     @ManyToOne
     @JoinColumn(name = "address")
     @Cascade({org.hibernate.annotations.CascadeType.ALL})
     private Address address;
+
+    @Column(name="accountNonExpired", nullable = true)
+    private boolean accountNonExpired;
+    @Column(name="credentialsNonExpired", nullable = true)
+    private boolean credentialsNonExpired;
+    @Column(name="enabled", nullable = true)
+    private boolean enabled;
+    @Column(name="accountNonLocked", nullable = true)
+    private boolean accountNonLocked;
 
     /*
         @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
@@ -54,10 +57,10 @@ public class User implements Nullable, Serializable {
      */
 
 
-    public User() {
+    public TripUser() {
     }
 
-    public User(String firstName, String lastName, Date dateOfBirth, String phoneNumber, char gender, String email, String password, Address address, Date dateRegistered, String role, Boolean isAdmin) {
+    public TripUser(String firstName, String lastName, Date dateOfBirth, String phoneNumber, char gender, String email, String password, Address address, Date dateRegistered, String role) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
@@ -68,15 +71,6 @@ public class User implements Nullable, Serializable {
         this.address = address;
         this.dateRegistered = dateRegistered;
         this.role = role;
-        this.isAdmin = isAdmin;
-    }
-
-    public Boolean getAdmin() {
-        return isAdmin;
-    }
-
-    public void setAdmin(Boolean admin) {
-        isAdmin = admin;
     }
 
     public int getId() {
@@ -167,6 +161,47 @@ public class User implements Nullable, Serializable {
         this.address = address;
     }
 
+    public boolean isAccountNonExpired() {
+        return accountNonExpired;
+    }
+
+    public void setAccountNonExpired(boolean accountNonExpired) {
+        this.accountNonExpired = accountNonExpired;
+    }
+
+    public boolean isCredentialsNonExpired() {
+        return credentialsNonExpired;
+    }
+
+    public void setCredentialsNonExpired(boolean credentialsNonExpired) {
+        this.credentialsNonExpired = credentialsNonExpired;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public boolean isAccountNonLocked() {
+        return accountNonLocked;
+    }
+
+    public void setAccountNonLocked(boolean accountNonLocked) {
+        this.accountNonLocked = accountNonLocked;
+    }
+
+    public boolean isAdmin(){
+        if(role.equals("ROLE_ADMIN")){
+            return  true;
+        }
+        return false;
+    }
+
+
+
     @Override
     public boolean isNull() {
         return false;
@@ -188,7 +223,7 @@ public class User implements Nullable, Serializable {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
 
-        User user = (User) obj;
+        TripUser user = (TripUser) obj;
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         String dob = "";
         String userdob = "";
@@ -211,7 +246,7 @@ public class User implements Nullable, Serializable {
         return getFirstName() + " " + getLastName() + " ";
     }
 
-    public static User INVALID_USER() {
+    public static TripUser INVALID_USER() {
         return new NullUser();
     }
 }

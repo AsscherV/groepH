@@ -18,21 +18,34 @@
                     <h:panelGrid rendered="#{not loginBean.loggedIn}">
                         <h:link class="btn  btn-primary btn-mini" value="Sign in with facebook"/>
                     </h:panelGrid>
-                    <h:panelGrid columns="5" border="0" rendered="#{not loginBean.loggedIn}">
-
+                    <h:panelGrid columns="2" cellpadding="2" rendered="#{not loginBean.loggedIn}">
                         <h:outputLabel value="Email"/>
                         <h:inputText id="email" styleClass="span2 loginInput" value="#{loginBean.email}"/>
                         <h:outputLabel value="Password"/>
                         <h:inputSecret id="password" styleClass="span2 loginInput" value="#{loginBean.password}"/>
                         <h:commandButton class="btn btn-mini" type="submit" value="Sign in"
                                          action="#{loginBean.loginUser}"/>
+                        <h:link class="floatRight" outcome="register.xhtml" value="Register"></h:link>
                     </h:panelGrid>
 
+                    <table>
+                        <tr>
+                            <td><h:message for="password" class="error"></h:message></td>
+                        </tr>
+                        <tr>
+                            <td><h:message for="email" class="error"></h:message></td>
+                        </tr>
+                    </table>
 
-                    <h:panelGrid rendered="#{loginBean.loggedIn}">
-                        <h1>Welkom #{loginBean.user.firstName}</h1>
+
+
+                    <h:panelGrid rendered="#{loginBean.loggedIn}" columns="2" cellpadding="2">
+                        <h:outputLabel class="welcomeMessage">Welkom </h:outputLabel>
+                        <h:outputLabel class="welcomeMessage">#{loginBean.user.firstName}</h:outputLabel >
+                        <h:commandLink class="btn btn-mini" type="submit" value="Sign off"
+                                         action="#{loginBean.logOut}"/>
                     </h:panelGrid>
-                    <a id="register" href="register.xhtml">Register</a>
+
                 </h:form>
 
             </div>

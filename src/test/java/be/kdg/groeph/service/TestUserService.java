@@ -1,7 +1,8 @@
 package be.kdg.groeph.service;
 
 import be.kdg.groeph.mockMother.UserMother;
-import be.kdg.groeph.model.User;
+import be.kdg.groeph.model.TripUser;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotSame;
-import static org.junit.Assert.*;
 
-/**
- * To change this template use File | Settings | File Templates.
- */
 
 @Transactional
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -26,16 +23,21 @@ public class TestUserService extends AbstractTransactionalJUnit4SpringContextTes
     @Autowired
     UserService userService;
 
-    private User user1;
-    private User user2;
+    private TripUser validUser1;
+    private TripUser validUser2;
+
+    @Before
+    public void init(){
+        validUser1 = UserMother.validUser1();
+        validUser2 = UserMother.validUser2();
+    }
 
     @Test
     public void testAddUser(){
-        user1 = UserMother.validUser1();
-        user2 = UserMother.validUser2();
-        assertTrue(userService.addUser(user1));
-        assertFalse(userService.addUser(user1));
-        assertTrue(userService.addUser(user2));
+
+        assertTrue("Adding validUser1 returns true",userService.addUser(validUser1));
+        assertFalse("Can't add existing user, returns false",userService.addUser(validUser1));
+        assertTrue("Adding validUser2 returns true",userService.addUser(validUser2));
     }
 
 
