@@ -9,7 +9,10 @@ import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 
 import org.junit.Test;
-
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 
 import javax.ws.rs.core.MediaType;
@@ -60,6 +63,6 @@ public class TestRest {
     }
 
     public static URI getBaseURI() {
-        return UriBuilder.fromUri("http://localhost:8080/groepH_war_exploded/api").build();
+        return UriBuilder.fromUri("http://localhost:8080/groepH-1.0/api").build();
     }
 }

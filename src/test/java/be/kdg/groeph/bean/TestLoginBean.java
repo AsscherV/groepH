@@ -30,19 +30,11 @@ public class TestLoginBean extends AbstractTransactionalJUnit4SpringContextTests
     @Qualifier("registerBean")
     @Autowired
     RegisterBean registerBean;
-    @Autowired
-    UserService userService;
-    @Autowired
-    UserDao userDao;
-
-    TripUser validUser;
 
     @Before
     public void init() throws ParseException {
-        //validUser =  UserMother.validUser2();
         fillRegisterBean();
         registerBean.addUser();
-        //userDao.addUser(validUser);
     }
 
     @Test

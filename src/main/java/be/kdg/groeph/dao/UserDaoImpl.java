@@ -16,6 +16,8 @@ public class UserDaoImpl implements UserDao {
     @Autowired
     private SessionFactory sessionFactory;
 
+    /*
+
     public SessionFactory getSessionFactory() {
         return sessionFactory;
     }
@@ -23,11 +25,12 @@ public class UserDaoImpl implements UserDao {
     public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
+    */
 
     @Override
     @SuppressWarnings("unchecked")
     public boolean addUser(TripUser user) {
-        getSessionFactory().getCurrentSession().saveOrUpdate(user);
+        sessionFactory.getCurrentSession().saveOrUpdate(user);
         return true;
     }
 

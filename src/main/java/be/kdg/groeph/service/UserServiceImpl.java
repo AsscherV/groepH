@@ -24,20 +24,11 @@ public class UserServiceImpl  implements UserService, UserDetailsService {
 
     @Autowired
     UserDao userDao;
-    private Collection<GrantedAuthority> authorities;
-
-    public UserDao getUserDao() {
-        return userDao;
-    }
-
-    public void setUserDao(UserDao userDao) {
-        this.userDao = userDao;
-    }
 
     public boolean addUser(TripUser user){
         TripUser userByEmail = userDao.getUserByEmail(user.getEmail());
         if(userByEmail.isNull()){
-            getUserDao().addUser(user);
+            userDao.addUser(user);
             logger.info("User " + user.getEmail() + " created");
             return  true;
         }

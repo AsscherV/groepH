@@ -79,14 +79,6 @@ public class TripBean implements Serializable {
         return startTime;
     }
 
-    public TripService getTripService() {
-        return tripService;
-    }
-
-    public void setTripService(TripService tripService) {
-        this.tripService = tripService;
-    }
-
     public Date getEndTime() {
         return endTime;
     }
@@ -140,5 +132,15 @@ public class TripBean implements Serializable {
             return FAILURE;
         }
     }
+
+    /*
+    public TripService getTripService() {
+        return tripService;
+    }
+
+    public void setTripService(TripService tripService) {
+        this.tripService = tripService;
+    }
+    */
 
 }

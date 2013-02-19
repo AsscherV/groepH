@@ -73,3 +73,7 @@ footer p {
 .loginInput {
     height: 25px;
 }
+
+.error{
+    color: Red;
+}

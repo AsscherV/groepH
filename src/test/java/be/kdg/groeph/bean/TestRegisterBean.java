@@ -28,8 +28,6 @@ public class TestRegisterBean extends AbstractTransactionalJUnit4SpringContextTe
     @Qualifier("registerBean")
     @Autowired
     RegisterBean registerBean;
-    @Autowired
-    UserService userService;
 
     private TripUser user1;
     private TripUser user2;

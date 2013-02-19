@@ -63,14 +63,6 @@ public class LoginBean implements Serializable {
         this.user = user;
     }
 
-    public LoginService getLoginService() {
-        return loginService;
-    }
-
-    public void setLoginService(LoginService loginService) {
-        this.loginService = loginService;
-    }
-
     public boolean isLoggedIn() {
         return isLoggedIn;
     }
@@ -100,4 +92,17 @@ public class LoginBean implements Serializable {
         //FacesContext.getCurrentInstance().getExternalContext().redirect(url);
         return SUCCESS;
     }
+
+    /*
+
+
+    public LoginService getLoginService() {
+        return loginService;
+    }
+
+    public void setLoginService(LoginService loginService) {
+        this.loginService = loginService;
+    }
+     */
 }
+

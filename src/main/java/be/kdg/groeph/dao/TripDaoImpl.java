@@ -17,6 +17,8 @@ public class TripDaoImpl implements TripDao {
     @Autowired
     private SessionFactory sessionFactory;
 
+    /*
+
     public SessionFactory getSessionFactory() {
         return sessionFactory;
     }
@@ -25,10 +27,12 @@ public class TripDaoImpl implements TripDao {
         this.sessionFactory = sessionFactory;
     }
 
+    */
+
     @Override
     @SuppressWarnings("unchecked")
     public boolean addTrip(Trip trip) {
-        getSessionFactory().getCurrentSession().saveOrUpdate(trip);
+        sessionFactory.getCurrentSession().saveOrUpdate(trip);
         return true;
     }
 

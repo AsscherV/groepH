@@ -3,6 +3,7 @@ package be.kdg.groeph.bean;
 import be.kdg.groeph.model.Address;
 import be.kdg.groeph.model.TripUser;
 import be.kdg.groeph.model.TripUser;
+import be.kdg.groeph.service.MailService;
 import be.kdg.groeph.service.UserService;
 import be.kdg.groeph.util.SHAEncryption;
 import org.apache.log4j.Logger;
@@ -32,26 +33,30 @@ public class RegisterBean implements Serializable {
     private static final String SUCCESS = "SUCCESS";
     private static final String FAILURE = "FAILURE";
 
-    @ManagedProperty(value="#{userService}")
+    @ManagedProperty(value = "#{userService}")
     @Autowired
     UserService userService;
 
+    @ManagedProperty(value = "#{mailService}")
+    @Autowired
+    MailService mailService;
+
     @NotEmpty(message = "{firstName} {notempty}")
-    @Length(max=50, message = "{firstName} {length}")
+    @Length(max = 50, message = "{firstName} {length}")
     private String firstName;
     @NotEmpty(message = "{lastName} {notempty}")
-    @Length(max=50, message = "{lastName} {length}")
+    @Length(max = 50, message = "{lastName} {length}")
     private String lastName;
     @NotNull(message = "{dateOfBirth} {notempty}")
     @Past(message = "{dateOfBirth} {past}")
     private Date dateOfBirth;
-    @Length(max=30, message = "{phoneNumber} {length}")
+    @Length(max = 30, message = "{phoneNumber} {length}")
     @NotEmpty(message = "{phoneNumber} {notempty}")
     private String phoneNumber;
     private char gender;
     @NotEmpty(message = "{email} {notempty}")
     @Email(message = "{email} {validEmail}")
-    @Length(max=100, message = "{email} {length}")
+    @Length(max = 100, message = "{email} {length}")
     private String email;
     @NotEmpty(message = "{password} {notempty}")
     private String password;
@@ -191,14 +196,6 @@ public class RegisterBean implements Serializable {
         return password.equals(getSecondPassword());
     }
 
-    public UserService getUserService() {
-        return userService;
-    }
-
-    public void setUserService(UserService userService) {
-        this.userService = userService;
-    }
-
     public boolean isRegistered() {
         return registered;
     }
@@ -208,20 +205,37 @@ public class RegisterBean implements Serializable {
     }
 
     public String addUser() throws ParseException {
-        Address address = new Address(getStreet(), getStreetNumber(),getZipcode(),getCity());
+        Address address = new Address(getStreet(), getStreetNumber(), getZipcode(), getCity());
         setRole("ROLE_USER");
         setDateRegistered(new Date());
-        TripUser user = new TripUser(getFirstName(), getLastName(), getDateOfBirth(), getPhoneNumber(), getGender(),getEmail(), SHAEncryption.encrypt(getPassword()),address,getDateRegistered(),getRole());
+        TripUser user = new TripUser(getFirstName(), getLastName(), getDateOfBirth(), getPhoneNumber(), getGender(), getEmail(), SHAEncryption.encrypt(getPassword()), address, getDateRegistered(), getRole());
         user.setAccountNonExpired(true);
         user.setAccountNonLocked(true);
         user.setCredentialsNonExpired(true);
         user.setEnabled(true);
 
-        if(confirmPassword()){
-            userService.addUser(user);
-            registered = true;
-            return SUCCESS;
+        if (confirmPassword()) {
+            boolean result = userService.addUser(user);
+            if (result) {
+                userService.addUser(user);
+                mailService.uponSuccessfulRegistration(user.getEmail());
+                registered = true;
+                return SUCCESS;
+            }
+            return FAILURE;
         }
         return FAILURE;
     }
+
+   /*
+
+    public UserService getUserService() {
+        return userService;
+    }
+
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
+
+    */
 }

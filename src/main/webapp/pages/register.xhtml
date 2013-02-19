@@ -1,7 +1,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
 <h:head>
     <title>Trippy Traveler</title>
     <!-- css -->
@@ -95,6 +96,7 @@
 
                     <!-- Tab content -->
                     <div class="tabDetails">
+
                         <div id="registerTab" class="tabContentsTrip">
                             <div class="box">
                                 <h:form rendered="#{not registerBean.registered}">
@@ -115,7 +117,7 @@
                                         <h:inputText id="firstname" styleClass="span2" value="#{registerBean.firstName}"/>
                                         <h:message for="firstname" styleClass="error" />
 
-                                        <h:outputLabel value="#{msgs.lastName}"/>
+                                        <h:outputLabel value="#{msgs.lastName}} "/>
                                         <h:inputText id="lastname" styleClass="span2" value="#{registerBean.lastName}"/>
                                         <h:message for="lastname" styleClass="error" />
 
@@ -152,8 +154,8 @@
 
                                     </h:panelGrid>
                                     <h:commandButton  type="submit" action="#{registerBean.addUser}" class="btn btn-success" value="#{msgs.register}" />
-                                </h:form>
 
+                                </h:form>
                                 <!-- Internationalisatie -->
                                 <h:panelGroup rendered="#{registerBean.registered}">
                                     <h1>U bent geregistreerd, proficiat  #{registerBean.firstName}</h1>

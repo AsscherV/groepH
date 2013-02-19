@@ -28,6 +28,17 @@
                         <h:link class="floatRight" outcome="register.xhtml" value="Register"></h:link>
                     </h:panelGrid>
 
+                    <table>
+                        <tr>
+                            <td><h:message for="password" class="error"></h:message></td>
+                        </tr>
+                        <tr>
+                            <td><h:message for="email" class="error"></h:message></td>
+                        </tr>
+                    </table>
+
+
+
                     <h:panelGrid rendered="#{loginBean.loggedIn}" columns="2" cellpadding="2">
                         <h:outputLabel class="welcomeMessage">Welkom </h:outputLabel>
                         <h:outputLabel class="welcomeMessage">#{loginBean.user.firstName}</h:outputLabel >

@@ -21,13 +21,6 @@
         <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
     </listener>
 
-    <!--
-    <context-param>
-        <param-name>javax.faces.PROJECT_STAGE</param-name>
-        <param-value>Development</param-value>
-    </context-param>
-    -->
-
     <!-- Start-up file -->
     <welcome-file-list>
         <welcome-file>pages/index.xhtml</welcome-file>
@@ -81,34 +74,4 @@
         <servlet-name>Jersey Servlet</servlet-name>
         <url-pattern>/api/*</url-pattern>
     </servlet-mapping>
-
-    <!--
-    <filter>
-        <filter-name>hibernateFilter</filter-name>
-        <filter-class>org.springframework.orm.hibernate4.support.OpenSessionInViewFilter</filter-class>
-    </filter>
-    -->
-    <!--
-<filter>
-    <filter-name>LoginFilterAdmin</filter-name>
-    <filter-class>be.kdg.groeph.util.LoginFilterAdmin</filter-class>
-</filter>
-
-<filter-mapping>
-    <filter-name>LoginFilterAdmin</filter-name>
-    <url-pattern>/pages/admin/*</url-pattern>
-</filter-mapping>
--->
-
-    <!-- Filters -->
-    <!--<filter>
-        <filter-name>LoginFilterUser</filter-name>
-        <filter-class>be.kdg.groeph.util.LoginFilterUser</filter-class>
-    </filter>
-
-        <filter-mapping>
-        <filter-name>LoginFilterUser</filter-name>
-        <url-pattern>/pages/user/*</url-pattern>
-    </filter-mapping>
-    -->
 </web-app>
