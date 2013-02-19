@@ -1,5 +1,6 @@
 package be.kdg.groeph.service;
 
+import be.kdg.groeph.bean.LoginBean;
 import be.kdg.groeph.mockMother.TripMother;
 import be.kdg.groeph.mockMother.UserMother;
 import be.kdg.groeph.model.Trip;
@@ -8,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -23,6 +25,9 @@ public class TestTripService extends AbstractTransactionalJUnit4SpringContextTes
     @Autowired
     TripService tripService;
 
+    @Qualifier("loginBean")
+    @Autowired
+    LoginBean loginBean;
 
     private Trip validPublicTrip1;
     private Trip validPublicTrip2;
@@ -30,6 +35,7 @@ public class TestTripService extends AbstractTransactionalJUnit4SpringContextTes
     @Before
     public void init(){
         validPublicTrip1 = TripMother.validPublicTrip1();
+        validPublicTrip1.setTripUser(UserMother.validUser1());
     }
 
 

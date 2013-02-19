@@ -5,20 +5,19 @@ import be.kdg.groeph.model.Trip;
 import be.kdg.groeph.model.TripType;
 import be.kdg.groeph.service.TripService;
 import org.apache.log4j.Logger;
-import org.apache.myfaces.extensions.cdi.core.api.scope.conversation.ViewAccessScoped;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
-
-import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.SessionScoped;
 import javax.inject.Named;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.*;
 
 @Component
-@ViewAccessScoped
+@SessionScoped
 @Named
 public class TripBean implements Serializable {
     static Logger logger = Logger.getLogger(TripBean.class);
@@ -28,6 +27,11 @@ public class TripBean implements Serializable {
     @ManagedProperty(value = "#{tripService}")
     @Autowired
     TripService tripService;
+
+    @Qualifier("loginBean")
+    @Autowired
+    LoginBean loginBean;
+
     @NotEmpty(message = "{title} {notempty}")
     private String title;
     @NotEmpty(message = "{description} {notempty}")
@@ -42,6 +46,10 @@ public class TripBean implements Serializable {
     @NotEmpty(message = "{tripType} {notempty}")
     private String tripType;
     private String isPublic;
+
+    Trip currentTrip;
+
+
 
     public TripBean() {
     }
@@ -111,6 +119,14 @@ public class TripBean implements Serializable {
         this.tripType = tripType;
     }
 
+    public Trip getCurrentTrip() {
+        return currentTrip;
+    }
+
+    public void setCurrentTrip(Trip currentTrip) {
+        this.currentTrip = currentTrip;
+    }
+
     //TODO: Callen met ajax call
     public void newLabel() {
         labels.add(new Label(label));
@@ -126,21 +142,12 @@ public class TripBean implements Serializable {
         }
 
         Trip trip = new Trip(getTitle(), getDescription(), getStartTime(), getEndTime(),getLabels(),new TripType(getTripType()), p);
+        loginBean.getUser().addTrip(trip);
         if (tripService.addTrip(trip)) {
+            currentTrip = trip;
             return SUCCESS;
         } else {
             return FAILURE;
         }
     }
-
-    /*
-    public TripService getTripService() {
-        return tripService;
-    }
-
-    public void setTripService(TripService tripService) {
-        this.tripService = tripService;
-    }
-    */
-
 }

@@ -16,17 +16,6 @@ public class UserDaoImpl implements UserDao {
     @Autowired
     private SessionFactory sessionFactory;
 
-    /*
-
-    public SessionFactory getSessionFactory() {
-        return sessionFactory;
-    }
-
-    public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
-    */
-
     @Override
     @SuppressWarnings("unchecked")
     public boolean addUser(TripUser user) {

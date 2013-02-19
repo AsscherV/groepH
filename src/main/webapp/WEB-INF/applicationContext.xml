@@ -17,10 +17,9 @@
     <sec:global-method-security secured-annotations="enabled" jsr250-annotations="enabled" />
 
     <sec:http auto-config="true" access-denied-page="/pages/accessDenied.xhtml">
-        <!--<sec:intercept-url pattern="/faces/pages/visitor/**" access="IS_AUTHENTICATED_ANONYMOUSLY"/> -->
         <sec:intercept-url pattern="/pages/user/**" access="ROLE_USER"/>
         <sec:intercept-url pattern="/pages/admin/**" access="ROLE_ADMIN"/>
-        <sec:form-login login-page="/pages/index.xhtml" default-target-url="/pages/user/styling.xhtml" authentication-failure-url="/pages/index.xhtml"/>
+        <sec:form-login login-page="/pages/welcome.xhtml" default-target-url="/pages/user/stops.xhtml" authentication-failure-url="/pages/index.xhtml"/>
         <!-- hier nog session control -->
     </sec:http>
     <!-- manager responsible for loading user account with assigned roles -->
@@ -31,8 +30,7 @@
     <bean class="org.springframework.security.authentication.event.LoggerListener"
           id="loggerListener"/>
 
-    <!-- Spring will scan your classpath for the Spring Annotations
-        in your classes and will automatically create service
+    <!-- Spring will scan your classpath for the Spring Annotations in your classes and will automatically create service
         implementation instances, inject dependencies , etc-->
     <context:component-scan base-package="be.kdg.groeph.service"/>
     <context:component-scan base-package="be.kdg.groeph.dao"/>

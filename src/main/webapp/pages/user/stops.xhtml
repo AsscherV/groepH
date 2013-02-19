@@ -18,48 +18,9 @@
             <div class="row">
 
                 <!-- trips / my trips -->
-                <div class="span3">
-                    <div id="tabContainerTrips" class="tabContainer">
-                        <ul>
-                            <li>
-                                <a class="active" href="#tripsTab">Trips</a>
-                            </li>
-                            <li>
-                                <a href="#myTripsTab">My trips</a>
-                            </li>
-                        </ul>
-                        <!-- //Tab buttons -->
-                        <div class="tabDetails">
-                            <div id="tripsTab" class="tabContentsTrips">
-                                <h:form class="navbar-form">
-                                    <h:inputText  type="text" styleClass="span2"/>
-
-                                    <h:commandButton class="btn btn-success" type="submit" value="Search"/>
-
-                                </h:form>
-
-                                <div class="box">
-                                    <div><a href="#">Trip1</a></div>
-                                    <div><a href="#">Trip2</a></div>
-                                </div>
-                            </div>
-                            <!-- //tripsTab -->
-                            <div id="myTripsTab" class="tabContentsTrips">
-                                <h:form class="navbar-form">
-                                    <h:inputText  type="text" styleClass="span2"/>
-
-                                    <h:commandButton class="btn btn-success" type="submit" value="Search"/>
-                                </h:form>
-
-                                <div class="box">
-                                             U BENT INGELOGD
-                                </div>
-                            </div>
-                            <!-- //myTripsTab -->
-                        </div>
-                        <!-- //tab Details -->
-                    </div>
-                </div>
+                <ui:insert name="header">
+                    <ui:include src="tripmenu.xhtml"/>
+                </ui:insert>
 
                 <!-- trip info -->
                 <div class="span9">
@@ -67,7 +28,7 @@
                         <ul>
                             <!-- Tab buttons -->
                             <li>
-                                <a class="button " href="../index.xhtml">Trip1</a>
+                                <a class="button " href="trip.xhtml">Trip1</a>
                             </li>
                             <h:panelGroup rendered="#{loginBean.loggedIn}">
                                 <li>

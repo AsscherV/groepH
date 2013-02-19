@@ -9,7 +9,9 @@ import org.hibernate.annotations.Cascade;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name="t_user")
@@ -25,7 +27,7 @@ public class TripUser implements Nullable, Serializable {
     private Date dateOfBirth;
     @Column(name="phoneNumber", nullable = false, length = 100)
     private String phoneNumber;
-    @Column(name="gender", nullable = false, length = 100)        //true
+    @Column(name="gender", nullable = false, length = 100)
     private char gender;
     @Column(name="email", nullable = false, length = 100)
     private String email;
@@ -52,11 +54,12 @@ public class TripUser implements Nullable, Serializable {
     @Column(name="accountNonLocked", nullable = true)
     private boolean accountNonLocked;
 
-    /*
-        @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "tripUser", fetch = FetchType.EAGER)
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    private List<Trip> trips = new ArrayList<Car>();
-     */
+    private List<Trip> trips = new ArrayList<Trip>();
+
+
+
 
 
     public TripUser() {
@@ -201,7 +204,18 @@ public class TripUser implements Nullable, Serializable {
         }
         return false;
     }
+    public List<Trip> getTrips() {
+        return trips;
+    }
 
+    public void setTrips(List<Trip> trips) {
+        this.trips = trips;
+    }
+
+    public void addTrip(Trip trip){
+        trip.setTripUser(this);
+        trips.add(trip);
+    }
 
 
     @Override
