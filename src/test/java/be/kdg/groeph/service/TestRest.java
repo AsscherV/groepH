@@ -3,6 +3,10 @@ package be.kdg.groeph.service;
 
 
 import be.kdg.groeph.model.TripUser;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonSyntaxException;
+import com.google.gson.reflect.TypeToken;
 import com.sun.jersey.api.client.Client;
 
 import com.sun.jersey.api.client.WebResource;
@@ -21,6 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriBuilder;
 
+import java.lang.reflect.Type;
 import java.net.URI;
 
 
@@ -43,16 +48,33 @@ public class TestRest extends AbstractTransactionalJUnit4SpringContextTests {
     public void loginTrue() {
         RestService restService = new RestService();
         String isValidUser = restService.login(username, password);
-        assertEquals("Login moet test zijn", username, isValidUser);
+
+        Gson gson = new GsonBuilder().create();
+        Type rootType = new TypeToken<TripUser>(){}.getType();
+
+        TripUser object = gson.fromJson(isValidUser, rootType);
+        if(object == null) {
+            throw new JsonSyntaxException("Error while parsing data from JSON: " + isValidUser);
+        }
+
+
+        assertEquals("Login moet test zijn", username, object.getEmail());
 
     }
 
     @Test
     public void loginFalse() {
         RestService restService = new RestService();
+        String isValidUser = restService.login(usernameFalse, password);
 
-        String isValidUser = restService.login(usernameFalse, passwordFalse);
-        assertEquals("Login moet test zijn", usernameFalse, isValidUser);
+        Gson gson = new GsonBuilder().create();
+        Type rootType = new TypeToken<TripUser>(){}.getType();
+
+        TripUser object = gson.fromJson(isValidUser, rootType);
+        if(object == null) {
+            throw new JsonSyntaxException("Error while parsing data from JSON: " + isValidUser);
+        }
+        assertEquals("Login moet test zijn", usernameFalse, object.getEmail());
     }
 
     @Test
@@ -62,9 +84,17 @@ public class TestRest extends AbstractTransactionalJUnit4SpringContextTests {
         Client client = Client.create(new DefaultClientConfig());
         WebResource service = client.resource(getBaseURI());
 
-        String response = service.path("rest").path("login").queryParam("Username","test").queryParam("Password","test").accept(MediaType.APPLICATION_JSON).get(String.class);
+        String isValidUser = service.path("rest").path("login").queryParam("Username",username).queryParam("Password","test").accept(MediaType.APPLICATION_JSON).get(String.class);
 
-        assertEquals("result van RestCall moet test zijn", "test", response.toString());
+
+        Gson gson = new GsonBuilder().create();
+        Type rootType = new TypeToken<TripUser>(){}.getType();
+
+        TripUser object = gson.fromJson(isValidUser, rootType);
+        if(object == null) {
+            throw new JsonSyntaxException("Error while parsing data from JSON: " + isValidUser);
+        }
+        assertEquals("result van RestCall moet test zijn", username, object.getEmail());
 
 
     }
