@@ -1,7 +1,6 @@
 package be.kdg.groeph.service;
 
 
-
 import be.kdg.groeph.model.TripUser;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -16,7 +15,6 @@ import com.sun.jersey.api.client.config.DefaultClientConfig;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -43,60 +41,43 @@ public class TestRest extends AbstractTransactionalJUnit4SpringContextTests {
     private final String usernameFalse = "fdqsfdsqfd@test.com";
     private String baseURI;
 
-
     @Test
     public void loginTrue() {
-        RestService restService = new RestService();
-        String isValidUser = restService.login(username, password);
-
-        Gson gson = new GsonBuilder().create();
-        Type rootType = new TypeToken<TripUser>(){}.getType();
-
-        TripUser object = gson.fromJson(isValidUser, rootType);
-        if(object == null) {
-            throw new JsonSyntaxException("Error while parsing data from JSON: " + isValidUser);
-        }
-
-
+        TripUser object = getTripUser(username, password);
         assertEquals("Login moet test zijn", username, object.getEmail());
-
     }
 
     @Test
     public void loginFalse() {
-        RestService restService = new RestService();
-        String isValidUser = restService.login(usernameFalse, password);
-
-        Gson gson = new GsonBuilder().create();
-        Type rootType = new TypeToken<TripUser>(){}.getType();
-
-        TripUser object = gson.fromJson(isValidUser, rootType);
-        if(object == null) {
-            throw new JsonSyntaxException("Error while parsing data from JSON: " + isValidUser);
-        }
+        TripUser object = getTripUser(usernameFalse, passwordFalse);
         assertEquals("Login moet test zijn", usernameFalse, object.getEmail());
     }
 
     @Test
     public void loginRest() {
-
-
         Client client = Client.create(new DefaultClientConfig());
         WebResource service = client.resource(getBaseURI());
-
-        String isValidUser = service.path("rest").path("login").queryParam("Username",username).queryParam("Password","test").accept(MediaType.APPLICATION_JSON).get(String.class);
-
-
-        Gson gson = new GsonBuilder().create();
-        Type rootType = new TypeToken<TripUser>(){}.getType();
-
-        TripUser object = gson.fromJson(isValidUser, rootType);
-        if(object == null) {
-            throw new JsonSyntaxException("Error while parsing data from JSON: " + isValidUser);
-        }
+        String isValidUser = service.path("rest").path("login").queryParam("Username", username).queryParam("Password", password).accept(MediaType.APPLICATION_JSON).get(String.class);
+        TripUser object = getTripUserFromResponse(isValidUser);
         assertEquals("result van RestCall moet test zijn", username, object.getEmail());
+    }
 
+    private TripUser getTripUserFromResponse(String validUser) {
+        Gson gson = new GsonBuilder().create();
+        Type rootType = new TypeToken<TripUser>() {
+        }.getType();
 
+        TripUser object = gson.fromJson(validUser, rootType);
+        if (object == null) {
+            throw new JsonSyntaxException("Error while parsing data from JSON: " + validUser);
+        }
+        return object;
+    }
+
+    private TripUser getTripUser(String UName, String Password) {
+        RestService restService = new RestService();
+        String isValidUser = restService.login(UName, Password);
+        return getTripUserFromResponse(isValidUser);
     }
 
     public static URI getBaseURI() {
