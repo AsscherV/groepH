@@ -9,10 +9,6 @@
         <webroots>
           <root url="file://$MODULE_DIR$/src/main/webapp" relative="/" />
         </webroots>
-        <sourceRoots>
-          <root url="file://$MODULE_DIR$/src/main/java" />
-          <root url="file://$MODULE_DIR$/src/main/resources" />
-        </sourceRoots>
       </configuration>
       <facet type="jsf" name="JSF">
         <configuration />
@@ -125,6 +121,7 @@
     <orderEntry type="library" name="Maven: javax.ws.rs:jsr311-api:1.0" level="project" />
     <orderEntry type="library" name="Maven: javax.transaction:jta:1.1" level="project" />
     <orderEntry type="library" name="Maven: javax.inject:javax.inject:1" level="project" />
+    <orderEntry type="library" name="Maven: com.google.code.gson:gson:1.7.1" level="project" />
   </component>
 </module>
 

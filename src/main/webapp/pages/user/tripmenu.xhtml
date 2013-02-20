@@ -1,0 +1,77 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+    <title>Trippy Traveler</title>
+    <!-- css -->
+    <h:outputStylesheet library="css" name="bootstrap.css"/>
+    <h:outputStylesheet library="css" name="bootstrap-responsive.css"/>
+    <h:outputStylesheet library="css" name="main.css"/>
+</h:head>
+<h:body>
+    <ui:composition>
+        <div class="span3">
+            <div id="tabContainerTrips" class="tabContainer">
+                <ul>
+                    <li>
+                        <a class="active" href="#tripsTab">Trips</a>
+                    </li>
+                    <li>
+                        <a href="#myTripsTab">My trips</a>
+                    </li>
+                </ul>
+                <!-- //Tab buttons -->
+                <div class="tabDetails">
+                    <div id="tripsTab" class="tabContentsTrips">
+                        <h:form class="navbar-form">
+                            <h:inputText type="text" styleClass="span2"/>
+
+                            <h:commandButton class="btn btn-success" type="submit" value="Search"/>
+
+                        </h:form>
+
+                        <div class="box">
+                            <div><a href="#">Trip1</a></div>
+                            <div><a href="#">Trip2</a></div>
+                        </div>
+                        <h:panelGroup rendered="#{loginBean.loggedIn}">
+                            <a href="../user/createTrip.xhtml">+ Make a trip</a>
+                        </h:panelGroup>
+                    </div>
+                    <!-- //tripsTab -->
+                    <div id="myTripsTab" class="tabContentsTrips">
+                        <h:form class="navbar-form">
+                            <h:inputText type="text" styleClass="span2"/>
+
+                            <h:commandButton class="btn btn-success" type="submit" value="Search"/>
+                        </h:form>
+
+                        <div class="box">
+                            <h:panelGroup rendered="#{loginBean.loggedIn}">
+                                <h:dataTable border="0" value="#{loginBean.user.trips}" var="trip">
+                                    <h:column>
+                                        <div>
+                                            <a href="#">
+                                                <h:outputText value="#{trip.title}" rendered="true" />
+                                            </a>
+                                        </div>
+                                    </h:column>
+                                </h:dataTable>
+                            </h:panelGroup>
+                        </div>
+                        <h:panelGroup rendered="#{loginBean.loggedIn}">
+                            <a href="createTrip.xhtml">+ Make a trip</a>
+                        </h:panelGroup>
+                    </div>
+                    <!-- //myTripsTab -->
+                </div>
+                <!-- //tab Details -->
+            </div>
+        </div>
+    </ui:composition>
+    <!-- Placed at the end of the document so the pages load faster -->
+    <h:outputScript name="js/jquery-1.9.0.min.js"/>
+    <h:outputScript name="js/main.js"/>
+</h:body>
+</html> 

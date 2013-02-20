@@ -1,6 +1,7 @@
 package be.kdg.groeph.bean;
 
 import be.kdg.groeph.mockMother.TripMother;
+import be.kdg.groeph.mockMother.UserMother;
 import be.kdg.groeph.model.Trip;
 import be.kdg.groeph.model.TripType;
 import org.junit.Before;
@@ -24,6 +25,9 @@ public class TestTripBean extends AbstractTransactionalJUnit4SpringContextTests 
     @Qualifier("tripBean")
     @Autowired
     TripBean tripBean;
+    @Qualifier("loginBean")
+    @Autowired
+    LoginBean loginBean;
 
     private Trip trip1;
 
@@ -31,6 +35,7 @@ public class TestTripBean extends AbstractTransactionalJUnit4SpringContextTests 
     @Before
     public void init()
     {
+        loginBean.setUser(UserMother.validUser1());
     }
 
     @Test
@@ -52,7 +57,7 @@ public class TestTripBean extends AbstractTransactionalJUnit4SpringContextTests 
         tripBean.newLabel();
         tripBean.setTripType("tijdspanne");
         tripBean.setPublic("Public");
-
+         //todo in die tripbean wordt current user gezet ma hier kunne we da ni doen...
         assertEquals("addTrip result should be SUCCESS for Open Trip","SUCCESS",tripBean.addTrip());
     }
 

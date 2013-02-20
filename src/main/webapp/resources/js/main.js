@@ -26,4 +26,12 @@ $(document).ready(function(){
                 yearRange: '-100y:c+nn',
                 maxDate: '-1d'
             });
+    //trip datetimepicker
+    $(".tripdatepicker").datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeMonth: true,
+        changeYear: true,
+        showOtherMonths: true,
+        selectOtherMonths: true
+    });
 });

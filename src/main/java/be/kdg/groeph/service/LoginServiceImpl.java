@@ -25,13 +25,13 @@ public class LoginServiceImpl implements LoginService {
 
     @Autowired
     @Resource(name = "authenticationManager")
-    private AuthenticationManager authenticationManager; // specific for Spring Security
+    private AuthenticationManager authenticationManager;
 
 
     @Override
     public TripUser loginUser(String email, String password) {
         TripUser user = userDao.getUserByEmail(email);
-        if (user.getEmail().equals(email) && user.getPassword().equals(password)) { //  if (!userDao.getUserByEmail(email).isNull() && ) {
+        if (user.getEmail().equals(email) && user.getPassword().equals(password)) {
             try {
                 Authentication authenticate = authenticationManager.authenticate(
                         new UsernamePasswordAuthenticationToken(email, password));

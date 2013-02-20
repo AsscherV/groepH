@@ -1,7 +1,6 @@
 package be.kdg.groeph.model;
 
 import be.kdg.groeph.model.Null.NullTrip;
-import be.kdg.groeph.model.Null.NullUser;
 import be.kdg.groeph.model.Null.Nullable;
 import org.hibernate.annotations.Cascade;
 
@@ -10,7 +9,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "t_trip")
@@ -38,6 +36,10 @@ public class Trip implements Nullable, Serializable {
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     private TripType tripType;
 
+    @ManyToOne
+    @JoinColumn(name = "tripUser", nullable = false)
+    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
+    private TripUser tripUser;
 
     public Trip() {
     }
@@ -127,5 +129,13 @@ public class Trip implements Nullable, Serializable {
 
     public void setEndTime(Date endTime) {
         this.endTime = endTime;
+    }
+
+    public TripUser getTripUser() {
+        return tripUser;
+    }
+
+    public void setTripUser(TripUser tripUser) {
+        this.tripUser = tripUser;
     }
 }
