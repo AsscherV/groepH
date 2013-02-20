@@ -15,11 +15,13 @@
             <div id="tabContainerTrips" class="tabContainer">
                 <ul>
                     <li>
-                        <a class="active" href="#tripsTab">Trips</a>
+                        <a  href="#tripsTab">Trips</a>
                     </li>
+                    <h:panelGroup rendered="#{loginBean.loggedIn}">
                     <li>
-                        <a href="#myTripsTab">My trips</a>
+                        <a class="active" href="#myTripsTab">My trips</a>
                     </li>
+                    </h:panelGroup>
                 </ul>
                 <!-- //Tab buttons -->
                 <div class="tabDetails">
@@ -49,15 +51,16 @@
 
                         <div class="box">
                             <h:panelGroup rendered="#{loginBean.loggedIn}">
+                                <h:form>
                                 <h:dataTable border="0" value="#{loginBean.user.trips}" var="trip">
                                     <h:column>
                                         <div>
-                                            <a href="#">
-                                                <h:outputText value="#{trip.title}" rendered="true" />
-                                            </a>
+                                                <h:commandLink value="#{trip.title}" action="#{tripBean.setCurrentTrip(trip)}" />
+
                                         </div>
                                     </h:column>
                                 </h:dataTable>
+                                </h:form>
                             </h:panelGroup>
                         </div>
                         <h:panelGroup rendered="#{loginBean.loggedIn}">

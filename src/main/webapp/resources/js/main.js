@@ -1,9 +1,9 @@
 
 $(document).ready(function(){
-	$(".tabContentsTrips").hide(); // Hide all tab conten divs by default
-	$(".tabContentsTrip").hide();
-	$(".tabContentsTrips:first").show(); // Show the first div of tab content by default
-	$(".tabContentsTrip:first").show();
+	$(".tabContentsTrips").hide(); // Hide all tab content divs by default
+
+	$(".tabContentsTrips").eq(1).show(); // Show the first div of tab content by default
+
 
 	$("#tabContainerTrips ul li a").click(function(){ //Fire the click event
 
