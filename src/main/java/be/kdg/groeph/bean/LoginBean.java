@@ -1,5 +1,6 @@
 package be.kdg.groeph.bean;
 
+import be.kdg.groeph.model.Trip;
 import be.kdg.groeph.model.TripUser;
 import be.kdg.groeph.service.LoginService;
 import be.kdg.groeph.util.SHAEncryption;
@@ -39,6 +40,8 @@ public class LoginBean implements Serializable {
 
     TripUser user;
 
+    Trip currentTrip;
+
     public String getPassword() {
         return password;
     }
@@ -71,10 +74,18 @@ public class LoginBean implements Serializable {
         isLoggedIn = loggedIn;
     }
 
+    public Trip getCurrentTrip() {
+        return currentTrip;
+    }
+
+    public void setCurrentTrip(Trip currentTrip) {
+        this.currentTrip = currentTrip;
+    }
+
     public String loginUser() throws LoginException{
         try {
             TripUser loginUser = loginService.loginUser(getEmail(), SHAEncryption.encrypt(getPassword()));
-            if (loginUser.isNull()) {     //        if (loginUser.isNull()) {
+            if (loginUser.isNull()) {
                 return FAILURE;
             } else {
                 user = loginUser;
@@ -92,17 +103,5 @@ public class LoginBean implements Serializable {
         //FacesContext.getCurrentInstance().getExternalContext().redirect(url);
         return SUCCESS;
     }
-
-    /*
-
-
-    public LoginService getLoginService() {
-        return loginService;
-    }
-
-    public void setLoginService(LoginService loginService) {
-        this.loginService = loginService;
-    }
-     */
 }
 

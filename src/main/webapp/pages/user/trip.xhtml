@@ -13,7 +13,6 @@
         <ui:insert name="header">
             <ui:include src="../header.xhtml"/>
         </ui:insert>
-
         <div class="container">
             <div class="row">
 
@@ -28,7 +27,7 @@
                         <ul>
                             <!-- Tab buttons -->
                             <li>
-                                <a class="button " href="trip.xhtml">Trip1</a>
+                                <a class="button active" href="trip.xhtml">#{tripBean.currentTrip.title}</a>
                             </li>
                             <h:panelGroup rendered="#{loginBean.loggedIn}">
                                 <li>
@@ -38,10 +37,10 @@
                                     <a class="button" href="participants.xhtml">Participants</a>
                                 </li>
                                 <li>
-                                    <a class="button" href="accessories.xhtml">Accessories</a>
+                                    <a class="button " href="accessories.xhtml">Accessories</a>
                                 </li>
                                 <li>
-                                    <a class="button active" href="styling.xhtml">Styling</a>
+                                    <a class="button" href="styling.xhtml">Styling</a>
                                 </li>
                                 <h:panelGroup rendered="#{loginBean.user.admin}">
                                     <li>
@@ -54,14 +53,20 @@
                         <!-- Tab content -->
                         <div class="tabDetails">
 
-                            <div id="stylingTab" class="tabContentsTrip">
+                            <div id="accesTab" class="tabContentsTrip">
                                 <div class="box">
-
+                                    <h:dataTable border="0" value="#{loginBean.user.trips}" var="trip">
+                                        <h:column>
+                                            <div>
+                                                <a href="#">
+                                                    <h:outputText value="#{trip.title}" rendered="true" />
+                                                </a>
+                                            </div>
+                                        </h:column>
+                                    </h:dataTable>
                                 </div>
                             </div>
-
                         </div>
-                        <!-- //tab Details -->
                     </div>
                 </div>
 

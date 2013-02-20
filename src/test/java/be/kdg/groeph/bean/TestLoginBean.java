@@ -39,23 +39,25 @@ public class TestLoginBean extends AbstractTransactionalJUnit4SpringContextTests
 
     @Test
     public void testLogin() throws LoginException {
-        loginBean.setEmail("greg.deckers@student.kdg.be");
-        loginBean.setPassword("password");
+        setLoginBean("greg.deckers@student.kdg.be", "password");
+        //loginBean.setEmail("greg.deckers@student.kdg.be");
+        //loginBean.setPassword("password");
         assertEquals("SUCCESS", loginBean.loginUser());
     }
 
     @Test
     public void testInvalidLogin() throws LoginException {
-        loginBean.setEmail("greg.deckers@student.kdg.be");
-        loginBean.setPassword("qsdqs");
+        setLoginBean("greg.deckers@student.kdg.be", "qsdqs");
+        //loginBean.setEmail("greg.deckers@student.kdg.be");
+        //loginBean.setPassword("qsdqs");
         assertEquals("FAILURE", loginBean.loginUser());
     }
 
-    //TODO logout nog testen
     @Test
     public void testLogOut() throws LoginException {
-        loginBean.setEmail("greg.deckers@student.kdg.be");
-        loginBean.setPassword("password");
+        setLoginBean("greg.deckers@student.kdg.be", "password");
+        //loginBean.setEmail("greg.deckers@student.kdg.be");
+        //loginBean.setPassword("password");
         loginBean.loginUser();
         assertEquals("SUCCESS",loginBean.logOut());
     }
@@ -63,6 +65,12 @@ public class TestLoginBean extends AbstractTransactionalJUnit4SpringContextTests
     @Test
     public void testIsAdmin(){
         assertFalse("User has no admin rights",loginBean.user.isAdmin());
+    }
+
+    public void setLoginBean(String email,String password){
+        loginBean.setEmail(email);
+        loginBean.setPassword(password);
+
     }
 
     public void fillRegisterBean(){

@@ -12,7 +12,7 @@
 <h:body>
 
     <ui:insert name="header">
-        <ui:include src="header.xhtml"/>
+        <ui:include src="../header.xhtml"/>
     </ui:insert>
 
     <div class="container">
@@ -20,7 +20,7 @@
 
             <!-- trips / my trips -->
             <ui:insert name="header">
-                <ui:include src="user/tripmenu.xhtml"/>
+                <ui:include src="tripmenu.xhtml"/>
             </ui:insert>
 
             <!-- trip info -->
@@ -29,24 +29,24 @@
                     <ul>
                         <!-- Tab buttons -->
                         <li>
-                            <a class="button active" href="index.xhtml">Trip1</a>
+                            <a class="button active" href="welcome.xhtml">Trip1</a>
                         </li>
                         <h:panelGroup rendered="#{loginBean.loggedIn}">
                             <li>
-                                <a class="button" href="user/stops.xhtml">Stops</a>
+                                <a class="button" href="stops.xhtml">Stops</a>
                             </li>
                             <li>
-                                <a class="button" href="user/participants.xhtml">Participants</a>
+                                <a class="button" href="participants.xhtml">Participants</a>
                             </li>
                             <li>
-                                <a class="button" href="user/accessories.xhtml">Accessories</a>
+                                <a class="button" href="accessories.xhtml">Accessories</a>
                             </li>
                             <li>
-                                <a class="button" href="user/styling.xhtml">Styling</a>
+                                <a class="button" href="styling.xhtml">Styling</a>
                             </li>
                             <h:panelGroup rendered="#{loginBean.user.admin}">
                                 <li>
-                                    <a class="button" href="admin/costs.xhtml">Costs</a>
+                                    <a class="button" href="../admin/costs.xhtml">Costs</a>
                                 </li>
                             </h:panelGroup>
 
@@ -56,7 +56,7 @@
                     <div class="tabDetails">
                         <div id="tripTab" class="tabContentsTrip">
                             <div class="box">
-
+                                WELCOME
                             </div>
                         </div>
                     </div>

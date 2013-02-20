@@ -17,12 +17,12 @@
     <sec:global-method-security secured-annotations="enabled" jsr250-annotations="enabled" />
 
     <sec:http auto-config="true" access-denied-page="/pages/accessDenied.xhtml">
-        <!--<sec:intercept-url pattern="/faces/pages/visitor/**" access="IS_AUTHENTICATED_ANONYMOUSLY"/> -->
         <sec:intercept-url pattern="/pages/user/**" access="ROLE_USER"/>
         <sec:intercept-url pattern="/pages/admin/**" access="ROLE_ADMIN"/>
-        <sec:form-login login-page="/pages/index.xhtml" default-target-url="/pages/user/styling.xhtml" authentication-failure-url="/pages/index.xhtml"/>
+        <sec:form-login login-page="/pages/index.xhtml" default-target-url="/pages/user/welcome.xhtml" authentication-failure-url="/pages/index.xhtml"/>
         <!-- hier nog session control -->
     </sec:http>
+
     <!-- manager responsible for loading user account with assigned roles -->
     <sec:authentication-manager alias="authenticationManager">
         <sec:authentication-provider user-service-ref="userService"/>
@@ -31,8 +31,7 @@
     <bean class="org.springframework.security.authentication.event.LoggerListener"
           id="loggerListener"/>
 
-    <!-- Spring will scan your classpath for the Spring Annotations
-        in your classes and will automatically create service
+    <!-- Spring will scan your classpath for the Spring Annotations in your classes and will automatically create service
         implementation instances, inject dependencies , etc-->
     <context:component-scan base-package="be.kdg.groeph.service"/>
     <context:component-scan base-package="be.kdg.groeph.dao"/>
@@ -47,8 +46,8 @@
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
         <property name="url" value="jdbc:mysql://localhost:3306/groepH"/>
-        <property name="username" value="groepH"/>
-        <property name="password" value="groepH2013"/>
+        <property name="username" value="groeph"/>
+        <property name="password" value="groeph"/> <!-- Vroeger groepH2013 -->
     </bean>
 
     <!-- Session Factory Declaration -->
@@ -58,7 +57,7 @@
             <props>
                 <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
                 <prop key="hibernate.show_sql">false</prop>
-                <prop key="hibernate.hbm2ddl.auto">create</prop>
+                <prop key="hibernate.hbm2ddl.auto">create</prop>     <!-- update -->
             </props>
         </property>
         <property name="packagesToScan">
