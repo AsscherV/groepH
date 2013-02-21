@@ -160,5 +160,6 @@ public class TripBean implements Serializable {
         startTime=null;
         endTime=null;
         label=null;
+        labels=null;
     }
 }

@@ -10,17 +10,20 @@
     <h:outputStylesheet library="css" name="main.css"/>
 </h:head>
 <h:body>
+
     <ui:composition>
+        <h:inputHidden id="loggedIn" value="#{loginBean.loggedIn}" />
         <div class="span3">
             <div id="tabContainerTrips" class="tabContainer">
                 <ul>
+
                     <li>
-                        <a  href="#tripsTab">Trips</a>
+                        <a id="trips" href="#tripsTab">Trips</a>
                     </li>
                     <h:panelGroup rendered="#{loginBean.loggedIn}">
-                    <li>
-                        <a class="active" href="#myTripsTab">My trips</a>
-                    </li>
+                        <li>
+                            <a id="myTrips"  href="#myTripsTab">My trips</a>
+                        </li>
                     </h:panelGroup>
                 </ul>
                 <!-- //Tab buttons -->
@@ -52,14 +55,15 @@
                         <div class="box">
                             <h:panelGroup rendered="#{loginBean.loggedIn}">
                                 <h:form>
-                                <h:dataTable border="0" value="#{loginBean.user.trips}" var="trip">
-                                    <h:column>
-                                        <div>
-                                                <h:commandLink value="#{trip.title}" action="#{tripBean.setCurrentTrip(trip)}" />
+                                    <h:dataTable border="0" value="#{loginBean.user.trips}" var="trip">
+                                        <h:column>
+                                            <div>
+                                                <h:commandLink value="#{trip.title}"
+                                                               action="#{tripBean.setCurrentTrip(trip)}"/>
 
-                                        </div>
-                                    </h:column>
-                                </h:dataTable>
+                                            </div>
+                                        </h:column>
+                                    </h:dataTable>
                                 </h:form>
                             </h:panelGroup>
                         </div>
