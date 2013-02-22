@@ -35,8 +35,8 @@ manager responsible for loading user account with assigned roles
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
         <property name="url" value="jdbc:mysql://localhost:3306/test"/>
-        <property name="username" value="groepH"/>
-        <property name="password" value="groepH2013"/>
+        <property name="username" value="groeph"/>
+        <property name="password" value="groeph"/> <!-- Vroeger groepH2013 -->
     </bean>
 
     <!-- Session Factory Declaration -->

@@ -57,7 +57,6 @@ public class TestTripBean extends AbstractTransactionalJUnit4SpringContextTests 
         tripBean.newLabel();
         tripBean.setTripType("tijdspanne");
         tripBean.setPublic("Public");
-         //todo in die tripbean wordt current user gezet ma hier kunne we da ni doen...
         assertEquals("addTrip result should be SUCCESS for Open Trip","SUCCESS",tripBean.addTrip());
     }
 

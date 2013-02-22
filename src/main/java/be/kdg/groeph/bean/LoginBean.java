@@ -40,8 +40,6 @@ public class LoginBean implements Serializable {
 
     TripUser user;
 
-    Trip currentTrip;
-
     public String getPassword() {
         return password;
     }
@@ -72,14 +70,6 @@ public class LoginBean implements Serializable {
 
     public void setLoggedIn(boolean loggedIn) {
         isLoggedIn = loggedIn;
-    }
-
-    public Trip getCurrentTrip() {
-        return currentTrip;
-    }
-
-    public void setCurrentTrip(Trip currentTrip) {
-        this.currentTrip = currentTrip;
     }
 
     public String loginUser() throws LoginException{

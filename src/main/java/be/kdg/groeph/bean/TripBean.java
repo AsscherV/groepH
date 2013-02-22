@@ -145,9 +145,21 @@ public class TripBean implements Serializable {
         loginBean.getUser().addTrip(trip);
         if (tripService.addTrip(trip)) {
             currentTrip = trip;
+            clearFields();
             return SUCCESS;
         } else {
             return FAILURE;
         }
+    }
+
+    public void clearFields(){
+          title=null;
+        description=null;
+        isPublic=null;
+        tripType=null;
+        startTime=null;
+        endTime=null;
+        label=null;
+        labels=null;
     }
 }
