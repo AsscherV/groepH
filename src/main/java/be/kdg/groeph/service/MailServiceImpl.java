@@ -1,16 +1,16 @@
 package be.kdg.groeph.service;
 
 import be.kdg.groeph.dao.UserDao;
-
+import be.kdg.groeph.model.TripUser;
 import org.apache.log4j.Logger;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.UUID;
 
 @Transactional
 @Service("mailService")
@@ -20,6 +20,9 @@ public class MailServiceImpl implements MailService {
     @Autowired
     @Resource(name = "mailSender")
     private MailSender mailSender;
+
+    @Autowired
+    UserDao userDao;
 
     @Override
     public void uponSuccessfulRegistration(String email) {
@@ -36,4 +39,24 @@ public class MailServiceImpl implements MailService {
         System.out.println("Sending email ....");
         mailSender.send(mailMessageArray);
     }
+
+    @Override
+    public boolean recoverPassword(String email) {
+        TripUser userByEmail = userDao.getUserByEmail(email);
+        if (userByEmail.isNull()) {
+            return false;
+        }
+
+        userDao.updateUser(randomString());
+
+        //Random password in databank toevoegen
+        //mail sturen met random password.
+        return true;
+    }
+
+    public String randomString() {
+        String random = UUID.randomUUID().toString();
+        return random;
+    }
+
 }

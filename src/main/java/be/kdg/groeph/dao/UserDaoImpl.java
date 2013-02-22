@@ -33,4 +33,9 @@ public class UserDaoImpl implements UserDao {
         return (TripUser) query.uniqueResult();
     }
 
+    @Override
+    public void updateUser(String s) {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
+
 }

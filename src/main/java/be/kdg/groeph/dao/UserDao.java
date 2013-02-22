@@ -7,4 +7,5 @@ public interface UserDao {
 
     TripUser getUserByEmail(String email);
 
+    void updateUser(String s);
 }

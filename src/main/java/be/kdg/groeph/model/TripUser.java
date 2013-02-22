@@ -2,14 +2,11 @@ package be.kdg.groeph.model;
 
 import be.kdg.groeph.model.Null.NullUser;
 import be.kdg.groeph.model.Null.Nullable;
-import org.codehaus.jackson.annotate.JsonAutoDetect;
-import org.codehaus.jackson.map.util.JSONPObject;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -33,6 +30,8 @@ public class TripUser implements Nullable, Serializable {
     private String email;
     @Column(name="password", nullable = false, length = 100)
     private String password;
+    @Column(name="oldPassword", nullable = true, length = 100)
+    private String tempPassword;
     @Column(name="role", nullable = false, length = 100)
     private String role;
     @Column(name="dateRegistered", nullable = false, length = 100)
@@ -59,9 +58,6 @@ public class TripUser implements Nullable, Serializable {
     private List<Trip> trips = new ArrayList<Trip>();
 
 
-
-
-
     public TripUser() {
     }
 
@@ -76,6 +72,20 @@ public class TripUser implements Nullable, Serializable {
         this.address = address;
         this.dateRegistered = dateRegistered;
         this.role = role;
+    }
+
+    public TripUser(String firstName, String lastName, Date dateOfBirth, String phoneNumber, char gender, String email, String password, String tempPassword, Address address, Date dateRegistered, String role) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dateOfBirth = dateOfBirth;
+        this.phoneNumber = phoneNumber;
+        this.gender = gender;
+        this.email = email;
+        this.password = password;
+        this.address = address;
+        this.dateRegistered = dateRegistered;
+        this.role = role;
+        this.tempPassword = tempPassword;
     }
 
     public int getId() {
@@ -208,6 +218,9 @@ public class TripUser implements Nullable, Serializable {
         return trips;
     }
 
+    public String getTempPassword() {
+        return tempPassword;
+    }
     public void setTrips(List<Trip> trips) {
         this.trips = trips;
     }
@@ -217,6 +230,9 @@ public class TripUser implements Nullable, Serializable {
         trips.add(trip);
     }
 
+    public void setTempPassword(String tempPassword) {
+        this.tempPassword = tempPassword;
+    }
 
     @Override
     public boolean isNull() {
