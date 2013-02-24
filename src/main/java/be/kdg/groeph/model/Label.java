@@ -18,7 +18,7 @@ public class Label {
 
     @ManyToOne
     @JoinColumn(name = "trip", nullable = true)
-    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
+    //@Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     private Trip trip;
 
     public Label() {

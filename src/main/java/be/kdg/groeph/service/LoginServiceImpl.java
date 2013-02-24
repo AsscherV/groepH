@@ -4,6 +4,7 @@ import be.kdg.groeph.dao.UserDao;
 import be.kdg.groeph.model.TripUser;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -19,7 +20,9 @@ import javax.annotation.Resource;
 @Service("loginService")
 public class LoginServiceImpl implements LoginService {
     static Logger logger = Logger.getLogger(LoginServiceImpl.class);
+   // static org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(LoginServiceImpl.class);
 
+    @Qualifier("userDaoImpl")
     @Autowired
     UserDao userDao;
 

@@ -37,8 +37,16 @@
                         </h:form>
 
                         <div class="box">
-                            <div><a href="#">Trip1</a></div>
-                            <div><a href="#">Trip2</a></div>
+                            <h:form>
+                                <h:dataTable border="0" value="#{tripBean.allPublicTrips}" var="openTrip">
+                                    <h:column>
+                                        <div>
+                                            <h:commandLink value="#{openTrip.title}"
+                                                           action="#{tripBean.setCurrentTrip(openTrip)}"/>
+                                        </div>
+                                    </h:column>
+                                </h:dataTable>
+                            </h:form>
                         </div>
                         <h:panelGroup rendered="#{loginBean.loggedIn}">
                             <a href="../user/createTrip.xhtml">+ Make a trip</a>

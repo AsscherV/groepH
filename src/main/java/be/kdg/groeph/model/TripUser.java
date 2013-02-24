@@ -59,9 +59,6 @@ public class TripUser implements Nullable, Serializable {
     private List<Trip> trips = new ArrayList<Trip>();
 
 
-
-
-
     public TripUser() {
     }
 

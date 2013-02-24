@@ -2,18 +2,17 @@ package be.kdg.groeph.bean;
 
 import be.kdg.groeph.model.Address;
 import be.kdg.groeph.model.TripUser;
-import be.kdg.groeph.model.TripUser;
 import be.kdg.groeph.service.MailService;
 import be.kdg.groeph.service.UserService;
 import be.kdg.groeph.util.SHAEncryption;
 import org.apache.log4j.Logger;
-import org.apache.myfaces.extensions.cdi.core.api.scope.conversation.ViewAccessScoped;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.RequestScoped;
 import javax.inject.Named;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
@@ -22,7 +21,8 @@ import java.text.ParseException;
 import java.util.Date;
 
 @Component
-@ViewAccessScoped
+//@ViewAccessScoped
+@RequestScoped
 @Named
 public class RegisterBean implements Serializable {
     static Logger logger = Logger.getLogger(RegisterBean.class);

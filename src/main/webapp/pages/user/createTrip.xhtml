@@ -72,15 +72,18 @@
 
 
                                             <h:selectOneRadio value="#{tripBean.public}">
-                                                <f:selectItem itemValue="Public" itemLabel="Public"/>
-                                                <f:selectItem itemValue="Private" itemLabel="Private"/>
+                                                <f:selectItem  itemValue= "#{true}"  itemLabel="Public"/>
+                                                <f:selectItem itemValue="#{false}"  itemLabel="Private"/>
                                             </h:selectOneRadio>
                                             <h:column></h:column>
                                             <h:column></h:column>
 
                                             <h:outputLabel value="#{msgs.tripType}"/>
-                                            <h:inputText id="type" styleClass="span2" value="#{tripBean.tripType}"/>
-                                            <h:message for="type" styleClass="error"/>
+                                            <h:selectOneMenu value="#{tripBean.tripType}">
+                                                <f:selectItems value="#{tripBean.allTripTypes}" var="type"
+                                                               itemLabel="#{type.id} : #{type.type}" itemValue="#{type.type}" />
+                                            </h:selectOneMenu>
+                                            <h:column></h:column>
 
                                             <h:outputLabel value="#{msgs.tripStartTime}"/>
                                             <h:inputText id="startTime" styleClass="span2 tripStartDatepicker"
@@ -96,10 +99,12 @@
 
                                             <h:outputLabel value="#{msgs.tripLabel}"/>
                                             <h:inputText id="label" styleClass="span2" value="#{tripBean.label}"/>
+                                            <!--
                                             <h:commandButton class="btn btn-success" value="add">
-                                                <f:ajax event="click" listener="#{tripBean.newLabel}"
+                                                <f:ajax event="click" listener="tripBean.newLabel}"
                                                         execute=":createTrip"/>
                                             </h:commandButton>
+                                             -->
 
                                             <h:message for="label" styleClass="error"/>
 

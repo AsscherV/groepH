@@ -21,6 +21,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,7 +39,6 @@ import static org.junit.Assert.assertEquals;
 @Transactional
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:daoContext.xml"})
-
 public class TestRest extends AbstractTransactionalJUnit4SpringContextTests {
 
     @Autowired
@@ -53,7 +53,7 @@ public class TestRest extends AbstractTransactionalJUnit4SpringContextTests {
 
     @Before
     public void init() {
-        user = UserMother.validUser1();
+        user = UserMother.validUser3WithOutEncryptedPassword();
         user.setEnabled(true);
         user.setAccountNonExpired(true);
         user.setAccountNonLocked(true);
@@ -73,6 +73,7 @@ public class TestRest extends AbstractTransactionalJUnit4SpringContextTests {
         assertEquals("Login moet test zijn", user.getEmail(), object.getEmail());
     }
 
+
     @Test
     public void loginRest() {
         Client client = Client.create(new DefaultClientConfig());
@@ -81,6 +82,7 @@ public class TestRest extends AbstractTransactionalJUnit4SpringContextTests {
         TripUser object = getTripUserFromResponse(isValidUser);
         assertEquals("result van RestCall moet test zijn", user.getEmail(), object.getEmail());
     }
+
 
     private TripUser getTripUserFromResponse(String validUser) {
         Gson gson = new GsonBuilder().create();
