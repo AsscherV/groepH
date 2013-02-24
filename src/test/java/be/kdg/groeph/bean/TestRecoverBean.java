@@ -3,7 +3,6 @@ package be.kdg.groeph.bean;
 import be.kdg.groeph.dao.UserDao;
 import be.kdg.groeph.mockMother.UserMother;
 import be.kdg.groeph.model.TripUser;
-import be.kdg.groeph.service.MailService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -58,15 +57,15 @@ public class TestRecoverBean  extends AbstractTransactionalJUnit4SpringContextTe
         assertTrue("Recover password must return true",recoverBean.recoverPassword());
     }
 
-    @Autowired
-    MailService mailService;
-
     @Test
     public void testRecoverPasswordGeneration(){
-        assertNull(userDao.getUserByEmail(validEmail).getTempPassword());
+        assertNull("TempPassword should be Null",userDao.getUserByEmail(validEmail).getTempPassword());
         recoverBean.setEmail(validEmail);
         recoverBean.recoverPassword();
-        assertNotNull(userDao.getUserByEmail(validEmail).getTempPassword());
+        assertNotNull("TempPassword shouldn't be Null",userDao.getUserByEmail(validEmail).getTempPassword());
     }
+
+
+
 }
 
