@@ -27,6 +27,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 
+import javax.faces.bean.ManagedProperty;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriBuilder;
 
@@ -43,6 +44,10 @@ public class TestRest extends AbstractTransactionalJUnit4SpringContextTests {
 
     @Autowired
     UserDao userDao;
+
+    @ManagedProperty(value = "#{restService}")
+    @Autowired
+    RestService restService;
 
     TripUser user;
     private final String password = "def";
@@ -70,10 +75,9 @@ public class TestRest extends AbstractTransactionalJUnit4SpringContextTests {
     @Test
     public void loginFalse() {
         TripUser object = getTripUser(user.getEmail(), user.getPassword());
-        assertEquals("Login moet test zijn", user.getEmail(), object.getEmail());
+        assertEquals("Email must be the same", user.getEmail(), object.getEmail());
     }
-
-
+    /*
     @Test
     public void loginRest() {
         Client client = Client.create(new DefaultClientConfig());
@@ -82,6 +86,7 @@ public class TestRest extends AbstractTransactionalJUnit4SpringContextTests {
         TripUser object = getTripUserFromResponse(isValidUser);
         assertEquals("result van RestCall moet test zijn", user.getEmail(), object.getEmail());
     }
+    */
 
 
     private TripUser getTripUserFromResponse(String validUser) {
@@ -97,7 +102,7 @@ public class TestRest extends AbstractTransactionalJUnit4SpringContextTests {
     }
 
     private TripUser getTripUser(String UName, String Password) {
-        RestService restService = new RestService();
+        //RestService restService = new RestService();
         String isValidUser = restService.login(UName, Password);
         return getTripUserFromResponse(isValidUser);
     }

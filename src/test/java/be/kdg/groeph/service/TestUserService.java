@@ -21,6 +21,7 @@ import static org.junit.Assert.assertNotSame;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:daoContext.xml"})
 public class TestUserService extends AbstractTransactionalJUnit4SpringContextTests  {        //   AbstractJUnit4SpringContextTests
+
     @Autowired
     UserService userService;
 

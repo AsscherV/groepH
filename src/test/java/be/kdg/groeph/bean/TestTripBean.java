@@ -1,5 +1,7 @@
 package be.kdg.groeph.bean;
 
+import be.kdg.groeph.dao.TripDao;
+import be.kdg.groeph.dao.UserDao;
 import be.kdg.groeph.mockMother.TripMother;
 import be.kdg.groeph.mockMother.UserMother;
 import be.kdg.groeph.model.Label;
@@ -36,12 +38,16 @@ public class TestTripBean extends AbstractTransactionalJUnit4SpringContextTests 
     @Autowired
     LoginBean loginBean;
 
+    @Autowired
+    private TripDao tripDao;
+
     @ManagedProperty(value = "#{tripService}")
     @Autowired
     TripService tripService;
 
     private Trip trip1;
     private TripUser user1;
+    private List<TripType> types;
 
 
     @Before
@@ -49,6 +55,9 @@ public class TestTripBean extends AbstractTransactionalJUnit4SpringContextTests 
     {
         user1 = UserMother.validUser1();
         loginBean.setUser(UserMother.validUser1());
+        tripDao.addTripType(new TripType("Timebound"));
+        tripDao.addTripType(new TripType("Public"));
+        tripDao.addTripType(new TripType("Private"));
     }
 
     @Test
@@ -69,7 +78,7 @@ public class TestTripBean extends AbstractTransactionalJUnit4SpringContextTests 
         lbls.add(new Label("Test3"));
         lbls.add(new Label("Test4"));
         tripBean.setLabels(lbls);
-        tripBean.setTripType("spam");
+        tripBean.setTripType("Timebound");
         tripBean.setPublic(true);
         assertEquals("addTrip result should be SUCCESS for Open Trip", "SUCCESS", tripBean.addTrip());
     }
@@ -80,10 +89,11 @@ public class TestTripBean extends AbstractTransactionalJUnit4SpringContextTests 
         Calendar cal;
         cal = Calendar.getInstance();
         cal.set(2013, Calendar.MARCH, 29, 12, 00);
-        Trip trip = new Trip("titel1", "desc", cal.getTime(), cal.getTime(),new ArrayList<Label>(),new TripType("type"), true);
-        Trip trip2 = new Trip("titel2", "desc", cal.getTime(), cal.getTime(),new ArrayList<Label>(),new TripType("type"), true);
-        Trip trip3 = new Trip("titel3", "desc", cal.getTime(), cal.getTime(),new ArrayList<Label>(),new TripType("type"), true);
-        Trip trip4 = new Trip("titel4", "desc", cal.getTime(), cal.getTime(),new ArrayList<Label>(),new TripType("type"), false);
+        TripType type = tripDao.getTypeByName("Timebound");
+        Trip trip = new Trip("titel1", "desc", cal.getTime(), cal.getTime(),new ArrayList<Label>(),type, true);
+        Trip trip2 = new Trip("titel2", "desc", cal.getTime(), cal.getTime(),new ArrayList<Label>(),type, true);
+        Trip trip3 = new Trip("titel3", "desc", cal.getTime(), cal.getTime(),new ArrayList<Label>(),type, true);
+        Trip trip4 = new Trip("titel4", "desc", cal.getTime(), cal.getTime(),new ArrayList<Label>(),type, false);
         user1.addTrip(trip);
         user1.addTrip(trip2);
         user1.addTrip(trip3);
@@ -97,6 +107,8 @@ public class TestTripBean extends AbstractTransactionalJUnit4SpringContextTests 
         assertEquals("getOpenTrips should give a list of 3 public trips", 3, tripBean.getAllPublicTrips().size());
 
     }
+
+
 
 
 

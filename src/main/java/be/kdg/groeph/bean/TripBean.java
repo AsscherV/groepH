@@ -133,27 +133,12 @@ public class TripBean implements Serializable {
         this.currentTrip = currentTrip;
     }
 
-    /*
-    //TODO: Callen met ajax call
-    public void newLabel() {
-        labels.add(new Label(label));
-        label = "";
-    }
-    */
-
     public String addTrip() {
         TripType type = tripService.getTypeByName(getTripType());
         //Trip trip = new Trip(getTitle(), getDescription(), getStartTime(), getEndTime(),getLabels(),type, getPublic());
         Trip trip = new Trip(getTitle(), getDescription(), getStartTime(), getEndTime(),type, getPublic());
         Label label = new Label(getLabel());
         trip.addLabel(label);
-        //labels.clear();
-        //getLabels().add(label);
-        //label.setTrip(trip);
-
-
-
-
 
         loginBean.getUser().addTrip(trip);
         if (tripService.addTrip(trip)) {

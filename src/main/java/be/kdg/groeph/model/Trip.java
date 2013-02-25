@@ -27,13 +27,13 @@ public class Trip implements Nullable, Serializable {
     @Column(name = "isPubic", nullable = false)
     private boolean isPublic;
 
-    @OneToMany(mappedBy = "trip")
+    @OneToMany(mappedBy = "trip")     //,fetch = FetchType.EAGER
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     private List<Label> labels = new ArrayList<Label>();
 
     @ManyToOne
     @JoinColumn(name = "tripType", nullable = true)
-    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
+    //@Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     private TripType tripType;
 
     @ManyToOne

@@ -22,8 +22,7 @@ import java.util.Collection;
 @Service("userService")
 public class UserServiceImpl  implements UserService, UserDetailsService {
    static Logger logger = Logger.getLogger(UserServiceImpl.class);
-   //static Logger logger = org.slf4j.LoggerFactory.getLogger(UserServiceImpl.class);
-    @Qualifier("userDaoImpl")
+   @Qualifier("userDaoImpl")
     @Autowired
     UserDao userDao;
 
@@ -69,4 +68,6 @@ public class UserServiceImpl  implements UserService, UserDetailsService {
         userAuthorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
         return userAuthorities;
     }
+
+
 }

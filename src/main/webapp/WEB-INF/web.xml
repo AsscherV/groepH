@@ -79,7 +79,7 @@
 
 
 
-    <!--
+
     <filter>
         <filter-name>hibernateFilter</filter-name>
         <filter-class>
@@ -94,9 +94,10 @@
     <filter-mapping>
         <filter-name>hibernateFilter</filter-name>
         <url-pattern>/*</url-pattern>
-        <dispatcher>REQUEST</dispatcher>
-        <dispatcher>FORWARD</dispatcher>
-        <dispatcher>INCLUDE</dispatcher>
-    </filter-mapping>
+    <!--
+    <dispatcher>REQUEST</dispatcher>
+    <dispatcher>FORWARD</dispatcher>
+    <dispatcher>INCLUDE</dispatcher>
     -->
+</filter-mapping>
 </web-app>

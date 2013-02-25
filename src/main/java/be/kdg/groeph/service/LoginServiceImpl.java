@@ -20,7 +20,6 @@ import javax.annotation.Resource;
 @Service("loginService")
 public class LoginServiceImpl implements LoginService {
     static Logger logger = Logger.getLogger(LoginServiceImpl.class);
-   // static org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(LoginServiceImpl.class);
 
     @Qualifier("userDaoImpl")
     @Autowired

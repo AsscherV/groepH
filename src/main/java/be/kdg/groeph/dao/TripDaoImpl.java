@@ -23,8 +23,9 @@ public class TripDaoImpl implements TripDao {
     @SuppressWarnings("unchecked")
     public boolean addTrip(Trip trip) {
         //TODO: Tip indien er een Non-UniqueObject exception gethrowed wordt ofwel session clearen ofwel cascade option weghalen bij dat object uit model klasse
-        //--> sessionFactory.getCurrentSession().clear();
+        //sessionFactory.getCurrentSession().clear();
         sessionFactory.getCurrentSession().saveOrUpdate(trip);
+        //sessionFactory.getCurrentSession().merge(trip);
         return true;
     }
 
@@ -49,6 +50,12 @@ public class TripDaoImpl implements TripDao {
         Query query = sessionFactory.getCurrentSession().createQuery("from TripType where type=:naam");
         query.setParameter("naam",naam);
         return (TripType) query.uniqueResult();
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public void addTripType(TripType tripType){
+        sessionFactory.getCurrentSession().saveOrUpdate(tripType);
     }
 
 

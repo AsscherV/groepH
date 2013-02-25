@@ -58,4 +58,9 @@ public class TripDaoMock implements TripDao {
         }
         return null;
     }
+
+    @Override
+    public void addTripType(TripType tripType) {
+        tripTypes.add(tripType);
+    }
 }

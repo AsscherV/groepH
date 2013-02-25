@@ -26,10 +26,6 @@ public class TestTripService extends AbstractTransactionalJUnit4SpringContextTes
     @Autowired
     TripService tripService;
 
-    @Qualifier("loginBean")
-    @Autowired
-    LoginBean loginBean;
-
     private Trip validPublicTrip1;
     private Trip validPublicTrip2;
 

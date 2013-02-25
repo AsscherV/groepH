@@ -13,4 +13,5 @@ public interface TripDao {
     List<TripType> fetchAllTripTypes();
 
     TripType getTypeByName(String naam);
+    void addTripType(TripType tripType);
 }

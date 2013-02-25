@@ -23,9 +23,7 @@ manager responsible for loading user account with assigned roles
     <bean class="org.springframework.security.authentication.event.LoggerListener"
           id="loggerListener"/>
 
-    <context:component-scan base-package="be.kdg.groeph.service"/>
     <context:component-scan base-package="be.kdg.groeph.dao"/>
-    <context:component-scan base-package="be.kdg.groeph.model"/>
     <context:component-scan base-package="be.kdg.groeph.util"/>
     <context:component-scan base-package="be.kdg.groeph.bean"/>
     <context:component-scan base-package="be.kdg.groeph.service"/>
