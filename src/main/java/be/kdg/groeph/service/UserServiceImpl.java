@@ -4,6 +4,7 @@ import be.kdg.groeph.dao.UserDao;
 import be.kdg.groeph.model.TripUser;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -14,14 +15,15 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 
 @Transactional
 @Service("userService")
 public class UserServiceImpl  implements UserService, UserDetailsService {
-    static Logger logger = Logger.getLogger(UserServiceImpl.class);
-
+   static Logger logger = Logger.getLogger(UserServiceImpl.class);
+   @Qualifier("userDaoImpl")
     @Autowired
     UserDao userDao;
 
@@ -33,6 +35,23 @@ public class UserServiceImpl  implements UserService, UserDetailsService {
             return  true;
         }
         logger.warn("Failed to create user: " + user.getEmail());
+        return false;
+    }
+
+    @Override
+    public boolean changePassword(TripUser user, String newPassword) {
+        if(!user.isNull()){
+            user.setPassword(newPassword);
+            user.setTempPassword("");
+            try {
+                userDao.updateUser(user);
+                logger.info("Password changed for user: " + user.getEmail());
+            } catch (SQLException e) {
+                logger.warn(e.getMessage().toString());
+                return false;
+            }
+            return true;
+        }
         return false;
     }
 

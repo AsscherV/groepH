@@ -9,8 +9,10 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.text.ParseException;
 import java.util.Calendar;
@@ -22,7 +24,7 @@ import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:daoContext.xml"})
-public class TestRegisterBean extends AbstractTransactionalJUnit4SpringContextTests{
+public class TestRegisterBean extends AbstractTransactionalJUnit4SpringContextTests {
 
 
     @Qualifier("registerBean")
@@ -51,7 +53,13 @@ public class TestRegisterBean extends AbstractTransactionalJUnit4SpringContextTe
         registerBean.setSecondPassword("testpasswordooo");
         assertEquals("FAILURE",registerBean.addUser());
     }
-
+     /*
+    @Test
+    public void testAddExistingUser() throws ParseException {
+        fillRegisterBean();
+        assertEquals("Can't add existing user, returns FAILURE","FAILURE", registerBean.addUser());
+    }
+*/
     @Test
     public void testValidPassword(){
         registerBean.setPassword("wachtwoord");

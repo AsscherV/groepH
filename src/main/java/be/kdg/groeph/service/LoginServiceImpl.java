@@ -4,6 +4,7 @@ import be.kdg.groeph.dao.UserDao;
 import be.kdg.groeph.model.TripUser;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -20,6 +21,7 @@ import javax.annotation.Resource;
 public class LoginServiceImpl implements LoginService {
     static Logger logger = Logger.getLogger(LoginServiceImpl.class);
 
+    @Qualifier("userDaoImpl")
     @Autowired
     UserDao userDao;
 
@@ -31,10 +33,10 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public TripUser loginUser(String email, String password) {
         TripUser user = userDao.getUserByEmail(email);
-        if (user.getEmail().equals(email) && user.getPassword().equals(password)) {
+        if (user.getEmail().equals(email) && (user.getPassword().equals(password)||user.getTempPassword().equals(password)) ) {
             try {
                 Authentication authenticate = authenticationManager.authenticate(
-                        new UsernamePasswordAuthenticationToken(email, password));
+                        new UsernamePasswordAuthenticationToken(email, user.getPassword()));
                 if (authenticate.isAuthenticated()) {
                     SecurityContextHolder.getContext().setAuthentication(
                             authenticate);

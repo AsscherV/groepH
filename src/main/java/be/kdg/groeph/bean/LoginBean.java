@@ -1,8 +1,8 @@
 package be.kdg.groeph.bean;
 
-import be.kdg.groeph.model.Trip;
 import be.kdg.groeph.model.TripUser;
 import be.kdg.groeph.service.LoginService;
+import be.kdg.groeph.service.UserService;
 import be.kdg.groeph.util.SHAEncryption;
 import org.apache.log4j.Logger;
 import org.hibernate.validator.constraints.Email;
@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
-import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.inject.Named;
@@ -22,6 +21,8 @@ import java.io.Serializable;
 @Named
 @SessionScoped
 public class LoginBean implements Serializable {
+    public static final String RESET = "RESET";
+    //static Logger logger = org.slf4j.LoggerFactory.getLogger(LoginBean.class);
     static Logger logger = Logger.getLogger(LoginBean.class);
     private static final String SUCCESS = "SUCCESS";
     private static final String FAILURE = "FAILURE";
@@ -30,11 +31,16 @@ public class LoginBean implements Serializable {
     @Autowired
     LoginService loginService;
 
+    @Autowired
+    UserService userService;
+
     @NotEmpty(message = "{email} {notempty}")
     @Email(message = "{email} {validEmail}")
     private String email;
     @NotEmpty(message = "{password} {notempty}")
     private String password;
+    @NotEmpty(message = "{password} {notempty}")
+    private String secondPassword;
 
     private boolean isLoggedIn;
 
@@ -56,6 +62,14 @@ public class LoginBean implements Serializable {
         this.email = email;
     }
 
+    public String getPassword2() {
+        return secondPassword;
+    }
+
+    public void setPassword2(String password2) {
+        this.secondPassword = password2;
+    }
+
     public TripUser getUser() {
         return user;
     }
@@ -74,24 +88,41 @@ public class LoginBean implements Serializable {
 
     public String loginUser() throws LoginException{
         try {
-            TripUser loginUser = loginService.loginUser(getEmail(), SHAEncryption.encrypt(getPassword()));
-            if (loginUser.isNull()) {
+            user = loginService.loginUser(email, SHAEncryption.encrypt(password));
+            if (user.isNull()) {
                 return FAILURE;
-            } else {
-                user = loginUser;
+            }
+            else if(user.getTempPassword()!=null && user.getTempPassword().equals(SHAEncryption.encrypt(password)))
+            {
+                isLoggedIn = true;
+                return RESET;
+            }
+           else{
+
                 isLoggedIn = true;
                 return SUCCESS;
+             }
             }
-        } catch (Exception e) {
+         catch (Exception e) {
             return FAILURE;
         }
     }
+
 
     public String logOut() {
         isLoggedIn = false;
         SecurityContextHolder.getContext().setAuthentication(null);
         //FacesContext.getCurrentInstance().getExternalContext().redirect(url);
         return SUCCESS;
+    }
+
+    public void tempPasswordLogin() {
+        if(password.equals(secondPassword)){
+             //TODO: userservice change pass
+
+             userService.changePassword(user, SHAEncryption.encrypt(password));
+        }
+
     }
 }
 

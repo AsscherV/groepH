@@ -7,24 +7,28 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertTrue;
 
 
 @Transactional
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:daoContext.xml"})
-public class TestUserService extends AbstractTransactionalJUnit4SpringContextTests {
+public class TestUserService extends AbstractTransactionalJUnit4SpringContextTests  {        //   AbstractJUnit4SpringContextTests
+
     @Autowired
     UserService userService;
 
+
+
     private TripUser validUser1;
     private TripUser validUser2;
+    private final String validEmail = "greg.deckers@student.kdg.be";
 
     @Before
     public void init(){
@@ -39,6 +43,7 @@ public class TestUserService extends AbstractTransactionalJUnit4SpringContextTes
         assertFalse("Can't add existing user, returns false",userService.addUser(validUser1));
         assertTrue("Adding validUser2 returns true",userService.addUser(validUser2));
     }
+
 
 
 }
