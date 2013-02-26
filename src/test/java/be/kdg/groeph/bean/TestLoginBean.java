@@ -10,8 +10,10 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.security.auth.login.LoginException;
 
@@ -24,9 +26,11 @@ import static org.junit.Assert.*;
 @ContextConfiguration(locations = {"classpath:daoContext.xml"})
 public class TestLoginBean extends AbstractTransactionalJUnit4SpringContextTests {
 
+
     @Qualifier("loginBean")
     @Autowired
     LoginBean loginBean;
+
     @Qualifier("registerBean")
     @Autowired
     RegisterBean registerBean;
@@ -40,24 +44,18 @@ public class TestLoginBean extends AbstractTransactionalJUnit4SpringContextTests
     @Test
     public void testLogin() throws LoginException {
         setLoginBean("greg.deckers@student.kdg.be", "password");
-        //loginBean.setEmail("greg.deckers@student.kdg.be");
-        //loginBean.setPassword("password");
         assertEquals("SUCCESS", loginBean.loginUser());
     }
 
     @Test
     public void testInvalidLogin() throws LoginException {
         setLoginBean("greg.deckers@student.kdg.be", "qsdqs");
-        //loginBean.setEmail("greg.deckers@student.kdg.be");
-        //loginBean.setPassword("qsdqs");
         assertEquals("FAILURE", loginBean.loginUser());
     }
 
     @Test
     public void testLogOut() throws LoginException {
         setLoginBean("greg.deckers@student.kdg.be", "password");
-        //loginBean.setEmail("greg.deckers@student.kdg.be");
-        //loginBean.setPassword("password");
         loginBean.loginUser();
         assertEquals("SUCCESS",loginBean.logOut());
     }

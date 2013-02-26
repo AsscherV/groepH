@@ -10,16 +10,21 @@
     <h:outputStylesheet library="css" name="main.css"/>
 </h:head>
 <h:body>
+
     <ui:composition>
+        <h:inputHidden id="loggedIn" value="#{loginBean.loggedIn}" />
         <div class="span3">
             <div id="tabContainerTrips" class="tabContainer">
                 <ul>
+
                     <li>
-                        <a class="active" href="#tripsTab">Trips</a>
+                        <a id="trips" href="#tripsTab">Trips</a>
                     </li>
-                    <li>
-                        <a href="#myTripsTab">My trips</a>
-                    </li>
+                    <h:panelGroup rendered="#{loginBean.loggedIn}">
+                        <li>
+                            <a id="myTrips"  href="#myTripsTab">My trips</a>
+                        </li>
+                    </h:panelGroup>
                 </ul>
                 <!-- //Tab buttons -->
                 <div class="tabDetails">
@@ -32,8 +37,16 @@
                         </h:form>
 
                         <div class="box">
-                            <div><a href="#">Trip1</a></div>
-                            <div><a href="#">Trip2</a></div>
+                            <h:form>
+                                <h:dataTable border="0" value="#{tripBean.allPublicTrips}" var="openTrip">
+                                    <h:column>
+                                        <div>
+                                            <h:commandLink value="#{openTrip.title}"
+                                                           action="#{tripBean.setCurrentTrip(openTrip)}"/>
+                                        </div>
+                                    </h:column>
+                                </h:dataTable>
+                            </h:form>
                         </div>
                         <h:panelGroup rendered="#{loginBean.loggedIn}">
                             <a href="../user/createTrip.xhtml">+ Make a trip</a>
@@ -49,15 +62,17 @@
 
                         <div class="box">
                             <h:panelGroup rendered="#{loginBean.loggedIn}">
-                                <h:dataTable border="0" value="#{loginBean.user.trips}" var="trip">
-                                    <h:column>
-                                        <div>
-                                            <a href="#">
-                                                <h:outputText value="#{trip.title}" rendered="true" />
-                                            </a>
-                                        </div>
-                                    </h:column>
-                                </h:dataTable>
+                                <h:form>
+                                    <h:dataTable border="0" value="#{loginBean.user.trips}" var="trip">
+                                        <h:column>
+                                            <div>
+                                                <h:commandLink value="#{trip.title}"
+                                                               action="#{tripBean.setCurrentTrip(trip)}"/>
+
+                                            </div>
+                                        </h:column>
+                                    </h:dataTable>
+                                </h:form>
                             </h:panelGroup>
                         </div>
                         <h:panelGroup rendered="#{loginBean.loggedIn}">

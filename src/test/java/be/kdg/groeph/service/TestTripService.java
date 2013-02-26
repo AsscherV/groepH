@@ -11,6 +11,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,10 +25,6 @@ import static org.junit.Assert.assertTrue;
 public class TestTripService extends AbstractTransactionalJUnit4SpringContextTests {
     @Autowired
     TripService tripService;
-
-    @Qualifier("loginBean")
-    @Autowired
-    LoginBean loginBean;
 
     private Trip validPublicTrip1;
     private Trip validPublicTrip2;

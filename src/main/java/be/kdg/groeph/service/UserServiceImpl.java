@@ -4,6 +4,7 @@ import be.kdg.groeph.dao.UserDao;
 import be.kdg.groeph.model.TripUser;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -20,8 +21,8 @@ import java.util.Collection;
 @Transactional
 @Service("userService")
 public class UserServiceImpl  implements UserService, UserDetailsService {
-    static Logger logger = Logger.getLogger(UserServiceImpl.class);
-
+   static Logger logger = Logger.getLogger(UserServiceImpl.class);
+   @Qualifier("userDaoImpl")
     @Autowired
     UserDao userDao;
 

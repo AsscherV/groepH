@@ -22,6 +22,7 @@ import java.io.Serializable;
 @Named
 @SessionScoped
 public class LoginBean implements Serializable {
+    //static Logger logger = org.slf4j.LoggerFactory.getLogger(LoginBean.class);
     static Logger logger = Logger.getLogger(LoginBean.class);
     private static final String SUCCESS = "SUCCESS";
     private static final String FAILURE = "FAILURE";
@@ -39,8 +40,6 @@ public class LoginBean implements Serializable {
     private boolean isLoggedIn;
 
     TripUser user;
-
-    Trip currentTrip;
 
     public String getPassword() {
         return password;
@@ -72,14 +71,6 @@ public class LoginBean implements Serializable {
 
     public void setLoggedIn(boolean loggedIn) {
         isLoggedIn = loggedIn;
-    }
-
-    public Trip getCurrentTrip() {
-        return currentTrip;
-    }
-
-    public void setCurrentTrip(Trip currentTrip) {
-        this.currentTrip = currentTrip;
     }
 
     public String loginUser() throws LoginException{

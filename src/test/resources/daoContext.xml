@@ -20,13 +20,13 @@ manager responsible for loading user account with assigned roles
         <sec:authentication-provider user-service-ref="userService"/>
     </sec:authentication-manager>
 
-    <context:component-scan base-package="be.kdg.groeph.service"/>
-    <context:component-scan base-package="be.kdg.groeph.dao"/>
-    <context:component-scan base-package="be.kdg.groeph.bean"/>
-    <context:component-scan base-package="be.kdg.groeph.util"/>
-    <context:component-scan base-package="be.kdg.groeph.model"/>
-    <context:component-scan base-package="be.kdg.groeph.mockMother"/>
+    <bean class="org.springframework.security.authentication.event.LoggerListener"
+          id="loggerListener"/>
 
+    <context:component-scan base-package="be.kdg.groeph.dao"/>
+    <context:component-scan base-package="be.kdg.groeph.util"/>
+    <context:component-scan base-package="be.kdg.groeph.bean"/>
+    <context:component-scan base-package="be.kdg.groeph.service"/>
 
     <!-- Activates annotation-based bean configuration -->
     <context:annotation-config/>
@@ -36,7 +36,7 @@ manager responsible for loading user account with assigned roles
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
         <property name="url" value="jdbc:mysql://localhost:3306/test"/>
         <property name="username" value="groeph"/>
-        <property name="password" value="groeph"/> <!-- Vroeger groepH2013 -->
+        <property name="password" value="groeph"/>
     </bean>
 
     <!-- Session Factory Declaration -->
@@ -51,11 +51,12 @@ manager responsible for loading user account with assigned roles
         </property>
         <property name="packagesToScan">
             <list>
-                <value>be.kdg.groeph.model</value>
+               <value>be.kdg.groeph.model</value>
                 <value>be.kdg.groeph.service</value>
+                <value>be.kdg.groeph.mock</value>
                 <value>be.kdg.groeph.dao</value>
-                <value>be.kdg.groeph.model</value>
                 <value>be.kdg.groeph.util</value>
+                <value>be.kdg.groeph.bean</value>
             </list>
         </property>
     </bean>
@@ -86,6 +87,4 @@ manager responsible for loading user account with assigned roles
             </props>
         </property>
     </bean>
-
-    <context:annotation-config/>
 </beans>
