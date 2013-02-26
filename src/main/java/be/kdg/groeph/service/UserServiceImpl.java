@@ -15,6 +15,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -34,6 +35,23 @@ public class UserServiceImpl  implements UserService, UserDetailsService {
             return  true;
         }
         logger.warn("Failed to create user: " + user.getEmail());
+        return false;
+    }
+
+    @Override
+    public boolean changePassword(TripUser user, String newPassword) {
+        if(!user.isNull()){
+            user.setPassword(newPassword);
+            user.setTempPassword("");
+            try {
+                userDao.updateUser(user);
+                logger.info("Password changed for user: " + user.getEmail());
+            } catch (SQLException e) {
+                logger.warn(e.getMessage().toString());
+                return false;
+            }
+            return true;
+        }
         return false;
     }
 

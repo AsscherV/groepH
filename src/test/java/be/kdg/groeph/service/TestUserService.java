@@ -12,9 +12,8 @@ import org.springframework.test.context.junit4.AbstractTransactionalJUnit4Spring
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertTrue;
 
 
 @Transactional
@@ -25,8 +24,11 @@ public class TestUserService extends AbstractTransactionalJUnit4SpringContextTes
     @Autowired
     UserService userService;
 
+
+
     private TripUser validUser1;
     private TripUser validUser2;
+    private final String validEmail = "greg.deckers@student.kdg.be";
 
     @Before
     public void init(){
@@ -41,6 +43,7 @@ public class TestUserService extends AbstractTransactionalJUnit4SpringContextTes
         assertFalse("Can't add existing user, returns false",userService.addUser(validUser1));
         assertTrue("Adding validUser2 returns true",userService.addUser(validUser2));
     }
+
 
 
 }

@@ -4,6 +4,7 @@ import be.kdg.groeph.dao.UserDao;
 import be.kdg.groeph.model.TripUser;
 import org.springframework.stereotype.Repository;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,5 +39,10 @@ public class UserDaoMock implements UserDao{
         else {
             return user;
         }
+    }
+
+    @Override
+    public void updateUser(TripUser user) throws SQLException {
+        //To change body of implemented methods use File | Settings | File Templates.
     }
 }

@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
+import java.sql.SQLException;
+
 @Repository
 public class UserDaoImpl implements UserDao {
     static Logger logger = Logger.getLogger(UserDaoImpl.class);
@@ -19,7 +21,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     @SuppressWarnings("unchecked")
     public boolean addUser(TripUser user) {
-        sessionFactory.getCurrentSession().saveOrUpdate(user);
+        sessionFactory.getCurrentSession().save(user);
         return true;
     }
 
@@ -34,8 +36,9 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void updateUser(String s) {
-        //To change body of implemented methods use File | Settings | File Templates.
+    public void updateUser(TripUser user) throws SQLException{
+        sessionFactory.getCurrentSession().update(user);
     }
+
 
 }
