@@ -27,13 +27,13 @@ public class Trip implements Nullable, Serializable {
     @Column(name = "isPubic", nullable = false)
     private boolean isPublic;
 
-    @OneToMany(mappedBy = "trip")
+    @OneToMany(mappedBy = "trip")     //,fetch = FetchType.EAGER
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     private List<Label> labels = new ArrayList<Label>();
 
     @ManyToOne
     @JoinColumn(name = "tripType", nullable = true)
-    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
+    //@Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     private TripType tripType;
 
     @ManyToOne
@@ -50,6 +50,24 @@ public class Trip implements Nullable, Serializable {
         this.startTime = startTime;
         this.endTime = endTime;
         this.labels = labels;
+        this.tripType = tripType;
+        this.isPublic = isPublic;
+    }
+
+    public Trip(String title, String description, Date startTime, Date endTime, ArrayList<Label> labels, boolean isPublic) {
+        this.title = title;
+        this.description = description;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.labels = labels;
+        this.isPublic = isPublic;
+    }
+
+    public Trip(String title, String description, Date startTime, Date endTime, TripType tripType, boolean isPublic) {
+        this.title = title;
+        this.description = description;
+        this.startTime = startTime;
+        this.endTime = endTime;
         this.tripType = tripType;
         this.isPublic = isPublic;
     }

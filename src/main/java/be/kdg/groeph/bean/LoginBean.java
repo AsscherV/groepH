@@ -22,6 +22,7 @@ import java.io.Serializable;
 @Named
 @SessionScoped
 public class LoginBean implements Serializable {
+    //static Logger logger = org.slf4j.LoggerFactory.getLogger(LoginBean.class);
     static Logger logger = Logger.getLogger(LoginBean.class);
     private static final String SUCCESS = "SUCCESS";
     private static final String FAILURE = "FAILURE";

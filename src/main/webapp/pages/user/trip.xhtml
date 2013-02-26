@@ -55,15 +55,22 @@
 
                             <div id="accesTab" class="tabContentsTrip">
                                 <div class="box">
-                                    <h:dataTable border="0" value="#{loginBean.user.trips}" var="trip">
-                                        <h:column>
-                                            <div>
-                                                <a href="#">
-                                                    <h:outputText value="#{trip.title}" rendered="true" />
-                                                </a>
-                                            </div>
-                                        </h:column>
-                                    </h:dataTable>
+                                    <h:panelGrid columns="2" border="0">
+                                        <h:outputLabel value="#{msgs.tripTitle}"/>
+                                        <h:outputLabel value="#{tripBean.currentTrip.title}"/>
+                                        <h:outputLabel value="#{msgs.tripDescription}"/>
+                                        <h:outputLabel value="#{tripBean.currentTrip.description}"/>
+                                        <h:outputLabel value="#{msgs.tripType}"/>
+                                        <h:outputLabel value="#{tripBean.currentTrip.tripType}"/>
+                                        <h:outputLabel value="#{msgs.tripStartTime}"/>
+                                        <h:outputLabel value="#{tripBean.currentTrip.startTime}"/>
+                                        <h:outputLabel value="#{msgs.tripEndTime}"/>
+                                        <h:outputLabel value="#{tripBean.currentTrip.endTime}"/>
+                                        <h:outputLabel value="#{msgs.tripLabel}"/>
+                                        <h:dataTable border="0" value="#{tripBean.currentTrip.labels}" var="label">
+                                            <h:outputLabel value="#{label.name}"/>
+                                        </h:dataTable>
+                                    </h:panelGrid>
                                 </div>
                             </div>
                         </div>

@@ -17,6 +17,7 @@ import static org.junit.Assert.*;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:daoContext.xml"})
 public class TestUserDao extends AbstractTransactionalJUnit4SpringContextTests {
+
     @Autowired
     private UserDao userDao;
 
