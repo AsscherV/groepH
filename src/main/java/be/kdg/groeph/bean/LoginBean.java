@@ -62,11 +62,11 @@ public class LoginBean implements Serializable {
         this.email = email;
     }
 
-    public String getPassword2() {
+    public String getSecondPassword() {
         return secondPassword;
     }
 
-    public void setPassword2(String password2) {
+    public void setSecondPassword(String password2) {
         this.secondPassword = password2;
     }
 
@@ -94,6 +94,7 @@ public class LoginBean implements Serializable {
             }
             else if(user.getTempPassword()!=null && user.getTempPassword().equals(SHAEncryption.encrypt(password)))
             {
+                userService.changePassword(user,user.getTempPassword());
                 isLoggedIn = true;
                 return RESET;
             }
@@ -116,12 +117,11 @@ public class LoginBean implements Serializable {
         return SUCCESS;
     }
 
-    public void tempPasswordLogin() {
+    public String tempPasswordLogin() {
         if(password.equals(secondPassword)){
-             //TODO: userservice change pass
-
              userService.changePassword(user, SHAEncryption.encrypt(password));
         }
+        return SUCCESS;
 
     }
 }
