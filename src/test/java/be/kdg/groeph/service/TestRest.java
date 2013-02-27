@@ -5,6 +5,7 @@ import be.kdg.groeph.bean.RegisterBean;
 import be.kdg.groeph.dao.UserDao;
 import be.kdg.groeph.mockMother.UserMother;
 import be.kdg.groeph.model.TripUser;
+import be.kdg.groeph.util.SHAEncryption;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
@@ -50,10 +51,7 @@ public class TestRest extends AbstractTransactionalJUnit4SpringContextTests {
     RestService restService;
 
     TripUser user;
-    private final String password = "def";
-    private final String username = "test@test.com";
-    private final String passwordFalse = "ddaeraeef";
-    private final String usernameFalse = "fdqsfdsqfd@test.com";
+
     private String baseURI;
 
     @Before
@@ -77,16 +75,70 @@ public class TestRest extends AbstractTransactionalJUnit4SpringContextTests {
         TripUser object = getTripUser(user.getEmail(), user.getPassword());
         assertEquals("Email must be the same", user.getEmail(), object.getEmail());
     }
-    /*
+
+
     @Test
     public void loginRest() {
+        //Client client = Client.create(new DefaultClientConfig());
+        //WebResource service = client.resource(getBaseURI());
+        //String isValidUser = service.path("rest").path("login").queryParam("Username", user.getEmail()).queryParam("Password", user.getPassword()).accept(MediaType.APPLICATION_JSON).get(String.class);
+        //System.out.println("teststring: " + isValidUser);
+        //TripUser object = getTripUserFromResponse(isValidUser);
+        //assertEquals("result van RestCall moet test zijn", user.getEmail(), object.getEmail());
+
+
+        System.out.println("User: " + user.getEmail() + " Password:" + user.getPassword());
+        String isValidUser2 = restService.login(user.getEmail(), user.getPassword());
+        System.out.println("Json String: " + isValidUser2);
+        TripUser object = getTripUserFromResponse(isValidUser2);
+        System.out.println("Object Email: " + object.getEmail());
+
+        assertEquals("result van RestCall moet test zijn", user.getEmail(), object.getEmail());
+
+        TripUser tu = getTripUserFromResponse(isValidUser2);
+        assertEquals("Emails need to be equal", user.getEmail(), tu.getEmail());
+        System.out.println("User pass: " + user.getPassword());
+        System.out.println("TU pass: " + tu.getPassword());
+
+    }
+     /*
+    @Test
+    public void loginRest2(){
+
+        //WERKT MET ECHTE DATABANK
         Client client = Client.create(new DefaultClientConfig());
         WebResource service = client.resource(getBaseURI());
+
+        //pppppppppp changed
+        user.setPassword("g");    //GfFCsBjzB7/fHHAJ0VopQXyW2GeNKYLuvOSWGy5n7rEYqOux11twCHw+Zbx5NFDj/koQACvvotA45a7UeWk38g==
+        user.setEmail("gunther.laurijssens@student.kdg.be");
         String isValidUser = service.path("rest").path("login").queryParam("Username", user.getEmail()).queryParam("Password", user.getPassword()).accept(MediaType.APPLICATION_JSON).get(String.class);
+        System.out.println("teststring: " + isValidUser);
         TripUser object = getTripUserFromResponse(isValidUser);
         assertEquals("result van RestCall moet test zijn", user.getEmail(), object.getEmail());
     }
+
     */
+    /*
+    @Test
+    public void loginRest2(){
+
+        //WERKT MET ECHTE DATABANK
+        Client client = Client.create(new DefaultClientConfig());
+        WebResource service = client.resource(getBaseURI());
+
+        //pppppppppp changed
+        user.setPassword("g");
+        user.setEmail("gunther.laurijssens@student.kdg.be");
+
+        JsonSerializer
+
+
+        String isValidUser = service.path("rest").path("login").queryParam("Username", user.getEmail()).queryParam("Password", user.getPassword()).accept(MediaType.APPLICATION_JSON).get(String.class);
+        System.out.println("teststring: " + isValidUser);
+        TripUser object = getTripUserFromResponse(isValidUser);
+        assertEquals("result van RestCall moet test zijn", user.getEmail(), object.getEmail());
+    }    */
 
 
     private TripUser getTripUserFromResponse(String validUser) {
@@ -102,7 +154,6 @@ public class TestRest extends AbstractTransactionalJUnit4SpringContextTests {
     }
 
     private TripUser getTripUser(String UName, String Password) {
-        //RestService restService = new RestService();
         String isValidUser = restService.login(UName, Password);
         return getTripUserFromResponse(isValidUser);
     }

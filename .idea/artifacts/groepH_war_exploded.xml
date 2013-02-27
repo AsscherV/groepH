@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="groepH:war exploded">
-    <output-path>$PROJECT_DIR$/classes/artifacts/groepH_war_exploded</output-path>
+    <output-path>$PROJECT_DIR$/target/groepH-1.0</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
@@ -70,6 +70,8 @@
           <element id="library" level="project" name="Maven: commons-io:commons-io:1.3.2" />
           <element id="library" level="project" name="Maven: com.sun.jersey:jersey-server:1.16" />
           <element id="library" level="project" name="Maven: com.sun.jersey:jersey-core:1.16" />
+          <element id="library" level="project" name="Maven: com.sun.jersey:jersey-servlet:1.16" />
+          <element id="library" level="project" name="Maven: com.sun.jersey.contribs:jersey-spring:1.8" />
           <element id="library" level="project" name="Maven: com.sun.jersey:jersey-client:1.16" />
           <element id="library" level="project" name="Maven: com.sun.xml.bind:jaxb-impl:2.1.12" />
           <element id="library" level="project" name="Maven: javax.ws.rs:jsr311-api:1.0" />

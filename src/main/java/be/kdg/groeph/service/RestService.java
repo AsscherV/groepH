@@ -4,6 +4,7 @@ import be.kdg.groeph.model.Address;
 import be.kdg.groeph.model.TripUser;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,8 +12,9 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.Date;
 
-@Service("restService")
-@Transactional
+//@Transactional
+//@Service("restService")
+@Component
 @Path("/rest")
 public class RestService {
     @Autowired
@@ -23,16 +25,10 @@ public class RestService {
     @Produces(MediaType.APPLICATION_JSON)
     public String login(@QueryParam("Username") String Username,
                         @QueryParam("Password") String Password) {
-
-
-        /*
-
-        Deze versie werkt nog niet met de back-end
-        */
         Gson gson = new Gson();
 
-
         TripUser user = loginService.loginUser(Username,Password);
+
         if(user.isNull()){
               return "";
         }   else {
@@ -45,7 +41,6 @@ public class RestService {
 
         return response ;
         */
-
 
     }
 }

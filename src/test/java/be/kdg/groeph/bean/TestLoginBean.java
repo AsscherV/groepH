@@ -100,7 +100,7 @@ public class TestLoginBean extends AbstractTransactionalJUnit4SpringContextTests
         loginBean.setUser(user);
 
         loginBean.setPassword(recoverypassword);
-        loginBean.setPassword2(recoverypassword);
+        loginBean.setSecondPassword(recoverypassword);
         loginBean.tempPasswordLogin();
         assertEquals("The new password must be equal to the passwordfield in user", SHAEncryption.encrypt(recoverypassword) , user.getPassword());
         assertTrue("TempPassword field must be empty",user.getTempPassword().isEmpty());
