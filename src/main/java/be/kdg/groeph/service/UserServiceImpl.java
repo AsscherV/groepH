@@ -21,18 +21,18 @@ import java.util.Collection;
 
 @Transactional
 @Service("userService")
-public class UserServiceImpl  implements UserService, UserDetailsService {
-   static Logger logger = Logger.getLogger(UserServiceImpl.class);
-   @Qualifier("userDaoImpl")
+public class UserServiceImpl implements UserService, UserDetailsService {
+    static Logger logger = Logger.getLogger(UserServiceImpl.class);
+    @Qualifier("userDaoImpl")
     @Autowired
     UserDao userDao;
 
-    public boolean addUser(TripUser user){
+    public boolean addUser(TripUser user) {
         TripUser userByEmail = userDao.getUserByEmail(user.getEmail());
-        if(userByEmail.isNull()){
+        if (userByEmail.isNull()) {
             userDao.addUser(user);
             logger.info("User " + user.getEmail() + " created");
-            return  true;
+            return true;
         }
         logger.warn("Failed to create user: " + user.getEmail());
         return false;
@@ -40,7 +40,7 @@ public class UserServiceImpl  implements UserService, UserDetailsService {
 
     @Override
     public boolean changePassword(TripUser user, String newPassword) {
-        if(!user.isNull()){
+        if (!user.isNull()) {
             user.setPassword(newPassword);
             user.setTempPassword("");
             try {
@@ -61,16 +61,16 @@ public class UserServiceImpl  implements UserService, UserDetailsService {
         boolean accountNonLocked = true;
         boolean credentialsNonExpired = true;
         boolean enabled = true;
-        User user = new User("test", "test", enabled, accountNonExpired, credentialsNonExpired, accountNonLocked,getDefaultAuthority());
+        User user = new User("test", "test", enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, getDefaultAuthority());
 
         TripUser userDB = userDao.getUserByEmail(email);
 
-        if(userDB.getRole().equals("ROLE_ADMIN")){
+        if (userDB.getRole().equals("ROLE_ADMIN")) {
             user = new User(userDB.getEmail(), userDB.getPassword(),
-                    userDB.isEnabled(),userDB.isAccountNonExpired(), userDB.isCredentialsNonExpired(), userDB.isAccountNonLocked(), getAdminAuthority());
-        }  else if(userDB.getRole().equals("ROLE_USER")){
+                    userDB.isEnabled(), userDB.isAccountNonExpired(), userDB.isCredentialsNonExpired(), userDB.isAccountNonLocked(), getAdminAuthority());
+        } else if (userDB.getRole().equals("ROLE_USER")) {
             user = new User(userDB.getEmail(), userDB.getPassword(),
-                    userDB.isEnabled(),userDB.isAccountNonExpired(), userDB.isCredentialsNonExpired(), userDB.isAccountNonLocked(),getDefaultAuthority());
+                    userDB.isEnabled(), userDB.isAccountNonExpired(), userDB.isCredentialsNonExpired(), userDB.isAccountNonLocked(), getDefaultAuthority());
         }
         return user;
     }
@@ -80,6 +80,7 @@ public class UserServiceImpl  implements UserService, UserDetailsService {
         userAuthorities.add(new SimpleGrantedAuthority("ROLE_USER"));
         return userAuthorities;
     }
+
     private Collection<GrantedAuthority> getAdminAuthority() {
         Collection<GrantedAuthority> userAuthorities = new ArrayList<GrantedAuthority>();
         userAuthorities.add(new SimpleGrantedAuthority("ROLE_USER"));
@@ -87,5 +88,19 @@ public class UserServiceImpl  implements UserService, UserDetailsService {
         return userAuthorities;
     }
 
+    @Override
+    public void updateUser(TripUser user) throws SQLException {
+        userDao.updateUser(user);
+    }
+
+    @Override
+    public TripUser getUserByEmail(String s) {
+        TripUser tripUser = userDao.getUserByEmail(s);
+        if (tripUser.isNull()) {
+             return null;
+        } else {
+            return userDao.getUserByEmail(s);
+        }
+    }
 
 }

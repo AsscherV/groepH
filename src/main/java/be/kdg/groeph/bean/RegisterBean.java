@@ -6,23 +6,26 @@ import be.kdg.groeph.service.MailService;
 import be.kdg.groeph.service.UserService;
 import be.kdg.groeph.util.SHAEncryption;
 import org.apache.log4j.Logger;
+import org.apache.myfaces.extensions.cdi.core.api.scope.conversation.ViewAccessScoped;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.inject.Named;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import java.io.Serializable;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.Date;
 
 @Component
-//@ViewAccessScoped
-@RequestScoped
+@ViewAccessScoped
 @Named
 public class RegisterBean implements Serializable {
     static Logger logger = Logger.getLogger(RegisterBean.class);
@@ -37,6 +40,11 @@ public class RegisterBean implements Serializable {
     @ManagedProperty(value = "#{mailService}")
     @Autowired
     MailService mailService;
+
+    @Qualifier("loginBean")
+    @ManagedProperty(value = "#{loginBean}")
+    @Autowired
+    LoginBean loginBean;
 
     @NotEmpty(message = "{firstName} {notempty}")
     @Length(max = 50, message = "{firstName} {length}")
@@ -71,10 +79,46 @@ public class RegisterBean implements Serializable {
     private String city;
     private String role;
 
+
+    @NotEmpty(message = "{firstName} {notempty}")
+    @Length(max = 50, message = "{firstName} {length}")
+    private String newfirstName;
+    @NotEmpty(message = "{lastName} {notempty}")
+    @Length(max = 50, message = "{lastName} {length}")
+    private String newlastName;
+    @NotNull(message = "{dateOfBirth} {notempty}")
+    @Past(message = "{dateOfBirth} {past}")
+    private Date newdateOfBirth;
+    @Length(max = 30, message = "{phoneNumber} {length}")
+    @NotEmpty(message = "{phoneNumber} {notempty}")
+    private String newphoneNumber;
+    private char newgender;
+    @NotEmpty(message = "{email} {notempty}")
+    @Email(message = "{email} {validEmail}")
+    @Length(max = 100, message = "{email} {length}")
+    private String newemail;
+    @NotEmpty(message = "{password} {notempty}")
+    private String newpassword;
+    @NotEmpty(message = "{password} {notempty}")
+    private String newsecondPassword;
+    @NotEmpty(message = "{dateRegistered} {notempty}")
+    private Date newdateRegistered;
+    @NotEmpty(message = "{zipcode} {notempty}")
+    private String newzipcode;
+    @NotEmpty(message = "{street} {notempty}")
+    private String newstreet;
+    @NotEmpty(message = "{streetNumber} {notempty}")
+    private String newstreetNumber;
+    @NotEmpty(message = "{city} {notempty}")
+    private String newcity;
+
+    private boolean editableUser;
+
     private boolean registered;
 
     public RegisterBean() {
         registered = false;
+        editableUser = false;
     }
 
     public String getFirstName() {
@@ -201,6 +245,118 @@ public class RegisterBean implements Serializable {
         this.registered = registered;
     }
 
+    public String getNewfirstName() {
+        return newfirstName;
+    }
+
+    public void setNewfirstName(String newfirstName) {
+        this.newfirstName = newfirstName;
+    }
+
+    public String getNewlastName() {
+        return newlastName;
+    }
+
+    public void setNewlastName(String newlastName) {
+        this.newlastName = newlastName;
+    }
+
+    public Date getNewdateOfBirth() {
+        return newdateOfBirth;
+    }
+
+    public void setNewdateOfBirth(Date newdateOfBirth) {
+        this.newdateOfBirth = newdateOfBirth;
+    }
+
+    public String getNewphoneNumber() {
+        return newphoneNumber;
+    }
+
+    public void setNewphoneNumber(String newphoneNumber) {
+        this.newphoneNumber = newphoneNumber;
+    }
+
+    public char getNewgender() {
+        return newgender;
+    }
+
+    public void setNewgender(char newgender) {
+        this.newgender = newgender;
+    }
+
+    public String getNewemail() {
+        return newemail;
+    }
+
+    public void setNewemail(String newemail) {
+        this.newemail = newemail;
+    }
+
+    public String getNewpassword() {
+        return newpassword;
+    }
+
+    public void setNewpassword(String newpassword) {
+        this.newpassword = newpassword;
+    }
+
+    public String getNewsecondPassword() {
+        return newsecondPassword;
+    }
+
+    public void setNewsecondPassword(String newsecondPassword) {
+        this.newsecondPassword = newsecondPassword;
+    }
+
+    public Date getNewdateRegistered() {
+        return newdateRegistered;
+    }
+
+    public void setNewdateRegistered(Date newdateRegistered) {
+        this.newdateRegistered = newdateRegistered;
+    }
+
+    public String getNewzipcode() {
+        return newzipcode;
+    }
+
+    public void setNewzipcode(String newzipcode) {
+        this.newzipcode = newzipcode;
+    }
+
+    public String getNewstreet() {
+        return newstreet;
+    }
+
+    public void setNewstreet(String newstreet) {
+        this.newstreet = newstreet;
+    }
+
+    public String getNewstreetNumber() {
+        return newstreetNumber;
+    }
+
+    public void setNewstreetNumber(String newstreetNumber) {
+        this.newstreetNumber = newstreetNumber;
+    }
+
+    public String getNewcity() {
+        return newcity;
+    }
+
+    public void setNewcity(String newcity) {
+        this.newcity = newcity;
+    }
+
+    public boolean isEditableUser() {
+        return editableUser;
+    }
+
+    public void setEditableUser(boolean editableUser) {
+        this.editableUser = editableUser;
+    }
+
     public String addUser() throws ParseException {
         Address address = new Address(getStreet(), getStreetNumber(), getZipcode(), getCity());
         setRole("ROLE_USER");
@@ -222,6 +378,46 @@ public class RegisterBean implements Serializable {
             return FAILURE;
         }
         return FAILURE;
+    }
+
+    public String updateUser() throws SQLException {
+        TripUser tripUser = loginBean.getUser();
+
+        tripUser.setFirstName(newfirstName);
+        tripUser.setLastName(newlastName);
+        tripUser.setDateOfBirth(newdateOfBirth);
+        tripUser.setPhoneNumber(newphoneNumber);
+        tripUser.setGender(newgender);
+        tripUser.setEmail(newemail);
+        tripUser.setDateRegistered(newdateRegistered);
+
+        Address adress =  loginBean.getUser().getAddress();
+        adress.setZipcode(newzipcode);
+        adress.setStreet(newstreet);
+        adress.setStreetNumber(newstreetNumber);
+        adress.setCity(newcity);
+        tripUser.setAddress(adress);
+
+        userService.updateUser(tripUser);
+        editableUser = false;
+
+        return null;
+    }
+
+    public String editUser() {
+        newfirstName = loginBean.getUser().getFirstName();
+        newlastName = loginBean.getUser().getLastName();
+        newdateOfBirth = loginBean.getUser().getDateOfBirth();
+        newphoneNumber = loginBean.getUser().getPhoneNumber();
+        newgender = loginBean.getUser().getGender();
+        newemail = loginBean.getUser().getEmail();
+        newdateRegistered = loginBean.getUser().getDateRegistered();
+        newzipcode = loginBean.getUser().getAddress().getZipcode();
+        newstreet = loginBean.getUser().getAddress().getStreet();
+        newstreetNumber = loginBean.getUser().getAddress().getStreetNumber();
+        newcity = loginBean.getUser().getAddress().getCity();
+        editableUser = true;
+        return null;
     }
 
    /*

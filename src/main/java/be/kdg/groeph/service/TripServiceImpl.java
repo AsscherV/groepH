@@ -4,11 +4,14 @@ import be.kdg.groeph.dao.TripDao;
 import be.kdg.groeph.dao.UserDao;
 import be.kdg.groeph.model.Trip;
 import be.kdg.groeph.model.TripType;
+import be.kdg.groeph.model.Waypoint;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
 
 import java.util.List;
 
@@ -21,6 +24,10 @@ public class TripServiceImpl implements TripService {
     @Qualifier("tripDaoImpl")
     @Autowired
     TripDao tripDao;
+
+    @Qualifier("userDaoImpl")
+    @Autowired
+    UserDao userDao;
 
     @Override
     public boolean addTrip(Trip trip) {
@@ -43,5 +50,15 @@ public class TripServiceImpl implements TripService {
     @Override
     public TripType getTypeByName(String naam) {
         return tripDao.getTypeByName(naam);
+    }
+
+    @Override
+    public boolean addWaypoint(Waypoint waypoint) {
+        return true;
+    }
+
+    @Override
+    public void addUserToTrip(Trip trip) {
+        //To change body of implemented methods use File | Settings | File Templates.
     }
 }

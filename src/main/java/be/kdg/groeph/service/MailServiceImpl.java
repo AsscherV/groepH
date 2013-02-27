@@ -1,11 +1,18 @@
 package be.kdg.groeph.service;
 
+import be.kdg.groeph.bean.TripBean;
 import be.kdg.groeph.dao.UserDao;
+
+import be.kdg.groeph.model.Trip;
 import be.kdg.groeph.model.TripUser;
 import be.kdg.groeph.util.SHAEncryption;
 import org.apache.log4j.Logger;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.mail.MailException;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Service;
@@ -13,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.UUID;
 
 @Transactional
@@ -24,15 +32,20 @@ public class MailServiceImpl implements MailService {
     @Resource(name = "mailSender")
     private MailSender mailSender;
 
+   
     @Qualifier("userDaoImpl")
     @Autowired
     UserDao userDao;
 
+    @Deprecated
     @Override
     public void uponSuccessfulRegistration(String email) {
+       
+
         String text="The user '" + email + "' is successfully registered";
         String subject="User Registration successful";
         sendMail(email,subject,text);
+
     }
 
     private void sendMail(String email, String subject, String text) {
@@ -47,6 +60,52 @@ public class MailServiceImpl implements MailService {
 
         System.out.println("Sending email ....");
         mailSender.send(mailMessageArray);
+    }
+
+    /*
+    *This method is the improved version of uponSuccessfullRegistration(string)
+     */
+    @Override
+    public boolean isSuccessfulRegistration(String email) {
+        SimpleMailMessage[] mailMessageArray = new SimpleMailMessage[1];
+
+        SimpleMailMessage message = new SimpleMailMessage();
+
+        String toAddress = email;
+        message.setTo(toAddress);
+        message.setSubject("User Registration successful");
+        message.setText("The user '" + toAddress + "' is successfully registered");
+        mailMessageArray[0] = message;
+
+        System.out.println("Sending email ....");
+        try{
+            mailSender.send(mailMessageArray);
+            return true;
+        }  catch (MailException e){
+            return false;
+        }
+
+    }
+
+    public boolean uponTripInvitation(ArrayList<String> emails, Trip trip) {
+        SimpleMailMessage[] mailMessageArray = new SimpleMailMessage[1];
+
+        SimpleMailMessage message = new SimpleMailMessage();
+
+        message.setBcc(emails.toArray(new String[emails.size()]));
+
+        message.setSubject("Trip invitation");
+        message.setText("You are invited to: " + trip.getTitle());
+        mailMessageArray[0] = message;
+
+        System.out.println("Sending email ....");
+        try{
+            mailSender.send(mailMessageArray);
+            return true;
+        }  catch (MailException e){
+            return false;
+        }
+
     }
 
     @Override

@@ -32,6 +32,11 @@ public class TripDaoMock implements TripDao {
     }
 
     @Override
+    public void addUserToTrip(Trip trip) {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
     public List<Trip> fetchAllPublicTrips() {
         List<Trip> publicTrips = new ArrayList<Trip>();
         for (Trip trip : trips) {
