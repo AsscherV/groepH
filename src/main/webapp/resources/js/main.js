@@ -19,24 +19,6 @@ $(document).ready(function () {
         $(activeTab).fadeIn(); // show the target tab content div by matching clicked link.
     });
 
-    //DATETIMEPICKER
-  /* $(".datepicker").datepicker({
-        dateFormat: 'dd/mm/yy', changeMonth: true,changeYear: true,showOtherMonths: true,selectOtherMonths: true,
-        yearRange: '-100y:c+nn', maxDate: '-1d'
-    });
-    //TRIP STARTDATE DATETIMEPICKER
-    $(".tripStartDatepicker").datepicker({
-        dateFormat: 'dd/mm/yy',changeMonth: true,changeYear: true,showOtherMonths: true,selectOtherMonths: true,
-        onClose: function (selectedDate) {
-            $(".tripEndDatepicker").datepicker("option", "minDate", selectedDate);
-        }
-    });
-    //TRIP ENDDATE DATETIMEPICKER
-    $(".tripEndDatepicker").datepicker({
-        dateFormat: 'dd/mm/yy',changeMonth: true,changeYear: true,showOtherMonths: true,selectOtherMonths: true,
-        onClose: function (selectedDate) {
-            $(".tripStartDatepicker").datepicker("option", "maxDate", selectedDate);
-        }
-    });
-    */
+
+
 });

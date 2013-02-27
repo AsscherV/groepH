@@ -30,7 +30,7 @@
                     <ul>
                         <!-- Tab buttons -->
                         <li>
-                            <a class="button active" href="welcome.xhtml">New trip</a>
+                            <a class="button active">New trip</a>
                         </li>
                         <h:panelGroup rendered="#{loginBean.loggedIn}">
                             <li>
@@ -72,8 +72,8 @@
 
 
                                             <h:selectOneRadio value="#{tripBean.public}">
-                                                <f:selectItem  itemValue= "#{true}"  itemLabel="Public"/>
-                                                <f:selectItem itemValue="#{false}"  itemLabel="Private"/>
+                                                <f:selectItem itemValue="#{true}" itemLabel="Public"/>
+                                                <f:selectItem itemValue="#{false}" itemLabel="Private"/>
                                             </h:selectOneRadio>
                                             <h:column></h:column>
                                             <h:column></h:column>
@@ -81,7 +81,8 @@
                                             <h:outputLabel value="#{msgs.type}"/>
                                             <h:selectOneMenu value="#{tripBean.tripType}">
                                                 <f:selectItems value="#{tripBean.allTripTypes}" var="type"
-                                                               itemLabel="#{type.id} : #{type.type}" itemValue="#{type.type}" />
+                                                               itemLabel="#{type.id} : #{type.type}"
+                                                               itemValue="#{type.type}"/>
                                             </h:selectOneMenu>
                                             <h:column></h:column>
 
@@ -146,6 +147,8 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <h:outputScript name="js/jquery-1.9.0.min.js"/>
     <h:outputScript name="js/jquery-ui.js"/>
+    <h:outputScript name="js/jquery-ui-timepicker-addon.js"/>
     <h:outputScript name="js/main.js"/>
+    <h:outputScript name="js/datetimepicker.js"/>
 </h:body>
 </html>

@@ -26,32 +26,9 @@
             <!-- trip info -->
             <div class="span9">
                 <div id="tabContainerTrip" class="tabContainer">
-                    <ul>
-                        <!-- Tab buttons -->
-                        <li>
-                            <a class="button active" href="welcome.xhtml">#{tripBean.currentTrip.title}</a>
-                        </li>
-                        <h:panelGroup rendered="#{loginBean.loggedIn}">
-                            <li>
-                                <a class="button" href="stops.xhtml">Stops</a>
-                            </li>
-                            <li>
-                                <a class="button" href="participants.xhtml">Participants</a>
-                            </li>
-                            <li>
-                                <a class="button" href="accessories.xhtml">Accessories</a>
-                            </li>
-                            <li>
-                                <a class="button" href="styling.xhtml">Styling</a>
-                            </li>
-                            <h:panelGroup rendered="#{loginBean.user.admin}">
-                                <li>
-                                    <a class="button" href="../admin/costs.xhtml">Costs</a>
-                                </li>
-                            </h:panelGroup>
 
-                        </h:panelGroup>
-                    </ul>
+                    <div class="noButton"></div>
+
                     <!-- Tab content -->
                     <div class="tabDetails">
                         <div id="tripTab" class="tabContentsTrip">

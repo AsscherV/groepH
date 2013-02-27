@@ -69,6 +69,14 @@
             <redirect/>
         </navigation-case>
     </navigation-rule>
+    <navigation-rule>
+            <navigation-case>
+                <from-action>#{tripBean.setThisAsCurrentTrip}</from-action>
+                <from-outcome>TRIP</from-outcome>
+                <to-view-id>/pages/user/trip.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+        </navigation-rule>
 
 
 

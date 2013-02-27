@@ -89,7 +89,9 @@ footer p {
 .error{
     color: Red;
 }
-
+.noButton{
+    padding-top: 47px;;
+}
 #map_canvas{
     height: 500px;
     width: auto;

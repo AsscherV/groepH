@@ -52,15 +52,13 @@ public class SocialBean implements Serializable {
     }
 
     public void login() {
-        if (!access_token.equals("")) {
-            this.loggedIn = true;
+            loggedIn = true;
             facebookClient = new DefaultFacebookClient(access_token);
             user = facebookClient.fetchObject("me", User.class);
             name = user.getFirstName();
             birthday = user.getBirthday();
             email = user.getEmail();
 
-        }
     }
 
     public void logout() {
