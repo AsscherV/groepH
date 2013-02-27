@@ -11,13 +11,28 @@
 </h:head>
 <h:body>
     <ui:composition>
+
         <div class="topmenu">
             <div class="container">
                 <div class="pull-left"><h1>Trippy Traveler</h1></div>
-                <h:form class="navbar-form pull-right">
-                    <h:panelGrid rendered="#{not loginBean.loggedIn}">
-                        <h:link class="btn  btn-primary btn-mini" value="Sign in with facebook"/>
+                <h:form id="loginForm" class="navbar-form pull-right">
+                    <h:inputHidden id="token" value="#{socialBean.access_token}" />
+                    <h:commandButton id="fbLoginButton" action="#{socialBean.login}" style="display: none"/>
+                </h:form>
+                <h:form  class="navbar-form pull-right">
+
+                    <h:panelGrid rendered="#{not socialBean.loggedIn}">
+                        <h:commandButton class="btn  btn-primary btn-mini" type="submit" value="Sign in with facebook"
+                                                                 action="#{socialBean.getFacebookUrlAuth}" immediate="true"/>
                     </h:panelGrid>
+                    <h:panelGrid rendered="#{ socialBean.loggedIn}">
+                        <h:outputLabel value="Name"/>
+                        <h:outputLabel >#{socialBean.name}</h:outputLabel >
+                        <h:outputLabel value="Birthday"/>
+                        <h:outputLabel >#{socialBean.birthday}</h:outputLabel >
+                                            <h:commandButton class="btn  btn-primary btn-mini" type="submit" value="logout from facebook"
+                                                                                                             action="#{socialBean.logout}" immediate="true"/>
+                                                            </h:panelGrid>
                     <h:panelGrid columns="2" cellpadding="2" rendered="#{not loginBean.loggedIn}">
                         <h:outputLabel value="Email"/>
                         <h:inputText id="email" styleClass="span2 loginInput" value="#{loginBean.email}"/>
@@ -55,5 +70,6 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <h:outputScript name="js/jquery-1.9.0.min.js"/>
     <h:outputScript name="js/main.js"/>
+
 </h:body>
 </html> 

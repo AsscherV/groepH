@@ -46,6 +46,9 @@ public class LoginBean implements Serializable {
 
     TripUser user;
 
+
+
+
     public String getPassword() {
         return password;
     }

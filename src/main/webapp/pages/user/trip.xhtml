@@ -2,97 +2,98 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
-    <h:head>
-        <title>Trippy Traveler</title>
-        <!-- css -->
-        <h:outputStylesheet library="css" name="bootstrap.css"/>
-        <h:outputStylesheet library="css" name="bootstrap-responsive.css"/>
-        <h:outputStylesheet library="css" name="main.css"/>
-    </h:head>
-    <h:body>
-        <ui:insert name="header">
-            <ui:include src="../header.xhtml"/>
-        </ui:insert>
-        <div class="container">
-            <div class="row">
+<h:head>
+    <title>Trippy Traveler</title>
+    <!-- css -->
+    <h:outputStylesheet library="css" name="bootstrap.css"/>
+    <h:outputStylesheet library="css" name="bootstrap-responsive.css"/>
+    <h:outputStylesheet library="css" name="main.css"/>
+</h:head>
+<h:body>
+    <ui:insert name="header">
+        <ui:include src="../header.xhtml"/>
+    </ui:insert>
 
-                <!-- trips / my trips -->
-                <ui:insert name="header">
-                    <ui:include src="tripmenu.xhtml"/>
-                </ui:insert>
+    <div class="container">
+        <div class="row">
 
-                <!-- trip info -->
-                <div class="span9">
-                    <div id="tabContainerTrip" class="tabContainer">
-                        <ul>
-                            <!-- Tab buttons -->
+            <!-- trips / my trips -->
+            <ui:insert name="header">
+                <ui:include src="tripmenu.xhtml"/>
+            </ui:insert>
+
+            <!-- trip info -->
+            <div class="span9">
+                <div id="tabContainerTrip" class="tabContainer">
+                    <ul>
+                        <!-- Tab buttons -->
+                        <li>
+                            <a class="button active" href="trip.xhtml">#{tripBean.currentTrip.title}</a>
+                        </li>
+                        <h:panelGroup rendered="#{loginBean.loggedIn}">
                             <li>
-                                <a class="button active" href="trip.xhtml">#{tripBean.currentTrip.title}</a>
+                                <a class="button" href="stops.xhtml">Stops</a>
                             </li>
-                            <h:panelGroup rendered="#{loginBean.loggedIn}">
+                            <li>
+                                <a class="button" href="participants.xhtml">Participants</a>
+                            </li>
+                            <li>
+                                <a class="button " href="accessories.xhtml">Accessories</a>
+                            </li>
+                            <li>
+                                <a class="button" href="styling.xhtml">Styling</a>
+                            </li>
+                            <h:panelGroup rendered="#{loginBean.user.admin}">
                                 <li>
-                                    <a class="button" href="stops.xhtml">Stops</a>
+                                    <a class="button" href="../admin/costs.xhtml">Costs</a>
                                 </li>
-                                <li>
-                                    <a class="button" href="participants.xhtml">Participants</a>
-                                </li>
-                                <li>
-                                    <a class="button " href="accessories.xhtml">Accessories</a>
-                                </li>
-                                <li>
-                                    <a class="button" href="styling.xhtml">Styling</a>
-                                </li>
-                                <h:panelGroup rendered="#{loginBean.user.admin}">
-                                    <li>
-                                        <a class="button" href="../admin/costs.xhtml">Costs</a>
-                                    </li>
-                                </h:panelGroup>
-
                             </h:panelGroup>
-                        </ul>
-                        <!-- Tab content -->
-                        <div class="tabDetails">
 
-                            <div id="accesTab" class="tabContentsTrip">
-                                <div class="box">
-                                    <h:panelGrid columns="2" border="0">
-                                        <h:outputLabel value="#{msgs.tripTitle}"/>
-                                        <h:outputLabel value="#{tripBean.currentTrip.title}"/>
-                                        <h:outputLabel value="#{msgs.tripDescription}"/>
-                                        <h:outputLabel value="#{tripBean.currentTrip.description}"/>
-                                        <h:outputLabel value="#{msgs.tripType}"/>
-                                        <h:outputLabel value="#{tripBean.currentTrip.tripType}"/>
-                                        <h:outputLabel value="#{msgs.tripStartTime}"/>
-                                        <h:outputLabel value="#{tripBean.currentTrip.startTime}"/>
-                                        <h:outputLabel value="#{msgs.tripEndTime}"/>
-                                        <h:outputLabel value="#{tripBean.currentTrip.endTime}"/>
-                                        <h:outputLabel value="#{msgs.tripLabel}"/>
-                                        <h:dataTable border="0" value="#{tripBean.currentTrip.labels}" var="label">
-                                            <h:outputLabel value="#{label.name}"/>
-                                        </h:dataTable>
-                                    </h:panelGrid>
-                                </div>
+                        </h:panelGroup>
+                    </ul>
+                    <!-- Tab content -->
+                    <div class="tabDetails">
+
+                        <div id="accesTab" class="tabContentsTrip">
+                            <div class="box">
+                                <h:panelGrid columns="2" border="0">
+                                    <h:outputLabel value="#{msgs.tripTitle}"/>
+                                    <h:outputLabel value="#{tripBean.currentTrip.title}"/>
+                                    <h:outputLabel value="#{msgs.tripDescription}"/>
+                                    <h:outputLabel value="#{tripBean.currentTrip.description}"/>
+                                    <h:outputLabel value="#{msgs.tripType}"/>
+                                    <h:outputLabel value="#{tripBean.currentTrip.tripType}"/>
+                                    <h:outputLabel value="#{msgs.tripStartTime}"/>
+                                    <h:outputLabel value="#{tripBean.currentTrip.startTime}"/>
+                                    <h:outputLabel value="#{msgs.tripEndTime}"/>
+                                    <h:outputLabel value="#{tripBean.currentTrip.endTime}"/>
+                                    <h:outputLabel value="#{msgs.tripLabel}"/>
+                                    <h:dataTable border="0" value="#{tripBean.currentTrip.labels}" var="label">
+                                        <h:outputLabel value="#{label.name}"/>
+                                    </h:dataTable>
+                                </h:panelGrid>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
 
-
-            <footer>
-                <p>
-                    © Trippy Traveler 2013
-                </p>
-            </footer>
-
         </div>
-        <!-- /container -->
 
-        <!-- javascript
-        ================================================== -->
-        <!-- Placed at the end of the document so the pages load faster -->
-        <h:outputScript name="js/jquery-1.9.0.min.js"/>
-        <h:outputScript name="js/main.js"/>
-    </h:body>
+
+        <footer>
+            <p>
+                © Trippy Traveler 2013
+            </p>
+        </footer>
+
+    </div>
+    <!-- /container -->
+
+    <!-- javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <h:outputScript name="js/jquery-1.9.0.min.js"/>
+    <h:outputScript name="js/main.js"/>
+</h:body>
 </html> 

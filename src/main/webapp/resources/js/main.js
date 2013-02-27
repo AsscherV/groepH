@@ -20,7 +20,7 @@ $(document).ready(function () {
     });
 
     //DATETIMEPICKER
-    $(".datepicker").datepicker({
+  /* $(".datepicker").datepicker({
         dateFormat: 'dd/mm/yy', changeMonth: true,changeYear: true,showOtherMonths: true,selectOtherMonths: true,
         yearRange: '-100y:c+nn', maxDate: '-1d'
     });
@@ -38,4 +38,5 @@ $(document).ready(function () {
             $(".tripStartDatepicker").datepicker("option", "maxDate", selectedDate);
         }
     });
+    */
 });

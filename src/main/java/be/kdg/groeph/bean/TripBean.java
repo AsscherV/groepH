@@ -1,17 +1,14 @@
 package be.kdg.groeph.bean;
 
-import be.kdg.groeph.dao.TripDao;
 import be.kdg.groeph.model.Label;
 import be.kdg.groeph.model.Trip;
 import be.kdg.groeph.model.TripType;
 import be.kdg.groeph.service.TripService;
 import org.apache.log4j.Logger;
-import org.hibernate.SessionFactory;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -19,7 +16,6 @@ import javax.inject.Named;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.*;
-
 
 @Component
 @SessionScoped
@@ -47,24 +43,22 @@ public class TripBean implements Serializable {
     private Date endTime;
     @NotEmpty(message = "{label} {notempty}")
     private String label;
-    private ArrayList<Label> labels;
+    private ArrayList<Label> labels = new ArrayList<Label>();
     @NotEmpty(message = "{tripType} {notempty}")
     private String tripType;
-    private boolean isPublic;
+    private String isPublic;
 
     Trip currentTrip;
 
 
     public TripBean() {
-        isPublic = true;
-        labels = new ArrayList<Label>();
     }
 
-    public boolean getPublic() {
+    public String getPublic() {
         return isPublic;
     }
 
-    public void setPublic(boolean aPublic) {
+    public void setPublic(String aPublic) {
         isPublic = aPublic;
     }
 
@@ -133,13 +127,21 @@ public class TripBean implements Serializable {
         this.currentTrip = currentTrip;
     }
 
-    public String addTrip() {
-        TripType type = tripService.getTypeByName(getTripType());
-        //Trip trip = new Trip(getTitle(), getDescription(), getStartTime(), getEndTime(),getLabels(),type, getPublic());
-        Trip trip = new Trip(getTitle(), getDescription(), getStartTime(), getEndTime(),type, getPublic());
-        Label label = new Label(getLabel());
-        trip.addLabel(label);
+    //TODO: Callen met ajax call
+    public void newLabel() {
+        labels.add(new Label(label));
+        label = "";
+    }
 
+    public String addTrip() {
+        boolean p;
+        if (isPublic.equalsIgnoreCase("public")) {
+            p = true;
+        } else {
+            p = false;
+        }
+
+        Trip trip = new Trip(getTitle(), getDescription(), getStartTime(), getEndTime(), getLabels(), new TripType(getTripType()), p);
         loginBean.getUser().addTrip(trip);
         if (tripService.addTrip(trip)) {
             currentTrip = trip;
@@ -150,21 +152,19 @@ public class TripBean implements Serializable {
         }
     }
 
-    public void clearFields(){
-          title=null;
-        description=null;
-        isPublic=true;
-        tripType=null;
-        startTime=null;
-        endTime=null;
-        label=null;
-        labels=null;
+    public void clearFields() {
+        title = null;
+        description = null;
+        isPublic = null;
+        tripType = null;
+        startTime = null;
+        endTime = null;
+        label = null;
+        labels = null;
     }
 
-    public List<Trip> getAllPublicTrips() {
-        return tripService.fetchAllPublicTrips();
-    }
-    public List<TripType> getAllTripTypes(){
-        return tripService.fetchAllTripTypes();
+    public String getOpenTrips() {
+            //tripService.
+        return null;
     }
 }

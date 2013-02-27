@@ -1,6 +1,5 @@
 package be.kdg.groeph.bean;
 
-import be.kdg.groeph.mockMother.TripMother;
 import be.kdg.groeph.mockMother.UserMother;
 import be.kdg.groeph.model.Label;
 import be.kdg.groeph.model.Trip;
@@ -18,14 +17,12 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import javax.faces.bean.ManagedProperty;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:daoContext.xml"})
-public class TestTripBean extends AbstractTransactionalJUnit4SpringContextTests {//extends AbstractTransactionalJUnit4SpringContextTests
+public class TestSocialBean extends AbstractTransactionalJUnit4SpringContextTests {//extends AbstractTransactionalJUnit4SpringContextTests
 
     @ManagedProperty(value = "#{tripService}")
         @Autowired
@@ -41,14 +38,10 @@ public class TestTripBean extends AbstractTransactionalJUnit4SpringContextTests 
     private Trip trip1;
 
 
-    @Before
-    public void init()
-    {
-        loginBean.setUser(UserMother.validUser1());
-    }
+
 
     @Test
-    public void testAddValidOpenTrip(){
+    public void testLoginFacebookUser(){
         Calendar cal;
         cal = Calendar.getInstance();
         cal.set(2013, Calendar.MARCH, 29, 12, 00);
