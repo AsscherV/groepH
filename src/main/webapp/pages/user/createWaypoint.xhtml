@@ -77,8 +77,10 @@
 
                                             <h:outputLabel value="#{msgs.type}"/>
                                             <h:selectOneMenu value="#{waypointBean.waypointType}">
-                                                <f:selectItems value="#{waypointBean.allWaypointTypes}" var="type"
-                                                               itemLabel="#{type.id} : #{type.type}" itemValue="#{type.type}" />
+                                                <!--
+                                                <f:selectItems value="{waypointBean.allWaypointTypes}" var="type"
+                                                               itemLabel="{type.id} : {type.type}" itemValue="{type.type}" />
+                                                               -->
                                             </h:selectOneMenu>
                                             <h:column></h:column>
 

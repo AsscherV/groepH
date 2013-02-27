@@ -26,12 +26,18 @@ public class WaypointBean  implements Serializable {
     @Autowired
     TripService tripService;
 
+    @NotEmpty(message = "{title} {notempty}")
+    private String title;
     @NotEmpty(message = "{description} {notempty}")
     private String description;
     @NotEmpty(message = "{label} {notempty}")
     private String label;
     @NotEmpty(message = "{waypointType} {notempty}")
     private WaypointType waypointType;
+    @NotEmpty(message = "{lat} {notempty}")
+    private double lat;
+    @NotEmpty(message = "{lng} {notempty}")
+    private double lng;
 
     Waypoint currentWaypoint;
 
@@ -49,6 +55,30 @@ public class WaypointBean  implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public double getLat() {
+        return lat;
+    }
+
+    public double getLng() {
+        return lng;
+    }
+
+    public void setLng(double lng) {
+        this.lng = lng;
+    }
+
+    public void setLat(double lat) {
+        this.lat = lat;
     }
 
     public String getLabel() {
