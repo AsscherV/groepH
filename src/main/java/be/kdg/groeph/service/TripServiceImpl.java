@@ -1,9 +1,9 @@
 package be.kdg.groeph.service;
 
 import be.kdg.groeph.dao.TripDao;
-import be.kdg.groeph.dao.UserDao;
 import be.kdg.groeph.model.Trip;
 import be.kdg.groeph.model.TripType;
+import be.kdg.groeph.model.Waypoint;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -43,5 +43,10 @@ public class TripServiceImpl implements TripService {
     @Override
     public TripType getTypeByName(String naam) {
         return tripDao.getTypeByName(naam);
+    }
+
+    @Override
+    public boolean addWaypoint(Waypoint waypoint) {
+        return true;
     }
 }
