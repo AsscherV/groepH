@@ -23,6 +23,11 @@ import static org.junit.Assert.*;
 @ContextConfiguration(locations = {"classpath:daoContext.xml"})
 public class TestLoginBean extends AbstractTransactionalJUnit4SpringContextTests {
 
+    /*
+    To force a commit
+     */
+
+
     @Qualifier("loginBean")
     @Autowired
     LoginBean loginBean;
