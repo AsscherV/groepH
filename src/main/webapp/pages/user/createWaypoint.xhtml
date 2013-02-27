@@ -9,6 +9,11 @@
     <h:outputStylesheet library="css" name="bootstrap-responsive.css"/>
     <h:outputStylesheet library="css" name="jquery-ui.css"/>
     <h:outputStylesheet library="css" name="main.css"/>
+
+    <script type="text/javascript"
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCmZaUMdD7lz1F48ySOKKlEFdvZNw3keb0&amp;sensor=false">
+    </script>
+
 </h:head>
 <h:body>
     <f:loadBundle basename="messages" var="msgs"/>
@@ -58,47 +63,36 @@
 
                         <div id="tripTab" class="tabContentsTrip">
                             <div class="box">
-                                <h:panelGroup id="createTrip">
-                                    <h:form id="tripForm">
-                                        <h:panelGrid columns="3" border="0">
+
+                                    <h:form id="waypointForm">
+                                        <h:panelGrid columns="1" border="0">
                                             <h:outputLabel value="#{msgs.title}"/>
-                                            <h:inputText id="titel" styleClass="span2" value="#{tripBean.title}"/>
+                                            <h:inputText id="titel" styleClass="span2" value="#{waypointBean.title}"/>
                                             <h:message for="titel" styleClass="error"/>
 
                                             <h:outputLabel value="#{msgs.description}"/>
                                             <h:inputText id="description" styleClass="span2"
-                                                         value="#{tripBean.description}"/>
+                                                         value="#{waypointBean.description}"/>
                                             <h:message for="description" styleClass="error"/>
 
-
-                                            <h:selectOneRadio value="#{tripBean.public}">
-                                                <f:selectItem  itemValue= "#{true}"  itemLabel="Public"/>
-                                                <f:selectItem itemValue="#{false}"  itemLabel="Private"/>
-                                            </h:selectOneRadio>
-                                            <h:column></h:column>
-                                            <h:column></h:column>
-
                                             <h:outputLabel value="#{msgs.type}"/>
-                                            <h:selectOneMenu value="#{tripBean.tripType}">
-                                                <f:selectItems value="#{tripBean.allTripTypes}" var="type"
+                                            <h:selectOneMenu value="#{waypointBean.waypointType}">
+                                                <f:selectItems value="#{waypointBean.allWaypointTypes}" var="type"
                                                                itemLabel="#{type.id} : #{type.type}" itemValue="#{type.type}" />
                                             </h:selectOneMenu>
                                             <h:column></h:column>
 
-                                            <h:outputLabel value="#{msgs.tripStartTime}"/>
-                                            <h:inputText id="startTime" styleClass="span2 tripStartDatepicker"
-                                                         value="#{tripBean.startTime}"> <f:convertDateTime
-                                                    pattern="dd/MM/yyyy"/> </h:inputText>
-                                            <h:message for="startTime" styleClass="error"/>
+                                            <h:outputLabel value="#{msgs.lat}"/>
+                                            <h:inputText id="lat" styleClass="span2"
+                                                         value="#{waypointBean.lat}"/>
+                                            <h:message for="lat" styleClass="error"/>
 
-                                            <h:outputLabel value="#{msgs.tripEndTime}"/>
-                                            <h:inputText id="endTime" styleClass="span2 tripEndDatepicker"
-                                                         value="#{tripBean.endTime}"> <f:convertDateTime
-                                                    pattern="dd/MM/yyyy"/> </h:inputText>
-                                            <h:message for="endTime" styleClass="error"/>
+                                            <h:outputLabel value="#{msgs.lng}"/>
+                                            <h:inputText id="lng" styleClass="span2"
+                                                         value="#{waypointBean.lng}"/>
+                                            <h:message for="lng" styleClass="error"/>
 
-                                            <h:outputLabel value="#{msgs.label}"/>
-                                            <h:inputText id="label" styleClass="span2" value="#{tripBean.label}"/>
+
                                             <!--
                                             <h:commandButton class="btn btn-success" value="add">
                                                 <f:ajax event="click" listener="tripBean.newLabel}"
@@ -106,23 +100,18 @@
                                             </h:commandButton>
                                              -->
 
-                                            <h:message for="label" styleClass="error"/>
 
 
-                                            <h:dataTable border="0" value="#{tripBean.labels}" var="label">
-                                                <h:column>
-                                                    <div>
-                                                        <h:commandLink value="#{label.name}"/>
 
-                                                    </div>
-                                                </h:column>
-                                            </h:dataTable>
+
                                         </h:panelGrid>
-                                        <h:commandButton type="submit" action="#{tripBean.addTrip}"
+                                        <h:commandButton type="submit" action="#{waypointBean.addWaypoint}"
                                                          class="btn btn-success"
-                                                         value="#{msgs.addTrip}"/>
+                                                         value="#{msgs.addWaypoint}"/>
                                     </h:form>
-                                </h:panelGroup>
+
+
+                                <div id="map_canvas"></div>
                             </div>
                         </div>
                     </div>
@@ -147,5 +136,12 @@
     <h:outputScript name="js/jquery-1.9.0.min.js"/>
     <h:outputScript name="js/jquery-ui.js"/>
     <h:outputScript name="js/main.js"/>
+    <h:outputScript name="js/gMaps.js"/>
+
+
+    <!--
+    <h:outputText value="&lt;script src=&quot;https://maps.googleapis.com/maps/api/js?key=AIzaSyCmZaUMdD7lz1F48ySOKKlEFdvZNw3keb0&amp;sensor=false&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;"/>
+     -->
+
 </h:body>
 </html>
