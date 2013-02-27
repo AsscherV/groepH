@@ -2,20 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7009435d-9949-4bd5-a126-8be2d5a087e4" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/pages/user/createWaypoint.xhtml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/resources/js/gMaps.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/artifacts/groepH_war.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/applicationContext.xml" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/applicationContext.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/pages/user/createTrip.xhtml" afterPath="$PROJECT_DIR$/src/main/webapp/pages/user/createTrip.xhtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/be/kdg/groeph/bean/WaypointBean.java" afterPath="$PROJECT_DIR$/src/main/java/be/kdg/groeph/bean/WaypointBean.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/pages/user/createWaypoint.xhtml" afterPath="$PROJECT_DIR$/src/main/webapp/pages/user/createWaypoint.xhtml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/groepH.iml" afterPath="$PROJECT_DIR$/groepH.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/artifacts/groepH_war_exploded.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/groepH_war_exploded.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/pages/index.xhtml" afterPath="$PROJECT_DIR$/src/main/webapp/pages/index.xhtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/resources/css/main.css" afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/main.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/messages.properties" afterPath="$PROJECT_DIR$/src/main/resources/messages.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/messages_en_US.properties" afterPath="$PROJECT_DIR$/src/main/resources/messages_en_US.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/messages_nl.properties" afterPath="$PROJECT_DIR$/src/main/resources/messages_nl.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/pages/newPassword.xhtml" afterPath="$PROJECT_DIR$/src/main/webapp/pages/newPassword.xhtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/pages/user/stops.xhtml" afterPath="$PROJECT_DIR$/src/main/webapp/pages/user/stops.xhtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/pages/user/trip.xhtml" afterPath="$PROJECT_DIR$/src/main/webapp/pages/user/trip.xhtml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="OTV_JSF_Spring_Hibernate_Project.iws" />
@@ -72,7 +62,7 @@
     <file path="$USER_HOME$/Desktop/Software Dev/Spring/Carpool/src/main/webapp/WEB-INF/web.xml" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1360132877883" ignored="false" />
     <file path="/spring-security.xml" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1361203409596" ignored="false" />
     <file path="$USER_HOME$/Desktop/Software Dev/Spring/Carpool/src/main/java/carpool/backingBeans/RegisterBean.java" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1360133956805" ignored="false" />
-    <file path="/Dummy.txt" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1361971669350" ignored="false" />
+    <file path="/Dummy.txt" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1361971945180" ignored="false" />
     <file path="/UserBean.java" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1360670408368" ignored="false" />
     <file path="/UserTest.java" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1360238079941" ignored="false" />
     <file path="/UserMother.java" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1361910071959" ignored="false" />
@@ -204,7 +194,7 @@
     <file path="/tripmenu_addtrip.xhtml" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1361280128230" ignored="false" />
     <file path="/tripmenu.xhtml" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1361453707278" ignored="false" />
     <file path="/welcome.xhtml" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1361282223047" ignored="false" />
-    <file path="/trip.xhtml" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1361299986189" ignored="false" />
+    <file path="/trip.xhtml" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1361972392769" ignored="false" />
     <file path="$USER_HOME$/Desktop/Software Dev/examenJavaWeb/src/main/webapp/users/cart.xhtml" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1361298697636" ignored="false" />
     <file path="/main.js" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1361351133592" ignored="false" />
     <file path="$PROJECT_DIR$/../../Inf Jo/Software Development/A_GROEPG_WEB/src/test/resources/serviceContext.xml" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1361728782749" ignored="false" />
@@ -226,6 +216,8 @@
     <file path="$PROJECT_DIR$/../../Public/Back-Up _ Older versions/23_02_2013_groepH_demunyk/groepH/.idea/workspace.xml" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1361912709036" ignored="false" />
     <file path="$PROJECT_DIR$/../../Public/Back-Up _ Older versions/23_02_2013_groepH_demunyk/groepH/src/main/java/be/kdg/groeph/service/RestService.java" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1361901753783" ignored="false" />
     <file path="$PROJECT_DIR$/../../Inf Jo/Software Development/A_GROEPG_WEB/.idea/workspace.xml" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1361956468291" ignored="false" />
+    <file path="/WaypointBean.java" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1361974306480" ignored="false" />
+    <file path="/createWaypoint.xhtml" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1361974161010" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -301,15 +293,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="LoginServiceImpl.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/groeph/service/LoginServiceImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="27" selection-start="1028" selection-end="1028" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="TripUser.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/groeph/model/TripUser.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -337,19 +320,64 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="applicationContext.xml" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="applicationContext.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/applicationContext.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="61" column="27" selection-start="3325" selection-end="3325" vertical-scroll-proportion="0.7832898">
+            <state line="61" column="27" selection-start="3325" selection-end="3325" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Trip.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/groeph/model/Trip.java">
+      <file leaf-file-name="tripmenu.xhtml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/pages/user/tripmenu.xhtml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="40" column="129" selection-start="1380" selection-end="1380" vertical-scroll-proportion="0.0">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="40.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="trip.xhtml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/pages/user/trip.xhtml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="68" column="70" selection-start="3601" selection-end="3601" vertical-scroll-proportion="-42.5">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="createWaypoint.xhtml" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/pages/user/createWaypoint.xhtml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="81" column="110" selection-start="3885" selection-end="3885" vertical-scroll-proportion="0.45961002">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="createTrip.xhtml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/pages/user/createTrip.xhtml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="42.5">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TripBean.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/groeph/bean/TripBean.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="26" column="13" selection-start="821" selection-end="821" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="WaypointBean.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/groeph/bean/WaypointBean.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="37" column="23" selection-start="1218" selection-end="1218" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -382,9 +410,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/be/kdg/groeph/model/Label.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/faces-config.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/be/kdg/groeph/bean/LoginBean.java" />
         <option value="$PROJECT_DIR$/src/main/java/be/kdg/groeph/model/TripUser.java" />
         <option value="$PROJECT_DIR$/src/main/java/be/kdg/groeph/service/MailServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/be/kdg/groeph/service/TripServiceImpl.java" />
@@ -398,6 +423,9 @@
         <option value="$PROJECT_DIR$/src/test/java/be/kdg/groeph/service/TestRest.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/applicationContext.xml" />
+        <option value="$PROJECT_DIR$/src/main/webapp/pages/user/trip.xhtml" />
+        <option value="$PROJECT_DIR$/src/main/webapp/pages/user/createWaypoint.xhtml" />
+        <option value="$PROJECT_DIR$/src/main/java/be/kdg/groeph/bean/WaypointBean.java" />
       </list>
     </option>
   </component>
@@ -1621,7 +1649,11 @@
       <created>1361956421122</created>
       <updated>1361956421122</updated>
     </task>
-    <option name="localTasksCounter" value="56" />
+    <task id="LOCAL-00056" summary="waypoints/stops GUI">
+      <created>1361972065619</created>
+      <updated>1361972065620</updated>
+    </task>
+    <option name="localTasksCounter" value="57" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1717,7 +1749,7 @@
     <option name="MAXIMUM_HISTORY_ROWS" value="1000" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="27/02/2012: Rest" />
+    <option name="LAST_COMMIT_MESSAGE" value="waypoints/stops GUI" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1749,6 +1781,7 @@
     <MESSAGE value="20/02/2012" />
     <MESSAGE value="24/02/2012: Maven site generation + log4j" />
     <MESSAGE value="27/02/2012: Rest" />
+    <MESSAGE value="waypoints/stops GUI" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1770,57 +1803,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml">
-      <provider editor-type-id="com.intellij.javaee.module.view.web.viewlets.WebModuleAssemblyDescriptorReferencesProvider">
-        <state />
-      </provider>
-      <provider editor-type-id="com.intellij.javaee.module.view.web.viewlets.WebModuleGeneralEditorProvider">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="72" column="49" selection-start="2545" selection-end="2545" vertical-scroll-proportion="-11.52">
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="com.intellij.javaee.module.view.web.viewlets.WebModuleAssemblyDescriptorProvider">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/be/kdg/groeph/mock/UserDaoMock.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="13" selection-start="258" selection-end="258" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/be/kdg/groeph/bean/TestRegisterBean.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="81" column="46" selection-start="2746" selection-end="2758" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/be/kdg/groeph/bean/TestLoginBean.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="102" column="89" selection-start="3254" selection-end="3254" vertical-scroll-proportion="-0.110707805">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/be/kdg/groeph/mockMother/UserMother.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="32" selection-start="1269" selection-end="1269" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/groeph/service/RestService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="44" selection-start="1006" selection-end="1006" vertical-scroll-proportion="0.6319703">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/be/kdg/groeph/mock/TripDaoMock.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="14" column="39" selection-start="376" selection-end="376" vertical-scroll-proportion="0.0">
@@ -1886,7 +1868,49 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/applicationContext.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="61" column="27" selection-start="3325" selection-end="3325" vertical-scroll-proportion="0.7832898">
+        <state line="61" column="27" selection-start="3325" selection-end="3325" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/pages/user/tripmenu.xhtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="40.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/pages/user/trip.xhtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="68" column="70" selection-start="3601" selection-end="3601" vertical-scroll-proportion="-42.5">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/pages/user/createTrip.xhtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="42.5">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/groeph/bean/TripBean.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="13" selection-start="821" selection-end="821" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/groeph/bean/WaypointBean.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="37" column="23" selection-start="1218" selection-end="1218" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/pages/user/createWaypoint.xhtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="81" column="110" selection-start="3885" selection-end="3885" vertical-scroll-proportion="0.45961002">
           <folding />
         </state>
       </provider>

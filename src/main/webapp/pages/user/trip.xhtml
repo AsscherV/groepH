@@ -56,17 +56,17 @@
                             <div id="accesTab" class="tabContentsTrip">
                                 <div class="box">
                                     <h:panelGrid columns="2" border="0">
-                                        <h:outputLabel value="#{msgs.tripTitle}"/>
+                                        <h:outputLabel value="#{msgs.title}"/>
                                         <h:outputLabel value="#{tripBean.currentTrip.title}"/>
-                                        <h:outputLabel value="#{msgs.tripDescription}"/>
+                                        <h:outputLabel value="#{msgs.description}"/>
                                         <h:outputLabel value="#{tripBean.currentTrip.description}"/>
-                                        <h:outputLabel value="#{msgs.tripType}"/>
+                                        <h:outputLabel value="#{msgs.type}"/>
                                         <h:outputLabel value="#{tripBean.currentTrip.tripType}"/>
                                         <h:outputLabel value="#{msgs.tripStartTime}"/>
                                         <h:outputLabel value="#{tripBean.currentTrip.startTime}"/>
                                         <h:outputLabel value="#{msgs.tripEndTime}"/>
                                         <h:outputLabel value="#{tripBean.currentTrip.endTime}"/>
-                                        <h:outputLabel value="#{msgs.tripLabel}"/>
+                                        <h:outputLabel value="#{msgs.label}"/>
                                         <h:dataTable border="0" value="#{tripBean.currentTrip.labels}" var="label">
                                             <h:outputLabel value="#{label.name}"/>
                                         </h:dataTable>
