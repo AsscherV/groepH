@@ -24,4 +24,18 @@ public final class SHAEncryption {
             throw new RuntimeException("Encoding not supported", e);
         }
     }
+    public static String decrypt(String password) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-512");
+            md.update(password.getBytes("UTF-8"));
+            byte byteData[] = md.digest();
+            return new String(new Base64().decode(byteData), "UTF8");
+        } catch (NoSuchAlgorithmException e) {
+            logger.error(e.getMessage());
+            throw new RuntimeException("Algorithm not found", e);
+        } catch (UnsupportedEncodingException e) {
+            logger.error(e.getMessage());
+            throw new RuntimeException("Encoding not supported", e);
+        }
+    }
 }

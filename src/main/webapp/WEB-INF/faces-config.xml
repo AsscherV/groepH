@@ -45,6 +45,22 @@
             <redirect/>
         </navigation-case>
     </navigation-rule>
+    <navigation-rule>
+        <navigation-case>
+            <from-action>#{loginBean.tempPasswordLogin}</from-action>
+            <from-outcome>SUCCESS</from-outcome>
+            <to-view-id>/pages/user/welcome.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <navigation-case>
+            <from-action>#{loginBean.loginUser}</from-action>
+            <from-outcome>RESET</from-outcome>
+            <to-view-id>/pages/newPassword.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
 
     <navigation-rule>
         <navigation-case>
@@ -54,6 +70,7 @@
             <redirect/>
         </navigation-case>
     </navigation-rule>
+
 
 
 </faces-config>
