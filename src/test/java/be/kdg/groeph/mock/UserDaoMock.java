@@ -42,6 +42,11 @@ public class UserDaoMock implements UserDao{
     }
 
     @Override
+    public void addInvitedUser(TripUser tripUser) {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
     public void updateUser(TripUser user) throws SQLException {
         //To change body of implemented methods use File | Settings | File Templates.
     }

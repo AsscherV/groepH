@@ -1,3 +1,11 @@
+ html{
+     height: 100%;
+ }
+ body{
+     height: 100%;
+     margin: 0;
+     padding: 0;
+ }
 
 .topmenu {
 	width: 100%;
@@ -80,4 +88,15 @@ footer p {
 
 .error{
     color: Red;
+}
+
+#map_canvas{
+    height: 500px;
+    width: auto;
+    margin: 10px;
+    border: 5px solid rgb(205,205,205);
+}
+#waypointForm{
+    float: left;
+    margin-right: 20px;
 }

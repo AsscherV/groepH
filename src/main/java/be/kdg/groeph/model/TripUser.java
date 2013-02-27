@@ -2,6 +2,8 @@ package be.kdg.groeph.model;
 
 import be.kdg.groeph.model.Null.NullUser;
 import be.kdg.groeph.model.Null.Nullable;
+import org.codehaus.jackson.annotate.JsonAutoDetect;
+import org.codehaus.jackson.map.util.JSONPObject;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
@@ -58,6 +60,11 @@ public class TripUser implements Nullable, Serializable {
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     private List<Trip> trips = new ArrayList<Trip>();
 
+    @ManyToMany
+    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
+    @JoinColumn(name="id", nullable = true)
+    private List<Trip> invitedTrips = new ArrayList<Trip>();
+
 
     public TripUser() {
     }
@@ -107,6 +114,14 @@ public class TripUser implements Nullable, Serializable {
 
     public String getLastName() {
         return lastName;
+    }
+
+    public List<Trip> getInvitedTrips() {
+        return invitedTrips;
+    }
+
+    public void setInvitedTrips(List<Trip> invitedTrips) {
+        this.invitedTrips = invitedTrips;
     }
 
     public void setLastName(String lastName) {
@@ -231,6 +246,9 @@ public class TripUser implements Nullable, Serializable {
         trips.add(trip);
     }
 
+    public void addInvitedTrip(Trip trip){
+        invitedTrips.add(trip);
+    }
     public void setTempPassword(String tempPassword) {
         this.tempPassword = tempPassword;
     }

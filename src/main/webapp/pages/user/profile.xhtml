@@ -13,7 +13,7 @@
 <h:body>
     <f:loadBundle basename="messages" var="msgs"/>
     <ui:insert name="header">
-        <ui:include src="header.xhtml"/>
+        <ui:include src="../header.xhtml"/>
     </ui:insert>
 
     <div class="container">
@@ -21,7 +21,7 @@
 
             <!-- trips / my trips -->
             <ui:insert name="header">
-                <ui:include src="user/tripmenu.xhtml"/>
+                <ui:include src="tripmenu.xhtml"/>
             </ui:insert>
 
             <!-- trip info -->
@@ -30,100 +30,95 @@
                     <ul>
                         <!-- Tab buttons -->
                         <li>
-                            <a class="button" href="index.xhtml">Trip1</a>
+                            <a class="button active" href="welcome.xhtml">New trip</a>
                         </li>
                         <h:panelGroup rendered="#{loginBean.loggedIn}">
                             <li>
-                                <a class="button" href="user/stops.xhtml">Stops</a>
+                                <a class="button" href="stops.xhtml">Stops</a>
                             </li>
                             <li>
-                                <a class="button" href="user/participants.xhtml">Participants</a>
+                                <a class="button " href="participants.xhtml">Participants</a>
                             </li>
                             <li>
-                                <a class="button" href="user/accessories.xhtml">Accessories</a>
+                                <a class="button" href="accessories.xhtml">Accessories</a>
                             </li>
                             <li>
-                                <a class="button" href="user/styling.xhtml">Styling</a>
+                                <a class="button" href="styling.xhtml">Styling</a>
                             </li>
                             <h:panelGroup rendered="#{loginBean.user.admin}">
                                 <li>
-                                    <a class="button" href="admin/costs.xhtml">Costs</a>
+                                    <a class="button" href="../admin/costs.xhtml">Costs</a>
                                 </li>
                             </h:panelGroup>
 
                         </h:panelGroup>
                     </ul>
-
                     <!-- Tab content -->
                     <div class="tabDetails">
 
-                        <div id="registerTab" class="tabContentsTrip">
+                        <div id="tripTab" class="tabContentsTrip">
                             <div class="box">
-                                <h:form rendered="#{not registerBean.registered}">
-                                    <h:panelGrid columns="3" border="0" >
+                                <h:form>
+                                    <h:panelGrid columns="3" border="0">
                                         <h:outputLabel value="#{msgs.email}"/>
-                                        <h:inputText id="email" styleClass="span2" value="#{registerBean.email}" />
+                                        <h:outputText value="#{loginBean.user.email}" rendered="#{not registerBean.editableUser}" />
+                                        <h:inputText id="email" styleClass="span2" value="#{registerBean.newemail}" rendered="#{registerBean.editableUser}"/>
                                         <h:message for="email" styleClass="error" />
 
-                                        <h:outputLabel value="#{msgs.password}"/>
-                                        <h:inputSecret id="password" styleClass="span2" value="#{registerBean.password}"/>
-                                        <h:message for="password" styleClass="error" />
-
-                                        <h:outputLabel value="#{msgs.password}"/>
-                                        <h:inputSecret id="password2" styleClass="span2" value="#{registerBean.secondPassword}"/>
-                                        <h:message for="password2" styleClass="error" />
-
                                         <h:outputLabel value="#{msgs.firstName}"/>
-                                        <h:inputText id="firstname" styleClass="span2" value="#{registerBean.firstName}"/>
+                                        <h:outputText value="#{loginBean.user.firstName}" rendered="#{not registerBean.editableUser}" />
+                                        <h:inputText id="firstname" styleClass="span2" value="#{registerBean.newfirstName}" rendered="#{registerBean.editableUser}"/>
                                         <h:message for="firstname" styleClass="error" />
 
                                         <h:outputLabel value="#{msgs.lastName} "/>
-                                        <h:inputText id="lastname" styleClass="span2" value="#{registerBean.lastName}"/>
+                                        <h:outputText value="#{loginBean.user.lastName}" rendered="#{not registerBean.editableUser}" />
+                                        <h:inputText id="lastname" styleClass="span2" value="#{registerBean.newlastName}" rendered="#{registerBean.editableUser}"/>
                                         <h:message for="lastname" styleClass="error" />
 
                                         <h:outputLabel value="#{msgs.dateOfBirth}"/>
-                                        <h:inputText id="dateOfBirth" styleClass="span2 datepicker" value="#{registerBean.dateOfBirth}"> <f:convertDateTime pattern="dd/MM/yyyy"/> </h:inputText>
+                                        <h:outputText value="#{loginBean.user.dateOfBirth}" rendered="#{not registerBean.editableUser}" />
+                                        <h:inputText id="dateOfBirth" styleClass="span2 datepicker" value="#{registerBean.newdateOfBirth}" rendered="#{registerBean.editableUser}"> <f:convertDateTime pattern="dd/MM/yyyy"/> </h:inputText>
                                         <h:message for="dateOfBirth" styleClass="error" />
 
                                         <h:outputLabel value="#{msgs.phoneNumber}"/>
-                                        <h:inputText id="phoneNumber" styleClass="span2" value="#{registerBean.phoneNumber}"/>
+                                        <h:outputText value="#{loginBean.user.phoneNumber}" rendered="#{not registerBean.editableUser}" />
+                                        <h:inputText id="phoneNumber" styleClass="span2" value="#{registerBean.newphoneNumber}" rendered="#{registerBean.editableUser}"/>
                                         <h:message for="phoneNumber" styleClass="error" />
 
                                         <h:outputLabel value="#{msgs.gender}"/>
-                                        <h:selectOneRadio value="#{registerBean.gender}">
+                                        <h:outputText value="#{loginBean.user.gender}" rendered="#{not registerBean.editableUser}"/>
+                                        <h:selectOneRadio value="#{registerBean.newgender}" rendered="#{registerBean.editableUser}">
                                             <f:selectItem itemValue="M" itemLabel="#{msgs.male}" />
                                             <f:selectItem itemValue="F" itemLabel="#{msgs.female}"/>
                                         </h:selectOneRadio>
                                         <!-- gender radios -->
 
                                         <h:outputLabel value="#{msgs.street}"/>
-                                        <h:inputText id="street" styleClass="span2" value="#{registerBean.street}"/>
+                                        <h:outputText value="#{loginBean.user.address.street}" rendered="#{not registerBean.editableUser}" />
+                                        <h:inputText id="street" styleClass="span2" value="#{registerBean.newstreet}" rendered="#{registerBean.editableUser}"/>
                                         <h:message for="street" styleClass="error" />
 
                                         <h:outputLabel value="#{msgs.streetNumber}" />
-                                        <h:inputText id="streetnumber" styleClass="span2" value="#{registerBean.streetNumber}"/>
+                                        <h:outputText value="#{loginBean.user.address.streetNumber}" rendered="#{not registerBean.editableUser}" />
+                                        <h:inputText id="streetnumber" styleClass="span2" value="#{registerBean.newstreetNumber}" rendered="#{registerBean.editableUser}"/>
                                         <h:message for="streetnumber" styleClass="error" />
 
                                         <h:outputLabel value="#{msgs.zipcode}"/>
-                                        <h:inputText id="zipcode" styleClass="span2" value="#{registerBean.zipcode}"/>
+                                        <h:outputText value="#{loginBean.user.address.zipcode}" rendered="#{not registerBean.editableUser}" />
+                                        <h:inputText id="zipcode" styleClass="span2" value="#{registerBean.newzipcode}" rendered="#{registerBean.editableUser}"/>
                                         <h:message for="zipcode" styleClass="error" />
 
                                         <h:outputLabel value="#{msgs.city}"/>
-                                        <h:inputText id="city" styleClass="span2" value="#{registerBean.city}"/>
+                                        <h:outputText value="#{loginBean.user.address.city}" rendered="#{not registerBean.editableUser}" />
+                                        <h:inputText id="city" styleClass="span2" value="#{registerBean.newcity}" rendered="#{registerBean.editableUser}"/>
                                         <h:message for="city" styleClass="error" />
 
                                     </h:panelGrid>
-                                    <h:commandButton  type="submit" action="#{registerBean.addUser}" class="btn btn-success" value="#{msgs.register}" />
 
+                                    <h:commandLink value="Change profile" immediate="true" action="#{registerBean.editUser}" rendered="#{not registerBean.editableUser}" />
+                                    <h:commandButton value="Save" action="#{registerBean.updateUser}"  rendered="#{registerBean.editableUser}" />
+                                    <h:commandLink value="Change password / Werkt nog ni!" rendered="#{not registerBean.editableUser}" />
                                 </h:form>
-                               Internationalisatie
-                                <h:panelGroup rendered="#{registerBean.registered}">
-                                    <h1>U bent geregistreerd, proficiat  #{registerBean.firstName}</h1>
-                                    <h2>LET OP: VIEWACCESSSCOPE NOG NAKIJKEN!!!!!</h2>
-
-                                </h:panelGroup>
-
-
                             </div>
                         </div>
                     </div>
@@ -149,4 +144,4 @@
     <h:outputScript name="js/jquery-ui.js"/>
     <h:outputScript name="js/main.js"/>
 </h:body>
-</html> 
+</html>

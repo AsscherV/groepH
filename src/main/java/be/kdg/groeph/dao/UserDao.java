@@ -9,6 +9,7 @@ public interface UserDao {
 
     TripUser getUserByEmail(String email);
 
+    void addInvitedUser(TripUser tripUser);
 
     void updateUser(TripUser user) throws SQLException;
 }

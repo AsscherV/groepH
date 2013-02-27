@@ -21,9 +21,8 @@ import java.io.Serializable;
 @Named
 @SessionScoped
 public class LoginBean implements Serializable {
-    public static final String RESET = "RESET";
-    //static Logger logger = org.slf4j.LoggerFactory.getLogger(LoginBean.class);
     static Logger logger = Logger.getLogger(LoginBean.class);
+    public static final String RESET = "RESET";
     private static final String SUCCESS = "SUCCESS";
     private static final String FAILURE = "FAILURE";
 

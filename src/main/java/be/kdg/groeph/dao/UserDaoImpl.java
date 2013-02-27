@@ -21,7 +21,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     @SuppressWarnings("unchecked")
     public boolean addUser(TripUser user) {
-        sessionFactory.getCurrentSession().save(user);
+        sessionFactory.getCurrentSession().saveOrUpdate(user);
         return true;
     }
 
@@ -38,6 +38,12 @@ public class UserDaoImpl implements UserDao {
     @Override
     public void updateUser(TripUser user) throws SQLException{
         sessionFactory.getCurrentSession().update(user);
+    }
+
+
+    @Override
+    public void addInvitedUser(TripUser tripUser) {
+        sessionFactory.getCurrentSession().saveOrUpdate(tripUser);
     }
 
 
