@@ -28,7 +28,6 @@
 
 
     <navigation-rule>
-        <!--<from-view-id>/pages/index.xhtml</from-view-id>  -->
         <navigation-case>
             <from-action>#{loginBean.logOut}</from-action>
             <from-outcome>SUCCESS</from-outcome>

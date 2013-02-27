@@ -57,12 +57,16 @@
             <props>
                 <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
                 <prop key="hibernate.show_sql">false</prop>
-               <!-- <prop key="hibernate.hbm2ddl.auto">update</prop> -->     <!-- update -->
+                <!--<prop key="hibernate.hbm2ddl.auto">create</prop>   -->
             </props>
         </property>
         <property name="packagesToScan">
             <list>
                 <value>be.kdg.groeph.model</value>
+                <value>be.kdg.groeph.service</value>
+                <value>be.kdg.groeph.dao</value>
+                <value>be.kdg.groeph.model</value>
+                <value>be.kdg.groeph.util</value>
             </list>
         </property>
     </bean>

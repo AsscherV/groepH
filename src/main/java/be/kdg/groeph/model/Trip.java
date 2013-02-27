@@ -3,6 +3,8 @@ package be.kdg.groeph.model;
 import be.kdg.groeph.model.Null.NullTrip;
 import be.kdg.groeph.model.Null.Nullable;
 import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -27,6 +29,7 @@ public class Trip implements Nullable, Serializable {
     @Column(name = "isPubic", nullable = false)
     private boolean isPublic;
 
+    @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(mappedBy = "trip")     //,fetch = FetchType.EAGER
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     private List<Label> labels = new ArrayList<Label>();
