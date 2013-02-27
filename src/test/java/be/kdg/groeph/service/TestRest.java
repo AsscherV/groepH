@@ -101,7 +101,9 @@ public class TestRest extends AbstractTransactionalJUnit4SpringContextTests {
         System.out.println("TU pass: " + tu.getPassword());
 
     }
-     /*
+   /*
+
+   //TODO: add the serializing
     @Test
     public void loginRest2(){
 
@@ -117,8 +119,8 @@ public class TestRest extends AbstractTransactionalJUnit4SpringContextTests {
         TripUser object = getTripUserFromResponse(isValidUser);
         assertEquals("result van RestCall moet test zijn", user.getEmail(), object.getEmail());
     }
-
     */
+
     /*
     @Test
     public void loginRest2(){

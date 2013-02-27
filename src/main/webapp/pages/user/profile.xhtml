@@ -58,7 +58,67 @@
 
                         <div id="tripTab" class="tabContentsTrip">
                             <div class="box">
-                                profile
+                                <h:form>
+                                    <h:panelGrid columns="3" border="0">
+                                        <h:outputLabel value="#{msgs.email}"/>
+                                        <h:outputText value="#{loginBean.user.email}" rendered="#{not registerBean.editableUser}" />
+                                        <h:inputText id="email" styleClass="span2" value="#{registerBean.newemail}" rendered="#{registerBean.editableUser}"/>
+                                        <h:message for="email" styleClass="error" />
+
+                                        <h:outputLabel value="#{msgs.firstName}"/>
+                                        <h:outputText value="#{loginBean.user.firstName}" rendered="#{not registerBean.editableUser}" />
+                                        <h:inputText id="firstname" styleClass="span2" value="#{registerBean.newfirstName}" rendered="#{registerBean.editableUser}"/>
+                                        <h:message for="firstname" styleClass="error" />
+
+                                        <h:outputLabel value="#{msgs.lastName} "/>
+                                        <h:outputText value="#{loginBean.user.lastName}" rendered="#{not registerBean.editableUser}" />
+                                        <h:inputText id="lastname" styleClass="span2" value="#{registerBean.newlastName}" rendered="#{registerBean.editableUser}"/>
+                                        <h:message for="lastname" styleClass="error" />
+
+                                        <h:outputLabel value="#{msgs.dateOfBirth}"/>
+                                        <h:outputText value="#{loginBean.user.dateOfBirth}" rendered="#{not registerBean.editableUser}" />
+                                        <h:inputText id="dateOfBirth" styleClass="span2 datepicker" value="#{registerBean.newdateOfBirth}" rendered="#{registerBean.editableUser}"> <f:convertDateTime pattern="dd/MM/yyyy"/> </h:inputText>
+                                        <h:message for="dateOfBirth" styleClass="error" />
+
+                                        <h:outputLabel value="#{msgs.phoneNumber}"/>
+                                        <h:outputText value="#{loginBean.user.phoneNumber}" rendered="#{not registerBean.editableUser}" />
+                                        <h:inputText id="phoneNumber" styleClass="span2" value="#{registerBean.newphoneNumber}" rendered="#{registerBean.editableUser}"/>
+                                        <h:message for="phoneNumber" styleClass="error" />
+
+                                        <h:outputLabel value="#{msgs.gender}"/>
+                                        <h:outputText value="#{loginBean.user.gender}" rendered="#{not registerBean.editableUser}"/>
+                                        <h:selectOneRadio value="#{registerBean.newgender}" rendered="#{registerBean.editableUser}">
+                                            <f:selectItem itemValue="M" itemLabel="#{msgs.male}" />
+                                            <f:selectItem itemValue="F" itemLabel="#{msgs.female}"/>
+                                        </h:selectOneRadio>
+                                        <!-- gender radios -->
+
+                                        <h:outputLabel value="#{msgs.street}"/>
+                                        <h:outputText value="#{loginBean.user.address.street}" rendered="#{not registerBean.editableUser}" />
+                                        <h:inputText id="street" styleClass="span2" value="#{registerBean.newstreet}" rendered="#{registerBean.editableUser}"/>
+                                        <h:message for="street" styleClass="error" />
+
+                                        <h:outputLabel value="#{msgs.streetNumber}" />
+                                        <h:outputText value="#{loginBean.user.address.streetNumber}" rendered="#{not registerBean.editableUser}" />
+                                        <h:inputText id="streetnumber" styleClass="span2" value="#{registerBean.newstreetNumber}" rendered="#{registerBean.editableUser}"/>
+                                        <h:message for="streetnumber" styleClass="error" />
+
+                                        <h:outputLabel value="#{msgs.zipcode}"/>
+                                        <h:outputText value="#{loginBean.user.address.zipcode}" rendered="#{not registerBean.editableUser}" />
+                                        <h:inputText id="zipcode" styleClass="span2" value="#{registerBean.newzipcode}" rendered="#{registerBean.editableUser}"/>
+                                        <h:message for="zipcode" styleClass="error" />
+
+                                        <h:outputLabel value="#{msgs.city}"/>
+                                        <h:outputText value="#{loginBean.user.address.city}" rendered="#{not registerBean.editableUser}" />
+                                        <h:inputText id="city" styleClass="span2" value="#{registerBean.newcity}" rendered="#{registerBean.editableUser}"/>
+                                        <h:message for="city" styleClass="error" />
+
+                                    </h:panelGrid>
+
+                                    <h:commandLink value="Change profile" immediate="true" action="#{registerBean.editUser}" rendered="#{not registerBean.editableUser}" />
+                                    <h:commandButton value="Save" action="#{registerBean.updateUser}"  rendered="#{registerBean.editableUser}" />
+                                    <h:commandLink value="Change password / Werkt nog ni!" rendered="#{not registerBean.editableUser}" />
+                                </h:form>
                             </div>
                         </div>
                     </div>

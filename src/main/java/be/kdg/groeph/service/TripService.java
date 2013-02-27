@@ -16,4 +16,6 @@ public interface TripService {
     TripType getTypeByName(String naam);
 
     boolean addWaypoint(Waypoint waypoint);
+
+    void addUserToTrip(Trip trip);
 }

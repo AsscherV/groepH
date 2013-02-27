@@ -16,7 +16,7 @@
                 <div class="pull-left"><h1>Trippy Traveler</h1></div>
                 <h:form class="navbar-form pull-right">
                     <h:panelGrid rendered="#{not loginBean.loggedIn}">
-                        <h:link class="btn  btn-primary btn-mini" value="Sign in with facebook"/>
+                        <h:link class="btn btn-primary btn-mini" value="Sign in with facebook"/>
                     </h:panelGrid>
                     <h:panelGrid columns="2" cellpadding="2" rendered="#{not loginBean.loggedIn}">
                         <h:outputLabel value="Email"/>
@@ -25,10 +25,9 @@
                         <h:inputSecret id="password" styleClass="span2 loginInput" value="#{loginBean.password}"/>
                         <h:commandButton class="btn btn-mini" type="submit" value="Sign in"
                                          action="#{loginBean.loginUser}"/>
-                        <h:link class="floatRight" outcome="register.xhtml" value="Register"></h:link>
-                        <h:link class="floatLeft btn-mini" outcome="forgotPassword.xhtml" value="Forgot password"></h:link>
+                        <h:link class="floatRight" outcome="register.xhtml" value="Register"/>
+                        <h:link class="floatLeft btn-mini" outcome="forgotPassword.xhtml" value="Forgot password"/>
                     </h:panelGrid>
-
                     <table>
                         <tr>
                             <td><h:message for="password" class="error"></h:message></td>
@@ -37,18 +36,14 @@
                             <td><h:message for="email" class="error"></h:message></td>
                         </tr>
                     </table>
-
-
-
                     <h:panelGrid rendered="#{loginBean.loggedIn}" columns="2" cellpadding="2">
                         <h:outputLabel class="welcomeMessage">Welkom </h:outputLabel>
                         <h:outputLabel class="welcomeMessage">#{loginBean.user.firstName}</h:outputLabel >
                         <h:commandLink id="login" class="btn btn-mini" type="submit" value="Sign off"
-                                         action="#{loginBean.logOut}"/>
+                                       action="#{loginBean.logOut}"/>
+                        <h:link class="floatRight" value="Profile" outcome="profile"/>
                     </h:panelGrid>
-
                 </h:form>
-
             </div>
         </div>
     </ui:composition>
@@ -56,4 +51,4 @@
     <h:outputScript name="js/jquery-1.9.0.min.js"/>
     <h:outputScript name="js/main.js"/>
 </h:body>
-</html> 
+</html>

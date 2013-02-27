@@ -1,6 +1,7 @@
 package be.kdg.groeph.dao;
 
 import be.kdg.groeph.model.Trip;
+import be.kdg.groeph.model.TripUser;
 import be.kdg.groeph.model.TripType;
 import org.apache.log4j.Logger;
 import org.hibernate.Query;
@@ -27,6 +28,11 @@ public class TripDaoImpl implements TripDao {
         sessionFactory.getCurrentSession().saveOrUpdate(trip);
         //sessionFactory.getCurrentSession().merge(trip);
         return true;
+    }
+
+    @Override
+    public void addUserToTrip(Trip trip) {
+        sessionFactory.getCurrentSession().saveOrUpdate(trip);
     }
 
     @Override

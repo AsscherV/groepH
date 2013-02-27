@@ -2,82 +2,93 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
-    <h:head>
-        <title>Trippy Traveler</title>
-        <!-- css -->
-        <h:outputStylesheet library="css" name="bootstrap.css"/>
-        <h:outputStylesheet library="css" name="bootstrap-responsive.css"/>
-        <h:outputStylesheet library="css" name="main.css"/>
-    </h:head>
-    <h:body>
-        <ui:insert name="header">
-            <ui:include src="../header.xhtml"/>
-        </ui:insert>
-        <div class="container">
-            <div class="row">
+<h:head>
+    <title>Trippy Traveler</title>
+    <!-- css -->
+    <h:outputStylesheet library="css" name="bootstrap.css"/>
+    <h:outputStylesheet library="css" name="bootstrap-responsive.css"/>
+    <h:outputStylesheet library="css" name="main.css"/>
+</h:head>
+<h:body>
+    <ui:insert name="header">
+        <ui:include src="../header.xhtml"/>
+    </ui:insert>
 
-                <!-- trips / my trips -->
-                <ui:insert name="header">
-                    <ui:include src="tripmenu.xhtml"/>
-                </ui:insert>
+    <div class="container">
+        <div class="row">
 
-                <!-- trip info -->
-                <div class="span9">
-                    <div id="tabContainerTrip" class="tabContainer">
-                        <ul>
-                            <!-- Tab buttons -->
+            <!-- trips / my trips -->
+            <ui:insert name="header">
+                <ui:include src="tripmenu.xhtml"/>
+            </ui:insert>
+
+            <!-- trip info -->
+            <div class="span9">
+                <div id="tabContainerTrip" class="tabContainer">
+                    <ul>
+                        <!-- Tab buttons -->
+                        <li>
+                            <a class="button " href="trip.xhtml">#{tripBean.currentTrip.title}</a>
+                        </li>
+                        <h:panelGroup rendered="#{loginBean.loggedIn}">
                             <li>
-                                <a class="button " href="trip.xhtml">#{tripBean.currentTrip.title}</a>
+                                <a class="button" href="stops.xhtml">Stops</a>
                             </li>
-                            <h:panelGroup rendered="#{loginBean.loggedIn}">
+                            <li>
+                                <a class="button active" href="participants.xhtml">Participants</a>
+                            </li>
+                            <li>
+                                <a class="button" href="accessories.xhtml">Accessories</a>
+                            </li>
+                            <li>
+                                <a class="button" href="styling.xhtml">Styling</a>
+                            </li>
+                            <h:panelGroup rendered="#{loginBean.user.admin}">
                                 <li>
-                                    <a class="button" href="stops.xhtml">Stops</a>
+                                    <a class="button" href="../admin/costs.xhtml">Costs</a>
                                 </li>
-                                <li>
-                                    <a class="button active" href="participants.xhtml">Participants</a>
-                                </li>
-                                <li>
-                                    <a class="button" href="accessories.xhtml">Accessories</a>
-                                </li>
-                                <li>
-                                    <a class="button" href="styling.xhtml">Styling</a>
-                                </li>
-                                <h:panelGroup rendered="#{loginBean.user.admin}">
-                                    <li>
-                                        <a class="button" href="../admin/costs.xhtml">Costs</a>
-                                    </li>
+                            </h:panelGroup>
+
+                        </h:panelGroup>
+                    </ul>
+                    <!-- Tab content -->
+                    <div class="tabDetails">
+
+                        <div id="partTab" class="tabContentsTrip">
+                            <div class="box">
+                                <!--liijst van participants op dit moment. -->
+                                <h:form>
+                                    <h:inputTextarea value="#{participantsBean.emails}"></h:inputTextarea>
+                                    <h:commandButton type="submit" action="#{participantsBean.sendInvitations}"
+                                                     class="btn btn-success" value="send invitations"/>
+                                </h:form>
+
+                                <h:panelGroup rendered="#{participantsBean.hasInvalidEmails}">
+                                    <h:outputText value="#{participantsBean.invalidEmails}"></h:outputText>
                                 </h:panelGroup>
 
-                            </h:panelGroup>
-                        </ul>
-                        <!-- Tab content -->
-                            <div class="tabDetails">
-
-                            <div id="partTab" class="tabContentsTrip">
-                                <div class="box">
-
-                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
 
-
-            <footer>
-                <p>
-                    © Trippy Traveler 2013
-                </p>
-            </footer>
-
         </div>
-        <!-- /container -->
 
-        <!-- javascript
-        ================================================== -->
-        <!-- Placed at the end of the document so the pages load faster -->
-        <h:outputScript name="js/jquery-1.9.0.min.js"/>
-        <h:outputScript name="js/main.js"/>
-    </h:body>
+
+        <footer>
+            <p>
+                © Trippy Traveler 2013
+            </p>
+        </footer>
+
+    </div>
+    <!-- /container -->
+
+    <!-- javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <h:outputScript name="js/jquery-1.9.0.min.js"/>
+    <h:outputScript name="js/main.js"/>
+</h:body>
 </html> 

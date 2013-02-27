@@ -44,6 +44,11 @@ public class Trip implements Nullable, Serializable {
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     private TripUser tripUser;
 
+    @ManyToMany
+    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
+    @JoinColumn(name="id", nullable = true)
+    private List<TripUser> tripUsers = new ArrayList<TripUser>();
+
     public Trip() {
     }
 
@@ -136,6 +141,14 @@ public class Trip implements Nullable, Serializable {
         this.description = description;
     }
 
+    public List<TripUser> getTripUsers() {
+        return tripUsers;
+    }
+
+    public void setTripUsers(List<TripUser> tripUsers) {
+        this.tripUsers = tripUsers;
+    }
+
     public Date getStartTime() {
         return startTime;
     }
@@ -158,5 +171,9 @@ public class Trip implements Nullable, Serializable {
 
     public void setTripUser(TripUser tripUser) {
         this.tripUser = tripUser;
+    }
+
+    public void addTripUser(TripUser tripUser){
+        tripUsers.add(tripUser);
     }
 }
