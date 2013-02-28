@@ -1,6 +1,7 @@
 package be.kdg.groeph.bean;
 
 import be.kdg.groeph.dao.TripDao;
+import be.kdg.groeph.dao.UserDao;
 import be.kdg.groeph.mockMother.UserMother;
 import be.kdg.groeph.model.Label;
 import be.kdg.groeph.model.Trip;
@@ -56,6 +57,9 @@ public class TestParticipantsBean extends AbstractTransactionalJUnit4SpringConte
     @Autowired
     private TripDao tripDao;
 
+    @Autowired
+    private UserDao userDao;
+
     @ManagedProperty(value = "#{tripService}")
     @Autowired
     TripService tripService;
@@ -73,6 +77,7 @@ public class TestParticipantsBean extends AbstractTransactionalJUnit4SpringConte
         tripDao.addTripType(new TripType("Timebound"));
         tripDao.addTripType(new TripType("Public"));
         tripDao.addTripType(new TripType("Private"));
+        userDao.addUser(user2);
     }
 
     @Test

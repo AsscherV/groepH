@@ -80,6 +80,7 @@
           <element id="library" level="project" name="Maven: javax.inject:javax.inject:1" />
           <element id="library" level="project" name="Maven: com.google.code.gson:gson:1.7.1" />
           <element id="library" level="project" name="Maven: net.sf.flexjson:flexjson:2.0" />
+          <element id="library" level="project" name="Maven: com.restfb:restfb:1.6.11" />
         </element>
       </element>
     </root>

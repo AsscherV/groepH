@@ -98,9 +98,11 @@
                                     <h:commandButton type="submit" action="#{registerBean.addUser}"
                                                      class="btn btn-success" value="#{msgs.register}"/>
 
+                                    <h:outputLabel value="#{registerBean.mailMessage}" />
+
                                 </h:form>
-                                Internationalisatie
                                 <h:panelGroup rendered="#{registerBean.registered}">
+                                    <h:outputLabel value="#{registerBean.mailMessage}" />
                                     <h1>U bent geregistreerd, proficiat  #{registerBean.firstName}</h1>
 
                                     <h2>LET OP: VIEWACCESSSCOPE NOG NAKIJKEN!!!!!</h2>

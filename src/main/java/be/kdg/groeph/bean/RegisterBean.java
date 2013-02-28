@@ -112,6 +112,8 @@ public class RegisterBean implements Serializable {
     @NotEmpty(message = "{city} {notempty}")
     private String newcity;
 
+    private String mailMessage;
+
     private boolean editableUser;
 
     private boolean registered;
@@ -127,6 +129,14 @@ public class RegisterBean implements Serializable {
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
+    }
+
+    public String getMailMessage() {
+        return mailMessage;
+    }
+
+    public void setMailMessage(String mailMessage) {
+        this.mailMessage = mailMessage;
     }
 
     public String getLastName() {
@@ -368,14 +378,17 @@ public class RegisterBean implements Serializable {
         user.setEnabled(true);
 
         if (confirmPassword()) {
-            boolean result = userService.addUser(user);
-            if (result) {
-                userService.addUser(user);
-                mailService.uponSuccessfulRegistration(user.getEmail());
-                registered = true;
-                return SUCCESS;
+            TripUser tripUser = userService.getUserByEmail(user.getEmail());
+            if (tripUser.isNull()) {
+                if (mailService.isSuccessfulRegistration(user.getEmail())) {
+                    userService.addUser(user);
+                    registered = true;
+                    return SUCCESS;
+                } else {
+                    mailMessage = "Registration mail could not be send. Please try to registrate again.";
+                    return FAILURE;
+                }
             }
-            return FAILURE;
         }
         return FAILURE;
     }
@@ -391,7 +404,7 @@ public class RegisterBean implements Serializable {
         tripUser.setEmail(newemail);
         tripUser.setDateRegistered(newdateRegistered);
 
-        Address adress =  loginBean.getUser().getAddress();
+        Address adress = loginBean.getUser().getAddress();
         adress.setZipcode(newzipcode);
         adress.setStreet(newstreet);
         adress.setStreetNumber(newstreetNumber);

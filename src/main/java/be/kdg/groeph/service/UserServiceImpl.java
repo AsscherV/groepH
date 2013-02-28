@@ -97,7 +97,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public TripUser getUserByEmail(String s) {
         TripUser tripUser = userDao.getUserByEmail(s);
         if (tripUser.isNull()) {
-             return null;
+             return TripUser.INVALID_USER();
         } else {
             return userDao.getUserByEmail(s);
         }
