@@ -5,6 +5,7 @@ import be.kdg.groeph.dao.UserDao;
 
 import be.kdg.groeph.model.Trip;
 import be.kdg.groeph.model.TripUser;
+import be.kdg.groeph.util.RandomPassword;
 import be.kdg.groeph.util.SHAEncryption;
 import org.apache.log4j.Logger;
 
@@ -114,7 +115,7 @@ public class MailServiceImpl implements MailService {
         if (userByEmail.isNull()) {
             return false;
         }
-        String pw = randomString()   ;
+        String pw =  RandomPassword.generatePassword();
         userByEmail.setTempPassword(SHAEncryption.encrypt(pw) );
 
         try {
@@ -130,10 +131,25 @@ public class MailServiceImpl implements MailService {
         return true;
     }
 
-    public String randomString() {
-        String random = UUID.randomUUID().toString().substring(0, 8);
-        return random;
+    @Override
+    public boolean uponFacebookLoginNoAccount(String email, String password) {
+        SimpleMailMessage[] mailMessageArray = new SimpleMailMessage[1];
+
+                SimpleMailMessage message = new SimpleMailMessage();
+
+                String toAddress = email;
+                message.setTo(toAddress);
+                message.setSubject("Facebook user registration successful!");
+                message.setText("You have registered with facebook if you want to login please use \n email: "+toAddress+" \n password: "+ password +" .");
+                mailMessageArray[0] = message;
+
+                System.out.println("Sending email ....");
+                try{
+                    mailSender.send(mailMessageArray);
+                    return true;
+                }  catch (MailException e){
+                    return false;
+                }
+
     }
-
-
 }

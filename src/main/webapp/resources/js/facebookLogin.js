@@ -9,5 +9,4 @@ $(document).ready(function () {
         document.getElementById("loginForm:fbLoginButton").click();
 
     }
-
 });

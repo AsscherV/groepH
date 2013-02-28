@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
@@ -32,6 +33,11 @@ public class LoginBean implements Serializable {
 
     @Autowired
     UserService userService;
+
+    @Qualifier("socialBean")
+        @ManagedProperty(value = "#{socialBean}")
+        @Autowired
+        SocialBean socialBean;
 
     @NotEmpty(message = "{email} {notempty}")
     @Email(message = "{email} {validEmail}")
@@ -115,6 +121,7 @@ public class LoginBean implements Serializable {
     public String logOut() {
         isLoggedIn = false;
         SecurityContextHolder.getContext().setAuthentication(null);
+        socialBean.logout();
         //FacesContext.getCurrentInstance().getExternalContext().redirect(url);
         return SUCCESS;
     }

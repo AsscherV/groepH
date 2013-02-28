@@ -21,19 +21,10 @@
                 </h:form>
                 <h:form  class="navbar-form pull-right">
 
-                    <h:panelGrid rendered="#{not socialBean.loggedIn}">
-                        <h:commandButton class="btn  btn-primary btn-mini" type="submit" value="Sign in with facebook"
-                                                                 action="#{socialBean.getFacebookUrlAuth}" immediate="true"/>
-                    </h:panelGrid>
-                    <h:panelGrid rendered="#{ socialBean.loggedIn}">
-                        <h:outputLabel value="Name"/>
-                        <h:outputLabel >#{socialBean.name}</h:outputLabel >
-                        <h:outputLabel value="Birthday"/>
-                        <h:outputLabel >#{socialBean.birthday}</h:outputLabel >
-                                            <h:commandButton class="btn  btn-primary btn-mini" type="submit" value="logout from facebook"
-                                                                                                             action="#{socialBean.logout}" immediate="true"/>
-                                                            </h:panelGrid>
                     <h:panelGrid columns="2" cellpadding="2" rendered="#{not loginBean.loggedIn}">
+                        <h:commandButton class="btn  btn-primary btn-mini" type="submit" value="Sign in with facebook"
+                                                                                         action="#{socialBean.getFacebookUrlAuth}" immediate="true"/>
+                        <h:column/>
                         <h:outputLabel value="Email"/>
                         <h:inputText id="email" styleClass="span2 loginInput" value="#{loginBean.email}"/>
                         <h:outputLabel value="Password"/>
