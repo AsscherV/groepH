@@ -11,4 +11,5 @@ public interface WaypointService {
     WaypointType getTypeByName(String name);
 
     List<WaypointType> fetchAllWaypointTypes();
+    List<Waypoint> fetchTripWaypoints();
 }

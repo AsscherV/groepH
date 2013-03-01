@@ -1,7 +1,8 @@
 package be.kdg.groeph.model;
 
 import org.hibernate.annotations.*;
-import org.hibernate.annotations.CascadeType;
+import org.hibernate.annotations.Cascade;
+
 
 import javax.persistence.*;
 import javax.persistence.Entity;
@@ -18,7 +19,7 @@ public class WaypointType {
     @Column(name = "type", nullable = false, length = 100)
     private String type;
     @OneToMany(mappedBy = "waypointType")
-    @Cascade({CascadeType.SAVE_UPDATE})
+    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     private List<Waypoint> waypoints = new ArrayList<Waypoint>();
 
     public WaypointType() {

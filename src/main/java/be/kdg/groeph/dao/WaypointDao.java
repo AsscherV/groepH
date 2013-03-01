@@ -14,4 +14,5 @@ public interface WaypointDao {
     void addWaypointType(WaypointType type);
 
     List<WaypointType> fetchAllWaypointTypes();
+    List<Waypoint> fetchAllWaypoints();
 }

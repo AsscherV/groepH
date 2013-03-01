@@ -41,4 +41,9 @@ public class WaypointDaoImpl implements WaypointDao{
         Query query = sessionFactory.getCurrentSession().createQuery("from WaypointType");
         return query.list();
     }
+
+    @Override
+    public List<Waypoint> fetchAllWaypoints() {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
 }

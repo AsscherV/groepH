@@ -1,5 +1,6 @@
 package be.kdg.groeph.bean;
 
+import be.kdg.groeph.model.Trip;
 import be.kdg.groeph.model.Waypoint;
 import be.kdg.groeph.model.WaypointType;
 import be.kdg.groeph.service.WaypointService;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Component;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.inject.Named;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.List;
 
@@ -38,12 +40,12 @@ public class WaypointBean  implements Serializable {
     private String label;
     @NotEmpty(message = "{waypointType} {notempty}")
     private String waypointType;
-    @NotEmpty(message = "{coordinates} {notempty}")
+    @NotNull(message = "{coordinates} {notempty}")
     private double lattitude;
-    @NotEmpty(message = "{coordinates} {notempty}")
+    @NotNull(message = "{coordinates} {notempty}")
     private double longitude;
 
-    Waypoint currentWaypoint;
+    private Waypoint currentWaypoint;
 
     public double getLattitude() {
         return lattitude;
@@ -110,4 +112,23 @@ public class WaypointBean  implements Serializable {
     public List<WaypointType> getAllWaypointTypes(){
         return waypointService.fetchAllWaypointTypes();
     }
+
+    public List<Waypoint> getTripWaypoints() {
+        return tripBean.getCurrentTrip().getWaypoints();
+    }
+
+    public void setCurrentWaypoint(Waypoint waypoint){
+        this.currentWaypoint = waypoint;
+    }
+
+    public Waypoint getCurrentWaypoint() {
+        return currentWaypoint;
+    }
+
+    public String setThisAsCurrentWaypoint(Waypoint currentWaypoint) {
+        setCurrentWaypoint(currentWaypoint);
+        return "WAYPOINT";
+    }
+
+
 }

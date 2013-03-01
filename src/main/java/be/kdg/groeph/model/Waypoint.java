@@ -32,6 +32,9 @@ public class Waypoint implements Nullable, Serializable {
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     private Trip trip;
 
+    public Waypoint(){
+
+    }
 
     public Waypoint(String label, String description, WaypointType waypointType, double lattitude, double longitude) {
 
@@ -80,5 +83,30 @@ public class Waypoint implements Nullable, Serializable {
     @Override
     public boolean isNull() {
         return false;
+    }
+
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public double getLattitude() {
+        return lattitude;
+    }
+
+    public void setLattitude(double lattitude) {
+        this.lattitude = lattitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 }

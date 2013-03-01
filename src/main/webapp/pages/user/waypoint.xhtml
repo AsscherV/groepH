@@ -1,0 +1,103 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+    <title>Trippy Traveler</title>
+    <!-- css -->
+    <h:outputStylesheet library="css" name="bootstrap.css"/>
+    <h:outputStylesheet library="css" name="bootstrap-responsive.css"/>
+    <h:outputStylesheet library="css" name="jquery-ui.css"/>
+    <h:outputStylesheet library="css" name="main.css"/>
+
+    <script type="text/javascript"
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCmZaUMdD7lz1F48ySOKKlEFdvZNw3keb0&amp;sensor=false">
+    </script>
+</h:head>
+<h:body>
+    <ui:insert name="header">
+        <ui:include src="../header.xhtml"/>
+    </ui:insert>
+    <div class="container">
+        <div class="row">
+
+            <!-- trips / my trips -->
+            <ui:insert name="header">
+                <ui:include src="tripmenu.xhtml"/>
+            </ui:insert>
+
+            <!-- trip info -->
+            <div class="span9">
+                <div id="tabContainerTrip" class="tabContainer">
+                    <ul>
+                        <!-- Tab buttons -->
+                        <li>
+                            <a class="button" href="trip.xhtml">#{tripBean.currentTrip.title}</a>
+                        </li>
+                        <h:panelGroup rendered="#{loginBean.loggedIn}">
+                            <li>
+                                <a class="button active" href="stops.xhtml">Stops</a>
+                            </li>
+                            <li>
+                                <a class="button" href="participants.xhtml">Participants</a>
+                            </li>
+                            <li>
+                                <a class="button " href="accessories.xhtml">Accessories</a>
+                            </li>
+                            <li>
+                                <a class="button" href="styling.xhtml">Styling</a>
+                            </li>
+                            <h:panelGroup rendered="#{loginBean.user.admin}">
+                                <li>
+                                    <a class="button" href="../admin/costs.xhtml">Costs</a>
+                                </li>
+                            </h:panelGroup>
+
+                        </h:panelGroup>
+                    </ul>
+                    <!-- Tab content -->
+                    <div class="tabDetails">
+
+                        <div id="accesTab" class="tabContentsTrip">
+                            <div class="box">
+                                <h:panelGrid class="floatLeft" columns="2" border="0">
+                                    <h:outputLabel value="#{msgs.title}"/>
+                                    <h:outputLabel value="#{waypointBean.currentWaypoint.label}"/>
+                                    <h:outputLabel value="#{msgs.description}"/>
+                                    <h:outputLabel value="#{waypointBean.currentWaypoint.description}"/>
+                                    <h:outputLabel value="#{msgs.type}"/>
+                                    <h:outputLabel value="#{waypointBean.currentWaypoint.waypointType.type}"/>
+                                    <h:outputLabel value="#{msgs.lat}"/>
+                                    <h:outputLabel value="#{waypointBean.currentWaypoint.lattitude}"/>
+                                    <h:outputLabel value="#{msgs.lng}"/>
+                                    <h:outputLabel value="#{waypointBean.currentWaypoint.longitude}"/>
+                                </h:panelGrid>
+
+                                <div id="map_canvas"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <footer>
+            <p>
+                © Trippy Traveler 2013
+            </p>
+        </footer>
+
+    </div>
+    <!-- /container -->
+
+    <!-- javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <h:outputScript name="js/jquery-1.9.0.min.js"/>
+    <h:outputScript name="js/jquery-ui.js"/>
+    <h:outputScript name="js/main.js"/>
+    <h:outputScript name="js/gMaps.js"/>
+</h:body>
+</html> 

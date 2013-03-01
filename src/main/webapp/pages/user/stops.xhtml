@@ -56,18 +56,18 @@
 
                             <div id="stopsTab" class="tabContentsTrip">
                                 <div class="box">
-                                    <!--
+
                                             <h:form>
-                                                <h:dataTable border="0" value="{tripBean.allWaypoints}" var="stop">
+                                                <h:dataTable border="0" value="#{tripBean.currentTrip.waypoints}" var="waypoint">
                                                     <h:column>
                                                         <div>
-                                                            <h:commandLink value="{stop.title}"
-                                                                           action="{tripBean.setCurrentWaypoint(stop)}"/>
+                                                            <h:commandLink value="#{waypoint.label}"
+                                                                           action="#{waypointBean.setThisAsCurrentWaypoint(waypoint)}"/>
                                                         </div>
                                                     </h:column>
                                                 </h:dataTable>
                                             </h:form>
-                                            -->
+
 
                                         <h:panelGroup rendered="#{loginBean.loggedIn}">
                                             <a href="../user/createWaypoint.xhtml">+ Add a Waypoint</a>

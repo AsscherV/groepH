@@ -33,4 +33,9 @@ public class WaypointServiceImpl implements WaypointService{
     public List<WaypointType> fetchAllWaypointTypes() {
         return waypointDao.fetchAllWaypointTypes();
     }
+
+    @Override
+    public List<Waypoint> fetchTripWaypoints() {
+        return waypointDao.fetchAllWaypoints();
+    }
 }

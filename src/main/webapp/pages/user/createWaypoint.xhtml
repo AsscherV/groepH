@@ -64,10 +64,10 @@
                         <div id="tripTab" class="tabContentsTrip">
                             <div class="box">
 
-                                    <h:form id="waypointForm">
+                                    <h:form id="waypointForm" class="floatLeft">
                                         <h:panelGrid columns="1" border="0">
                                             <h:outputLabel value="#{msgs.title}"/>
-                                            <h:inputText id="titel" styleClass="span2" value="#{waypointBean.title}"/>
+                                            <h:inputText id="titel" styleClass="span2" value="#{waypointBean.label}"/>
                                             <h:message for="titel" styleClass="error"/>
 
                                             <h:outputLabel value="#{msgs.description}"/>
@@ -77,21 +77,21 @@
 
                                             <h:outputLabel value="#{msgs.type}"/>
                                             <h:selectOneMenu value="#{waypointBean.waypointType}">
-                                                <!--
-                                                <f:selectItems value="{waypointBean.allWaypointTypes}" var="type"
-                                                               itemLabel="{type.id} : {type.type}" itemValue="{type.type}" />
-                                                               -->
+
+                                                <f:selectItems value="#{waypointBean.allWaypointTypes}" var="type"
+                                                               itemLabel="#{type.id} : #{type.type}" itemValue="#{type.type}" />
+
                                             </h:selectOneMenu>
                                             <h:column></h:column>
 
                                             <h:outputLabel value="#{msgs.lat}"/>
                                             <h:inputText id="lat" styleClass="span2"
-                                                         value="#{waypointBean.lat}"/>
+                                                         value="#{waypointBean.lattitude}"/>
                                             <h:message for="lat" styleClass="error"/>
 
                                             <h:outputLabel value="#{msgs.lng}"/>
                                             <h:inputText id="lng" styleClass="span2"
-                                                         value="#{waypointBean.lng}"/>
+                                                         value="#{waypointBean.longitude}"/>
                                             <h:message for="lng" styleClass="error"/>
 
 
