@@ -21,8 +21,9 @@
                 </h:form>
                 <h:form  class="navbar-form pull-right">
 
+
                     <h:panelGrid columns="2" cellpadding="2" rendered="#{not loginBean.loggedIn}">
-                        <h:commandButton class="btn  btn-primary btn-mini"  value="Sign in with facebook"
+                        <h:commandButton class="btn  btn-primary btn-mini" value="Sign in with facebook"
                                                                                          action="#{socialBean.getFacebookUrlAuth}" immediate="true"/>
                         <h:column/>
                         <h:outputLabel value="Email"/>
