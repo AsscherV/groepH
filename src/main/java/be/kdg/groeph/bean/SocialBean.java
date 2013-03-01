@@ -19,6 +19,8 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Date;
 
 
@@ -38,28 +40,24 @@ public class SocialBean implements Serializable {
     LoginBean loginBean;
 
     @ManagedProperty(value = "#{mailService}")
-        @Autowired
-        MailService mailService;
+    @Autowired
+    MailService mailService;
 
     private String access_token = "";
 
     private FacebookClient facebookClient;
     private User fbUser;
     private boolean loggedIn;
-    private String name;
-    private String birthday;
-    private String email;
-    private TripUser user;
+    private String appId = "414428928649857";
+    private String redirectUrl = "http://localhost:8080/groepH-1.0/pages/index.xhtml";
 
     public SocialBean() {
         loggedIn = false;
     }
 
-    public void getFacebookUrlAuth() {
-        String appId = "414428928649857";
-        String redirectUrl = "http://localhost:8080/groepH-1.0/pages/index.xhtml";
+    public void getFacebookUrlAuth() throws UnsupportedEncodingException {
         String url = "https://www.facebook.com/dialog/oauth?client_id="
-                + appId + "&redirect_uri=" + redirectUrl
+                + appId + "&redirect_uri=" + URLEncoder.encode(redirectUrl, "UTF-8")
                 + "&scope=email,user_birthday,user_hometown&response_type=token&display=popup";
         try {
             FacesContext.getCurrentInstance().getExternalContext().redirect(url);
@@ -75,9 +73,6 @@ public class SocialBean implements Serializable {
         loggedIn = true;
         facebookClient = new DefaultFacebookClient(access_token);
         fbUser = facebookClient.fetchObject("me", User.class);
-        name = fbUser.getFirstName();
-        birthday = fbUser.getGender();
-        email = fbUser.getEmail();
 
         user = userService.getUserByEmail(fbUser.getEmail());
 
@@ -102,69 +97,27 @@ public class SocialBean implements Serializable {
             loginBean.setUser(user);
             loginBean.setLoggedIn(true);
 
-            mailService.uponFacebookLoginNoAccount(user.getEmail(),newPassword);
+            mailService.uponFacebookLoginNoAccount(user.getEmail(), newPassword);
             return "SUCCESS";
         } else {
             loginBean.setUser(user);
             loginBean.setLoggedIn(true);
             return "SUCCESS";
         }
-
     }
 
-    public void logout() {
+    public void logout()  {
         loggedIn = false;
         facebookClient = null;
-        user = null;
+        fbUser = null;
     }
-
-    /*public String addUser() throws ParseException {
-            Address address = new Address(getStreet(), getStreetNumber(), getZipcode(), getCity());
-            setRole("ROLE_USER");
-            setDateRegistered(new Date());
-            TripUser user = new TripUser(getFirstName(), getLastName(), getDateOfBirth(), getPhoneNumber(), getGender(), getEmail(), SHAEncryption.encrypt(getPassword()), address, getDateRegistered(), getRole());
-            user.setAccountNonExpired(true);
-            user.setAccountNonLocked(true);
-            user.setCredentialsNonExpired(true);
-            user.setEnabled(true);
-
-            if (confirmPassword()) {
-                boolean result = userService.addUser(user);
-                if (result) {
-                    userService.addUser(user);
-                    mailService.uponSuccessfulRegistration(user.getEmail());
-                    registered = true;
-                    return SUCCESS;
-                }
-                return FAILURE;
-            }
-            return FAILURE;
-        } */
 
     public boolean isLoggedIn() {
         return loggedIn;
     }
 
     public void setLoggedIn(boolean loggedIn) {
-
         this.loggedIn = loggedIn;
-
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(String birthday) {
-        this.birthday = birthday;
     }
 
     public String getAccess_token() {
@@ -175,11 +128,4 @@ public class SocialBean implements Serializable {
         this.access_token = access_token;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
 }

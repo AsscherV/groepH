@@ -17,6 +17,7 @@ import javax.faces.bean.SessionScoped;
 import javax.inject.Named;
 import javax.security.auth.login.LoginException;
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
 
 @Component
 @Named
@@ -121,7 +122,9 @@ public class LoginBean implements Serializable {
     public String logOut() {
         isLoggedIn = false;
         SecurityContextHolder.getContext().setAuthentication(null);
-        socialBean.logout();
+        if(socialBean.isLoggedIn()){
+            socialBean.logout();
+        }
         //FacesContext.getCurrentInstance().getExternalContext().redirect(url);
         return SUCCESS;
     }

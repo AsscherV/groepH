@@ -14,6 +14,7 @@ import org.springframework.test.context.junit4.AbstractTransactionalJUnit4Spring
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.security.auth.login.LoginException;
+import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.util.Calendar;
 
@@ -77,7 +78,7 @@ public class TestLoginBean extends AbstractTransactionalJUnit4SpringContextTests
     }
 
     @Test
-    public void testLogOut() throws LoginException {
+    public void testLogOut() throws LoginException{
         setLoginBean(validEmail, "password");
         //loginBean.setEmail("greg.deckers@student.kdg.be");
         //loginBean.setPassword("password");
