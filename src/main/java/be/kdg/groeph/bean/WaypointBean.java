@@ -2,50 +2,69 @@ package be.kdg.groeph.bean;
 
 import be.kdg.groeph.model.Waypoint;
 import be.kdg.groeph.model.WaypointType;
-import be.kdg.groeph.service.TripService;
+import be.kdg.groeph.service.WaypointService;
 import org.apache.log4j.Logger;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.util.List;
 
 
 @Component
 @SessionScoped
 @Named
 public class WaypointBean  implements Serializable {
-    static Logger logger = Logger.getLogger(TripBean.class);
+    static Logger logger = Logger.getLogger(WaypointBean.class);
     private static final String SUCCESS = "SUCCESS";
     private static final String FAILURE = "FAILURE";
 
-    @ManagedProperty(value = "#{tripService}")
+    @ManagedProperty(value = "#{waypointService}")
     @Autowired
-    TripService tripService;
+    WaypointService waypointService;
 
-    @NotEmpty(message = "{title} {notempty}")
-    private String title;
+    @Qualifier("tripBean")
+    @Autowired
+    TripBean tripBean;
+
     @NotEmpty(message = "{description} {notempty}")
     private String description;
     @NotEmpty(message = "{label} {notempty}")
     private String label;
     @NotEmpty(message = "{waypointType} {notempty}")
-    private WaypointType waypointType;
-    @NotEmpty(message = "{lat} {notempty}")
-    private double lat;
-    @NotEmpty(message = "{lng} {notempty}")
-    private double lng;
+    private String waypointType;
+    @NotEmpty(message = "{coordinates} {notempty}")
+    private double lattitude;
+    @NotEmpty(message = "{coordinates} {notempty}")
+    private double longitude;
 
     Waypoint currentWaypoint;
 
-    public WaypointType getWaypointType() {
+    public double getLattitude() {
+        return lattitude;
+    }
+
+    public void setLattitude(double lattitude) {
+        this.lattitude = lattitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+    public String getWaypointType() {
         return waypointType;
     }
 
-    public void setWaypointType(WaypointType waypointType) {
+    public void setWaypointType(String waypointType) {
         this.waypointType = waypointType;
     }
 
@@ -55,30 +74,6 @@ public class WaypointBean  implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public double getLat() {
-        return lat;
-    }
-
-    public double getLng() {
-        return lng;
-    }
-
-    public void setLng(double lng) {
-        this.lng = lng;
-    }
-
-    public void setLat(double lat) {
-        this.lat = lat;
     }
 
     public String getLabel() {
@@ -92,10 +87,27 @@ public class WaypointBean  implements Serializable {
 
 
     public String addWaypoint() {
-        if(tripService.addWaypoint(new Waypoint()))
+        WaypointType type = waypointService.getTypeByName(getWaypointType());
+        Waypoint waypoint= new Waypoint(getLabel(),getDescription(),type,getLattitude(),getLongitude());
+        tripBean.getCurrentTrip().addWaypoint(waypoint);
+
+        if(waypointService.addWaypoint(waypoint) )
         {
+            clearfield();
             return SUCCESS;
         }
         return FAILURE  ;
+    }
+
+    private void clearfield() {
+            label=null;
+            description=null;
+            lattitude=0;
+            longitude=0;
+            waypointType=null;
+    }
+
+    public List<WaypointType> getAllWaypointTypes(){
+        return waypointService.fetchAllWaypointTypes();
     }
 }

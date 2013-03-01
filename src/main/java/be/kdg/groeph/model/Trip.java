@@ -49,6 +49,11 @@ public class Trip implements Nullable, Serializable {
     @JoinColumn(name="id", nullable = true)
     private List<TripUser> tripUsers = new ArrayList<TripUser>();
 
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(mappedBy = "trip")
+    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
+    private List<Waypoint> waypoints;
+
     public Trip() {
     }
 
@@ -60,6 +65,7 @@ public class Trip implements Nullable, Serializable {
         this.labels = labels;
         this.tripType = tripType;
         this.isPublic = isPublic;
+        waypoints= new ArrayList<Waypoint>();
     }
 
     public Trip(String title, String description, Date startTime, Date endTime, ArrayList<Label> labels, boolean isPublic) {
@@ -69,6 +75,7 @@ public class Trip implements Nullable, Serializable {
         this.endTime = endTime;
         this.labels = labels;
         this.isPublic = isPublic;
+        waypoints= new ArrayList<Waypoint>();
     }
 
     public Trip(String title, String description, Date startTime, Date endTime, TripType tripType, boolean isPublic) {
@@ -78,6 +85,16 @@ public class Trip implements Nullable, Serializable {
         this.endTime = endTime;
         this.tripType = tripType;
         this.isPublic = isPublic;
+        waypoints= new ArrayList<Waypoint>();
+    }
+
+
+    public List<Waypoint> getWaypoints() {
+        return waypoints;
+    }
+
+    public void setWaypoints(List<Waypoint> waypoints) {
+        this.waypoints = waypoints;
     }
 
     public void addLabel(Label label) {
@@ -171,6 +188,12 @@ public class Trip implements Nullable, Serializable {
 
     public void setTripUser(TripUser tripUser) {
         this.tripUser = tripUser;
+    }
+
+    public void addWaypoint(Waypoint waypoint) {
+        waypoint.setTrip(this);
+        waypoints.add(waypoint);
+
     }
 
     public void addTripUser(TripUser tripUser){

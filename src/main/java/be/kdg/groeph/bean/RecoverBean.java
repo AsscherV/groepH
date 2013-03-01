@@ -1,6 +1,7 @@
 package be.kdg.groeph.bean;
 
 import be.kdg.groeph.service.MailService;
+import org.apache.log4j.Logger;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -21,6 +22,7 @@ import javax.inject.Named;
 @Named
 @RequestScoped
 public class RecoverBean {
+    static Logger logger = Logger.getLogger(RecoverBean.class);
 
     @ManagedProperty(value = "#{mailService}")
     @Autowired

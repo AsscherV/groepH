@@ -53,11 +53,6 @@ public class TripServiceImpl implements TripService {
     }
 
     @Override
-    public boolean addWaypoint(Waypoint waypoint) {
-        return true;
-    }
-
-    @Override
     public void addUserToTrip(Trip trip) {
         //To change body of implemented methods use File | Settings | File Templates.
     }
