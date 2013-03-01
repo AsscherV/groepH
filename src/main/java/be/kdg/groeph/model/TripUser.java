@@ -58,7 +58,7 @@ public class TripUser implements Nullable, Serializable {
 
     @OneToMany(mappedBy = "tripUser", fetch = FetchType.EAGER)
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    private List<Trip> trips = new ArrayList<Trip>();
+    private List<Trip> trips;
 
     @ManyToMany
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
@@ -80,6 +80,7 @@ public class TripUser implements Nullable, Serializable {
         this.address = address;
         this.dateRegistered = dateRegistered;
         this.role = role;
+        trips = new ArrayList<Trip>();
     }
 
     public TripUser(String firstName, String lastName, Date dateOfBirth, String phoneNumber, char gender, String email, String password, String tempPassword, Address address, Date dateRegistered, String role) {

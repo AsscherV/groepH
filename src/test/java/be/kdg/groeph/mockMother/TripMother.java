@@ -34,4 +34,5 @@ public class TripMother {
 
         return new Trip(title, description, startTime, endTime,labels,tripType,isPublic);
     }
+
 }
