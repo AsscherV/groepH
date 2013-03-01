@@ -68,4 +68,9 @@ public class TripDaoMock implements TripDao {
     public void addTripType(TripType tripType) {
         tripTypes.add(tripType);
     }
+
+    @Override
+    public Trip getTripByName(String tripName) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
 }

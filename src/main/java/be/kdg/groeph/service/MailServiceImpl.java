@@ -140,7 +140,7 @@ public class MailServiceImpl implements MailService {
                 String toAddress = email;
                 message.setTo(toAddress);
                 message.setSubject("Facebook user registration successful!");
-                message.setText("You have registered with facebook if you want to login please use \n email: "+toAddress+" \n password: "+ password +" .");
+                message.setText("You have registered with facebook if you want to login please use \nemail: "+toAddress+" \npassword: "+ password );
                 mailMessageArray[0] = message;
 
                 System.out.println("Sending email ....");

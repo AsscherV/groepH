@@ -43,7 +43,9 @@
                                     <h:column>
                                         <div>
                                             <h:commandLink value="#{trip.title}"
-                                                           action="#{tripBean.setThisAsCurrentTrip(trip)}"/>
+                                                           action="#{tripBean.setThisAsCurrentTrip}">
+                                                    <f:param name="currentTrip" value="#{trip.title}"/>
+                                            </h:commandLink>
 
                                         </div>
                                     </h:column>
@@ -69,7 +71,21 @@
                                         <h:column>
                                             <div>
                                                 <h:commandLink value="#{trip.title}"
-                                                               action="#{tripBean.setThisAsCurrentTrip(trip)}"/>
+                                                               action="#{tripBean.setThisAsCurrentTrip}">
+                                                    <f:param name="currentTrip" value="#{trip.title}"/>
+                                                </h:commandLink>
+
+                                            </div>
+                                        </h:column>
+                                    </h:dataTable>
+                                    <p>--INVITATIONS--</p>
+                                    <h:dataTable border="0" value="#{loginBean.user.invitedTrips}" var="invitedTrip">
+                                        <h:column>
+                                            <div>
+                                                <h:commandLink value="#{invitedTrip.title}"
+                                                               action="#{tripBean.setThisAsCurrentTrip}">
+                                                    <f:param name="currentTrip" value="#{invitedTrip.title}"/>
+                                                </h:commandLink>
 
                                             </div>
                                         </h:column>

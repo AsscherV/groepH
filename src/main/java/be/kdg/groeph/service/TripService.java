@@ -15,4 +15,6 @@ public interface TripService {
     TripType getTypeByName(String naam);
 
     void addUserToTrip(Trip trip);
+
+    Trip getTripByName(String tripName);
 }

@@ -64,5 +64,10 @@ public class TripDaoImpl implements TripDao {
         sessionFactory.getCurrentSession().saveOrUpdate(tripType);
     }
 
-
+    @Override
+    public Trip getTripByName(String tripName) {
+        Query query = sessionFactory.getCurrentSession().createQuery("from Trip where title=:tripName");
+        query.setParameter("tripName",tripName);
+        return (Trip) query.uniqueResult();
+    }
 }

@@ -15,7 +15,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.*;
@@ -126,9 +128,12 @@ public class TripBean implements Serializable {
         this.currentTrip = currentTrip;
     }
 
-    public String setThisAsCurrentTrip(Trip currentTrip) {
-        setCurrentTrip(currentTrip);
-        return "TRIP";
+    public String setThisAsCurrentTrip() {
+        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        String tripName = request.getParameter("currentTrip");
+        Trip trip = tripService.getTripByName(tripName);
+        setCurrentTrip(trip);
+        return SUCCESS;
     }
 
     public String addTrip() {

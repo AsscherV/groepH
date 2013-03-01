@@ -91,6 +91,7 @@ public class TestRest extends AbstractTransactionalJUnit4SpringContextTests {
         Client client = Client.create(new DefaultClientConfig());
         WebResource service = client.resource(getBaseURI());
          //GEBRUIKT ECHTE DATABANK : DUS ZELF USER AANMAKEN DIE HIERONDER STAAT
+        //TODO User aanmaken email: guntherlaurijssens@gmail.com  password: g
         user.setPassword("g");
         user.setEmail("guntherlaurijssens@gmail.com");
 
@@ -99,7 +100,8 @@ public class TestRest extends AbstractTransactionalJUnit4SpringContextTests {
 
         assertEquals("result van RestCall moet test zijn", user.getEmail(), Tuser.getEmail());
     }
-    */
+     */
+
 
     private TripUser getTripUserFromResponse(String restValidUser) {
         TripUser Tuser = new JSONDeserializer<TripUser>().deserialize(restValidUser);

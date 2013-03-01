@@ -54,6 +54,12 @@ public class TripServiceImpl implements TripService {
 
     @Override
     public void addUserToTrip(Trip trip) {
-        //To change body of implemented methods use File | Settings | File Templates.
+
+        userDao.addInvitedUser(trip.getTripUser());
+    }
+
+    @Override
+    public Trip getTripByName(String tripName) {
+        return tripDao.getTripByName(tripName);
     }
 }

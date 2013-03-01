@@ -24,7 +24,6 @@ public class Waypoint implements Nullable, Serializable {
 
     @ManyToOne
     @JoinColumn(name = "waypointType", nullable = true)
-    //@Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     private WaypointType waypointType;
 
     @ManyToOne
