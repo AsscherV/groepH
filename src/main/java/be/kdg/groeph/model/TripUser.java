@@ -5,6 +5,9 @@ import be.kdg.groeph.model.Null.Nullable;
 import org.codehaus.jackson.annotate.JsonAutoDetect;
 import org.codehaus.jackson.map.util.JSONPObject;
 import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -60,6 +63,7 @@ public class TripUser implements Nullable, Serializable {
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     private List<Trip> trips;
 
+    @LazyCollection(LazyCollectionOption.FALSE)
     @ManyToMany
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     @JoinColumn(name="id", nullable = true)

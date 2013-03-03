@@ -12,7 +12,9 @@ import org.springframework.stereotype.Component;
 
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.List;
@@ -25,6 +27,7 @@ public class WaypointBean  implements Serializable {
     static Logger logger = Logger.getLogger(WaypointBean.class);
     private static final String SUCCESS = "SUCCESS";
     private static final String FAILURE = "FAILURE";
+    private static final String WAYPOINT = "WAYPOINT";
 
     @ManagedProperty(value = "#{waypointService}")
     @Autowired
@@ -125,9 +128,12 @@ public class WaypointBean  implements Serializable {
         return currentWaypoint;
     }
 
-    public String setThisAsCurrentWaypoint(Waypoint currentWaypoint) {
-        setCurrentWaypoint(currentWaypoint);
-        return "WAYPOINT";
+    public String setThisAsCurrentWaypoint() {
+        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        String waypointId = request.getParameter("currentWaypointId");
+        Waypoint waypoint = waypointService.getWaypointById(Integer.parseInt(waypointId));
+        setCurrentWaypoint(waypoint);
+        return WAYPOINT;
     }
 
 

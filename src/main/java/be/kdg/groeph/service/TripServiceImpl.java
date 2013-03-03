@@ -2,6 +2,7 @@ package be.kdg.groeph.service;
 
 import be.kdg.groeph.dao.TripDao;
 import be.kdg.groeph.dao.UserDao;
+import be.kdg.groeph.model.Label;
 import be.kdg.groeph.model.Trip;
 import be.kdg.groeph.model.TripType;
 import be.kdg.groeph.model.Waypoint;
@@ -31,7 +32,6 @@ public class TripServiceImpl implements TripService {
 
     @Override
     public boolean addTrip(Trip trip) {
-        //hier checken of het nen valid trip is
         logger.info("Trip: " + trip.getTitle() + " created");
         return tripDao.addTrip(trip);
     }
@@ -62,4 +62,9 @@ public class TripServiceImpl implements TripService {
     public Trip getTripByName(String tripName) {
         return tripDao.getTripByName(tripName);
     }
+    @Override
+    public List<Label> getLabels(Trip trip) {
+        return tripDao.getLabels(trip);
+    }
+
 }

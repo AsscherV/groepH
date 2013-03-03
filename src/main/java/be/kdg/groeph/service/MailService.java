@@ -14,4 +14,5 @@ public interface MailService {
     public boolean uponTripInvitation(ArrayList<String> emails, Trip trip);
     public boolean recoverPassword(String email);
     public boolean uponFacebookLoginNoAccount(String email, String password);
+    public boolean uponGeneratingNewAccountFromEmail(String email, String password);
 }

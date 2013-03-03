@@ -1,5 +1,6 @@
 package be.kdg.groeph.dao;
 
+import be.kdg.groeph.model.Label;
 import be.kdg.groeph.model.Trip;
 import be.kdg.groeph.model.TripUser;
 import be.kdg.groeph.model.TripType;
@@ -23,10 +24,7 @@ public class TripDaoImpl implements TripDao {
     @Override
     @SuppressWarnings("unchecked")
     public boolean addTrip(Trip trip) {
-        //TODO: Tip indien er een Non-UniqueObject exception gethrowed wordt ofwel session clearen ofwel cascade option weghalen bij dat object uit model klasse
-        //sessionFactory.getCurrentSession().clear();
         sessionFactory.getCurrentSession().saveOrUpdate(trip);
-        //sessionFactory.getCurrentSession().merge(trip);
         return true;
     }
 
@@ -69,5 +67,15 @@ public class TripDaoImpl implements TripDao {
         Query query = sessionFactory.getCurrentSession().createQuery("from Trip where title=:tripName");
         query.setParameter("tripName",tripName);
         return (Trip) query.uniqueResult();
+    }
+
+    @Override
+    public List<Label> getLabels(Trip trip) {
+        if(trip!=null){
+            Query query = sessionFactory.getCurrentSession().createQuery("from Label where trip=:trip");
+            query.setParameter("trip",trip);
+            return (List<Label>) query.list();
+        }
+        return null;
     }
 }

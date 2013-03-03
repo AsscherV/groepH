@@ -99,7 +99,6 @@ public class ParticipantsBean implements Serializable {
     }
 
     public boolean validMails(String pEmails) {
-
         String[] emails = pEmails.split(";");
         invalidEmails.clear();
         validEmails.clear();

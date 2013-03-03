@@ -50,6 +50,9 @@
                             <li>
                                 <a class="button" href="styling.xhtml">Styling</a>
                             </li>
+                            <li>
+                                <a class="button" href="tripCosts.xhtml">Costs</a>
+                            </li>
                             <h:panelGroup rendered="#{loginBean.user.admin}">
                                 <li>
                                     <a class="button" href="../admin/costs.xhtml">Costs</a>
@@ -64,7 +67,7 @@
                         <div id="tripTab" class="tabContentsTrip">
                             <div class="box">
 
-                                    <h:form id="waypointForm" class="floatLeft">
+                                    <h:form id="waypointForm" class="floatLeft marginRight">
                                         <h:panelGrid columns="1" border="0">
                                             <h:outputLabel value="#{msgs.title}"/>
                                             <h:inputText id="titel" styleClass="span2" value="#{waypointBean.label}"/>

@@ -47,6 +47,9 @@
                             <li>
                                 <a class="button" href="styling.xhtml">Styling</a>
                             </li>
+                            <li>
+                                <a class="button" href="tripCosts.xhtml">Costs</a>
+                            </li>
                             <h:panelGroup rendered="#{loginBean.user.admin}">
                                 <li>
                                     <a class="button" href="../admin/costs.xhtml">Costs</a>
@@ -60,7 +63,7 @@
 
                         <div id="accesTab" class="tabContentsTrip">
                             <div class="box">
-                                <h:panelGrid class="floatLeft" columns="2" border="0">
+                                <h:panelGrid class="floatLeft marginRight" columns="2" border="0">
                                     <h:outputLabel value="#{msgs.title}"/>
                                     <h:outputLabel value="#{waypointBean.currentWaypoint.label}"/>
                                     <h:outputLabel value="#{msgs.description}"/>
@@ -68,9 +71,10 @@
                                     <h:outputLabel value="#{msgs.type}"/>
                                     <h:outputLabel value="#{waypointBean.currentWaypoint.waypointType.type}"/>
                                     <h:outputLabel value="#{msgs.lat}"/>
-                                    <h:outputLabel value="#{waypointBean.currentWaypoint.lattitude}"/>
+                                    <h:outputLabel id="lat" value="#{waypointBean.currentWaypoint.lattitude}"/>
                                     <h:outputLabel value="#{msgs.lng}"/>
-                                    <h:outputLabel value="#{waypointBean.currentWaypoint.longitude}"/>
+                                    <h:outputLabel id="lng" value="#{waypointBean.currentWaypoint.longitude}"/>
+                                    <a id="reset" class="button">Reset map</a>
                                 </h:panelGrid>
 
                                 <div id="map_canvas"></div>
@@ -98,6 +102,6 @@
     <h:outputScript name="js/jquery-1.9.0.min.js"/>
     <h:outputScript name="js/jquery-ui.js"/>
     <h:outputScript name="js/main.js"/>
-    <h:outputScript name="js/gMaps.js"/>
+    <h:outputScript name="js/gMapUneditable.js"/>
 </h:body>
 </html> 

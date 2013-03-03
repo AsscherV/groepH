@@ -19,7 +19,8 @@ public class Label implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "trip", nullable = true)
-    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
+    //TODO: enkel cascade DELETE fzo
+    //@Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     private Trip trip;
 
     public Label() {

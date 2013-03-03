@@ -44,15 +44,21 @@ public class Trip implements Nullable, Serializable {
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     private TripUser tripUser;
 
+    @LazyCollection(LazyCollectionOption.FALSE)
     @ManyToMany
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     @JoinColumn(name="id", nullable = true)
     private List<TripUser> tripUsers = new ArrayList<TripUser>();
 
+    @OneToMany(mappedBy = "trip")
+    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
+    private List<Cost> costs = new ArrayList<Cost>();
+
     @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(mappedBy = "trip")
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    private List<Waypoint> waypoints;
+    private List<Waypoint> waypoints = new ArrayList<Waypoint>();
+
 
     public Trip() {
     }
@@ -65,7 +71,6 @@ public class Trip implements Nullable, Serializable {
         this.labels = labels;
         this.tripType = tripType;
         this.isPublic = isPublic;
-        waypoints= new ArrayList<Waypoint>();
     }
 
     public Trip(String title, String description, Date startTime, Date endTime, ArrayList<Label> labels, boolean isPublic) {
@@ -75,7 +80,6 @@ public class Trip implements Nullable, Serializable {
         this.endTime = endTime;
         this.labels = labels;
         this.isPublic = isPublic;
-        waypoints= new ArrayList<Waypoint>();
     }
 
     public Trip(String title, String description, Date startTime, Date endTime, TripType tripType, boolean isPublic) {
@@ -85,16 +89,6 @@ public class Trip implements Nullable, Serializable {
         this.endTime = endTime;
         this.tripType = tripType;
         this.isPublic = isPublic;
-        waypoints= new ArrayList<Waypoint>();
-    }
-
-
-    public List<Waypoint> getWaypoints() {
-        return waypoints;
-    }
-
-    public void setWaypoints(List<Waypoint> waypoints) {
-        this.waypoints = waypoints;
     }
 
     public void addLabel(Label label) {
@@ -190,13 +184,28 @@ public class Trip implements Nullable, Serializable {
         this.tripUser = tripUser;
     }
 
-    public void addWaypoint(Waypoint waypoint) {
-        waypoint.setTrip(this);
-        waypoints.add(waypoint);
-
-    }
-
     public void addTripUser(TripUser tripUser){
         tripUsers.add(tripUser);
+    }
+
+    public List<Cost> getCosts() {
+        return costs;
+    }
+
+    public void setCosts(List<Cost> costs) {
+        this.costs = costs;
+    }
+
+    public List<Waypoint> getWaypoints() {
+        return waypoints;
+    }
+
+    public void setWaypoints(List<Waypoint> waypoints) {
+        this.waypoints = waypoints;
+    }
+
+    public void addWaypoint(Waypoint waypoint) {
+        waypoints.add(waypoint);
+        waypoint.setTrip(this);
     }
 }

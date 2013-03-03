@@ -36,9 +36,15 @@ public class LoginBean implements Serializable {
     UserService userService;
 
     @Qualifier("socialBean")
-        @ManagedProperty(value = "#{socialBean}")
-        @Autowired
-        SocialBean socialBean;
+    @ManagedProperty(value = "#{socialBean}")
+    @Autowired
+    SocialBean socialBean;
+
+    @Qualifier("tripBean")
+    @ManagedProperty(value = "#{tripBean}")
+    @Autowired
+    TripBean tripBean;
+
 
     @NotEmpty(message = "{email} {notempty}")
     @Email(message = "{email} {validEmail}")
@@ -51,8 +57,6 @@ public class LoginBean implements Serializable {
     private boolean isLoggedIn;
 
     TripUser user;
-
-
 
 
     public String getPassword() {
@@ -95,25 +99,21 @@ public class LoginBean implements Serializable {
         isLoggedIn = loggedIn;
     }
 
-    public String loginUser() throws LoginException{
+    public String loginUser() throws LoginException {
         try {
             user = loginService.loginUser(email, SHAEncryption.encrypt(password));
             if (user.isNull()) {
                 return FAILURE;
-            }
-            else if(user.getTempPassword()!=null && user.getTempPassword().equals(SHAEncryption.encrypt(password)))
-            {
-                userService.changePassword(user,user.getTempPassword());
+            } else if (user.getTempPassword() != null && user.getTempPassword().equals(SHAEncryption.encrypt(password))) {
+                userService.changePassword(user, user.getTempPassword());
                 isLoggedIn = true;
                 return RESET;
-            }
-           else{
+            } else {
 
                 isLoggedIn = true;
                 return SUCCESS;
-             }
             }
-         catch (Exception e) {
+        } catch (Exception e) {
             return FAILURE;
         }
     }
@@ -122,16 +122,17 @@ public class LoginBean implements Serializable {
     public String logOut() {
         isLoggedIn = false;
         SecurityContextHolder.getContext().setAuthentication(null);
-        if(socialBean.isLoggedIn()){
+        if (socialBean.isLoggedIn()) {
             socialBean.logout();
         }
+        tripBean.currentTrip = null;
         //FacesContext.getCurrentInstance().getExternalContext().redirect(url);
         return SUCCESS;
     }
 
     public String tempPasswordLogin() {
-        if(password.equals(secondPassword)){
-             userService.changePassword(user, SHAEncryption.encrypt(password));
+        if (password.equals(secondPassword)) {
+            userService.changePassword(user, SHAEncryption.encrypt(password));
         }
         return SUCCESS;
 

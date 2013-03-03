@@ -1,5 +1,6 @@
 package be.kdg.groeph.dao;
 
+import be.kdg.groeph.model.Label;
 import be.kdg.groeph.model.Trip;
 import be.kdg.groeph.model.TripType;
 import be.kdg.groeph.model.TripUser;
@@ -18,4 +19,6 @@ public interface TripDao {
     void addTripType(TripType tripType);
 
     Trip getTripByName(String tripName);
+
+    List<Label> getLabels(Trip trip);
 }

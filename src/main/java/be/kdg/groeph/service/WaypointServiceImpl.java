@@ -38,4 +38,15 @@ public class WaypointServiceImpl implements WaypointService{
     public List<Waypoint> fetchTripWaypoints() {
         return waypointDao.fetchAllWaypoints();
     }
+
+    @Override
+    public Waypoint getWaypointByLabel(String waypointLabel) {
+        return waypointDao.getWaypointByLabel(waypointLabel);
+    }
+
+    @Override
+    public Waypoint getWaypointById(int id) {
+        return waypointDao.getWaypointById(id);
+    }
+
 }

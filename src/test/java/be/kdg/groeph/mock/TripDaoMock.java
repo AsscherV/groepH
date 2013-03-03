@@ -1,6 +1,7 @@
 package be.kdg.groeph.mock;
 
 import be.kdg.groeph.dao.TripDao;
+import be.kdg.groeph.model.Label;
 import be.kdg.groeph.model.Trip;
 import be.kdg.groeph.model.TripType;
 import org.springframework.stereotype.Repository;
@@ -71,6 +72,11 @@ public class TripDaoMock implements TripDao {
 
     @Override
     public Trip getTripByName(String tripName) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public List<Label> getLabels(Trip trip) {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 }

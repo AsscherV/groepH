@@ -10,6 +10,7 @@
     <h:outputStylesheet library="css" name="main.css"/>
 </h:head>
 <h:body>
+    <f:loadBundle basename="messages" var="msgs"/>
     <ui:insert name="header">
         <ui:include src="../header.xhtml"/>
     </ui:insert>
@@ -35,7 +36,7 @@
                                 <a class="button" href="stops.xhtml">Stops</a>
                             </li>
                             <li>
-                                <a class="button active" href="participants.xhtml">Participants</a>
+                                <a class="button" href="participants.xhtml">Participants</a>
                             </li>
                             <li>
                                 <a class="button" href="accessories.xhtml">Accessories</a>
@@ -44,7 +45,7 @@
                                 <a class="button" href="styling.xhtml">Styling</a>
                             </li>
                             <li>
-                                <a class="button" href="tripCosts.xhtml">Costs</a>
+                                <a class="button active" href="tripCosts.xhtml">Costs</a>
                             </li>
                             <h:panelGroup rendered="#{loginBean.user.admin}">
                                 <li>
@@ -59,16 +60,48 @@
 
                         <div id="partTab" class="tabContentsTrip">
                             <div class="box">
-                                <!--liijst van participants op dit moment. -->
-                                <h:form>
-                                    <h:inputTextarea value="#{participantsBean.emails}"/>
-                                    <h:commandButton type="submit" action="#{participantsBean.sendInvitations}"
-                                                     class="btn btn-success" value="send invitations"/>
-                                </h:form>
+                                <h1>Costs of TRIP <h:outputText value="#{costBean.currentTrip.title}"/>  </h1>
+                                <!--HIer nen list met alle kosten + Bijlage -->
+                                <h:dataTable value="#{costBean.costs}" var="cost">
 
-                                <h:panelGroup rendered="#{participantsBean.hasInvalidEmails}">
-                                    <h:outputText value="#{participantsBean.invalidEmails}"/>
-                                </h:panelGroup>
+
+
+                                    <h:column>
+                                     <h:head>CostName </h:head>
+
+                                    <h:outputText value="#{cost.text}"/> <br/>
+
+
+                                    </h:column>
+                                    <h:column>
+                                        <h:head>CostValue </h:head>
+                                        <h:outputText value="#{cost.costValue}"/>  <br/>
+                                    </h:column>
+                                    <h:column>
+                                        <h:head>UserName </h:head>
+                                        <h:outputText value="#{cost.tripUser.firstName}"/>
+                                    </h:column>
+
+                                </h:dataTable>
+
+                                <!--2 fields (tekst,kost) , + filepicker -->
+                                <h:form columns="3" border="0">
+                                    <h:outputLabel value="#{msgs.Cost}"/>
+                                    <h:inputText id="text" styleClass="span2" value="#{costBean.text}"/>
+                                    <h:message for="text" styleClass="error"/>
+
+
+                                    <h:outputLabel value="#{msgs.CostValue}"/>
+                                    <h:inputText id="costValue" styleClass="span2" value="#{costBean.costValue}"/>
+                                    <h:message for="costValue" styleClass="error"/>
+
+                                    <!-- Hier moet een date file picker
+                                    <h:outputLabel value="{msgs.Images}"/>
+                                    <t:inputFileUpload binding="{costBean.uFile}" />
+                                    <h:outputText value=""/>-->
+                                  <br/>
+                                    <h:commandButton value="submit" type="submit" action="#{costBean.addCost}" />
+                                </h:form>
 
                             </div>
                         </div>
@@ -77,7 +110,6 @@
             </div>
 
         </div>
-
 
         <footer>
             <p>

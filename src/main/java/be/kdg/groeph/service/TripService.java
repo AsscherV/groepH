@@ -1,5 +1,6 @@
 package be.kdg.groeph.service;
 
+import be.kdg.groeph.model.Label;
 import be.kdg.groeph.model.Trip;
 import be.kdg.groeph.model.TripType;
 
@@ -17,4 +18,6 @@ public interface TripService {
     void addUserToTrip(Trip trip);
 
     Trip getTripByName(String tripName);
+
+    List<Label> getLabels(Trip trip);
 }

@@ -2,25 +2,23 @@ package be.kdg.groeph.service;
 
 import be.kdg.groeph.dao.TripDao;
 import be.kdg.groeph.dao.UserDao;
+import be.kdg.groeph.model.Address;
 import be.kdg.groeph.model.Trip;
 import be.kdg.groeph.model.TripUser;
+import be.kdg.groeph.util.RandomPassword;
+import be.kdg.groeph.util.SHAEncryption;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Date;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Greg
- * Date: 22/02/13
- * Time: 13:19
- * To change this template use File | Settings | File Templates.
- */
 @Transactional
 @Service("participantsService")
 public class ParticipantsServiceImpl implements ParticipantsService {
+    private TripUser tripUser;
 
     @Autowired
     UserService userService;
@@ -32,9 +30,31 @@ public class ParticipantsServiceImpl implements ParticipantsService {
     public void addUsersToTrip(ArrayList<String> validEmails, Trip trip) {
 
         for (int i = 0; i < validEmails.size(); i++) {
-            TripUser tripUser = userService.getUserByEmail(validEmails.get(i));
-            trip.addTripUser(tripUser);
-            tripService.addUserToTrip(trip);
+            String email = validEmails.get(i);
+            tripUser = userService.getUserByEmail(email);
+            if(!tripUser.isNull()) {
+                setUserAndTrip(tripUser, trip);
+            } else{
+                setUserAndTrip(makeNewUserWithGeneratedPass(email), trip);
+            }
         }
+    }
+
+    private TripUser makeNewUserWithGeneratedPass(String email) {
+        String newPassword = RandomPassword.generatePassword();
+
+        Address address = new Address("no streetname", "no streetnumber", "no zip", "no Hometown");
+        tripUser = new TripUser("no Firstname", "no Lastname", new Date(), "no phonenumber", 'M', email, SHAEncryption.encrypt(newPassword), address, new Date(), "ROLE_USER");
+        tripUser.setAccountNonExpired(true);
+        tripUser.setAccountNonLocked(true);
+        tripUser.setCredentialsNonExpired(true);
+        tripUser.setEnabled(true);
+        userService.addUser(tripUser);
+        return tripUser;
+    }
+
+    public void setUserAndTrip(TripUser tripUser, Trip trip){
+        trip.addTripUser(tripUser);
+        tripService.addUserToTrip(trip);
     }
 }

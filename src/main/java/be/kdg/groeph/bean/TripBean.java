@@ -45,7 +45,7 @@ public class TripBean implements Serializable {
     private Date endTime;
     @NotEmpty(message = "{label} {notempty}")
     private String label;
-    private ArrayList<Label> labels;
+    private List<Label> labels;
     @NotEmpty(message = "{tripType} {notempty}")
     private String tripType;
     private boolean isPublic;
@@ -104,7 +104,10 @@ public class TripBean implements Serializable {
         this.label = label;
     }
 
-    public ArrayList<Label> getLabels() {
+    public List<Label> getLabels() {
+
+        labels = tripService.getLabels(getCurrentTrip());
+
         return labels;
     }
 
@@ -138,10 +141,10 @@ public class TripBean implements Serializable {
 
     public String addTrip() {
         TripType type = tripService.getTypeByName(getTripType());
-//Trip trip = new Trip(getTitle(), getDescription(), getStartTime(), getEndTime(),getLabels(),type, getPublic());
         Trip trip = new Trip(getTitle(), getDescription(), getStartTime(), getEndTime(), type, getPublic());
         Label label = new Label(getLabel());
         trip.addLabel(label);
+
         loginBean.getUser().addTrip(trip);
         if (tripService.addTrip(trip)) {
             currentTrip = trip;

@@ -96,10 +96,11 @@ public class MailServiceImpl implements MailService {
         message.setBcc(emails.toArray(new String[emails.size()]));
 
         message.setSubject("Trip invitation");
-        message.setText("You are invited to: " + trip.getTitle());
+        message.setText("You are invited to: " + trip.getTitle() + ".\n ");
         mailMessageArray[0] = message;
-
+//TODO: nog zen account details verzende, want da gebeurt nog niet
         System.out.println("Sending email ....");
+
         try{
             mailSender.send(mailMessageArray);
             return true;
@@ -151,5 +152,10 @@ public class MailServiceImpl implements MailService {
                     return false;
                 }
 
+    }
+
+    @Override
+    public boolean uponGeneratingNewAccountFromEmail(String email, String password) {
+        return false;  //To change body of implemented methods use File | Settings | File Templates.
     }
 }

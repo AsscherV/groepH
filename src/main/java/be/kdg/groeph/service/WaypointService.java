@@ -9,7 +9,9 @@ import java.util.List;
 public interface WaypointService {
     boolean addWaypoint(Waypoint waypoint);
     WaypointType getTypeByName(String name);
+    Waypoint getWaypointById(int id);
 
     List<WaypointType> fetchAllWaypointTypes();
     List<Waypoint> fetchTripWaypoints();
+    Waypoint getWaypointByLabel(String waypointLabel);
 }

@@ -15,4 +15,7 @@ public interface WaypointDao {
 
     List<WaypointType> fetchAllWaypointTypes();
     List<Waypoint> fetchAllWaypoints();
+    Waypoint getWaypointByLabel(String waypointLabel);
+
+    Waypoint getWaypointById(int id);
 }

@@ -105,19 +105,18 @@
                                                 <f:ajax event="click" listener="tripBean.newLabel}"
                                                         execute=":createTrip"/>
                                             </h:commandButton>
-                                             -->
-
+                                            -->
+                                            <!--
                                             <h:message for="label" styleClass="error"/>
-
-
-                                            <h:dataTable border="0" value="#{tripBean.labels}" var="label">
+                                            <h:dataTable border="0" value="#tripBean.labels}" var="label">
                                                 <h:column>
                                                     <div>
-                                                        <h:commandLink value="#{label.name}"/>
-
+                                                        <h:commandLink value="#label.name}"/>
                                                     </div>
                                                 </h:column>
                                             </h:dataTable>
+                                            -->
+
                                         </h:panelGrid>
                                         <h:commandButton type="submit" action="#{tripBean.addTrip}"
                                                          class="btn btn-success"
