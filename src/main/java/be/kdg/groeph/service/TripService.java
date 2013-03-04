@@ -3,7 +3,9 @@ package be.kdg.groeph.service;
 import be.kdg.groeph.model.Label;
 import be.kdg.groeph.model.Trip;
 import be.kdg.groeph.model.TripType;
+import be.kdg.groeph.model.TripUser;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface TripService {
@@ -18,6 +20,11 @@ public interface TripService {
     void addUserToTrip(Trip trip);
 
     Trip getTripByName(String tripName);
+    Trip getTripById(int id);
 
     List<Label> getLabels(Trip trip);
+
+    List<Trip> getAllInvitedTripsByUser(TripUser user);
+
+    boolean addConfirmedTrip(Trip currentTrip);
 }

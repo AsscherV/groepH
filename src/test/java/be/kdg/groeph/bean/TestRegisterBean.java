@@ -25,20 +25,9 @@ import static org.junit.Assert.*;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:daoContext.xml"})
 public class TestRegisterBean extends AbstractTransactionalJUnit4SpringContextTests {
-
-
     @Qualifier("registerBean")
     @Autowired
     RegisterBean registerBean;
-
-    private TripUser user1;
-    private TripUser user2;
-
-    @Before
-    public void init(){
-        user1 = UserMother.validUser1();
-        user2 = UserMother.validUser2();
-    }
 
     @Test
     public void insertValidUser() throws ParseException {
@@ -53,25 +42,19 @@ public class TestRegisterBean extends AbstractTransactionalJUnit4SpringContextTe
         registerBean.setSecondPassword("testpasswordooo");
         assertEquals("FAILURE",registerBean.addUser());
     }
-     /*
-    @Test
-    public void testAddExistingUser() throws ParseException {
-        fillRegisterBean();
-        assertEquals("Can't add existing user, returns FAILURE","FAILURE", registerBean.addUser());
-    }
-*/
+
     @Test
     public void testValidPassword(){
         registerBean.setPassword("wachtwoord");
         registerBean.setSecondPassword("wachtwoord");
-        assertTrue(registerBean.confirmPassword());
+        assertTrue("Both passwords must be Equal",registerBean.confirmPassword());
     }
 
     @Test
-    public  void testInvalidPassword(){
+    public void testInvalidPassword(){
         registerBean.setPassword("wachtwoord");
         registerBean.setSecondPassword("wachtwoordo");
-        assertFalse(registerBean.confirmPassword());
+        assertFalse("Passwords are not Equal",registerBean.confirmPassword());
     }
 
     public void fillRegisterBean(){
@@ -92,10 +75,7 @@ public class TestRegisterBean extends AbstractTransactionalJUnit4SpringContextTe
         registerBean.setPhoneNumber("04989898989");
     }
 
+    public void testUpdateUser(){
 
-
-
-
-
-
+    }
 }

@@ -4,6 +4,7 @@ import be.kdg.groeph.dao.TripDao;
 import be.kdg.groeph.model.Label;
 import be.kdg.groeph.model.Trip;
 import be.kdg.groeph.model.TripType;
+import be.kdg.groeph.model.TripUser;
 import be.kdg.groeph.service.TripService;
 import org.apache.log4j.Logger;
 import org.hibernate.SessionFactory;
@@ -133,8 +134,9 @@ public class TripBean implements Serializable {
 
     public String setThisAsCurrentTrip() {
         HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-        String tripName = request.getParameter("currentTrip");
-        Trip trip = tripService.getTripByName(tripName);
+        Integer tripId = Integer.parseInt(request.getParameter("currentTrip"));
+        Trip trip = tripService.getTripById(tripId); //tripService.getTripByName(tripName);
+
         setCurrentTrip(trip);
         return SUCCESS;
     }
@@ -173,4 +175,24 @@ public class TripBean implements Serializable {
     public List<TripType> getAllTripTypes() {
         return tripService.fetchAllTripTypes();
     }
+
+    public List<Trip> getAllInvitedTrips(){
+        return tripService.getAllInvitedTripsByUser(loginBean.getUser());
+    }
+
+    /*public void confirmParticipation(){
+        TripUser user = loginBean.getUser();
+        currentTrip.addConfirmedUser(user);
+        user.confirmParticipation(currentTrip);
+        tripService.addConfirmedTrip(currentTrip);
+    }
+
+    public boolean isConfirmInvitation(){
+        if(currentTrip.getTripUsers().contains(loginBean.getUser())){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }   */
 }

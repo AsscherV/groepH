@@ -18,14 +18,6 @@ import javax.mail.internet.InternetAddress;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Greg
- * Date: 21/02/13
- * Time: 14:54
- * To change this template use File | Settings | File Templates.
- */
-
 @Component
 @Named
 @ViewAccessScoped

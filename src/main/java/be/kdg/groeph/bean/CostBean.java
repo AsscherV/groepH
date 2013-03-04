@@ -32,7 +32,7 @@ import java.util.List;
 public class CostBean implements Serializable {
     @Autowired
     CostService costService;
-    //This Comment is to force a commit TEST
+
     @Qualifier("loginBean")
     @Autowired
     LoginBean loginBean;
@@ -51,9 +51,6 @@ public class CostBean implements Serializable {
     String costValue;
 
     @NotEmpty(message = "{notempty}")
-    MultipartFile image;
-
-    @NotEmpty(message = "{notempty}")
     TripUser tripUser;
 
     List<Cost> costs;
@@ -61,19 +58,12 @@ public class CostBean implements Serializable {
 
     public List<Cost> getCosts() {
         setCosts();
-
         return costs;
     }
 
     public void setCosts() {
         currentTrip = tripBean.getCurrentTrip();
-
         costs = costService.getCostsByTripBeanId(currentTrip);
-
-    }
-
-    public TripUser getTripUser() {
-        return tripUser;
     }
 
     public void setTripUser() {
@@ -83,10 +73,9 @@ public class CostBean implements Serializable {
     public CostBean() {
     }
 
-    public CostBean(String text, String costValue, MultipartFile image) {
+    public CostBean(String text, String costValue) {
         this.text = text;
         this.costValue = costValue;
-        this.image = image;
     }
 
     public String getText() {
@@ -105,15 +94,6 @@ public class CostBean implements Serializable {
         this.costValue = costValue;
     }
 
-    MultipartFile getImage() {
-        return image;
-    }
-
-    public void setImage(MultipartFile image) {
-        this.image = image;
-    }
-
-
     public Trip getCurrentTrip() {
         currentTrip = tripBean.getCurrentTrip();
         return currentTrip;
@@ -127,10 +107,6 @@ public class CostBean implements Serializable {
         tripUser = loginBean.getUser();
         currentTrip = tripBean.getCurrentTrip();
         costService.addCost(text, costValue, tripUser,  currentTrip);
-
     }
-
-
-
 }
 

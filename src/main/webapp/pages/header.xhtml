@@ -19,13 +19,15 @@
                     <h:inputHidden id="token" value="#{socialBean.access_token}" />
                     <h:commandButton id="fbLoginButton" action="#{socialBean.login}" style="display: none"/>
                 </h:form>
-                <h:form  class="navbar-form pull-right">
-
+                <div class="navbar-form pull-right">
+                <h:form  >
+                    <h:commandButton class="btn  btn-primary btn-mini" value="Sign in with facebook"
+                                     action="#{socialBean.getFacebookUrlAuth}" immediate="true"/>
+                </h:form>
+                    <h:form  >
 
                     <h:panelGrid columns="2" cellpadding="2" rendered="#{not loginBean.loggedIn}">
-                        <h:commandButton class="btn  btn-primary btn-mini" value="Sign in with facebook"
-                                                                                         action="#{socialBean.getFacebookUrlAuth}" immediate="true"/>
-                        <h:column/>
+
                         <h:outputLabel value="Email"/>
                         <h:inputText id="email" styleClass="span2 loginInput" value="#{loginBean.email}"/>
                         <h:outputLabel value="Password"/>
@@ -52,11 +54,11 @@
                         <h:outputLabel class="welcomeMessage">#{loginBean.user.firstName}</h:outputLabel >
                         <h:commandLink id="login" class="btn btn-mini" type="submit" value="Sign off"
                                          action="#{loginBean.logOut}"/>
-                        <h:link action="user/profile.xhtml" value="profile"/>
+                        <h:link outcome="profile" value="profile"/>
                     </h:panelGrid>
 
                 </h:form>
-
+                </div>
             </div>
         </div>
     </ui:composition>

@@ -24,8 +24,6 @@ public class TestUserService extends AbstractTransactionalJUnit4SpringContextTes
     @Autowired
     UserService userService;
 
-
-
     private TripUser validUser1;
     private TripUser validUser2;
     private final String validEmail = "greg.deckers@student.kdg.be";
@@ -38,7 +36,6 @@ public class TestUserService extends AbstractTransactionalJUnit4SpringContextTes
 
     @Test
     public void testAddUser(){
-
         assertTrue("Adding validUser1 returns true",userService.addUser(validUser1));
         assertFalse("Can't add existing user, returns false",userService.addUser(validUser1));
         assertTrue("Adding validUser2 returns true",userService.addUser(validUser2));

@@ -47,7 +47,7 @@ public class WaypointDaoImpl implements WaypointDao{
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    //TODO: Aanpassen...
+    //TODO: Aanpassen... --> Verwijderen
     @Override
     public Waypoint getWaypointByLabel(String waypointLabel) {
         Query query = sessionFactory.getCurrentSession().createQuery("from Waypoint where label=:waypointLabel");

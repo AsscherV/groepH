@@ -21,4 +21,10 @@ public interface TripDao {
     Trip getTripByName(String tripName);
 
     List<Label> getLabels(Trip trip);
+
+    Trip getTripById(int id);
+
+    List<Trip> getAllInvitedTripsByUser(TripUser user);
+
+    boolean addConfirmedTrip(Trip currentTrip);
 }

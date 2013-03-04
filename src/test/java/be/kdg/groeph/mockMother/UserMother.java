@@ -46,4 +46,12 @@ public class UserMother {
         return new TripUser("Greg", "Deckers", cal.getTime(), "0477879057", 'M', "", SHAEncryption.encrypt("password"), address, new Date(), USER);
     }
 
+    public static TripUser nonEE() {
+        Calendar cal;
+        cal = Calendar.getInstance();
+        cal.set(1988, Calendar.DECEMBER, 10);
+        Address address = new Address("TestStreet", "TestStreetNumber", "TestZipcode", "TestCity");
+        return new TripUser("Greg", "Deckers", cal.getTime(), "0477879057", 'M', "greg.deckers@student.kdg.be", SHAEncryption.encrypt("password"), address, new Date(), USER);
+    }
+
 }

@@ -15,7 +15,7 @@ public final class RandomPassword {
     static Logger logger = Logger.getLogger(RandomPassword.class);
 
     public static String generatePassword() {
-           String random = UUID.randomUUID().toString().substring(0, 8);
-           return random;
-       }
+        String random = UUID.randomUUID().toString().substring(0, 8);
+        return random;
+    }
 }

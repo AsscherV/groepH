@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -37,7 +38,7 @@ public class TripDaoImpl implements TripDao {
     @SuppressWarnings("unchecked")
     public List<Trip> fetchAllPublicTrips() {
         Query query = sessionFactory.getCurrentSession().createQuery("from Trip where isPublic=:public");
-        query.setParameter("public",true);
+        query.setParameter("public", true);
         return query.list();
     }
 
@@ -52,30 +53,69 @@ public class TripDaoImpl implements TripDao {
     @SuppressWarnings("unchecked")
     public TripType getTypeByName(String naam) {
         Query query = sessionFactory.getCurrentSession().createQuery("from TripType where type=:naam");
-        query.setParameter("naam",naam);
+        query.setParameter("naam", naam);
         return (TripType) query.uniqueResult();
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public void addTripType(TripType tripType){
+    public void addTripType(TripType tripType) {
         sessionFactory.getCurrentSession().saveOrUpdate(tripType);
     }
 
+    //TODO: Werkt niet
     @Override
     public Trip getTripByName(String tripName) {
         Query query = sessionFactory.getCurrentSession().createQuery("from Trip where title=:tripName");
-        query.setParameter("tripName",tripName);
+        query.setParameter("tripName", tripName);
         return (Trip) query.uniqueResult();
     }
 
     @Override
     public List<Label> getLabels(Trip trip) {
-        if(trip!=null){
+        if (trip != null) {
             Query query = sessionFactory.getCurrentSession().createQuery("from Label where trip=:trip");
-            query.setParameter("trip",trip);
+            query.setParameter("trip", trip);
+
             return (List<Label>) query.list();
         }
         return null;
+    }
+
+    @Override
+    public Trip getTripById(int id) {
+        Query query = sessionFactory.getCurrentSession().createQuery("from Trip where id=:id");
+        query.setParameter("id", id);
+        return (Trip) query.uniqueResult();
+    }
+
+    @Override
+    public List<Trip> getAllInvitedTripsByUser(TripUser user) {
+        Query query = sessionFactory.getCurrentSession().createQuery("from Trip trip left join trip.tripUsers tripUsers where tripUsers =:id");
+        query.setParameter("id", user);
+        System.out.println("bla" + query.list());
+        List<Object[]> trips = query.list();
+
+        List<Trip> returnTripList = new ArrayList<Trip>();
+        for (int i = 0; i < trips.size(); i++) {
+
+            Object[] tripArray = trips.get(i);
+            if (Trip.class == tripArray[0].getClass()) {
+                Trip tripToAdd = (Trip) tripArray[0];
+                returnTripList.add(tripToAdd);
+            }
+
+        }
+
+        //List<Trip> trips = (List<Trip>)query.list();
+        //System.out.println("bla"+trips.get(0).getTitle());
+
+        return returnTripList;
+    }
+
+    @Override
+    public boolean addConfirmedTrip(Trip currentTrip) {
+        sessionFactory.getCurrentSession().saveOrUpdate(currentTrip);
+        return true;
     }
 }

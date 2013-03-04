@@ -45,7 +45,6 @@ public class LoginBean implements Serializable {
     @Autowired
     TripBean tripBean;
 
-
     @NotEmpty(message = "{email} {notempty}")
     @Email(message = "{email} {validEmail}")
     private String email;

@@ -82,14 +82,12 @@ public class Address implements Nullable, Serializable {
     }
     @Override
     public boolean equals(Object obj) {
-        //todo aanpassen
         return super.equals(obj);
     }
 
 
     @Override
     public int hashCode() {
-        //todo aanpassen
         return super.hashCode();
     }
 

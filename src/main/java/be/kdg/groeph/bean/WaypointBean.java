@@ -89,8 +89,6 @@ public class WaypointBean  implements Serializable {
         this.label = label;
     }
 
-
-
     public String addWaypoint() {
         WaypointType type = waypointService.getTypeByName(getWaypointType());
         Waypoint waypoint= new Waypoint(getLabel(),getDescription(),type,getLattitude(),getLongitude());

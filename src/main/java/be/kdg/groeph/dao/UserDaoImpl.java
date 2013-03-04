@@ -28,15 +28,15 @@ public class UserDaoImpl implements UserDao {
     @Override
     public TripUser getUserByEmail(String email) {
         Query query = sessionFactory.getCurrentSession().createQuery("from TripUser where email=:email");
-        query.setParameter("email",email);
-        if (query.uniqueResult()==null) {
+        query.setParameter("email", email);
+        if (query.uniqueResult() == null) {
             return TripUser.INVALID_USER();
         }
         return (TripUser) query.uniqueResult();
     }
 
     @Override
-    public void updateUser(TripUser user) throws SQLException{
+    public void updateUser(TripUser user) throws SQLException {
         sessionFactory.getCurrentSession().update(user);
     }
 

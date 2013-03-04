@@ -27,7 +27,6 @@ public class TestTripService extends AbstractTransactionalJUnit4SpringContextTes
     TripService tripService;
 
     private Trip validPublicTrip1;
-    private Trip validPublicTrip2;
 
     @Before
     public void init(){

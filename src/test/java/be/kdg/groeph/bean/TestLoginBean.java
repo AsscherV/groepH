@@ -23,12 +23,6 @@ import static org.junit.Assert.*;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:daoContext.xml"})
 public class TestLoginBean extends AbstractTransactionalJUnit4SpringContextTests {
-
-    /*
-    To force a commit
-     */
-
-
     @Qualifier("loginBean")
     @Autowired
     LoginBean loginBean;
@@ -49,7 +43,7 @@ public class TestLoginBean extends AbstractTransactionalJUnit4SpringContextTests
 
 
     private final String validEmail = "greg.deckers@student.kdg.be";
-    private String recoverypassword="testrecovery";
+    private String recoverypassword = "testrecovery";
 
     @Before
     public void init() throws ParseException {
@@ -62,8 +56,6 @@ public class TestLoginBean extends AbstractTransactionalJUnit4SpringContextTests
         loginBean.setEmail(validEmail);
         loginBean.setPassword("password");
         setLoginBean(validEmail, "password");
-        //loginBean.setEmail("greg.deckers@student.kdg.be");
-        //loginBean.setPassword("password");
         assertEquals("SUCCESS", loginBean.loginUser());
     }
 
@@ -72,50 +64,48 @@ public class TestLoginBean extends AbstractTransactionalJUnit4SpringContextTests
         loginBean.setEmail(validEmail);
         loginBean.setPassword("qsdqs");
         setLoginBean(validEmail, "qsdqs");
-        //loginBean.setEmail("greg.deckers@student.kdg.be");
-        //loginBean.setPassword("qsdqs");
         assertEquals("FAILURE", loginBean.loginUser());
     }
 
     @Test
-    public void testLogOut() throws LoginException{
+    public void testLogOut() throws LoginException {
         setLoginBean(validEmail, "password");
-        //loginBean.setEmail("greg.deckers@student.kdg.be");
-        //loginBean.setPassword("password");
         loginBean.loginUser();
-        assertEquals("SUCCESS",loginBean.logOut());
+        assertEquals("SUCCESS", loginBean.logOut());
     }
 
     @Test
-         public void testIsAdmin(){
-        assertFalse("User has no admin rights",loginBean.user.isAdmin());
+    public void testIsAdmin() {
+        //        assertNotEquals("User has no ADMIN_ROLE","ROLE_ADMIN", loginBean.user.getRole());
+        //assertNotEquals("User has has USER_ROLE","ROLE_ADMIN", loginBean.user.getRole());
+        assertFalse("User has no admin rights", loginBean.user.isAdmin());
     }
 
-    public void setLoginBean(String email,String password){
+    public void setLoginBean(String email, String password) {
         loginBean.setEmail(email);
         loginBean.setPassword(password);
 
     }
+
     @Test
     public void testRecoverPasswordSucces() throws LoginException {
         recoverBean.setEmail(validEmail);
         recoverBean.recoverPassword();
 
         TripUser userByEmail = userDao.getUserByEmail(validEmail);
-        TripUser user= loginService.loginUser(validEmail,userByEmail.getTempPassword());
+        TripUser user = loginService.loginUser(validEmail, userByEmail.getTempPassword());
         loginBean.setUser(user);
 
         loginBean.setPassword(recoverypassword);
         loginBean.setSecondPassword(recoverypassword);
         loginBean.tempPasswordLogin();
-        assertEquals("The new password must be equal to the passwordfield in user", SHAEncryption.encrypt(recoverypassword) , user.getPassword());
-        assertTrue("TempPassword field must be empty",user.getTempPassword().isEmpty());
+        assertEquals("The new password must be equal to the passwordfield in user", SHAEncryption.encrypt(recoverypassword), user.getPassword());
+        assertTrue("TempPassword field must be empty", user.getTempPassword().isEmpty());
 
     }
 
 
-
-    public void fillRegisterBean(){
+    public void fillRegisterBean() {
         registerBean.setGender('M');
         registerBean.setFirstName("Greg");
         registerBean.setLastName("Deckers");
@@ -132,7 +122,6 @@ public class TestLoginBean extends AbstractTransactionalJUnit4SpringContextTests
         registerBean.setCity("test");
         registerBean.setPhoneNumber("04989898989");
     }
-
 
 
 }

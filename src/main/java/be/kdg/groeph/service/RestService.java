@@ -39,13 +39,5 @@ public class RestService {
             //return serializer.serialize(user);
 
         }
-
-        /*
-        Gson gson = new Gson();
-        String response =  gson.toJson(new TripUser(Username,Password,new Date(2009,12,11),"1535464654", 'M',Username,Password,new Address("hiestraat","18","BE 2555","BCity"),new Date(2013,02,19),"MEMBER"));
-
-        return response ;
-        */
-
     }
 }

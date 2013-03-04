@@ -2,6 +2,7 @@
   <artifact type="exploded-war" name="groepH:war exploded">
     <output-path>$PROJECT_DIR$/target/groepH-1.0</output-path>
     <root id="root">
+      <element id="javaee-facet-resources" facet="groepH/web/Web" />
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
           <element id="module-output" name="groepH" />
@@ -80,10 +81,9 @@
           <element id="library" level="project" name="Maven: com.google.code.gson:gson:1.7.1" />
           <element id="library" level="project" name="Maven: net.sf.flexjson:flexjson:2.0" />
           <element id="library" level="project" name="Maven: com.restfb:restfb:1.6.11" />
+          <element id="library" level="project" name="Maven: javax:javaee-web-api:6.0" />
         </element>
       </element>
-      <element id="library" level="project" name="Java EE 6-Java EE 6" />
-      <element id="javaee-facet-resources" facet="groepH/web/Web" />
     </root>
   </artifact>
 </component>

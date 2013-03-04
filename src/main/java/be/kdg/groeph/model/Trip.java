@@ -50,6 +50,13 @@ public class Trip implements Nullable, Serializable {
     @JoinColumn(name="id", nullable = true)
     private List<TripUser> tripUsers = new ArrayList<TripUser>();
 
+    /*@LazyCollection(LazyCollectionOption.FALSE)
+    @ManyToMany
+    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
+    @JoinColumn(name="id", nullable = true)
+    private List<TripUser> confirmedTripUsers = new ArrayList<TripUser>();  */
+
+
     @OneToMany(mappedBy = "trip")
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     private List<Cost> costs = new ArrayList<Cost>();
@@ -208,4 +215,20 @@ public class Trip implements Nullable, Serializable {
         waypoints.add(waypoint);
         waypoint.setTrip(this);
     }
+
+    /*
+    public List<TripUser> getConfirmedTripUsers() {
+
+        return confirmedTripUsers;
+    }
+
+    public void setConfirmedTripUsers(List<TripUser> confirmedTripUsers) {
+        this.confirmedTripUsers = confirmedTripUsers;
+    }
+
+    public void addConfirmedUser(TripUser user){
+        confirmedTripUsers.add(user);
+        tripUsers.remove(user);
+    }
+    */
 }

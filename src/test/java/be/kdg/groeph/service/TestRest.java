@@ -66,10 +66,9 @@ public class TestRest extends AbstractTransactionalJUnit4SpringContextTests {
     }
 
     @Test
-    public void dummyTest(){
+    public void test(){
         assertTrue(true);
     }
-
     /*
     @Test
     public void loginTrue() {
@@ -82,8 +81,6 @@ public class TestRest extends AbstractTransactionalJUnit4SpringContextTests {
         TripUser object = getTripUser(user.getEmail(), user.getPassword());
         assertEquals("Email must be the same", user.getEmail(), object.getEmail());
     }
-
-
 
      //TODO: UNCOMMENT TO TEST THE REST SERVLET!!!
     @Test
@@ -101,7 +98,6 @@ public class TestRest extends AbstractTransactionalJUnit4SpringContextTests {
         assertEquals("result van RestCall moet test zijn", user.getEmail(), Tuser.getEmail());
     }
      */
-
 
     private TripUser getTripUserFromResponse(String restValidUser) {
         TripUser Tuser = new JSONDeserializer<TripUser>().deserialize(restValidUser);

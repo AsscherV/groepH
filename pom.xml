@@ -475,5 +475,10 @@ This artifact is generally always defined with a 'test' scope for the integratio
               <artifactId>restfb</artifactId>
               <version>1.6.11</version>
             </dependency>
+    <dependency>
+        <groupId>javax</groupId>
+        <artifactId>javaee-web-api</artifactId>
+        <version>6.0</version>
+    </dependency>
 </dependencies>
 </project>

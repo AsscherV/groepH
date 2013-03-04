@@ -98,7 +98,7 @@ public class SocialBean implements Serializable {
         } else {
             gender = 'F';
         }
-        if (!fbUser.getHometownName().isEmpty()) {
+        if (fbUser.getHometownName().isEmpty()) {
             address = new Address("no streetname", "no streetnumber", "no zip", fbUser.getHometownName());
         }
         user = new TripUser(fbUser.getFirstName(), fbUser.getLastName(), fbUser.getBirthdayAsDate(), "no phonenumber", gender, fbUser.getEmail(), SHAEncryption.encrypt(newPassword), address, new Date(), "ROLE_USER");

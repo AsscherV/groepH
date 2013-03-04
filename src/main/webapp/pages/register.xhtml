@@ -15,119 +15,87 @@
     <ui:insert name="header">
         <ui:include src="header.xhtml"/>
     </ui:insert>
-
     <div class="container">
         <div class="row">
-
             <!-- trips / my trips -->
             <ui:insert name="header">
                 <ui:include src="user/tripmenu.xhtml"/>
             </ui:insert>
-
             <!-- trip info -->
             <div class="span9">
                 <div id="tabContainerTrip" class="tabContainer">
-                      <div class="noButton"></div>
-
+                    <div class="noButton"></div>
                     <!-- Tab content -->
                     <div class="tabDetails">
-
                         <div id="registerTab" class="tabContentsTrip">
                             <div class="box">
-                                <h:form rendered="#{not registerBean.registered}">
-                                    <h:panelGrid columns="3" border="0">
+                                <h:form rendered="#{not registerBean.registered}" >
+                                    <h:messages globalOnly="true" errorStyle="color: red" infoStyle="color: green" layout="table" />
+                                    <h:panelGrid columns="3" border="0" >
                                         <h:outputLabel value="#{msgs.email}"/>
                                         <h:inputText id="email" styleClass="span2" value="#{registerBean.email}"/>
                                         <h:message for="email" styleClass="error"/>
-
                                         <h:outputLabel value="#{msgs.password}"/>
                                         <h:inputSecret id="password" styleClass="span2"
                                                        value="#{registerBean.password}"/>
                                         <h:message for="password" styleClass="error"/>
-
                                         <h:outputLabel value="#{msgs.password}"/>
                                         <h:inputSecret id="password2" styleClass="span2"
                                                        value="#{registerBean.secondPassword}"/>
                                         <h:message for="password2" styleClass="error"/>
-
                                         <h:outputLabel value="#{msgs.firstName}"/>
                                         <h:inputText id="firstname" styleClass="span2"
                                                      value="#{registerBean.firstName}"/>
                                         <h:message for="firstname" styleClass="error"/>
-
                                         <h:outputLabel value="#{msgs.lastName} "/>
                                         <h:inputText id="lastname" styleClass="span2" value="#{registerBean.lastName}"/>
                                         <h:message for="lastname" styleClass="error"/>
-
                                         <h:outputLabel value="#{msgs.dateOfBirth}"/>
                                         <h:inputText id="dateOfBirth" styleClass="span2 datepicker"
                                                      value="#{registerBean.dateOfBirth}"> <f:convertDateTime
                                                 pattern="dd/MM/yyyy"/> </h:inputText>
                                         <h:message for="dateOfBirth" styleClass="error"/>
-
                                         <h:outputLabel value="#{msgs.phoneNumber}"/>
                                         <h:inputText id="phoneNumber" styleClass="span2"
                                                      value="#{registerBean.phoneNumber}"/>
                                         <h:message for="phoneNumber" styleClass="error"/>
-
                                         <h:outputLabel value="#{msgs.gender}"/>
                                         <h:selectOneRadio value="#{registerBean.gender}">
                                             <f:selectItem itemValue="M" itemLabel="#{msgs.male}"/>
                                             <f:selectItem itemValue="F" itemLabel="#{msgs.female}"/>
                                         </h:selectOneRadio>
                                         <!-- gender radios -->
-
                                         <h:outputLabel value="#{msgs.street}"/>
                                         <h:inputText id="street" styleClass="span2" value="#{registerBean.street}"/>
                                         <h:message for="street" styleClass="error"/>
-
                                         <h:outputLabel value="#{msgs.streetNumber}"/>
                                         <h:inputText id="streetnumber" styleClass="span2"
                                                      value="#{registerBean.streetNumber}"/>
                                         <h:message for="streetnumber" styleClass="error"/>
-
                                         <h:outputLabel value="#{msgs.zipcode}"/>
                                         <h:inputText id="zipcode" styleClass="span2" value="#{registerBean.zipcode}"/>
                                         <h:message for="zipcode" styleClass="error"/>
-
                                         <h:outputLabel value="#{msgs.city}"/>
                                         <h:inputText id="city" styleClass="span2" value="#{registerBean.city}"/>
                                         <h:message for="city" styleClass="error"/>
-
                                     </h:panelGrid>
                                     <h:commandButton type="submit" action="#{registerBean.addUser}"
                                                      class="btn btn-success" value="#{msgs.register}"/>
-
                                     <h:outputLabel value="#{registerBean.mailMessage}" />
-
                                 </h:form>
-                                <h:panelGroup rendered="#{registerBean.registered}">
-                                    <h:outputLabel value="#{registerBean.mailMessage}" />
-                                    <h1>U bent geregistreerd, proficiat  #{registerBean.firstName}</h1>
-
-                                    <h2>LET OP: VIEWACCESSSCOPE NOG NAKIJKEN!!!!!</h2>
-
-                                </h:panelGroup>
-
-
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
-
-
         <footer>
             <p>
                 © Trippy Traveler 2013
             </p>
         </footer>
-
     </div>
     <!-- /container -->
-
     <!-- javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
@@ -136,4 +104,4 @@
     <h:outputScript name="js/main.js"/>
     <h:outputScript name="js/datetimepicker.js"/>
 </h:body>
-</html> 
+</html>

@@ -107,7 +107,6 @@ public class MailServiceImpl implements MailService {
         }  catch (MailException e){
             return false;
         }
-
     }
 
     @Override

@@ -44,18 +44,7 @@ public class TestWaypointBean extends AbstractTransactionalJUnit4SpringContextTe
     private Trip trip;
 
     @Before
-    public void init()
-    {
-//        user1 = UserMother.validUser1();
-//        loginBean.setUser(UserMother.validUser1());
-//        tripDao.addTripType(new TripType("Timebound"));
-//        tripDao.addTripType(new TripType("Repeating"));
-//        tripDao.addTripType(new TripType("Anytime"));
-//        trip = TripMother.validPublicTrip1();
-//        trip.setTripType("Timebound");
-//        trip.setTripUser(user1);
-//        tripDao.addTrip(trip);
-//        tripBean.setCurrentTrip(trip);
+    public void init() {
         user1 = UserMother.validUser1();
         loginBean.setUser(UserMother.validUser1());
         tripDao.addTripType(new TripType("Timebound"));
@@ -85,35 +74,21 @@ public class TestWaypointBean extends AbstractTransactionalJUnit4SpringContextTe
         waypointDao.addWaypointType(new WaypointType("End"));
         waypointDao.addWaypointType(new WaypointType("Overnight"));
         waypointDao.addWaypointType(new WaypointType("Meeting"));
-        TripUser usr =  userDao.getUserByEmail(user1.getEmail());
-        trip=usr.getTrips().get(0);
-
-//        //tripDao.getTypeByName("Timebound");
-//        waypointDao.getTypeByName("Start");
-//        String lol = "lol";
-
-
+        TripUser usr = userDao.getUserByEmail(user1.getEmail());
+        trip = usr.getTrips().get(0);
     }
 
-//    @Test
-//    public void testAddWaypoint()
-//    {
-//
-//        assertEquals("Add waypoint must return SUCCESS", SUCCESS,waypointBean.addWaypoint()) ;
-//
-//    }
     @Test
-    public void testAddWaypointTrip()
-    {
-        TripUser daoTestUser=null;
-        Trip trip=null;
+    public void testAddWaypointTrip() {
+        TripUser daoTestUser = null;
+        Trip trip = null;
         waypointBean.setLabel(START);
         waypointBean.setDescription("This is where we meet before starting the trip");
         waypointBean.setWaypointType("Start");
         waypointBean.setLattitude(50.9);
         waypointBean.setLongitude(4.3);
         waypointBean.addWaypoint();
-        daoTestUser= userDao.getUserByEmail(loginBean.getUser().getEmail());
+        daoTestUser = userDao.getUserByEmail(loginBean.getUser().getEmail());
 
         trip = daoTestUser.getTrips().get(0);
         assertEquals("The trip must contain 1 waypoint", 1, trip.getWaypoints().size());

@@ -43,7 +43,6 @@ public class TestCostBean extends AbstractTransactionalJUnit4SpringContextTests 
     @Autowired
     UserDao userDao;
 
-
     @Autowired
     CostDao costDao;
 
@@ -62,8 +61,6 @@ public class TestCostBean extends AbstractTransactionalJUnit4SpringContextTests 
 
     @Test
     public void testAddCost() throws SQLException, IOException {
-
-
         try {
             costBean.setCostValue("12");
             costBean.setText("FOOD");
@@ -72,13 +69,11 @@ public class TestCostBean extends AbstractTransactionalJUnit4SpringContextTests 
             loginBean.loginUser();
             costBean.setTripUser();
             costBean.addCost();
-
-
         } catch ( LoginException e) {
             assertTrue(false);
         }
 
-        assertEquals("texts should be equal",costDao.getCostByCostId(1).getText(),costBean.text);
+        assertEquals("Texts should be equal",costDao.getCostByCostId(1).getText(),costBean.text);
     }
 }
 

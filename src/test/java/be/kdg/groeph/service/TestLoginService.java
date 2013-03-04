@@ -51,7 +51,6 @@ public class TestLoginService extends AbstractTransactionalJUnit4SpringContextTe
     public void init() throws ParseException {
         fillRegisterBean();
         registerBean.addUser();
-
     }
     @Test
     public void testLoggedInTempPassword() throws LoginException {

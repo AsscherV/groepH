@@ -82,7 +82,6 @@ public class TestParticipantsBean extends AbstractTransactionalJUnit4SpringConte
 
     @Test
     public void testInvalidEmail() {
-
         assertFalse("invalidEmail test. Excpected false", participantsBean.isValidMail(invalidEmail));
     }
 

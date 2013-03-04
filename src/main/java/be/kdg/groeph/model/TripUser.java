@@ -69,6 +69,15 @@ public class TripUser implements Nullable, Serializable {
     @JoinColumn(name="id", nullable = true)
     private List<Trip> invitedTrips = new ArrayList<Trip>();
 
+    /*
+    @LazyCollection(LazyCollectionOption.FALSE)
+
+    @ManyToMany
+    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
+    @JoinColumn(name="id", nullable = true)
+    private List<Trip> confirmedTrips = new ArrayList<Trip>(); */
+
+
 
     public TripUser() {
     }
@@ -258,6 +267,20 @@ public class TripUser implements Nullable, Serializable {
         this.tempPassword = tempPassword;
     }
 
+    /*
+    public List<Trip> getConfirmedTrips() {
+        return confirmedTrips;
+    }
+
+    public void setConfirmedTrips(List<Trip> confirmedTrips) {
+        this.confirmedTrips = confirmedTrips;
+    }
+
+    public void confirmParticipation(Trip trip){
+        confirmedTrips.add(trip);
+        invitedTrips.remove(trip);
+    }      */
+
     @Override
     public boolean isNull() {
         return false;
@@ -288,7 +311,7 @@ public class TripUser implements Nullable, Serializable {
             dob = sdf.format(dateOfBirth);
             userdob = sdf.format(user.dateOfBirth);
         } catch (NullPointerException e) {
-            //TODO hier nog deftige exception message zetten...
+            System.out.println("Nullpointer: " + e.getMessage());
         }
 
         return !(firstName != null ? !firstName.equals(user.getFirstName()) : user.getFirstName() != null)

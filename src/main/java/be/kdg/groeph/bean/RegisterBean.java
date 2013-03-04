@@ -14,8 +14,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
+
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
@@ -25,7 +28,7 @@ import java.text.ParseException;
 import java.util.Date;
 
 @Component
-@ViewAccessScoped
+@RequestScoped
 @Named
 public class RegisterBean implements Serializable {
     static Logger logger = Logger.getLogger(RegisterBean.class);
@@ -376,21 +379,38 @@ public class RegisterBean implements Serializable {
         user.setAccountNonLocked(true);
         user.setCredentialsNonExpired(true);
         user.setEnabled(true);
-
         if (confirmPassword()) {
             TripUser tripUser = userService.getUserByEmail(user.getEmail());
             if (tripUser.isNull()) {
                 if (mailService.isSuccessfulRegistration(user.getEmail())) {
                     userService.addUser(user);
-                    registered = true;
+                    putNewValues(null, null, null, null, null, ' ', null, null, null, null);
+                    makeFacesMessage("Registration succesfull !", "info");
+                    registered=true;
                     return SUCCESS;
                 } else {
                     mailMessage = "Registration mail could not be send. Please try to registrate again.";
+                    makeFacesMessage("Registration mail could not be send. Please try to registrate again.", "error");
                     return FAILURE;
                 }
+            } else {
+                makeFacesMessage("This email already has an account !", "error");
+                return FAILURE;
             }
         }
         return FAILURE;
+    }
+    private void makeFacesMessage(String message, String type) {
+        /*
+        FacesMessage facesMsg = null;
+        if (type.equals("info")) {
+            facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, message, message);
+        } else if (type.equals("error")) {
+            facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+        }
+        //FacesContext fc = FacesContext.getCurrentInstance();
+        //fc.addMessage(null, facesMsg);
+        */
     }
 
     public String updateUser() throws SQLException {
@@ -433,15 +453,17 @@ public class RegisterBean implements Serializable {
         return null;
     }
 
-   /*
-
-    public UserService getUserService() {
-        return userService;
+    public void putNewValues(String email, String firstName, String lastName, Date dateOfBirth, String phoneNumber,
+                             char gender, String zipcode, String street, String streetNumber, String city) {
+        setEmail(email);
+        setFirstName(firstName);
+        setLastName(lastName);
+        setDateOfBirth(dateOfBirth);
+        setPhoneNumber(phoneNumber);
+        setGender(gender);
+        setZipcode(zipcode);
+        setStreet(street);
+        setStreetNumber(streetNumber);
+        setCity(city);
     }
-
-    public void setUserService(UserService userService) {
-        this.userService = userService;
-    }
-
-    */
 }

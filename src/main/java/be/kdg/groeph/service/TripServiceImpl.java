@@ -2,10 +2,7 @@ package be.kdg.groeph.service;
 
 import be.kdg.groeph.dao.TripDao;
 import be.kdg.groeph.dao.UserDao;
-import be.kdg.groeph.model.Label;
-import be.kdg.groeph.model.Trip;
-import be.kdg.groeph.model.TripType;
-import be.kdg.groeph.model.Waypoint;
+import be.kdg.groeph.model.*;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -54,8 +51,8 @@ public class TripServiceImpl implements TripService {
 
     @Override
     public void addUserToTrip(Trip trip) {
-
         userDao.addInvitedUser(trip.getTripUser());
+       //tripDao.addUserToTrip(trip);
     }
 
     @Override
@@ -67,4 +64,18 @@ public class TripServiceImpl implements TripService {
         return tripDao.getLabels(trip);
     }
 
+    @Override
+    public List<Trip> getAllInvitedTripsByUser(TripUser user) {
+        return tripDao.getAllInvitedTripsByUser(user);
+    }
+
+    @Override
+    public Trip getTripById(int id) {
+        return tripDao.getTripById(id);
+    }
+
+    @Override
+    public boolean addConfirmedTrip(Trip currentTrip) {
+        return tripDao.addConfirmedTrip(currentTrip);
+    }
 }
