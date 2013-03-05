@@ -35,9 +35,9 @@ public class RestService {
         }   else {
             JSONSerializer serializer = new JSONSerializer();
             //return gson.toJson(user);
-            return serializer.include("trips").serialize(user);
-            //return serializer.serialize(user);
-
+            //return serializer.include("trips").serialize(user);
+            return serializer.serialize(user);
+            //return gson.toJson(user, TripUser.class);
         }
     }
 }

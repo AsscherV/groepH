@@ -49,6 +49,7 @@ public class WaypointBean  implements Serializable {
     private double longitude;
 
     private Waypoint currentWaypoint;
+    private List<Waypoint> waypointList;
 
     public double getLattitude() {
         return lattitude;
@@ -102,6 +103,33 @@ public class WaypointBean  implements Serializable {
         return FAILURE  ;
     }
 
+    public String previousWaypoint(){
+        //TODO: refactor this code for previous
+        waypointList = getTripWaypoints();
+
+        if(waypointList.get(waypointList.size() -1) == currentWaypoint){
+            currentWaypoint = waypointList.get(0);
+        }
+        else{
+            currentWaypoint = waypointList.get(waypointList.indexOf(currentWaypoint) + 1);
+        }
+
+        return null;
+    }
+
+    public String nextWaypoint(){
+        waypointList = getTripWaypoints();
+
+        if(waypointList.get(waypointList.size() -1) == currentWaypoint){
+            currentWaypoint = waypointList.get(0);
+        }
+        else{
+            currentWaypoint = waypointList.get(waypointList.indexOf(currentWaypoint) + 1);
+        }
+
+        return null;
+    }
+
     private void clearfield() {
             label=null;
             description=null;
@@ -132,6 +160,16 @@ public class WaypointBean  implements Serializable {
         Waypoint waypoint = waypointService.getWaypointById(Integer.parseInt(waypointId));
         setCurrentWaypoint(waypoint);
         return WAYPOINT;
+    }
+
+    public String editWaypoint(){
+        label=currentWaypoint.getLabel();
+        description=currentWaypoint.getDescription();
+        lattitude=currentWaypoint.getLattitude();
+        longitude=currentWaypoint.getLongitude();
+        waypointType = currentWaypoint.getWaypointType().getType();
+
+        return "EDITWAYPOINT";
     }
 
 

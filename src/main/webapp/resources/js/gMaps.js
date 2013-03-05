@@ -5,6 +5,7 @@ var markersArray = [];
 $(function(){
     initMap();
     addListeners();
+    setFilledInPosition();
 });
 
 function initMap(){
@@ -58,6 +59,16 @@ function deleteOverlays() {
         }
         markersArray.length = 0;
     }
+}
+
+function setFilledInPosition(){
+    if(document.getElementById("lat").innerHTML != 0.0){
+        var marker = new google.maps.Marker({
+            position: new google.maps.LatLng(parseFloat(document.getElementById("lat").innerHTML),parseFloat(document.getElementById("lng").innerHTML)),
+            map: map
+        });
+    }
+
 }
 
 

@@ -63,6 +63,20 @@
 
                         <div id="accesTab" class="tabContentsTrip">
                             <div class="box">
+                                <h:form>
+                                    <h:commandButton type="submit" action="#{waypointBean.previousWaypoint}"
+                                                     class="btn btn-success marginRight"
+                                                     value="Previous"/>
+                                    <h:commandButton type="submit" action="#{waypointBean.nextWaypoint}"
+                                                     class="btn btn-success marginRight"
+                                                     value="Next"/>
+                                    <h:commandButton action="STOPS" value="Back to overview"
+                                                     class="btn btn-success marginRight" id="overviewWaypoint"/>
+
+                                </h:form>
+
+
+
                                 <h:panelGrid class="floatLeft marginRight" columns="2" border="0">
                                     <h:outputLabel value="#{msgs.title}"/>
                                     <h:outputLabel value="#{waypointBean.currentWaypoint.label}"/>
@@ -74,10 +88,25 @@
                                     <h:outputLabel id="lat" value="#{waypointBean.currentWaypoint.lattitude}"/>
                                     <h:outputLabel value="#{msgs.lng}"/>
                                     <h:outputLabel id="lng" value="#{waypointBean.currentWaypoint.longitude}"/>
-                                    <a id="reset" class="button">Reset map</a>
+
                                 </h:panelGrid>
 
+                               <h:form>
+                                   <h:commandButton action="#{waypointBean.editWaypoint}" value="Edit Waypoint"
+                                   class="btn btn-success" id="editWaypoint"/>
+                               </h:form>
+
+
+
+
+
                                 <div id="map_canvas"></div>
+
+                                <div>
+                                    <h:commandButton value="Reset map"
+                                                     class="btn btn-success" id="resetMap"/>
+                                </div>
+
                             </div>
                         </div>
                     </div>

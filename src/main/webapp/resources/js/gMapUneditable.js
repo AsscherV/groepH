@@ -34,7 +34,7 @@ function initMap(){
 }
 
 function addListeners(){
-    $('#reset').click( function(){
+    $('#resetMap').click( function(){
         map.setCenter(loc);
     });
 }
