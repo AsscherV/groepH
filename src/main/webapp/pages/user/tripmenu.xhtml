@@ -19,26 +19,21 @@
                 <ul>
 
                     <li>
-                        <a id="trips" href="#tripsTab">Trips</a>
+                        <a id="trips" class="button" href="#tripsTab">Trips</a>
                     </li>
                     <h:panelGroup rendered="#{loginBean.loggedIn}">
                         <li>
-                            <a id="myTrips" href="#myTripsTab">My trips</a>
+                            <a id="myTrips" class="button" href="#myTripsTab">My trips</a>
                         </li>
                     </h:panelGroup>
-
+                    <li>
+                        <a id="invitedTrips" class="button" href="#invitedTripsTab">Invitations</a>
+                    </li>
                 </ul>
-                <h:form class="navbar-form">
-                    <h:inputText type="text" styleClass="span2" value="#{tripBean.filter}"/>
-
-                    <h:commandButton id="zoeken" class="btn btn-success" type="submit" value="#{msgs.search}"/>
-
-                </h:form>
                 <!-- //Tab buttons -->
                 <div class="tabDetails">
+
                     <div id="tripsTab" class="tabContentsTrips">
-
-
                         <div class="box">
                             <h:form>
                                 <h:dataTable border="0" value="#{tripBean.allPublicTrips}" var="trip">
@@ -61,13 +56,15 @@
                     <!-- //tripsTab -->
                     <div id="myTripsTab" class="tabContentsTrips">
                         <h:form class="navbar-form">
+                            <h:inputText type="text" styleClass="span2"/>
 
+                            <h:commandButton class="btn btn-success" type="submit" value="Search"/>
                         </h:form>
 
                         <div class="box">
                             <h:panelGroup rendered="#{loginBean.loggedIn}">
                                 <h:form>
-                                    <h:dataTable border="0" value="#{tripBean.allPrivateTrips}" var="trip">
+                                    <h:dataTable border="0" value="#{loginBean.user.trips}" var="trip">
                                         <h:column>
                                             <div>
                                                 <h:commandLink value="#{trip.title}"
@@ -88,7 +85,9 @@
 
                     <div id="invitedTripsTab" class="tabContentsTrips">
                         <h:form class="navbar-form">
+                            <h:inputText type="text" styleClass="span2"/>
 
+                            <h:commandButton class="btn btn-success" type="submit" value="Search"/>
                         </h:form>
 
                         <div class="box">
@@ -114,4 +113,4 @@
     <h:outputScript name="js/jquery-1.9.0.min.js"/>
     <h:outputScript name="js/main.js"/>
 </h:body>
-</html> 
+</html>
