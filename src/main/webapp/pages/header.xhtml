@@ -22,7 +22,7 @@
                 <div class="navbar-form pull-right">
                 <h:form  >
                     <h:commandButton class="btn  btn-primary btn-mini" value="Sign in with facebook"
-                                     action="#{socialBean.getFacebookUrlAuth}" immediate="true"/>
+                                     action="#{socialBean.getFacebookUrlAuth}" immediate="true" rendered="#{not loginBean.loggedIn}"/>
                 </h:form>
                     <h:form  >
 

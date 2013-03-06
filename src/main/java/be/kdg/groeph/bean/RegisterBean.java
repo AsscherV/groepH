@@ -6,12 +6,17 @@ import be.kdg.groeph.service.MailService;
 import be.kdg.groeph.service.UserService;
 import be.kdg.groeph.util.SHAEncryption;
 import org.apache.log4j.Logger;
+import org.apache.myfaces.extensions.cdi.core.api.scope.conversation.ViewAccessScoped;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import javax.faces.bean.ManagedProperty;
 
 import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedProperty;
@@ -393,18 +398,18 @@ public class RegisterBean implements Serializable {
         return FAILURE;
     }
     private void makeFacesMessage(String message, String type) {
-
-//        FacesMessage facesMsg = null;
-//        if (type.equals("info")) {
-//            facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, message, message);
-//        } else if (type.equals("error")) {
-//            facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
-//        }
-//        if(!FacesContext.getCurrentInstance().equals(null)){
-//        FacesContext fc = FacesContext.getCurrentInstance();
-//        fc.addMessage(null, facesMsg);
-   //     }
-
+        /*
+        FacesMessage facesMsg = null;
+        if (type.equals("info")) {
+            facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, message, message);
+        } else if (type.equals("error")) {
+            facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+        }
+        if(!FacesContext.getCurrentInstance().equals(null)){
+        FacesContext fc = FacesContext.getCurrentInstance();
+        fc.addMessage(null, facesMsg);
+        }
+        */
     }
 
     public String updateUser() throws SQLException {
