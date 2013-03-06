@@ -93,7 +93,6 @@ public class TripDaoImpl implements TripDao {
     public List<Trip> getAllInvitedTripsByUser(TripUser user) {
         Query query = sessionFactory.getCurrentSession().createQuery("from Trip trip left join trip.tripUsers tripUsers where tripUsers =:id");
         query.setParameter("id", user);
-        System.out.println("bla" + query.list());
         List<Object[]> trips = query.list();
 
         List<Trip> returnTripList = new ArrayList<Trip>();
@@ -104,12 +103,25 @@ public class TripDaoImpl implements TripDao {
                 Trip tripToAdd = (Trip) tripArray[0];
                 returnTripList.add(tripToAdd);
             }
-
         }
+        return returnTripList;
+    }
 
-        //List<Trip> trips = (List<Trip>)query.list();
-        //System.out.println("bla"+trips.get(0).getTitle());
+    @Override
+    public List<Trip> getAllParticipatedTripsByUser(TripUser user) {
+        Query query = sessionFactory.getCurrentSession().createQuery("from Trip trip left join trip.confirmedTripUsers tripUsers where tripUsers =:id");
+        query.setParameter("id", user);
+        List<Object[]> trips = query.list();
 
+        List<Trip> returnTripList = new ArrayList<Trip>();
+        for (int i = 0; i < trips.size(); i++) {
+
+            Object[] tripArray = trips.get(i);
+            if (Trip.class == tripArray[0].getClass()) {
+                Trip tripToAdd = (Trip) tripArray[0];
+                returnTripList.add(tripToAdd);
+            }
+        }
         return returnTripList;
     }
 

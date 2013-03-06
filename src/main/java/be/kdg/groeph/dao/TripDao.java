@@ -27,4 +27,6 @@ public interface TripDao {
     List<Trip> getAllInvitedTripsByUser(TripUser user);
 
     boolean addConfirmedTrip(Trip currentTrip);
+
+    List<Trip> getAllParticipatedTripsByUser(TripUser user);
 }

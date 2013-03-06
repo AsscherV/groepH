@@ -50,8 +50,10 @@ public class TripBean implements Serializable {
     @NotEmpty(message = "{tripType} {notempty}")
     private String tripType;
     private boolean isPublic;
+
     Trip currentTrip;
     private String filter;
+    private boolean isVisible;
 
     public TripBean() {
         isPublic = true;
@@ -142,6 +144,14 @@ public class TripBean implements Serializable {
         this.currentTrip = currentTrip;
     }
 
+    public boolean isVisible() {
+        return isVisible;
+    }
+
+    public void setVisible(boolean visible) {
+        isVisible = visible;
+    }
+
     public String setThisAsCurrentTrip() {
         HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
         Integer tripId = Integer.parseInt(request.getParameter("currentTrip"));
@@ -152,8 +162,9 @@ public class TripBean implements Serializable {
     }
 
     public String addTrip() {
+        setVisible(false);
         TripType type = tripService.getTypeByName(getTripType());
-        Trip trip = new Trip(getTitle(), getDescription(), getStartTime(), getEndTime(), type, getPublic());
+        Trip trip = new Trip(getTitle(), getDescription(), getStartTime(), getEndTime(), type, getPublic(), isVisible);
         Label label = new Label(getLabel());
         trip.addLabel(label);
 
@@ -180,9 +191,6 @@ public class TripBean implements Serializable {
 
     public List<Trip> getAllPublicTrips() {
         List<Trip> publictrips = tripService.fetchAllPublicTrips();
-
-        //filter="";
-
         return Tools.filter(publictrips, filter);
     }
 
@@ -192,6 +200,10 @@ public class TripBean implements Serializable {
 
     public List<Trip> getAllInvitedTrips() {
         return tripService.getAllInvitedTripsByUser(loginBean.getUser());
+    }
+
+    public List<Trip> getAllParticipatedTrips() {
+        return tripService.getAllParticipatedTripsByUser(loginBean.getUser());
     }
 
     public List<Trip> getAllPrivateTrips() {

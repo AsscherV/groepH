@@ -29,6 +29,9 @@ public class Trip implements Nullable, Serializable {
     @Column(name = "isPubic", nullable = false)
     private boolean isPublic;
 
+    @Column(name = "visible", nullable = false)
+    private boolean isVisible;
+
     @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(mappedBy = "trip")     //,fetch = FetchType.EAGER
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
@@ -86,6 +89,8 @@ public class Trip implements Nullable, Serializable {
     public Trip() {
     }
 
+
+
     public Trip(String title, String description, Date startTime, Date endTime, List<Label> labels, TripType tripType, boolean isPublic) {
         this.title = title;
         this.description = description;
@@ -96,22 +101,14 @@ public class Trip implements Nullable, Serializable {
         this.isPublic = isPublic;
     }
 
-    public Trip(String title, String description, Date startTime, Date endTime, List<Label> labels, boolean isPublic) {
-        this.title = title;
-        this.description = description;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.labels = labels;
-        this.isPublic = isPublic;
-    }
-
-    public Trip(String title, String description, Date startTime, Date endTime, TripType tripType, boolean isPublic) {
+    public Trip(String title, String description, Date startTime, Date endTime, TripType tripType, boolean isPublic,boolean visible) {
         this.title = title;
         this.description = description;
         this.startTime = startTime;
         this.endTime = endTime;
         this.tripType = tripType;
         this.isPublic = isPublic;
+        this.isVisible = visible;
     }
 
     public void addLabel(Label label) {
@@ -233,6 +230,13 @@ public class Trip implements Nullable, Serializable {
         waypoint.setTrip(this);
     }
 
+    public boolean isVisible() {
+        return isVisible;
+    }
+
+    public void setVisible(boolean visible) {
+        isVisible = visible;
+    }
 
     public List<TripUser> getConfirmedTripUsers() {
 

@@ -70,6 +70,11 @@ public class TripServiceImpl implements TripService {
     }
 
     @Override
+    public List<Trip> getAllParticipatedTripsByUser(TripUser user) {
+        return tripDao.getAllParticipatedTripsByUser(user);
+    }
+
+    @Override
     public Trip getTripById(int id) {
         return tripDao.getTripById(id);
     }

@@ -29,7 +29,15 @@
                     <li>
                         <a id="invitedTrips" class="button" href="#invitedTripsTab">Invitations</a>
                     </li>
+                    <li>
+                        <a id="participatingTrips" class="button" href="#participatingTripsTab">Participating trips</a>
+                    </li>
                 </ul>
+                <h:form class="navbar-form">
+                    <h:inputText type="text" styleClass="span2" value="#{tripBean.filter}"/>
+
+                    <h:commandButton class="btn btn-success" type="submit" value="#{msgs.search}"/>
+                </h:form>
                 <!-- //Tab buttons -->
                 <div class="tabDetails">
 
@@ -37,7 +45,7 @@
                         <div class="box">
                             <h:form>
                                 <h:dataTable border="0" value="#{tripBean.allPublicTrips}" var="trip">
-                                    <h:column>
+                                    <h:column rendered="#{trip.visible}">
                                         <div>
                                             <h:commandLink value="#{trip.title}"
                                                            action="#{tripBean.setThisAsCurrentTrip}">
@@ -55,16 +63,10 @@
                     </div>
                     <!-- //tripsTab -->
                     <div id="myTripsTab" class="tabContentsTrips">
-                        <h:form class="navbar-form">
-                            <h:inputText type="text" styleClass="span2"/>
-
-                            <h:commandButton class="btn btn-success" type="submit" value="Search"/>
-                        </h:form>
-
                         <div class="box">
                             <h:panelGroup rendered="#{loginBean.loggedIn}">
                                 <h:form>
-                                    <h:dataTable border="0" value="#{loginBean.user.trips}" var="trip">
+                                    <h:dataTable border="0" value="#{tripBean.allPrivateTrips}" var="trip">
                                         <h:column>
                                             <div>
                                                 <h:commandLink value="#{trip.title}"
@@ -83,21 +85,17 @@
                         </h:panelGroup>
                     </div>
 
-                    <div id="invitedTripsTab" class="tabContentsTrips">
-                        <h:form class="navbar-form">
-                            <h:inputText type="text" styleClass="span2"/>
+                    <div id="participatingTripsTab" class="tabContentsTrips">
 
-                            <h:commandButton class="btn btn-success" type="submit" value="Search"/>
-                        </h:form>
 
                         <div class="box">
                             <h:form rendered="#{loginBean.loggedIn}">
-                                <h:dataTable border="0" value="#{tripBean.allInvitedTrips}" var="invitedTrip">
+                                <h:dataTable border="0" value="#{tripBean.allParticipatedTrips}" var="participatedTrips">
                                     <h:column>
                                         <div>
-                                            <h:commandLink value="#{invitedTrip.title}"
+                                            <h:commandLink value="#{participatedTrips.title}"
                                                            action="#{tripBean.setThisAsCurrentTrip}">
-                                                <f:param name="currentTrip" value="#{invitedTrip.id}"/>
+                                                <f:param name="currentTrip" value="#{participatedTrips.id}"/>
                                             </h:commandLink>
                                         </div>
                                     </h:column>
@@ -105,6 +103,26 @@
                             </h:form>
                         </div>
                     </div>
+
+                    <div id="invitedTripsTab" class="tabContentsTrips">
+
+
+                        <div class="box">
+                            <h:form rendered="#{loginBean.loggedIn}">
+                                <h:dataTable border="0" value="#{tripBean.allInvitedTrips}" var="invitations">
+                                    <h:column>
+                                        <div>
+                                            <h:commandLink value="#{invitations.title}"
+                                                           action="#{tripBean.setThisAsCurrentTrip}">
+                                                <f:param name="currentTrip" value="#{invitations.id}"/>
+                                            </h:commandLink>
+                                        </div>
+                                    </h:column>
+                                </h:dataTable>
+                            </h:form>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
