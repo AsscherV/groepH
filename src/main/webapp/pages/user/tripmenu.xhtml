@@ -45,9 +45,9 @@
                         <div class="box">
                             <h:form>
                                 <h:dataTable border="0" value="#{tripBean.allPublicTrips}" var="trip">
-                                    <h:column rendered="#{trip.visible}">
+                                    <h:column>
                                         <div>
-                                            <h:commandLink value="#{trip.title}"
+                                            <h:commandLink value="#{trip.title}" rendered="#{trip.visible}"
                                                            action="#{tripBean.setThisAsCurrentTrip}">
                                                 <f:param name="currentTrip" value="#{trip.id}"/>
                                             </h:commandLink>
@@ -102,6 +102,9 @@
                                 </h:dataTable>
                             </h:form>
                         </div>
+                        <h:panelGroup rendered="#{loginBean.loggedIn}">
+                            <a href="../user/createTrip.xhtml">+ Make a trip</a>
+                        </h:panelGroup>
                     </div>
 
                     <div id="invitedTripsTab" class="tabContentsTrips">
@@ -121,6 +124,9 @@
                                 </h:dataTable>
                             </h:form>
                         </div>
+                        <h:panelGroup rendered="#{loginBean.loggedIn}">
+                            <a href="../user/createTrip.xhtml">+ Make a trip</a>
+                        </h:panelGroup>
                     </div>
 
                 </div>

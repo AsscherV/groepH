@@ -35,6 +35,12 @@ public class TripDaoImpl implements TripDao {
     }
 
     @Override
+    public boolean updateTrip(Trip trip) {
+        sessionFactory.getCurrentSession().update(trip);
+        return true;
+    }
+
+    @Override
     @SuppressWarnings("unchecked")
     public List<Trip> fetchAllPublicTrips() {
         Query query = sessionFactory.getCurrentSession().createQuery("from Trip where isPublic=:public");

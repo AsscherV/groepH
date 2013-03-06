@@ -29,4 +29,6 @@ public interface TripDao {
     boolean addConfirmedTrip(Trip currentTrip);
 
     List<Trip> getAllParticipatedTripsByUser(TripUser user);
+
+    boolean updateTrip(Trip trip);
 }

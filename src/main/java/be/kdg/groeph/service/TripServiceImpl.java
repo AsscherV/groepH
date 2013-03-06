@@ -34,6 +34,11 @@ public class TripServiceImpl implements TripService {
     }
 
     @Override
+    public boolean updateTrip(Trip trip) {
+        return tripDao.updateTrip(trip);
+    }
+
+    @Override
     @SuppressWarnings("unchecked")
     public List<Trip> fetchAllPublicTrips() {
         return  tripDao.fetchAllPublicTrips();

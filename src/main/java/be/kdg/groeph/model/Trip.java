@@ -89,8 +89,6 @@ public class Trip implements Nullable, Serializable {
     public Trip() {
     }
 
-
-
     public Trip(String title, String description, Date startTime, Date endTime, List<Label> labels, TripType tripType, boolean isPublic) {
         this.title = title;
         this.description = description;

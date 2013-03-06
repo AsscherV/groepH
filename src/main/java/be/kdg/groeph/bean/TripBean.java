@@ -228,4 +228,13 @@ public class TripBean implements Serializable {
         }
         return  false;
     }
+
+    public boolean publishTrip(){
+        currentTrip.setVisible(true);
+        if(tripService.updateTrip(currentTrip)){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }
