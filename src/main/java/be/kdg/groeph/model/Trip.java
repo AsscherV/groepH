@@ -44,18 +44,34 @@ public class Trip implements Nullable, Serializable {
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     private TripUser tripUser;
 
-    @LazyCollection(LazyCollectionOption.FALSE)
-    @ManyToMany
+    /*@LazyCollection(LazyCollectionOption.FALSE)
+    @ManyToMany(mappedBy = "invitedTrips")
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    @JoinColumn(name="id", nullable = true)
+    //@JoinColumn(name="id", nullable = true)
     private List<TripUser> tripUsers = new ArrayList<TripUser>();
 
-    /*@LazyCollection(LazyCollectionOption.FALSE)
-    @ManyToMany
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @ManyToMany(mappedBy = "confirmedTrips")
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    @JoinColumn(name="id", nullable = true)
-    private List<TripUser> confirmedTripUsers = new ArrayList<TripUser>();  */
+    //@JoinColumn(name="id", nullable = true)
+    private List<TripUser> confirmedTripUsers = new ArrayList<TripUser>();
+    */
 
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @ManyToMany( cascade = CascadeType.ALL)
+    @JoinTable(name = "t_trip_t_user_invited", joinColumns = {
+                @JoinColumn(name = "tripId", nullable = true, updatable = true)},
+            inverseJoinColumns = {@JoinColumn(name = "tripUserId",
+                    nullable = true, updatable = true)})
+    private List<TripUser> tripUsers = new ArrayList<TripUser>();
+
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @ManyToMany( cascade = CascadeType.ALL)
+    @JoinTable(name = "t_trip_t_user_confirmed", joinColumns = {
+            @JoinColumn(name = "tripId", nullable = true, updatable = true)},
+            inverseJoinColumns = {@JoinColumn(name = "tripUserId",
+                    nullable = true, updatable = true)})
+    private List<TripUser> confirmedTripUsers = new ArrayList<TripUser>();
 
     @OneToMany(mappedBy = "trip")
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
@@ -143,6 +159,7 @@ public class Trip implements Nullable, Serializable {
     public static Trip INVALID_TRIP() {
         return new NullTrip();
     }
+
     public int getId() {
         return id;
     }
@@ -191,7 +208,7 @@ public class Trip implements Nullable, Serializable {
         this.tripUser = tripUser;
     }
 
-    public void addTripUser(TripUser tripUser){
+    public void addTripUser(TripUser tripUser) {
         tripUsers.add(tripUser);
     }
 
@@ -216,7 +233,7 @@ public class Trip implements Nullable, Serializable {
         waypoint.setTrip(this);
     }
 
-    /*
+
     public List<TripUser> getConfirmedTripUsers() {
 
         return confirmedTripUsers;
@@ -226,9 +243,13 @@ public class Trip implements Nullable, Serializable {
         this.confirmedTripUsers = confirmedTripUsers;
     }
 
-    public void addConfirmedUser(TripUser user){
+    public void addConfirmedUser(TripUser user) {
+        System.out.println("size confirmedTripUsers before: " + confirmedTripUsers.size());
         confirmedTripUsers.add(user);
+        System.out.println("size confirmedTripUsers after: " + confirmedTripUsers.size());
+        System.out.println("size tripUsers before: " + tripUsers.size());
         tripUsers.remove(user);
+        System.out.println("size tripUsers after: " + tripUsers.size());
     }
-    */
+
 }

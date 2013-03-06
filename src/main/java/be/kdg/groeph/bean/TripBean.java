@@ -3,6 +3,7 @@ package be.kdg.groeph.bean;
 import be.kdg.groeph.model.Label;
 import be.kdg.groeph.model.Trip;
 import be.kdg.groeph.model.TripType;
+import be.kdg.groeph.model.TripUser;
 import be.kdg.groeph.service.TripService;
 import be.kdg.groeph.util.Tools;
 import org.apache.log4j.Logger;
@@ -55,7 +56,7 @@ public class TripBean implements Serializable {
     public TripBean() {
         isPublic = true;
         labels = new ArrayList<Label>();
-        filter="";
+        filter = "";
     }
 
     public String getFilter() {
@@ -178,39 +179,41 @@ public class TripBean implements Serializable {
     }
 
     public List<Trip> getAllPublicTrips() {
-        List<Trip> publictrips=tripService.fetchAllPublicTrips();
+        List<Trip> publictrips = tripService.fetchAllPublicTrips();
 
-         //filter="";
+        //filter="";
 
-        return Tools.filter(publictrips,filter);
+        return Tools.filter(publictrips, filter);
     }
 
     public List<TripType> getAllTripTypes() {
         return tripService.fetchAllTripTypes();
     }
 
-    public List<Trip> getAllInvitedTrips(){
+    public List<Trip> getAllInvitedTrips() {
         return tripService.getAllInvitedTripsByUser(loginBean.getUser());
     }
 
     public List<Trip> getAllPrivateTrips() {
 
-        return Tools.filter(loginBean.getUser().getTrips(),filter);
+        return Tools.filter(loginBean.getUser().getTrips(), filter);
     }
 
-    /*public void confirmParticipation(){
+    public void confirmParticipation() {
         TripUser user = loginBean.getUser();
         currentTrip.addConfirmedUser(user);
         user.confirmParticipation(currentTrip);
         tripService.addConfirmedTrip(currentTrip);
     }
 
-    public boolean isConfirmInvitation(){
-        if(currentTrip.getTripUsers().contains(loginBean.getUser())){
-            return true;
+    public boolean isConfirmInvitation() {
+        if (currentTrip != null) {
+            if (currentTrip.getTripUsers().contains(loginBean.getUser())) {
+                return true;
+            } else {
+                return false;
+            }
         }
-        else{
-            return false;
-        }
-    }   */
+        return  false;
+    }
 }

@@ -63,19 +63,30 @@ public class TripUser implements Nullable, Serializable {
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     private List<Trip> trips;
 
-    @LazyCollection(LazyCollectionOption.FALSE)
+    /*@LazyCollection(LazyCollectionOption.FALSE)
     @ManyToMany
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    @JoinColumn(name="id", nullable = true)
+    //@JoinColumn(name="id", nullable = true)
+    @JoinTable(name="trip_user_invited")
     private List<Trip> invitedTrips = new ArrayList<Trip>();
 
-    /*
-    @LazyCollection(LazyCollectionOption.FALSE)
 
+    @LazyCollection(LazyCollectionOption.FALSE)
     @ManyToMany
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    @JoinColumn(name="id", nullable = true)
-    private List<Trip> confirmedTrips = new ArrayList<Trip>(); */
+    //@JoinColumn(name="id", nullable = true)
+    @JoinTable(name="trip_user_confirmed")
+    private List<Trip> confirmedTrips = new ArrayList<Trip>();  */
+
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @ManyToMany( mappedBy = "tripUsers")
+    private List<Trip> invitedTrips = new ArrayList<Trip>();
+
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @ManyToMany( mappedBy = "confirmedTripUsers")
+    private List<Trip> confirmedTrips = new ArrayList<Trip>();
+
+
 
 
 
@@ -267,7 +278,7 @@ public class TripUser implements Nullable, Serializable {
         this.tempPassword = tempPassword;
     }
 
-    /*
+
     public List<Trip> getConfirmedTrips() {
         return confirmedTrips;
     }
@@ -279,7 +290,7 @@ public class TripUser implements Nullable, Serializable {
     public void confirmParticipation(Trip trip){
         confirmedTrips.add(trip);
         invitedTrips.remove(trip);
-    }      */
+    }
 
     @Override
     public boolean isNull() {
