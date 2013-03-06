@@ -98,6 +98,7 @@
 
                                     <h:commandLink value="Change profile" immediate="true" action="#{registerBean.editUser}" rendered="#{not registerBean.editableUser}" />
                                     <h:commandButton value="Save" action="#{registerBean.updateUser}"  rendered="#{registerBean.editableUser}" />
+                                    <h:commandButton value="Cancel" action="#{registerBean.cancel}"  rendered="#{registerBean.editableUser}" />
                                     <h:commandLink value="Change password / Werkt nog ni!" rendered="#{not registerBean.editableUser}" />
                                 </h:form>
                             </div>

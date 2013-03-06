@@ -31,8 +31,15 @@ function addListeners(){
         placeMarker(event.latLng);
 
         // display the lat/lng in your form's lat/lng fields
-        document.getElementById("waypointForm:lat").value = event.latLng.lat();
-        document.getElementById("waypointForm:lng").value = event.latLng.lng();
+        var lat  = event.latLng.lat();
+        var lng =  event.latLng.lng();
+
+        // NEED A FIX !!!! FOR SOME REASON ONLY THE FIRST LAT & LNG GETS THE VALUE !!!
+        document.getElementById("waypointForm:newlat").value = lat;
+        document.getElementById("waypointForm:newlng").value = lng  ;
+        document.getElementById("waypointForm:lat").value = lat ;
+        document.getElementById("waypointForm:lng").value = lng ;
+
     });
 }
 
@@ -62,11 +69,13 @@ function deleteOverlays() {
 }
 
 function setFilledInPosition(){
-    if(document.getElementById("lat").innerHTML != 0.0){
+    if(document.getElementById("waypointForm:newlat").value != '0.0'){
         var marker = new google.maps.Marker({
-            position: new google.maps.LatLng(parseFloat(document.getElementById("lat").innerHTML),parseFloat(document.getElementById("lng").innerHTML)),
+            position: new google.maps.LatLng(parseFloat(document.getElementById("waypointForm:newlat").value),parseFloat(document.getElementById("waypointForm:newlng").value)),
             map: map
         });
+
+        markersArray.push(marker);
     }
 
 }

@@ -95,4 +95,30 @@ public class TestWaypointBean extends AbstractTransactionalJUnit4SpringContextTe
         assertEquals("The waypoint must have Start as label", START, trip.getWaypoints().get(0).getLabel());
     }
 
+    @Test
+    public void testUpdateWaypointTrip() {
+        TripUser daoTestUser = null;
+        Trip trip = null;
+        waypointBean.setLabel(START);
+        waypointBean.setDescription("This is where we meet before starting the trip");
+        waypointBean.setWaypointType("Start");
+        waypointBean.setLattitude(50.9);
+        waypointBean.setLongitude(4.3);
+        waypointBean.addWaypoint();
+
+        waypointBean.setNewlabel("Update");
+        waypointBean.setNewdescription("This is where we meet before starting the trip");
+        waypointBean.setWaypointType("Start");
+        waypointBean.setNewlattitude(50.9);
+        waypointBean.setNewlongitude(4.3);
+
+        waypointBean.updateWaypoint();
+
+        daoTestUser = userDao.getUserByEmail(loginBean.getUser().getEmail());
+
+        trip = daoTestUser.getTrips().get(0);
+        assertEquals("The trip must contain 1 waypoint", 1, trip.getWaypoints().size());
+        assertEquals("The waypoint must have Update as label", "Update", trip.getWaypoints().get(0).getLabel());
+    }
+
 }

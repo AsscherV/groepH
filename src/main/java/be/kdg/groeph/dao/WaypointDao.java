@@ -4,6 +4,7 @@ package be.kdg.groeph.dao;
 import be.kdg.groeph.model.Waypoint;
 import be.kdg.groeph.model.WaypointType;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface WaypointDao {
@@ -18,4 +19,5 @@ public interface WaypointDao {
     Waypoint getWaypointByLabel(String waypointLabel);
 
     Waypoint getWaypointById(int id);
+    boolean updateWaypoint(Waypoint waypoint) ;
 }

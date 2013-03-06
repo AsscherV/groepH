@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.SQLException;
 import java.util.List;
 
 @Transactional
@@ -22,6 +23,11 @@ public class WaypointServiceImpl implements WaypointService{
     public boolean addWaypoint(Waypoint waypoint) {
         logger.info("Waypoint: " + waypoint.getLabel() + " created");
         return waypointDao.addWaypoint(waypoint);
+    }
+
+    @Override
+    public boolean updateWaypoint(Waypoint waypoint) {
+                return waypointDao.updateWaypoint(waypoint);
     }
 
     @Override

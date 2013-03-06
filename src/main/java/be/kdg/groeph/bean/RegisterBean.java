@@ -106,13 +106,9 @@ public class RegisterBean implements Serializable {
     private String newsecondPassword;
     @NotEmpty(message = "{dateRegistered} {notempty}")
     private Date newdateRegistered;
-    @NotEmpty(message = "{zipcode} {notempty}")
     private String newzipcode;
-    @NotEmpty(message = "{street} {notempty}")
     private String newstreet;
-    @NotEmpty(message = "{streetNumber} {notempty}")
     private String newstreetNumber;
-    @NotEmpty(message = "{city} {notempty}")
     private String newcity;
 
     private String mailMessage;
@@ -401,16 +397,18 @@ public class RegisterBean implements Serializable {
         return FAILURE;
     }
     private void makeFacesMessage(String message, String type) {
-        /*
+
         FacesMessage facesMsg = null;
         if (type.equals("info")) {
             facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, message, message);
         } else if (type.equals("error")) {
             facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
         }
-        //FacesContext fc = FacesContext.getCurrentInstance();
-        //fc.addMessage(null, facesMsg);
-        */
+        if(!FacesContext.getCurrentInstance().equals(null)){
+        FacesContext fc = FacesContext.getCurrentInstance();
+        fc.addMessage(null, facesMsg);
+        }
+
     }
 
     public String updateUser() throws SQLException {
@@ -451,6 +449,11 @@ public class RegisterBean implements Serializable {
         newcity = loginBean.getUser().getAddress().getCity();
         editableUser = true;
         return null;
+    }
+
+    public String cancel(){
+        editableUser = false;
+                return null;
     }
 
     public void putNewValues(String email, String firstName, String lastName, Date dateOfBirth, String phoneNumber,

@@ -70,12 +70,13 @@
                                     <h:form id="waypointForm" class="floatLeft marginRight">
                                         <h:panelGrid columns="1" border="0">
                                             <h:outputLabel value="#{msgs.title}"/>
-                                            <h:inputText id="titel" styleClass="span2" value="#{waypointBean.label}"/>
+                                            <h:inputText id="titel" styleClass="span2" value="#{waypointBean.label}" rendered="#{not waypointBean.editableWaypoint}"/>
+                                            <h:inputText id="newtitel" styleClass="span2" value="#{waypointBean.newlabel}" rendered="#{waypointBean.editableWaypoint}"/>
                                             <h:message for="titel" styleClass="error"/>
 
                                             <h:outputLabel value="#{msgs.description}"/>
-                                            <h:inputText id="description" styleClass="span2"
-                                                         value="#{waypointBean.description}"/>
+                                            <h:inputText id="description" styleClass="span2" value="#{waypointBean.description}" rendered="#{not waypointBean.editableWaypoint}"/>
+                                            <h:inputText id="newdescription" styleClass="span2" value="#{waypointBean.newdescription}" rendered="#{waypointBean.editableWaypoint}"/>
                                             <h:message for="description" styleClass="error"/>
 
                                             <h:outputLabel value="#{msgs.type}"/>
@@ -88,13 +89,13 @@
                                             <h:column></h:column>
 
                                             <h:outputLabel value="#{msgs.lat}"/>
-                                            <h:inputText id="lat" styleClass="span2"
-                                                         value="#{waypointBean.lattitude}"/>
+                                            <h:inputText id="lat" styleClass="span2" value="#{waypointBean.lattitude}" rendered="#{not waypointBean.editableWaypoint}"/>
+                                            <h:inputText id="newlat" styleClass="span2" value="#{waypointBean.newlattitude}" rendered="#{waypointBean.editableWaypoint}"/>
                                             <h:message for="lat" styleClass="error"/>
 
                                             <h:outputLabel value="#{msgs.lng}"/>
-                                            <h:inputText id="lng" styleClass="span2"
-                                                         value="#{waypointBean.longitude}"/>
+                                            <h:inputText id="lng" styleClass="span2" value="#{waypointBean.longitude}" rendered="#{not waypointBean.editableWaypoint}"/>
+                                            <h:inputText id="newlng" styleClass="span2" value="#{waypointBean.newlongitude}" rendered="#{waypointBean.editableWaypoint}"/>
                                             <h:message for="lng" styleClass="error"/>
 
 
@@ -106,9 +107,8 @@
                                              -->
 
                                         </h:panelGrid>
-                                        <h:commandButton type="submit" action="#{waypointBean.addWaypoint}"
-                                                         class="btn btn-success"
-                                                         value="#{msgs.addWaypoint}"/>
+                                        <h:commandButton type="submit" action="#{waypointBean.addWaypoint}" class="btn btn-success" value="#{msgs.addWaypoint}" rendered="#{not waypointBean.editableWaypoint}"/>
+                                        <h:commandButton type="submit" action="#{waypointBean.updateWaypoint}" class="btn btn-success" value="Update" rendered="#{waypointBean.editableWaypoint}"/>
                                     </h:form>
 
 

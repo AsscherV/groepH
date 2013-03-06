@@ -48,8 +48,24 @@ public class WaypointBean  implements Serializable {
     @NotNull(message = "{coordinates} {notempty}")
     private double longitude;
 
+    @NotEmpty(message = "{description} {notempty}")
+        private String newdescription;
+        @NotEmpty(message = "{label} {notempty}")
+        private String newlabel;
+        @NotNull(message = "{coordinates} {notempty}")
+        private double newlattitude;
+        @NotNull(message = "{coordinates} {notempty}")
+        private double newlongitude;
+
     private Waypoint currentWaypoint;
     private List<Waypoint> waypointList;
+
+    private boolean editableWaypoint;
+
+
+    public WaypointBean() {
+        editableWaypoint= false;
+    }
 
     public double getLattitude() {
         return lattitude;
@@ -90,10 +106,52 @@ public class WaypointBean  implements Serializable {
         this.label = label;
     }
 
+    public String getNewdescription() {
+        return newdescription;
+    }
+
+    public void setNewdescription(String newdescription) {
+        this.newdescription = newdescription;
+    }
+
+    public String getNewlabel() {
+        return newlabel;
+    }
+
+    public void setNewlabel(String newlabel) {
+        this.newlabel = newlabel;
+    }
+
+
+    public double getNewlattitude() {
+        return newlattitude;
+    }
+
+    public void setNewlattitude(double newlattitude) {
+        this.newlattitude = newlattitude;
+    }
+
+    public double getNewlongitude() {
+        return newlongitude;
+    }
+
+    public void setNewlongitude(double newlongitude) {
+        this.newlongitude = newlongitude;
+    }
+
+    public boolean isEditableWaypoint() {
+        return editableWaypoint;
+    }
+
+    public void setEditableWaypoint(boolean editableWaypoint) {
+        this.editableWaypoint = editableWaypoint;
+    }
+
     public String addWaypoint() {
         WaypointType type = waypointService.getTypeByName(getWaypointType());
         Waypoint waypoint= new Waypoint(getLabel(),getDescription(),type,getLattitude(),getLongitude());
         tripBean.getCurrentTrip().addWaypoint(waypoint);
+        setCurrentWaypoint(waypoint);
 
         if(waypointService.addWaypoint(waypoint) )
         {
@@ -102,6 +160,34 @@ public class WaypointBean  implements Serializable {
         }
         return FAILURE  ;
     }
+    public String editWaypoint(){
+           newlabel=currentWaypoint.getLabel();
+           newdescription=currentWaypoint.getDescription();
+           newlattitude=currentWaypoint.getLattitude();
+           newlongitude=currentWaypoint.getLongitude();
+           waypointType = currentWaypoint.getWaypointType().getType();
+
+            editableWaypoint=true;
+           return "EDITWAYPOINT";
+       }
+
+    public String updateWaypoint() {
+        WaypointType newtype = waypointService.getTypeByName(getWaypointType());
+
+        Waypoint waypoint = getCurrentWaypoint();
+        waypoint.setLabel(newlabel);
+        waypoint.setDescription(newdescription);
+        waypoint.setWaypointType(newtype);
+        waypoint.setLattitude(newlattitude);
+        waypoint.setLongitude(newlongitude);
+        editableWaypoint=false;
+            if(waypointService.updateWaypoint(waypoint) )
+            {
+                clearfield();
+                return SUCCESS;
+            }
+            return FAILURE  ;
+        }
 
     public String previousWaypoint(){
         //TODO: refactor this code for previous
@@ -162,15 +248,6 @@ public class WaypointBean  implements Serializable {
         return WAYPOINT;
     }
 
-    public String editWaypoint(){
-        label=currentWaypoint.getLabel();
-        description=currentWaypoint.getDescription();
-        lattitude=currentWaypoint.getLattitude();
-        longitude=currentWaypoint.getLongitude();
-        waypointType = currentWaypoint.getWaypointType().getType();
-
-        return "EDITWAYPOINT";
-    }
 
 
 }

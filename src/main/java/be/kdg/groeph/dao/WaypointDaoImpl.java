@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
+import java.sql.SQLException;
 import java.util.List;
 
 @Repository
@@ -37,6 +38,12 @@ public class WaypointDaoImpl implements WaypointDao{
     }
 
     @Override
+    public boolean updateWaypoint(Waypoint waypoint)  {
+        sessionFactory.getCurrentSession().update(waypoint);
+        return true;
+    }
+
+    @Override
     public List<WaypointType> fetchAllWaypointTypes() {
         Query query = sessionFactory.getCurrentSession().createQuery("from WaypointType");
         return query.list();
@@ -59,5 +66,7 @@ public class WaypointDaoImpl implements WaypointDao{
     public Waypoint getWaypointById(int id) {
         Query query = sessionFactory.getCurrentSession().createQuery("from Waypoint where id=:id");
         query.setParameter("id",id);
-        return (Waypoint) query.uniqueResult();}
+        return (Waypoint) query.uniqueResult();
+    }
+
 }
