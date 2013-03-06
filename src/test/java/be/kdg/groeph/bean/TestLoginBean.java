@@ -43,6 +43,8 @@ public class TestLoginBean extends AbstractTransactionalJUnit4SpringContextTests
 
 
     private final String validEmail = "greg.deckers@student.kdg.be";
+    private final String SUCCESS = "SUCCESS";
+    private final String FAILURE = "FAILURE";
     private String recoverypassword = "testrecovery";
 
     @Before
@@ -56,7 +58,9 @@ public class TestLoginBean extends AbstractTransactionalJUnit4SpringContextTests
         loginBean.setEmail(validEmail);
         loginBean.setPassword("password");
         setLoginBean(validEmail, "password");
-        assertEquals("SUCCESS", loginBean.loginUser());
+        assertFalse("IsLoggedIn is FALSE before login",loginBean.isLoggedIn());
+        assertEquals(SUCCESS, loginBean.loginUser());
+        assertTrue("IsLoggedIn is TRUE after successful login",loginBean.isLoggedIn());
     }
 
     @Test
@@ -64,27 +68,27 @@ public class TestLoginBean extends AbstractTransactionalJUnit4SpringContextTests
         loginBean.setEmail(validEmail);
         loginBean.setPassword("qsdqs");
         setLoginBean(validEmail, "qsdqs");
-        assertEquals("FAILURE", loginBean.loginUser());
+        assertFalse("IsLoggedIn is FALSE before login",loginBean.isLoggedIn());
+        assertEquals(FAILURE, loginBean.loginUser());
+        assertFalse("IsLoggedIn is FALSE after login",loginBean.isLoggedIn());
     }
 
     @Test
     public void testLogOut() throws LoginException {
         setLoginBean(validEmail, "password");
         loginBean.loginUser();
-        assertEquals("SUCCESS", loginBean.logOut());
+        assertEquals(SUCCESS, loginBean.logOut());
+        assertFalse("IsLoggedIn is FALSE after logout",loginBean.isLoggedIn());
     }
 
     @Test
     public void testIsAdmin() {
-        //        assertNotEquals("User has no ADMIN_ROLE","ROLE_ADMIN", loginBean.user.getRole());
-        //assertNotEquals("User has has USER_ROLE","ROLE_ADMIN", loginBean.user.getRole());
         assertFalse("User has no admin rights", loginBean.user.isAdmin());
     }
 
-    public void setLoginBean(String email, String password) {
+    public void setLoginBean(String email, String password) throws LoginException {
         loginBean.setEmail(email);
         loginBean.setPassword(password);
-
     }
 
     @Test
@@ -103,7 +107,6 @@ public class TestLoginBean extends AbstractTransactionalJUnit4SpringContextTests
         assertTrue("TempPassword field must be empty", user.getTempPassword().isEmpty());
 
     }
-
 
     public void fillRegisterBean() {
         registerBean.setGender('M');

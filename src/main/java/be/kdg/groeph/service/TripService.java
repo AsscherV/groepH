@@ -19,7 +19,7 @@ public interface TripService {
 
     void addUserToTrip(Trip trip);
 
-    Trip getTripByName(String tripName);
+    List<Trip> getTripsByName(String tripName);
     Trip getTripById(int id);
 
     List<Label> getLabels(Trip trip);

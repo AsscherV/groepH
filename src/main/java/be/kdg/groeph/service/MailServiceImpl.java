@@ -75,12 +75,12 @@ public class MailServiceImpl implements MailService {
         String toAddress = email;
         message.setTo(toAddress);
         message.setSubject("User Registration successful");
-        message.setText("The user '" + toAddress + "' is successfully registered");
+        message.setText("The user '" + toAddress + "' is successfully registered!");
         mailMessageArray[0] = message;
 
-        System.out.println("Sending email ....");
         try{
             mailSender.send(mailMessageArray);
+            System.out.println("Sending email ....");
             return true;
         }  catch (MailException e){
             return false;

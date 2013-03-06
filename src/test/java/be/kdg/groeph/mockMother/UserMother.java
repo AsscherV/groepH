@@ -1,16 +1,27 @@
 package be.kdg.groeph.mockMother;
 
+import be.kdg.groeph.bean.RegisterBean;
 import be.kdg.groeph.model.Address;
 import be.kdg.groeph.model.TripUser;
 import be.kdg.groeph.util.SHAEncryption;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.keygen.StringKeyGenerator;
+import org.springframework.test.context.ContextConfiguration;
 
 import java.util.Calendar;
 import java.util.Date;
 
+
+@ContextConfiguration(locations = {"classpath:daoContext.xml"})
 public class UserMother {
     private static final String USER = "ROLE_USER";
     private static final String ADMIN = "ROLE_ADMIN";
+
+    @Qualifier("registerBean")
+    @Autowired
+    RegisterBean registerBean;
+
 
     public static TripUser validUser1() {
         Calendar cal;

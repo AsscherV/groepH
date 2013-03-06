@@ -18,6 +18,8 @@ import org.springframework.test.context.junit4.AbstractTransactionalJUnit4Spring
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.faces.bean.ManagedProperty;
+import javax.security.auth.login.LoginException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -36,12 +38,17 @@ import static org.junit.Assert.assertTrue;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:daoContext.xml"})
 public class TestParticipantsBean extends AbstractTransactionalJUnit4SpringContextTests {
+    public static final String TIMEBOUND = "Timebound";
+    public static final String REPEATING = "Repeating";
+    public static final String ANYTIME = "AnyTime";
 
     private final String invalidEmail = "jajajaInvalid";
-    private final String validEmail = "greg.deckers@student.kdg.be";
+    private final String validEmail = "guntherlaurijssens@gmail.com";
+    private final String validEmail2 = "greg.deckers@student.kdg.be";
 
     private final String validEmails = "greg.deckers@student.kdg.be; gunther.laurijssens@student.kdg.be";
     private final String inValidEmails = "greg.deckersstudent.kdg.be; gunther.laurijssens@student";
+
     @Qualifier("participantsBean")
     @Autowired
     ParticipantsBean participantsBean;
@@ -49,6 +56,10 @@ public class TestParticipantsBean extends AbstractTransactionalJUnit4SpringConte
     @Qualifier("tripBean")
     @Autowired
     TripBean tripBean;
+
+    @Qualifier("registerBean")
+    @Autowired
+    RegisterBean registerBean;
 
     @Qualifier("loginBean")
     @Autowired
@@ -70,15 +81,49 @@ public class TestParticipantsBean extends AbstractTransactionalJUnit4SpringConte
     private List<TripType> types;
 
     @Before
-    public void init() {
-        user1 = UserMother.validUser1();
-        user2 = UserMother.validUser2();
-        loginBean.setUser(UserMother.validUser1());
-        tripDao.addTripType(new TripType("Timebound"));
-        tripDao.addTripType(new TripType("Public"));
-        tripDao.addTripType(new TripType("Private"));
-        userDao.addUser(user2);
+    public void init() throws ParseException, LoginException {
+        tripDao.addTripType(new TripType(TIMEBOUND));
+        tripDao.addTripType(new TripType(REPEATING));
+        tripDao.addTripType(new TripType(ANYTIME));
+
+        //First user
+        fillRegisterBean();
+        registerBean.addUser();
+
+        //Second user
+        fillRegisterBean();
+        registerBean.setEmail(validEmail2);
+        registerBean.addUser();
+
+        TripUser user = userDao.getUserByEmail(validEmail);
+
+        loginBean.setEmail(user.getEmail());
+        loginBean.setPassword("password");
+        loginBean.loginUser();
+
+        //user2 = UserMother.validUser2();
+        //userDao.addUser(user2);
+
     }
+
+    public void fillRegisterBean() {
+        registerBean.setGender('M');
+        registerBean.setFirstName("Gunther");
+        registerBean.setLastName("Laurijssens");
+        registerBean.setEmail(validEmail);
+        registerBean.setPassword("password");
+        registerBean.setSecondPassword("password");
+        Calendar cal;
+        cal = Calendar.getInstance();
+        cal.set(1988, Calendar.DECEMBER, 10);
+        registerBean.setDateOfBirth(cal.getTime());
+        registerBean.setStreet("test");
+        registerBean.setStreetNumber("test");
+        registerBean.setZipcode("test");
+        registerBean.setCity("test");
+        registerBean.setPhoneNumber("04989898989");
+    }
+
 
     @Test
     public void testInvalidEmail() {
@@ -133,7 +178,7 @@ public class TestParticipantsBean extends AbstractTransactionalJUnit4SpringConte
     }
 
     @Test
-    public void testSendValidEmails() {
+    public void testSendValidEmails() throws LoginException {
         participantsBean.setEmails(validEmails);
         Calendar cal;
         cal = Calendar.getInstance();
@@ -156,6 +201,14 @@ public class TestParticipantsBean extends AbstractTransactionalJUnit4SpringConte
         tripBean.addTrip();
 
         assertTrue("sendValidEmails test. Expected true", participantsBean.sendInvitations());
+        loginBean.logOut();
+        loginBean.setEmail(validEmail2);
+        loginBean.setPassword("password");
+        loginBean.loginUser();
+        assertEquals("User is invited for 1 trip",1, tripBean.getAllInvitedTrips().size());
+        tripBean.setCurrentTrip(tripBean.getAllInvitedTrips().get(0));
+        tripBean.confirmParticipation();
+        assertEquals("User had confirmed 1 trip",1,tripBean.getAllParticipatedTrips().size());
     }
 
 

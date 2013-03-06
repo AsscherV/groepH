@@ -61,8 +61,8 @@ public class TripServiceImpl implements TripService {
     }
 
     @Override
-    public Trip getTripByName(String tripName) {
-        return tripDao.getTripByName(tripName);
+    public List<Trip> getTripsByName(String tripName) {
+        return tripDao.getTripsByName(tripName);
     }
     @Override
     public List<Label> getLabels(Trip trip) {

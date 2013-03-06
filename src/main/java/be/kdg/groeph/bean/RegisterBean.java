@@ -415,19 +415,19 @@ public class RegisterBean implements Serializable {
     public String updateUser() throws SQLException {
         TripUser tripUser = loginBean.getUser();
 
-        tripUser.setFirstName(newfirstName);
-        tripUser.setLastName(newlastName);
-        tripUser.setDateOfBirth(newdateOfBirth);
-        tripUser.setPhoneNumber(newphoneNumber);
-        tripUser.setGender(newgender);
-        tripUser.setEmail(newemail);
-        tripUser.setDateRegistered(newdateRegistered);
+        tripUser.setFirstName(getNewfirstName());
+        tripUser.setLastName(getNewlastName());
+        tripUser.setDateOfBirth(getNewdateOfBirth());
+        tripUser.setPhoneNumber(getNewphoneNumber());
+        tripUser.setGender(getNewgender());
+        tripUser.setEmail(getNewemail());
+        tripUser.setDateRegistered(getNewdateRegistered());
 
         Address adress = loginBean.getUser().getAddress();
-        adress.setZipcode(newzipcode);
-        adress.setStreet(newstreet);
-        adress.setStreetNumber(newstreetNumber);
-        adress.setCity(newcity);
+        adress.setZipcode(getNewzipcode());
+        adress.setStreet(getNewstreet());
+        adress.setStreetNumber(getNewstreetNumber());
+        adress.setCity(getNewcity());
         tripUser.setAddress(adress);
 
         userService.updateUser(tripUser);

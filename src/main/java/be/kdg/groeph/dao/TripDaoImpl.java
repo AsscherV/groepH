@@ -71,12 +71,14 @@ public class TripDaoImpl implements TripDao {
 
     //TODO: Werkt niet
     @Override
-    public Trip getTripByName(String tripName) {
+    public List<Trip> getTripsByName(String tripName) {
         Query query = sessionFactory.getCurrentSession().createQuery("from Trip where title=:tripName");
         query.setParameter("tripName", tripName);
-        return (Trip) query.uniqueResult();
+        return (List<Trip>) query.list();
     }
 
+
+    //TODO: Klopt dees?
     @Override
     public List<Label> getLabels(Trip trip) {
         if (trip != null) {
@@ -135,5 +137,12 @@ public class TripDaoImpl implements TripDao {
     public boolean addConfirmedTrip(Trip currentTrip) {
         sessionFactory.getCurrentSession().saveOrUpdate(currentTrip);
         return true;
+    }
+
+    @Override
+    public List<Trip> getTripByUserId(TripUser tripUser) {
+        Query query = sessionFactory.getCurrentSession().createQuery("from Trip where tripUser=:tripUser");
+        query.setParameter("tripUser", tripUser);
+        return (List<Trip>) query.list();
     }
 }

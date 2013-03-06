@@ -18,7 +18,7 @@ public interface TripDao {
     TripType getTypeByName(String naam);
     void addTripType(TripType tripType);
 
-    Trip getTripByName(String tripName);
+    List<Trip> getTripsByName(String tripName);
 
     List<Label> getLabels(Trip trip);
 
@@ -31,4 +31,6 @@ public interface TripDao {
     List<Trip> getAllParticipatedTripsByUser(TripUser user);
 
     boolean updateTrip(Trip trip);
+
+    List<Trip> getTripByUserId(TripUser tripUser);
 }

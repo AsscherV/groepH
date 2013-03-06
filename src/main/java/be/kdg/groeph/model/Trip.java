@@ -61,7 +61,8 @@ public class Trip implements Nullable, Serializable {
     */
 
     @LazyCollection(LazyCollectionOption.FALSE)
-    @ManyToMany( cascade = CascadeType.ALL)
+    @ManyToMany//( cascade = CascadeType.ALL)
+    @Cascade({org.hibernate.annotations.CascadeType.ALL})
     @JoinTable(name = "t_trip_t_user_invited", joinColumns = {
                 @JoinColumn(name = "tripId", nullable = true, updatable = true)},
             inverseJoinColumns = {@JoinColumn(name = "tripUserId",
@@ -69,7 +70,8 @@ public class Trip implements Nullable, Serializable {
     private List<TripUser> tripUsers = new ArrayList<TripUser>();
 
     @LazyCollection(LazyCollectionOption.FALSE)
-    @ManyToMany( cascade = CascadeType.ALL)
+    @ManyToMany//( cascade = CascadeType.ALL)
+    @Cascade({org.hibernate.annotations.CascadeType.ALL})
     @JoinTable(name = "t_trip_t_user_confirmed", joinColumns = {
             @JoinColumn(name = "tripId", nullable = true, updatable = true)},
             inverseJoinColumns = {@JoinColumn(name = "tripUserId",
@@ -246,12 +248,12 @@ public class Trip implements Nullable, Serializable {
     }
 
     public void addConfirmedUser(TripUser user) {
-        System.out.println("size confirmedTripUsers before: " + confirmedTripUsers.size());
+        //System.out.println("size confirmedTripUsers before: " + confirmedTripUsers.size());
         confirmedTripUsers.add(user);
-        System.out.println("size confirmedTripUsers after: " + confirmedTripUsers.size());
-        System.out.println("size tripUsers before: " + tripUsers.size());
+        //System.out.println("size confirmedTripUsers after: " + confirmedTripUsers.size());
+        //System.out.println("size tripUsers before: " + tripUsers.size());
         tripUsers.remove(user);
-        System.out.println("size tripUsers after: " + tripUsers.size());
+        //System.out.println("size tripUsers after: " + tripUsers.size());
     }
 
 }

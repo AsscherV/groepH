@@ -59,6 +59,7 @@ public class TripUser implements Nullable, Serializable {
     @Column(name="accountNonLocked", nullable = true)
     private boolean accountNonLocked;
 
+    //TODO: hernoeme naar Organised trips
     @OneToMany(mappedBy = "tripUser", fetch = FetchType.EAGER)
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     private List<Trip> trips;
