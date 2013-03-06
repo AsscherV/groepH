@@ -1,18 +1,15 @@
 package be.kdg.groeph.bean;
 
-import be.kdg.groeph.dao.TripDao;
 import be.kdg.groeph.model.Label;
 import be.kdg.groeph.model.Trip;
 import be.kdg.groeph.model.TripType;
-import be.kdg.groeph.model.TripUser;
 import be.kdg.groeph.service.TripService;
+import be.kdg.groeph.util.Tools;
 import org.apache.log4j.Logger;
-import org.hibernate.SessionFactory;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -21,7 +18,9 @@ import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @Component
 @SessionScoped
@@ -51,10 +50,20 @@ public class TripBean implements Serializable {
     private String tripType;
     private boolean isPublic;
     Trip currentTrip;
+    private String filter;
 
     public TripBean() {
         isPublic = true;
         labels = new ArrayList<Label>();
+        filter="";
+    }
+
+    public String getFilter() {
+        return filter;
+    }
+
+    public void setFilter(String filter) {
+        this.filter = filter;
     }
 
     public boolean getPublic() {
@@ -169,7 +178,11 @@ public class TripBean implements Serializable {
     }
 
     public List<Trip> getAllPublicTrips() {
-        return tripService.fetchAllPublicTrips();
+        List<Trip> publictrips=tripService.fetchAllPublicTrips();
+
+         //filter="";
+
+        return Tools.filter(publictrips,filter);
     }
 
     public List<TripType> getAllTripTypes() {
@@ -178,6 +191,11 @@ public class TripBean implements Serializable {
 
     public List<Trip> getAllInvitedTrips(){
         return tripService.getAllInvitedTripsByUser(loginBean.getUser());
+    }
+
+    public List<Trip> getAllPrivateTrips() {
+
+        return Tools.filter(loginBean.getUser().getTrips(),filter);
     }
 
     /*public void confirmParticipation(){

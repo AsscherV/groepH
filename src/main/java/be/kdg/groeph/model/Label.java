@@ -1,12 +1,7 @@
 package be.kdg.groeph.model;
 
-import org.hibernate.annotations.*;
-
 import javax.persistence.*;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 import java.io.Serializable;
-import java.util.List;
 
 @Entity
 @Table(name="t_label")
@@ -52,5 +47,22 @@ public class Label implements Serializable {
 
     public void setTrip(Trip trip) {
         this.trip = trip;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Label label = (Label) o;
+
+        if (!name.toLowerCase().equals(label.name.toLowerCase())) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return name.hashCode();
     }
 }

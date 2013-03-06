@@ -13,9 +13,9 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import java.io.Serializable;
@@ -98,7 +98,7 @@ public class SocialBean implements Serializable {
         } else {
             gender = 'F';
         }
-        if (fbUser.getHometownName().isEmpty()) {
+        if (fbUser.getHometownName() == null) {
             address = new Address("no streetname", "no streetnumber", "no zip", fbUser.getHometownName());
         }
         user = new TripUser(fbUser.getFirstName(), fbUser.getLastName(), fbUser.getBirthdayAsDate(), "no phonenumber", gender, fbUser.getEmail(), SHAEncryption.encrypt(newPassword), address, new Date(), "ROLE_USER");

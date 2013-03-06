@@ -70,7 +70,7 @@ public class Trip implements Nullable, Serializable {
     public Trip() {
     }
 
-    public Trip(String title, String description, Date startTime, Date endTime, ArrayList<Label> labels, TripType tripType, boolean isPublic) {
+    public Trip(String title, String description, Date startTime, Date endTime, List<Label> labels, TripType tripType, boolean isPublic) {
         this.title = title;
         this.description = description;
         this.startTime = startTime;
@@ -80,7 +80,7 @@ public class Trip implements Nullable, Serializable {
         this.isPublic = isPublic;
     }
 
-    public Trip(String title, String description, Date startTime, Date endTime, ArrayList<Label> labels, boolean isPublic) {
+    public Trip(String title, String description, Date startTime, Date endTime, List<Label> labels, boolean isPublic) {
         this.title = title;
         this.description = description;
         this.startTime = startTime;
