@@ -50,10 +50,10 @@ public class TripBean implements Serializable {
     @NotEmpty(message = "{tripType} {notempty}")
     private String tripType;
     private boolean isPublic;
-
     Trip currentTrip;
     private String filter;
     private boolean isVisible;
+    private boolean hasCurrentTrip;
 
     public TripBean() {
         isPublic = true;
@@ -152,6 +152,23 @@ public class TripBean implements Serializable {
         isVisible = visible;
     }
 
+    public boolean isHasCurrentTrip() {
+        if(currentTrip == null){
+            hasCurrentTrip= false;
+        }
+        else{
+            hasCurrentTrip= true;
+        }
+        return hasCurrentTrip;
+    }
+
+    public void setHasCurrentTrip(boolean hasCurrentTrip) {
+        this.hasCurrentTrip = hasCurrentTrip;
+    }
+    public String NoCurrentTrip(){
+        setCurrentTrip(null);
+        return null;
+    }
     public String setThisAsCurrentTrip() {
         HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
         Integer tripId = Integer.parseInt(request.getParameter("currentTrip"));

@@ -29,6 +29,10 @@ public class WaypointServiceImpl implements WaypointService{
     public boolean updateWaypoint(Waypoint waypoint) {
                 return waypointDao.updateWaypoint(waypoint);
     }
+    @Override
+        public boolean deleteWaypoint(Waypoint waypoint) {
+                    return waypointDao.deleteWaypoint(waypoint);
+        }
 
     @Override
     public WaypointType getTypeByName(String name) {

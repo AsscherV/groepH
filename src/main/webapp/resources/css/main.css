@@ -85,13 +85,45 @@ footer p {
 .loginInput {
     height: 25px;
 }
-
+ a.trippy    {
+   /* Applies to unvisited links of class trippy */
+   text-decoration:  none;
+   font-weight:      bold;
+   color:            black;
+   }
+ a.trippy:link    {
+   /* Applies to unvisited links of class trippy */
+   text-decoration:  none;
+   font-weight:      bold;
+   color:            black;
+   }
+ a.trippy:visited {
+   /* Applies to visited links of class trippy */
+   text-decoration:  none;
+   font-weight:      bold;
+   color:            black;
+   }
+ a.trippy:hover   {
+   /* Applies to links under the pointer of class trippy */
+   text-decoration:  none;
+   font-weight:      bold;
+   color:            black;
+   }
+ a.trippy:active  {
+   /* Applies to activated links of class trippy */
+   text-decoration:  none;
+   font-weight:      bold;
+   color: black;
+   }
 .error{
     color: Red;
 }
 .noButton{
     padding-top: 47px;;
 }
+ .noButtonIndex{
+     padding-top: 37px;;
+ }
 #map_canvas{
     height: 500px;
     width: auto;

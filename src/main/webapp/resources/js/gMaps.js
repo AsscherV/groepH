@@ -31,15 +31,16 @@ function addListeners(){
         placeMarker(event.latLng);
 
         // display the lat/lng in your form's lat/lng fields
-        var lat  = event.latLng.lat();
-        var lng =  event.latLng.lng();
+        var lat = event.latLng.lat();
+        var lng =event.latLng.lng();
 
-        // NEED A FIX !!!! FOR SOME REASON ONLY THE FIRST LAT & LNG GETS THE VALUE !!!
-        document.getElementById("waypointForm:newlat").value = lat;
-        document.getElementById("waypointForm:newlng").value = lng  ;
-        document.getElementById("waypointForm:lat").value = lat ;
-        document.getElementById("waypointForm:lng").value = lng ;
-
+        if($("#editableWaypoint").val() =="false"){
+            document.getElementById("waypointForm:lat").value = lat;
+            document.getElementById("waypointForm:lng").value = lng;
+        }else{
+            document.getElementById("waypointForm:newlat").value = lat;
+             document.getElementById("waypointForm:newlng").value = lng;
+        }
     });
 }
 

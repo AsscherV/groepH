@@ -20,4 +20,5 @@ public interface WaypointDao {
 
     Waypoint getWaypointById(int id);
     boolean updateWaypoint(Waypoint waypoint) ;
+    boolean deleteWaypoint(Waypoint waypoint) ;
 }

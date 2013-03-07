@@ -14,7 +14,12 @@
 
         <div class="topmenu">
             <div class="container">
-                <div class="pull-left"><h1>Trippy Traveler</h1></div>
+                <div class="pull-left">
+                    <h:form>
+                    <h1><h:commandLink class="trippy" action="#{tripBean.NoCurrentTrip}" value="Trippy Traveler" /></h1>
+                    </h:form>
+                </div>
+
                 <h:form id="loginForm" class="navbar-form pull-right">
                     <h:inputHidden id="token" value="#{socialBean.access_token}" />
                     <h:commandButton id="fbLoginButton" action="#{socialBean.login}" style="display: none"/>

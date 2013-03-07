@@ -17,6 +17,7 @@
 </h:head>
 <h:body>
     <f:loadBundle basename="messages" var="msgs"/>
+    <h:inputHidden id="editableWaypoint" value="#{waypointBean.editableWaypoint}" />
     <ui:insert name="header">
         <ui:include src="../header.xhtml"/>
     </ui:insert>
@@ -108,7 +109,8 @@
 
                                         </h:panelGrid>
                                         <h:commandButton type="submit" action="#{waypointBean.addWaypoint}" class="btn btn-success" value="#{msgs.addWaypoint}" rendered="#{not waypointBean.editableWaypoint}"/>
-                                        <h:commandButton type="submit" action="#{waypointBean.updateWaypoint}" class="btn btn-success" value="Update" rendered="#{waypointBean.editableWaypoint}"/>
+                                        <h:commandButton type="submit" action="#{waypointBean.updateWaypoint}" class="btn btn-success" value="#{msgs.updateWaypoint}" rendered="#{waypointBean.editableWaypoint}"/>
+                                        <h:commandButton type="submit" action="#{waypointBean.cancel}" class="btn btn-success" value="#{msgs.cancelWaypoint}" rendered="#{waypointBean.editableWaypoint}"/>
                                     </h:form>
 
 
@@ -118,9 +120,7 @@
                     </div>
                 </div>
             </div>
-
         </div>
-
 
         <footer>
             <p>
@@ -139,10 +139,6 @@
     <h:outputScript name="js/main.js"/>
     <h:outputScript name="js/gMaps.js"/>
 
-
-    <!--
-    <h:outputText value="&lt;script src=&quot;https://maps.googleapis.com/maps/api/js?key=AIzaSyCmZaUMdD7lz1F48ySOKKlEFdvZNw3keb0&amp;sensor=false&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;"/>
-     -->
 
 </h:body>
 </html>

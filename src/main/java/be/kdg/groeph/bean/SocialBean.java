@@ -19,6 +19,8 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Date;
 @Component
 @RequestScoped
@@ -47,12 +49,15 @@ public class SocialBean implements Serializable {
     public SocialBean() {
         loggedIn = false;
     }
-    public void getFacebookUrlAuth() {
+    public void getFacebookUrlAuth() throws UnsupportedEncodingException {
+
         String appId = "414428928649857";
+
         String redirectUrl = "http://localhost:8080/groepH-1.0/pages/index.xhtml";
+       redirectUrl = URLEncoder.encode(redirectUrl,"UTF-8");
         String url = "https://www.facebook.com/dialog/oauth?client_id="
                 + appId + "&redirect_uri=" + redirectUrl
-                + "&scope=email,user_birthday,user_hometown&response_type=token&display=popup";
+                + "&scope=email,user_birthday,user_hometown&response_type=token";
         try {
             FacesContext.getCurrentInstance().getExternalContext().redirect(url);
         } catch (Exception e) {

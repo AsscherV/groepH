@@ -16,4 +16,5 @@ public interface WaypointService {
     List<Waypoint> fetchTripWaypoints();
     Waypoint getWaypointByLabel(String waypointLabel);
     boolean updateWaypoint(Waypoint waypoint) ;
+    boolean deleteWaypoint(Waypoint waypoint) ;
 }

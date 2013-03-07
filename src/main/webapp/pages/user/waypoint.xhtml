@@ -15,6 +15,7 @@
     </script>
 </h:head>
 <h:body>
+    <f:loadBundle basename="messages" var="msgs"/>
     <ui:insert name="header">
         <ui:include src="../header.xhtml"/>
     </ui:insert>
@@ -73,11 +74,7 @@
                                     <h:commandButton action="STOPS" value="Back to overview"
                                                      class="btn btn-success marginRight" id="overviewWaypoint"/>
 
-                                </h:form>
-
-
-
-                                <h:panelGrid class="floatLeft marginRight" columns="2" border="0">
+                                </h:form>                               <h:panelGrid class="floatLeft marginRight" columns="2" border="0">
                                     <h:outputLabel value="#{msgs.title}"/>
                                     <h:outputLabel value="#{waypointBean.currentWaypoint.label}"/>
                                     <h:outputLabel value="#{msgs.description}"/>
@@ -92,14 +89,11 @@
                                 </h:panelGrid>
 
                                <h:form>
-                                   <h:commandButton action="#{waypointBean.editWaypoint}" value="Edit Waypoint"
+                                   <h:commandButton action="#{waypointBean.editWaypoint}" value="#{msgs.updateWaypoint}"
                                    class="btn btn-success" id="editWaypoint"/>
+                                   <h:commandButton action="#{waypointBean.deleteWaypoint}"  value="#{msgs.deleteWaypoint}"
+                                                                      class="btn btn-success" id="deleteWaypoint"/>
                                </h:form>
-
-
-
-
-
                                 <div id="map_canvas"></div>
 
                                 <div>

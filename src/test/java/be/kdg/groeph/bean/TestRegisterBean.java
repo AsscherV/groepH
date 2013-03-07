@@ -3,7 +3,9 @@ package be.kdg.groeph.bean;
 import be.kdg.groeph.dao.UserDao;
 import be.kdg.groeph.mockMother.UserMother;
 import be.kdg.groeph.model.TripUser;
+import be.kdg.groeph.service.TestUserService;
 import be.kdg.groeph.service.UserService;
+import be.kdg.groeph.util.SHAEncryption;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,6 +17,7 @@ import org.springframework.test.context.junit4.AbstractTransactionalJUnit4Spring
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.faces.bean.ManagedProperty;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.Calendar;
@@ -41,6 +44,10 @@ public class TestRegisterBean extends AbstractTransactionalJUnit4SpringContextTe
     @Qualifier("userDaoImpl")
     @Autowired
     UserDao userDao;
+
+    @ManagedProperty(value = "#{userService}")
+                @Autowired
+                UserService userService;
 
     public void fillRegisterBeanWithValidData() {
         registerBean.setGender('M');
@@ -107,6 +114,19 @@ public class TestRegisterBean extends AbstractTransactionalJUnit4SpringContextTe
         assertTrue("User is editable, returns TRUE",registerBean.isEditableUser());
         assertNull("Update Cancelled, return null", registerBean.cancel());
         assertFalse("User is not editable, return FALSE",registerBean.isEditableUser());
+    }
+
+    @Test
+    public void testUpdatePassword() throws ParseException, SQLException {
+
+
+        registerUser();
+        registerBean.setPassword("testpassword");
+        registerBean.setNewpassword("new");
+        registerBean.setNewsecondPassword("new");
+        registerBean.updatePassword();
+        TripUser user = userService.getUserByEmail(VALID_EMAIL1);
+        assertEquals("User password must be the same as 'new' encrypted", SHAEncryption.encrypt("new"), user.getPassword());
     }
 
     public void registerUser() throws ParseException {

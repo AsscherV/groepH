@@ -25,13 +25,15 @@
                         <li>
                             <a id="myTrips" class="button" href="#myTripsTab">My trips</a>
                         </li>
+
+                        <li>
+                            <a id="invitedTrips" class="button" href="#invitedTripsTab">Invitations</a>
+                        </li>
+                        <li>
+                            <a id="participatingTrips" class="button"
+                               href="#participatingTripsTab">Participating trips</a>
+                        </li>
                     </h:panelGroup>
-                    <li>
-                        <a id="invitedTrips" class="button" href="#invitedTripsTab">Invitations</a>
-                    </li>
-                    <li>
-                        <a id="participatingTrips" class="button" href="#participatingTripsTab">Participating trips</a>
-                    </li>
                 </ul>
                 <h:form class="navbar-form">
                     <h:inputText type="text" styleClass="span2" value="#{tripBean.filter}"/>
@@ -90,7 +92,8 @@
 
                         <div class="box">
                             <h:form rendered="#{loginBean.loggedIn}">
-                                <h:dataTable border="0" value="#{tripBean.allParticipatedTrips}" var="participatedTrips">
+                                <h:dataTable border="0" value="#{tripBean.allParticipatedTrips}"
+                                             var="participatedTrips">
                                     <h:column>
                                         <div>
                                             <h:commandLink value="#{participatedTrips.title}"
@@ -124,11 +127,7 @@
                                 </h:dataTable>
                             </h:form>
                         </div>
-                        <h:panelGroup rendered="#{loginBean.loggedIn}">
-                            <a href="../user/createTrip.xhtml">+ Make a trip</a>
-                        </h:panelGroup>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -137,4 +136,4 @@
     <h:outputScript name="js/jquery-1.9.0.min.js"/>
     <h:outputScript name="js/main.js"/>
 </h:body>
-</html>
+</html> 

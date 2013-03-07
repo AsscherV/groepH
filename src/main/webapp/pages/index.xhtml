@@ -28,13 +28,11 @@
                 <div id="tabContainerTrip" class="tabContainer">
                     <ul>
                         <!-- Tab buttons -->
+                        <h:panelGroup rendered="#{tripBean.hasCurrentTrip}">
                         <li>
-                            <a class="button active" href="index.xhtml">Index</a>
+                            <a class="button active" href="index.xhtml">#{tripBean.currentTrip.title}</a>
                         </li>
-                        <h:panelGroup rendered="#{loginBean.loggedIn}">
-                            <li>
-                                <a class="button" href="user/welcome.xhtml">Welcome</a>
-                            </li>
+
                             <li>
                                 <a class="button" href="user/stops.xhtml">#{msgs.waypoints}</a>
                             </li>
@@ -54,6 +52,10 @@
                             </h:panelGroup>
 
                         </h:panelGroup>
+                        <h:panelGroup rendered="#{not tripBean.hasCurrentTrip}">
+                            <div class="noButtonIndex" />
+                        </h:panelGroup>
+
                     </ul>
                     <!-- Tab content -->
                     <div class="tabDetails">

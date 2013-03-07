@@ -84,7 +84,7 @@ public class Trip implements Nullable, Serializable {
 
     @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(mappedBy = "trip")
-    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
+    @Cascade({org.hibernate.annotations.CascadeType.DELETE})
     private List<Waypoint> waypoints = new ArrayList<Waypoint>();
 
 
@@ -228,6 +228,10 @@ public class Trip implements Nullable, Serializable {
     public void addWaypoint(Waypoint waypoint) {
         waypoints.add(waypoint);
         waypoint.setTrip(this);
+    }
+    public void deleteWaypoint(Waypoint waypoint){
+        waypoint.setTrip(null);
+        waypoints.remove(waypoint);
     }
 
     public boolean isVisible() {

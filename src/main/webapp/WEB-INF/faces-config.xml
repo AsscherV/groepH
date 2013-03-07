@@ -137,4 +137,23 @@
                 <!-- hier nog navigation rule voor failure-->
             </navigation-case>
         </navigation-rule>
+    <navigation-rule>
+                <navigation-case>
+                    <from-action>#{waypointBean.deleteWaypoint}</from-action>
+                    <from-outcome>SUCCESS</from-outcome>
+                    <to-view-id>/pages/user/stops.xhtml</to-view-id>
+                    <redirect/>
+                    <!-- hier nog navigation rule voor failure-->
+                </navigation-case>
+            </navigation-rule>
+    <navigation-rule>
+                   <navigation-case>
+                       <from-action>#{waypointBean.cancel}</from-action>
+                       <from-outcome>CANCEL</from-outcome>
+                       <to-view-id>/pages/user/waypoint.xhtml</to-view-id>
+                       <redirect/>
+                       <!-- hier nog navigation rule voor failure-->
+                   </navigation-case>
+               </navigation-rule>
+
 </faces-config>

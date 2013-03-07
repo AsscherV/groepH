@@ -5,6 +5,7 @@ import be.kdg.groeph.model.TripUser;
 import be.kdg.groeph.service.MailService;
 import be.kdg.groeph.service.UserService;
 import be.kdg.groeph.util.SHAEncryption;
+import be.kdg.groeph.util.FMessage;
 import org.apache.log4j.Logger;
 import org.apache.myfaces.extensions.cdi.core.api.scope.conversation.ViewAccessScoped;
 import org.hibernate.validator.constraints.Email;
@@ -115,12 +116,13 @@ public class RegisterBean implements Serializable {
     private String mailMessage;
 
     private boolean editableUser;
-
+    private boolean editablePassword;
     private boolean registered;
 
     public RegisterBean() {
         registered = false;
         editableUser = false;
+        editablePassword = false;
     }
 
     public String getFirstName() {
@@ -367,6 +369,14 @@ public class RegisterBean implements Serializable {
         this.editableUser = editableUser;
     }
 
+    public boolean isEditablePassword() {
+        return editablePassword;
+    }
+
+    public void setEditablePassword(boolean editablePassword) {
+        this.editablePassword = editablePassword;
+    }
+
     public String addUser() throws ParseException {
         Address address = new Address(getStreet(), getStreetNumber(), getZipcode(), getCity());
         setRole("ROLE_USER");
@@ -382,34 +392,21 @@ public class RegisterBean implements Serializable {
                 if (mailService.isSuccessfulRegistration(user.getEmail())) {
                     userService.addUser(user);
                     putNewValues(null, null, null, null, null, ' ', null, null, null, null);
-                    makeFacesMessage("Registration succesfull !", "info");
+
+                    FMessage.makeFacesMessage("Registration succesfull !", "info");
                     registered=true;
                     return SUCCESS;
                 } else {
                     mailMessage = "Registration mail could not be send. Please try to registrate again.";
-                    makeFacesMessage("Registration mail could not be send. Please try to registrate again.", "error");
+                    FMessage.makeFacesMessage("Registration mail could not be send. Please try to registrate again.", "error");
                     return FAILURE;
                 }
             } else {
-                makeFacesMessage("This email already has an account !", "error");
+                FMessage.makeFacesMessage("This email already has an account !", "error");
                 return FAILURE;
             }
         }
         return FAILURE;
-    }
-    private void makeFacesMessage(String message, String type) {
-        /*
-        FacesMessage facesMsg = null;
-        if (type.equals("info")) {
-            facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, message, message);
-        } else if (type.equals("error")) {
-            facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
-        }
-        if(!FacesContext.getCurrentInstance().equals(null)){
-        FacesContext fc = FacesContext.getCurrentInstance();
-        fc.addMessage(null, facesMsg);
-        }
-        */
     }
 
     public String updateUser() throws SQLException {
@@ -469,5 +466,42 @@ public class RegisterBean implements Serializable {
         setStreet(street);
         setStreetNumber(streetNumber);
         setCity(city);
+    }
+
+    public String changePassword(){
+        setEditablePassword(true);
+        return null;
+    }
+    public String cancelPassword(){
+        setEditablePassword(false);
+                return null;
+    }
+    public String updatePassword() throws SQLException {
+        if(SHAEncryption.encrypt(getPassword()).equals(loginBean.getUser().getPassword())){
+
+            if(getNewpassword().equals(getNewsecondPassword())){
+
+               TripUser user = loginBean.getUser();
+                user.setPassword(SHAEncryption.encrypt(getNewpassword()));
+                userService.updateUser(user);
+                setPassword("");
+                setNewpassword("");
+                setNewsecondPassword("");
+
+                FMessage.makeFacesMessage("Password was successfully changed", "info");
+                setEditablePassword(false);
+                return "SUCCESS";
+            }else{
+                setNewpassword("");
+                setNewsecondPassword("");
+                FMessage.makeFacesMessage("Your new password wasn't the same", "error");
+                return null;
+            }
+
+        }else{
+            FMessage.makeFacesMessage("Wrong old password", "error");
+            return null;
+        }
+
     }
 }

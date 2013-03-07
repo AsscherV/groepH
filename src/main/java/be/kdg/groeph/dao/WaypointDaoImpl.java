@@ -21,10 +21,19 @@ public class WaypointDaoImpl implements WaypointDao{
 
     @Override
     public boolean addWaypoint(Waypoint waypoint) {
-        sessionFactory.getCurrentSession().save(waypoint);
+        sessionFactory.getCurrentSession().saveOrUpdate(waypoint);
         return true;
     }
-
+    @Override
+        public boolean updateWaypoint(Waypoint waypoint)  {
+            sessionFactory.getCurrentSession().update(waypoint);
+            return true;
+        }
+    @Override
+        public boolean deleteWaypoint(Waypoint waypoint)  {
+            sessionFactory.getCurrentSession().delete(waypoint);
+            return true;
+        }
     @Override
     public WaypointType getTypeByName(String name) {
         Query query = sessionFactory.getCurrentSession().createQuery("from WaypointType where type=:name");
@@ -37,11 +46,7 @@ public class WaypointDaoImpl implements WaypointDao{
         sessionFactory.getCurrentSession().saveOrUpdate(type);
     }
 
-    @Override
-    public boolean updateWaypoint(Waypoint waypoint)  {
-        sessionFactory.getCurrentSession().update(waypoint);
-        return true;
-    }
+
 
     @Override
     public List<WaypointType> fetchAllWaypointTypes() {
