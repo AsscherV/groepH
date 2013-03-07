@@ -34,6 +34,9 @@ public class CostServiceImpl implements CostService {
     public List<Cost> getCostsByTripBeanId(Trip trip) {
         return costDao.getCostByTripId(trip);
     }
-
+    @Override
+    public Cost getCostByCostId(int id) {
+        return costDao.getCostByCostId(id);
+    }
 
 }

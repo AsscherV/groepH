@@ -4,6 +4,7 @@ import be.kdg.groeph.model.Trip;
 import be.kdg.groeph.model.Waypoint;
 import be.kdg.groeph.model.WaypointType;
 import be.kdg.groeph.service.WaypointService;
+import be.kdg.groeph.util.Tools;
 import org.apache.log4j.Logger;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -184,9 +185,9 @@ public class WaypointBean implements Serializable {
         editableWaypoint = false;
         if (waypointService.updateWaypoint(waypoint)) {
             clearfield();
-            return SUCCESS;
+            return Tools.SUCCESS;
         }
-        return FAILURE;
+        return Tools.FAILURE  ;
     }
 
     public String cancel(){
@@ -199,9 +200,9 @@ public class WaypointBean implements Serializable {
         System.out.println("id: "+waypoint.getId());
         if (waypointService.deleteWaypoint(waypoint)) {
 
-            return SUCCESS;
+            return Tools.SUCCESS;
         }
-        return FAILURE;
+        return Tools.FAILURE;
     }
 
     public String previousWaypoint() {

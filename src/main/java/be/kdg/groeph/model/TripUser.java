@@ -2,12 +2,9 @@ package be.kdg.groeph.model;
 
 import be.kdg.groeph.model.Null.NullUser;
 import be.kdg.groeph.model.Null.Nullable;
-import org.codehaus.jackson.annotate.JsonAutoDetect;
-import org.codehaus.jackson.map.util.JSONPObject;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
-
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -87,7 +84,9 @@ public class TripUser implements Nullable, Serializable {
     @ManyToMany( mappedBy = "confirmedTripUsers")
     private List<Trip> confirmedTrips = new ArrayList<Trip>();
 
-
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @ManyToMany( mappedBy = "tripUsers")
+    private List<Accessory> accessories;
 
 
 
@@ -286,6 +285,13 @@ public class TripUser implements Nullable, Serializable {
 
     public void setConfirmedTrips(List<Trip> confirmedTrips) {
         this.confirmedTrips = confirmedTrips;
+    }
+    public List<Accessory> getAccessories() {
+        return accessories;
+    }
+
+    public void setAccessories(List<Accessory> accessories) {
+        this.accessories = accessories;
     }
 
     public void confirmParticipation(Trip trip){

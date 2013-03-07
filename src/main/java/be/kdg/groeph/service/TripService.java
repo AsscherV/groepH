@@ -5,7 +5,6 @@ import be.kdg.groeph.model.Trip;
 import be.kdg.groeph.model.TripType;
 import be.kdg.groeph.model.TripUser;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public interface TripService {
@@ -31,4 +30,6 @@ public interface TripService {
     List<Trip> getAllParticipatedTripsByUser(TripUser user);
 
     boolean updateTrip(Trip Trip);
+
+    void addTripType(TripType tripType);
 }

@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Tools {
+    public static final String SUCCESS = "SUCCESS";
+    public static final String FAILURE = "FAILURE";
     public static List<Trip> filter(List<Trip> trips, String filter) {
         List<Trip> filteredTrips = new ArrayList<Trip>();
         //System.out.println("FILTER: "+filter);

@@ -3,7 +3,6 @@ package be.kdg.groeph.service;
 import be.kdg.groeph.model.Cost;
 import be.kdg.groeph.model.Trip;
 import be.kdg.groeph.model.TripUser;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -17,5 +16,5 @@ public interface CostService {
 
     public void addCost(String CostName, String CostValue, TripUser user, Trip currentTrip);
     public List<Cost> getCostsByTripBeanId(Trip trip);
-
+    public Cost getCostByCostId(int id);
 }

@@ -6,7 +6,6 @@ import be.kdg.groeph.model.TripUser;
 import be.kdg.groeph.util.SHAEncryption;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.security.crypto.keygen.StringKeyGenerator;
 import org.springframework.test.context.ContextConfiguration;
 
 import java.util.Calendar;
@@ -37,6 +36,13 @@ public class UserMother {
         cal.set(1988, Calendar.DECEMBER, 10);
         Address address = new Address("TestStreet", "TestStreetNumber", "TestZipcode", "TestCity");
         return new TripUser("Greg", "Deckers", cal.getTime(), "0477879057", 'M', "greg.deckers@student.kdg.be", SHAEncryption.encrypt("password"), address, new Date(), USER);
+    }
+    public static TripUser validUser3() {
+        Calendar cal;
+        cal = Calendar.getInstance();
+        cal.set(1988, Calendar.DECEMBER, 10);
+        Address address = new Address("testdreef", "TestStreetNumber", "TestZipcode", "TestCity");
+        return new TripUser("Maarten", "Aerts", cal.getTime(), "0477879057", 'M', "maarten.aerts@student.kdg.be", SHAEncryption.encrypt("password"), address, new Date(), USER);
     }
 
     public static TripUser validUser3WithOutEncryptedPassword() {

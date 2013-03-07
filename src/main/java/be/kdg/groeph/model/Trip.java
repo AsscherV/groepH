@@ -90,6 +90,12 @@ public class Trip implements Nullable, Serializable {
     @Cascade({org.hibernate.annotations.CascadeType.DELETE})
     private List<Waypoint> waypoints = new ArrayList<Waypoint>();
 
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(mappedBy = "trip")
+    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
+    private List<Accessory> accessories = new ArrayList<Accessory>();
+
+
 
     public Trip() {
     }
@@ -113,7 +119,13 @@ public class Trip implements Nullable, Serializable {
         this.isPublic = isPublic;
         this.isVisible = visible;
     }
+    public List<Accessory> getAccessories() {
+        return accessories;
+    }
 
+    public void setAccessories(List<Accessory> accessories) {
+        this.accessories = accessories;
+    }
     public void addLabel(Label label) {
         label.setTrip(this);
         labels.add(label);
@@ -271,6 +283,10 @@ public class Trip implements Nullable, Serializable {
         //System.out.println("size tripUsers before: " + tripUsers.size());
         tripUsers.remove(user);
         //System.out.println("size tripUsers after: " + tripUsers.size());
+    }
+    public void addAccessory(Accessory accessory) {
+        accessory.setTrip(this);
+        this.accessories.add(accessory);
     }
 
 }
