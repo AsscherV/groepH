@@ -50,9 +50,11 @@ public class TripBean implements Serializable {
     @NotEmpty(message = "{tripType} {notempty}")
     private String tripType;
     private boolean isPublic;
+
     Trip currentTrip;
     private String filter;
     private boolean isVisible;
+    private boolean started;
     private boolean hasCurrentTrip;
 
     public TripBean() {
@@ -152,6 +154,14 @@ public class TripBean implements Serializable {
         isVisible = visible;
     }
 
+    public boolean isStarted() {
+        return started;
+    }
+
+    public void setStarted(boolean started) {
+        this.started = started;
+    }
+
     public boolean isHasCurrentTrip() {
         if(currentTrip == null){
             hasCurrentTrip= false;
@@ -182,6 +192,7 @@ public class TripBean implements Serializable {
         setVisible(false);
         TripType type = tripService.getTypeByName(getTripType());
         Trip trip = new Trip(getTitle(), getDescription(), getStartTime(), getEndTime(), type, getPublic(), isVisible);
+        trip.setStarted(false);
         Label label = new Label(getLabel());
         trip.addLabel(label);
 
@@ -253,5 +264,17 @@ public class TripBean implements Serializable {
         }else{
             return false;
         }
+    }
+
+    public boolean startTrip(){
+        currentTrip.setStarted(true);
+        tripService.updateTrip(currentTrip);
+        return true;
+    }
+
+    public boolean stopTrip(){
+        currentTrip.setStarted(false);
+        tripService.updateTrip(currentTrip);
+        return true;
     }
 }

@@ -32,6 +32,9 @@ public class Trip implements Nullable, Serializable {
     @Column(name = "visible", nullable = false)
     private boolean isVisible;
 
+    @Column(name="started", nullable = false)
+    private boolean isStarted;
+
     @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(mappedBy = "trip")     //,fetch = FetchType.EAGER
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
@@ -122,6 +125,14 @@ public class Trip implements Nullable, Serializable {
 
     public void setPublic(boolean aPublic) {
         isPublic = aPublic;
+    }
+
+    public boolean isStarted() {
+        return isStarted;
+    }
+
+    public void setStarted(boolean started) {
+        isStarted = started;
     }
 
     public TripType getTripType() {
@@ -241,6 +252,8 @@ public class Trip implements Nullable, Serializable {
     public void setVisible(boolean visible) {
         isVisible = visible;
     }
+
+
 
     public List<TripUser> getConfirmedTripUsers() {
 

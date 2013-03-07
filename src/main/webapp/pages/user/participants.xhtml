@@ -1,7 +1,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
 <h:head>
     <title>Trippy Traveler</title>
     <!-- css -->
@@ -59,16 +60,50 @@
 
                         <div id="partTab" class="tabContentsTrip">
                             <div class="box">
-                                <!--liijst van participants op dit moment. -->
-                                <h:form>
-                                    <h:inputTextarea value="#{participantsBean.emails}"/>
-                                    <h:commandButton type="submit" action="#{participantsBean.sendInvitations}"
-                                                     class="btn btn-success" value="send invitations"/>
-                                </h:form>
+                                <c:choose>
+                                    <c:when test="#{tripBean.currentTrip.visible == false}">
+                                        <p>Trip isn't published yet</p>
+                                    </c:when>
+                                    <c:when test="#{tripBean.currentTrip.visible == true}">
+                                        <h:form>
+                                            <h:inputTextarea value="#{participantsBean.emails}"/>
+                                            <h:commandButton type="submit" action="#{participantsBean.sendInvitations}"
+                                                             class="btn btn-success" value="send invitations"/>
+                                        </h:form>
 
-                                <h:panelGroup rendered="#{participantsBean.hasInvalidEmails}">
-                                    <h:outputText value="#{participantsBean.invalidEmails}"/>
-                                </h:panelGroup>
+                                        <h:panelGroup rendered="#{participantsBean.hasInvalidEmails}">
+                                            <p>Invalid emails:</p>
+                                            <h:outputText value="#{participantsBean.invalidEmails}"/>
+                                        </h:panelGroup>
+
+                                        <c:if test="#{tripBean.currentTrip.tripUsers.size() > 0}">
+
+                                            <p>Invited users:</p>
+                                            <h:outputText value="#{tripBean.currentTrip.tripUsers}"/>
+
+                                        </c:if>
+
+                                        <c:if test="#{tripBean.currentTrip.tripUsers.size() == 0}">
+
+                                            <p>No users invited </p>
+
+                                        </c:if>
+
+                                        <c:if test="#{tripBean.currentTrip.confirmedTripUsers.size() == 0}">
+
+                                            <strong>No confirmed users</strong>
+
+                                        </c:if>
+
+                                        <c:if test="#{tripBean.currentTrip.confirmedTripUsers.size() > 0}">
+
+                                            <p>Confirmed users:</p>
+                                            <h:outputText value="#{tripBean.currentTrip.confirmedTripUsers}"/>
+
+                                        </c:if>
+
+                                    </c:when>
+                                </c:choose>
 
                             </div>
                         </div>

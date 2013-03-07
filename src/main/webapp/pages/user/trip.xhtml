@@ -32,10 +32,7 @@
                             <a class="button active" href="trip.xhtml">#{tripBean.currentTrip.title}</a>
                         </li>
 
-                        <h:panelGroup rendered="#{loginBean.loggedIn}"> $
-                            <li>
-                                <a class="button" href="welcome.xhtml">Welcome</a>
-                            </li>
+                        <h:panelGroup rendered="#{loginBean.loggedIn}">
                             <c:if test="#{tripBean.currentTrip != null}">
                                 <li>
                                     <a class="button" href="stops.xhtml">Stops</a>
@@ -66,37 +63,46 @@
 
                         <div id="accesTab" class="tabContentsTrip">
                             <div class="box">
-                                <h:panelGrid columns="2" border="0">
-                                    <h:outputLabel value="#{msgs.title}"/>
-                                    <h:outputLabel value="#{tripBean.currentTrip.title}"/>
-                                    <h:outputLabel value="#{msgs.description}"/>
-                                    <h:outputLabel value="#{tripBean.currentTrip.description}"/>
-                                    <h:outputLabel value="#{msgs.type}"/>
-                                    <h:outputLabel value="#{tripBean.currentTrip.tripType}"/>
-                                    <h:outputLabel value="#{msgs.tripStartTime}"/>
-                                    <h:outputLabel value="#{tripBean.currentTrip.startTime}"/>
-                                    <h:outputLabel value="#{msgs.tripEndTime}"/>
-                                    <h:outputLabel value="#{tripBean.currentTrip.endTime}"/>
-                                    <h:outputLabel value="#{msgs.label}"/>
-                                    <h:dataTable value="#{tripBean.currentTrip.labels}" var="item">
-                                        <h:column>
-                                            <h:outputLabel value="#{item.name}"/>
-                                        </h:column>
-                                    </h:dataTable>
-                                    <h:form>
-                                        <h:panelGroup rendered="#{tripBean.confirmInvitation}">
+                                <c:choose>
+                                    <c:when test="#{tripBean.currentTrip == null}">
+                                        <p>No trip selected</p>
+                                    </c:when>
+                                    <c:when test="#{tripBean.currentTrip != null}">
+                                        <h:panelGrid columns="2" border="0">
+                                            <h:outputLabel value="#{msgs.title}"/>
+                                            <h:outputLabel value="#{tripBean.currentTrip.title}"/>
+                                            <h:outputLabel value="#{msgs.description}"/>
+                                            <h:outputLabel value="#{tripBean.currentTrip.description}"/>
+                                            <h:outputLabel value="#{msgs.type}"/>
+                                            <h:outputLabel value="#{tripBean.currentTrip.tripType}"/>
+                                            <h:outputLabel value="#{msgs.tripStartTime}"/>
+                                            <h:outputLabel value="#{tripBean.currentTrip.startTime}"/>
+                                            <h:outputLabel value="#{msgs.tripEndTime}"/>
+                                            <h:outputLabel value="#{tripBean.currentTrip.endTime}"/>
+                                            <h:outputLabel value="#{msgs.label}"/>
+                                            <h:dataTable value="#{tripBean.currentTrip.labels}" var="item">
+                                                <h:column>
+                                                    <h:outputLabel value="#{item.name}"/>
+                                                </h:column>
+                                            </h:dataTable>
+                                            <h:form>
+                                                <h:panelGroup rendered="#{tripBean.confirmInvitation}">
 
-                                            <h:commandButton class="btn btn-success"
-                                                             action="#{tripBean.confirmParticipation()}"
-                                                             value="Confirm Participation"/>
-                                            <h:commandButton class="btn btn-success" value="Cancel Invitation"/>
+                                                    <h:commandButton class="btn btn-success"
+                                                                     action="#{tripBean.confirmParticipation()}"
+                                                                     value="Confirm Participation"/>
+                                                    <h:commandButton class="btn btn-success" value="Cancel Invitation"/>
 
-                                        </h:panelGroup>
-                                        <h:commandButton class="btn btn-success" action="#{tripBean.publishTrip}"
-                                                         value="Publish Trip"
-                                                         rendered="#{not tripBean.currentTrip.visible}"/>
-                                    </h:form>
-                                </h:panelGrid>
+                                                </h:panelGroup>
+                                                <h:commandButton class="btn btn-success"
+                                                                 action="#{tripBean.publishTrip}"
+                                                                 value="Publish Trip"
+                                                                 rendered="#{not tripBean.currentTrip.visible}"/>
+                                            </h:form>
+                                        </h:panelGrid>
+                                    </c:when>
+                                </c:choose>
+
                             </div>
                         </div>
                     </div>

@@ -58,6 +58,8 @@ public class TestTripBean extends AbstractTransactionalJUnit4SpringContextTests 
     TripService tripService;
     private List<Trip> trips;
 
+    private Trip trip;
+
     private final String validEmail = "greg.deckers@student.kdg.be";
 
     @Before
@@ -80,23 +82,27 @@ public class TestTripBean extends AbstractTransactionalJUnit4SpringContextTests 
         loginBean.loginUser();
     }
 
-    public void makeTrips(TripUser tripUser){
+    public void makeTrips(TripUser tripUser) {
         Calendar cal;
         cal = Calendar.getInstance();
         cal.set(2013, Calendar.MARCH, 29, 12, 00);
         TripType type = tripDao.getTypeByName(TIMEBOUND);
-        List<Label> lbls= new ArrayList<Label>();
+        List<Label> lbls = new ArrayList<Label>();
         lbls.add(new Label("Fun"));
         lbls.add(new Label(TEST));
         Trip trip = new Trip(TITLE_1, "desc", cal.getTime(), cal.getTime(), new ArrayList<Label>(), type, true);
         trip.setVisible(false);
+        trip.setStarted(false);
         Trip trip2 = new Trip("titel2", "desc", cal.getTime(), cal.getTime(), new ArrayList<Label>(), type, true);
         trip2.setVisible(false);
-        type= tripDao.getTypeByName(REPEATING);
+        trip.setStarted(false);
+        type = tripDao.getTypeByName(REPEATING);
         Trip trip3 = new Trip("titel3", "desc", cal.getTime(), cal.getTime(), lbls, type, true);
         trip3.setVisible(false);
+        trip.setStarted(false);
         Trip trip4 = new Trip("titel4", "desc", cal.getTime(), cal.getTime(), new ArrayList<Label>(), type, false);
         trip4.setVisible(false);
+        trip.setStarted(false);
 
         tripUser.addTrip(trip);
         tripUser.addTrip(trip2);
@@ -106,10 +112,11 @@ public class TestTripBean extends AbstractTransactionalJUnit4SpringContextTests 
         tripService.addTrip(trip2);
         tripService.addTrip(trip3);
         tripService.addTrip(trip4);
+        tripBean.setCurrentTrip(trip);
 
     }
 
-    public void fillTripBean(){
+    public void fillTripBean() {
         Calendar cal;
         cal = Calendar.getInstance();
         cal.set(2013, Calendar.MARCH, 29, 12, 00);
@@ -131,8 +138,8 @@ public class TestTripBean extends AbstractTransactionalJUnit4SpringContextTests 
     }
 
     @Test
-    public void testGetAllTripTypes(){
-        assertEquals("3 types should be fetched from database",3,tripBean.getAllTripTypes().size());
+    public void testGetAllTripTypes() {
+        assertEquals("3 types should be fetched from database", 3, tripBean.getAllTripTypes().size());
     }
 
     @Test
@@ -143,39 +150,63 @@ public class TestTripBean extends AbstractTransactionalJUnit4SpringContextTests 
         assertFalse("Trip should not be visible after adding", tripBean.isVisible());
         assertEquals("List of organised trips should be 5 after adding", 5, loginBean.getUser().getTrips().size());
         assertNull("Field should be null after adding", tripBean.getTitle());
-        assertEquals("Dao returns 5 trip",5,tripDao.getTripByUserId(loginBean.getUser()).size());
+        assertEquals("Dao returns 5 trip", 5, tripDao.getTripByUserId(loginBean.getUser()).size());
     }
 
     @Test
     public void testGetAllPublicTrips() {
         tripBean.setFilter("");
-        trips= tripBean.getAllPublicTrips();
+        trips = tripBean.getAllPublicTrips();
         assertEquals("getOpenTrips should give a list of 3  trips", 3, trips.size());
         assertTrue("getOpenTrips should return public trips", trips.get(0).isPublic());
     }
+
     @Test
-    public void testFilteredPublicTripsType()
-    {
+    public void testFilteredPublicTripsType() {
         tripBean.setFilter(REPEATING);
-        trips= tripBean.getAllPublicTrips();
+        trips = tripBean.getAllPublicTrips();
         assertEquals("getAllPublicTrips should return 1 trip", 1, trips.size());
         assertEquals("getAllPublicTrips should return 1 trip of the type Repeating", REPEATING, trips.get(0).getTripType().getType());
     }
+
     @Test
-    public void testFilteredPublicTripsTitle()
-    {
+    public void testFilteredPublicTripsTitle() {
         tripBean.setFilter(TITLE_1);
-        trips= tripBean.getAllPublicTrips();
-        assertEquals("getAllPublicTrips should return 1 trip",1,trips.size());
-        assertEquals("getAllPublicTrips should return 1 trip with the title title1",TITLE_1,trips.get(0).getTitle());
+        trips = tripBean.getAllPublicTrips();
+        assertEquals("getAllPublicTrips should return 1 trip", 1, trips.size());
+        assertEquals("getAllPublicTrips should return 1 trip with the title title1", TITLE_1, trips.get(0).getTitle());
     }
+
     @Test
-         public void testFilteredPublicTripsLabels()
-    {
+    public void testFilteredPublicTripsLabels() {
         tripBean.setFilter(TEST);
-        trips= tripBean.getAllPublicTrips();
-        assertEquals("getAllPublicTrips should return 1 trip",1,trips.size());
-        assertTrue("getAllPublicTrips should return 1 trip containing the label TestLabel",trips.get(0).getLabels().contains(new Label(TEST)));
+        trips = tripBean.getAllPublicTrips();
+        assertEquals("getAllPublicTrips should return 1 trip", 1, trips.size());
+        assertTrue("getAllPublicTrips should return 1 trip containing the label TestLabel", trips.get(0).getLabels().contains(new Label(TEST)));
+    }
+
+    @Test
+    public void testTripStarted() {
+        assertFalse("trip is not started", tripBean.getCurrentTrip().isStarted());
+        assertTrue("trip is started", tripBean.startTrip());
+        assertTrue("trip is  started", tripBean.getCurrentTrip().isStarted());
+
+        trip = tripDao.getTripById(tripBean.getCurrentTrip().getId());
+        assertTrue("trip is started DAO", trip.isStarted());
+    }
+
+    @Test
+    public void testTripStopped() {
+        tripBean.getCurrentTrip().setStarted(true);
+        assertTrue("trip is not stopped", tripBean.getCurrentTrip().isStarted());
+
+        trip = tripDao.getTripById(tripBean.getCurrentTrip().getId());
+        assertTrue("trip is running DAO", trip.isStarted());
+
+        assertTrue("trip is stopped", tripBean.stopTrip());
+
+        trip = tripDao.getTripById(tripBean.getCurrentTrip().getId());
+        assertFalse("Trip is stopped DAO", trip.isStarted());
     }
 
 
