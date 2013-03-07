@@ -85,13 +85,16 @@
                                                     <h:outputLabel value="#{item.name}"/>
                                                 </h:column>
                                             </h:dataTable>
+
+
                                             <h:form>
                                                 <h:panelGroup rendered="#{tripBean.confirmInvitation}">
 
                                                     <h:commandButton class="btn btn-success"
                                                                      action="#{tripBean.confirmParticipation()}"
                                                                      value="Confirm Participation"/>
-                                                    <h:commandButton class="btn btn-success" value="Cancel Invitation"/>
+                                                    <h:commandButton class="btn btn-success"
+                                                                     value="Cancel Invitation"/>
 
                                                 </h:panelGroup>
                                                 <h:commandButton class="btn btn-success"
@@ -99,6 +102,7 @@
                                                                  value="Publish Trip"
                                                                  rendered="#{not tripBean.currentTrip.visible}"/>
                                             </h:form>
+
                                         </h:panelGrid>
                                     </c:when>
                                 </c:choose>

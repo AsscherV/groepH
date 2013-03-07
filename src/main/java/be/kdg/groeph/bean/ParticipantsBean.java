@@ -98,7 +98,9 @@ public class ParticipantsBean implements Serializable {
         for (int i = 0; i < emails.length; i++) {
             if (isValidMail(emails[i].trim())) {
                 validEmails.add(emails[i].trim());
-                hasInvalidEmails = false;
+                if (!(invalidEmails.size() > 0)) {
+                    hasInvalidEmails = false;
+                }
             } else {
                 hasInvalidEmails = true;
                 invalidEmails.add(emails[i].trim());

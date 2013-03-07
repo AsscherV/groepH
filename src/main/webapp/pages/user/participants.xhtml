@@ -65,11 +65,14 @@
                                         <p>Trip isn't published yet</p>
                                     </c:when>
                                     <c:when test="#{tripBean.currentTrip.visible == true}">
-                                        <h:form>
-                                            <h:inputTextarea value="#{participantsBean.emails}"/>
-                                            <h:commandButton type="submit" action="#{participantsBean.sendInvitations}"
-                                                             class="btn btn-success" value="send invitations"/>
-                                        </h:form>
+                                        <c:if test="#{tripBean.currentTrip.tripUser == loginBean.user}">
+                                            <h:form>
+                                                <h:inputTextarea value="#{participantsBean.emails}"/>
+                                                <h:commandButton type="submit"
+                                                                 action="#{participantsBean.sendInvitations}"
+                                                                 class="btn btn-success" value="send invitations"/>
+                                            </h:form>
+                                        </c:if>
 
                                         <h:panelGroup rendered="#{participantsBean.hasInvalidEmails}">
                                             <p>Invalid emails:</p>

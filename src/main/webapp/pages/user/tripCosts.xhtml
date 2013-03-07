@@ -1,7 +1,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
 <h:head>
     <title>Trippy Traveler</title>
     <!-- css -->
@@ -60,22 +61,19 @@
 
                         <div id="partTab" class="tabContentsTrip">
                             <div class="box">
-                                <h1>Costs of TRIP <h:outputText value="#{costBean.currentTrip.title}"/>  </h1>
+                                <h1>Costs of TRIP <h:outputText value="#{costBean.currentTrip.title}"/></h1>
                                 <!--HIer nen list met alle kosten + Bijlage -->
                                 <h:dataTable value="#{costBean.costs}" var="cost">
 
-
-
                                     <h:column>
-                                     <h:head>CostName </h:head>
+                                        <h:head>CostName </h:head>
 
-                                    <h:outputText value="#{cost.text}"/> <br/>
-
+                                        <h:outputText value="#{cost.text}"/> <br/>
 
                                     </h:column>
                                     <h:column>
                                         <h:head>CostValue </h:head>
-                                        <h:outputText value="#{cost.costValue}"/>  <br/>
+                                        <h:outputText value="#{cost.costValue}"/> <br/>
                                     </h:column>
                                     <h:column>
                                         <h:head>UserName </h:head>
@@ -85,24 +83,26 @@
                                 </h:dataTable>
 
                                 <!--2 fields (tekst,kost) , + filepicker -->
-                                <h:form columns="3" border="0">
-                                    <h:outputLabel value="CostName"/>
-                                    <h:inputText id="text" styleClass="span2" value="#{costBean.text}"/>
-                                    <h:message for="text" styleClass="error"/>
+                                <c:if test="#{tripBean.currentTrip.tripUser == loginBean.user}">
+                                    <h:form columns="3" border="0">
+                                        <h:outputLabel value="CostName"/>
+                                        <h:inputText id="text" styleClass="span2" value="#{costBean.text}"/>
+                                        <h:message for="text" styleClass="error"/>
 
 
-                                    <h:outputLabel value="CostValue"/>
-                                    <h:inputText id="costValue" styleClass="span2" value="#{costBean.costValue}"/>
-                                    <h:message for="costValue" styleClass="error"/>
+                                        <h:outputLabel value="CostValue"/>
+                                        <h:inputText id="costValue" styleClass="span2" value="#{costBean.costValue}"/>
+                                        <h:message for="costValue" styleClass="error"/>
 
-                                    <!-- Hier moet een date file picker
-                                    <h:outputLabel value="{msgs.Images}"/>
-                                    <t:inputFileUpload binding="{costBean.uFile}" />
-                                    <h:outputText value=""/>-->
-                                  <br/>
-                                    <h:commandButton value="submit" type="submit" action="#{costBean.addCost}" />
-                                </h:form>
+                                        <!-- Hier moet een date file picker
+                                        <h:outputLabel value="{msgs.Images}"/>
+                                        <t:inputFileUpload binding="{costBean.uFile}" />
+                                        <h:outputText value=""/>-->
+                                        <br/>
+                                        <h:commandButton value="submit" type="submit" action="#{costBean.addCost}"/>
+                                    </h:form>
 
+                                </c:if>
                             </div>
                         </div>
                     </div>
