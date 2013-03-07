@@ -26,7 +26,6 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:daoContext.xml"})
 public class TestTripBean extends AbstractTransactionalJUnit4SpringContextTests {
@@ -57,9 +56,6 @@ public class TestTripBean extends AbstractTransactionalJUnit4SpringContextTests 
     @ManagedProperty(value = "#{tripService}")
     @Autowired
     TripService tripService;
-    private Trip trip1;
-    private TripUser user1;
-    private List<TripType> types;
     private List<Trip> trips;
 
     private final String validEmail = "greg.deckers@student.kdg.be";
@@ -70,33 +66,19 @@ public class TestTripBean extends AbstractTransactionalJUnit4SpringContextTests 
         tripDao.addTripType(new TripType(REPEATING));
         tripDao.addTripType(new TripType(ANYTIME));
 
-        fillRegisterBean();
-        registerBean.addUser();
+        TripUser tripUser1 = UserMother.validUser2();
+        tripUser1.setEnabled(true);
+        tripUser1.setAccountNonLocked(true);
+        tripUser1.setAccountNonExpired(true);
+        tripUser1.setCredentialsNonExpired(true);
+        userDao.addUser(tripUser1);
+
         TripUser user = userDao.getUserByEmail(validEmail);
         makeTrips(user);
         loginBean.setEmail(user.getEmail());
         loginBean.setPassword("password");
         loginBean.loginUser();
     }
-
-    public void fillRegisterBean() {
-        registerBean.setGender('M');
-        registerBean.setFirstName("Greg");
-        registerBean.setLastName("Deckers");
-        registerBean.setEmail(validEmail);
-        registerBean.setPassword("password");
-        registerBean.setSecondPassword("password");
-        Calendar cal;
-        cal = Calendar.getInstance();
-        cal.set(1988, Calendar.DECEMBER, 10);
-        registerBean.setDateOfBirth(cal.getTime());
-        registerBean.setStreet("test");
-        registerBean.setStreetNumber("test");
-        registerBean.setZipcode("test");
-        registerBean.setCity("test");
-        registerBean.setPhoneNumber("04989898989");
-    }
-
 
     public void makeTrips(TripUser tripUser){
         Calendar cal;

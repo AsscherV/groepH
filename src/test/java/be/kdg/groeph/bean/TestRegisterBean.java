@@ -60,7 +60,6 @@ public class TestRegisterBean extends AbstractTransactionalJUnit4SpringContextTe
         registerBean.setPhoneNumber("04989898989");
     }
 
-
     @Test
     public void testAddUser() throws ParseException {
         fillRegisterBeanWithValidData();

@@ -34,7 +34,6 @@ public class TestTripService extends AbstractTransactionalJUnit4SpringContextTes
         validPublicTrip1.setTripUser(UserMother.validUser1());
     }
 
-
     @Test
     public void testAddPublicTrip(){
         assertTrue(tripService.addTrip(validPublicTrip1));

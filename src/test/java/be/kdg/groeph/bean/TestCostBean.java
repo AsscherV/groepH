@@ -21,13 +21,6 @@ import java.sql.SQLException;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-/**
- * Created with IntelliJ IDEA.
- * <p/>
- * Date: 27/02/13
- * Time: 11:51
- */
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:daoContext.xml"})
 public class TestCostBean extends AbstractTransactionalJUnit4SpringContextTests {
@@ -57,7 +50,6 @@ public class TestCostBean extends AbstractTransactionalJUnit4SpringContextTests 
         user.setCredentialsNonExpired(true);
         userDao.addUser(user);
     }
-
 
     @Test
     public void testAddCost() throws SQLException, IOException {

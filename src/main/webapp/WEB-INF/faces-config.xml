@@ -48,7 +48,7 @@
         <navigation-case>
             <from-action>#{loginBean.tempPasswordLogin}</from-action>
             <from-outcome>SUCCESS</from-outcome>
-            <to-view-id>/pages/user/welcome.xhtml</to-view-id>
+            <to-view-id>/pages/user/trip.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
     </navigation-rule>

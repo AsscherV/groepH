@@ -1,6 +1,7 @@
 package be.kdg.groeph.bean;
 
 import be.kdg.groeph.dao.UserDao;
+import be.kdg.groeph.mockMother.UserMother;
 import be.kdg.groeph.model.TripUser;
 import be.kdg.groeph.service.LoginService;
 import be.kdg.groeph.util.SHAEncryption;
@@ -49,8 +50,12 @@ public class TestLoginBean extends AbstractTransactionalJUnit4SpringContextTests
 
     @Before
     public void init() throws ParseException {
-        fillRegisterBean();
-        registerBean.addUser();
+        TripUser tripUser1 = UserMother.validUser2();
+        tripUser1.setEnabled(true);
+        tripUser1.setAccountNonLocked(true);
+        tripUser1.setAccountNonExpired(true);
+        tripUser1.setCredentialsNonExpired(true);
+        userDao.addUser(tripUser1);
     }
 
     @Test
@@ -105,26 +110,8 @@ public class TestLoginBean extends AbstractTransactionalJUnit4SpringContextTests
         loginBean.tempPasswordLogin();
         assertEquals("The new password must be equal to the passwordfield in user", SHAEncryption.encrypt(recoverypassword), user.getPassword());
         assertTrue("TempPassword field must be empty", user.getTempPassword().isEmpty());
-
     }
 
-    public void fillRegisterBean() {
-        registerBean.setGender('M');
-        registerBean.setFirstName("Greg");
-        registerBean.setLastName("Deckers");
-        registerBean.setEmail(validEmail);
-        registerBean.setPassword("password");
-        registerBean.setSecondPassword("password");
-        Calendar cal;
-        cal = Calendar.getInstance();
-        cal.set(1988, Calendar.DECEMBER, 10);
-        registerBean.setDateOfBirth(cal.getTime());
-        registerBean.setStreet("test");
-        registerBean.setStreetNumber("test");
-        registerBean.setZipcode("test");
-        registerBean.setCity("test");
-        registerBean.setPhoneNumber("04989898989");
-    }
 
 
 }

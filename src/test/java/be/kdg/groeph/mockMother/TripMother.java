@@ -7,13 +7,6 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class TripMother {
-
-
-    public static Trip validTripTimeboundOnlyStart()
-    {
-        return null;
-    }
-
     public static Trip validPublicTrip1() {
         String title = "Chille op Sint-Anna plage";
         String description = "Lekker int antwaarps zonneke gon ligge op't mooiste strand vant land";

@@ -28,13 +28,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Greg
- * Date: 21/02/13
- * Time: 14:58
- * To change this template use File | Settings | File Templates.
- */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:daoContext.xml"})
 public class TestParticipantsBean extends AbstractTransactionalJUnit4SpringContextTests {
@@ -75,11 +68,6 @@ public class TestParticipantsBean extends AbstractTransactionalJUnit4SpringConte
     @Autowired
     TripService tripService;
 
-    private Trip trip1;
-    private TripUser user1;
-    private TripUser user2;
-    private List<TripType> types;
-
     @Before
     public void init() throws ParseException, LoginException {
         tripDao.addTripType(new TripType(TIMEBOUND));
@@ -87,43 +75,29 @@ public class TestParticipantsBean extends AbstractTransactionalJUnit4SpringConte
         tripDao.addTripType(new TripType(ANYTIME));
 
         //First user
-        fillRegisterBean();
-        registerBean.addUser();
+        makeUser(validEmail);
+        System.out.println("user 1 made");
 
         //Second user
-        fillRegisterBean();
-        registerBean.setEmail(validEmail2);
-        registerBean.addUser();
+        makeUser(validEmail2);
+        System.out.println("user 2 made");
 
         TripUser user = userDao.getUserByEmail(validEmail);
 
         loginBean.setEmail(user.getEmail());
         loginBean.setPassword("password");
         loginBean.loginUser();
-
-        //user2 = UserMother.validUser2();
-        //userDao.addUser(user2);
-
     }
 
-    public void fillRegisterBean() {
-        registerBean.setGender('M');
-        registerBean.setFirstName("Gunther");
-        registerBean.setLastName("Laurijssens");
-        registerBean.setEmail(validEmail);
-        registerBean.setPassword("password");
-        registerBean.setSecondPassword("password");
-        Calendar cal;
-        cal = Calendar.getInstance();
-        cal.set(1988, Calendar.DECEMBER, 10);
-        registerBean.setDateOfBirth(cal.getTime());
-        registerBean.setStreet("test");
-        registerBean.setStreetNumber("test");
-        registerBean.setZipcode("test");
-        registerBean.setCity("test");
-        registerBean.setPhoneNumber("04989898989");
+    private void makeUser(String email) {
+        TripUser tripUser = UserMother.validUser1();
+        tripUser.setEmail(email);
+        tripUser.setEnabled(true);
+        tripUser.setAccountNonLocked(true);
+        tripUser.setAccountNonExpired(true);
+        tripUser.setCredentialsNonExpired(true);
+        userDao.addUser(tripUser);
     }
-
 
     @Test
     public void testInvalidEmail() {

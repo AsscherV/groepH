@@ -4,6 +4,7 @@ import be.kdg.groeph.bean.LoginBean;
 import be.kdg.groeph.bean.RecoverBean;
 import be.kdg.groeph.bean.RegisterBean;
 import be.kdg.groeph.dao.UserDao;
+import be.kdg.groeph.mockMother.UserMother;
 import be.kdg.groeph.model.TripUser;
 import be.kdg.groeph.util.SHAEncryption;
 import org.junit.Before;
@@ -23,12 +24,6 @@ import java.util.Calendar;
 
 import static org.junit.Assert.*;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Maarten.Aerts
- * Date: 21/02/13
- * Time: 15:18
- */
 @Transactional
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:daoContext.xml"})
@@ -80,21 +75,28 @@ public class TestLoginService extends AbstractTransactionalJUnit4SpringContextTe
         registerBean.setPhoneNumber("04989898989");
     }
 
+    @Before
     public void setRegisterBean() throws ParseException {
-        fillRegisterBean();
-        registerBean.addUser();
+        //fillRegisterBean();
+        //registerBean.addUser();
+
+        TripUser tripUser1 = UserMother.validUser2();
+        tripUser1.setEnabled(true);
+        tripUser1.setAccountNonLocked(true);
+        tripUser1.setAccountNonExpired(true);
+        tripUser1.setCredentialsNonExpired(true);
+        userDao.addUser(tripUser1);
     }
 
     @Test
     public void testLoginUser() throws ParseException {
-        setRegisterBean();
         userDao.getUserByEmail(validEmail);
         assertSame("User exists, logged in.", userDao.getUserByEmail(validEmail), loginService.loginUser(validEmail, SHAEncryption.encrypt("password")));
     }
 
     @Test
     public void testLoggedInTempPassword() throws LoginException, ParseException {
-        setRegisterBean();
+        //setRegisterBean();
         recoverBean.setEmail(validEmail);
         recoverBean.recoverPassword();
 

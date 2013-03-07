@@ -13,14 +13,6 @@ import org.springframework.test.context.junit4.AbstractTransactionalJUnit4Spring
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import static org.junit.Assert.*;
-
-/**
- * Created with IntelliJ IDEA.
- * User: Maarten.Aerts
- * Date: 19/02/13
- * Time: 14:41
- */
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:daoContext.xml"})
 public class TestRecoverBean  extends AbstractTransactionalJUnit4SpringContextTests {
@@ -34,7 +26,6 @@ public class TestRecoverBean  extends AbstractTransactionalJUnit4SpringContextTe
 
     @Autowired
     private UserDao userDao;
-
 
     private TripUser user1;
 
@@ -64,8 +55,5 @@ public class TestRecoverBean  extends AbstractTransactionalJUnit4SpringContextTe
         recoverBean.recoverPassword();
         assertNotNull("TempPassword shouldn't be Null",userDao.getUserByEmail(validEmail).getTempPassword());
     }
-
-
-
 }
 

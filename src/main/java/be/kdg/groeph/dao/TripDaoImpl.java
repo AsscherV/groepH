@@ -77,8 +77,6 @@ public class TripDaoImpl implements TripDao {
         return (List<Trip>) query.list();
     }
 
-
-    //TODO: Klopt dees?
     @Override
     public List<Label> getLabels(Trip trip) {
         if (trip != null) {

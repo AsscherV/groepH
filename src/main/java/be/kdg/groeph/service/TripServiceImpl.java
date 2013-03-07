@@ -17,7 +17,6 @@ import java.util.List;
 @Service("tripService")
 public class TripServiceImpl implements TripService {
     static Logger logger = Logger.getLogger(TripServiceImpl.class);
-    //static org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(LoginServiceImpl.class);
 
     @Qualifier("tripDaoImpl")
     @Autowired
