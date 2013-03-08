@@ -16,6 +16,8 @@ public class Accessory implements Serializable {
     private int id;
     @Column(name = "description", nullable = false, length = 100)
     private String description;
+    @Column(name = "isChecked", nullable = true)
+    private boolean isChecked;
 
     @LazyCollection(LazyCollectionOption.FALSE)
     @ManyToMany( cascade = CascadeType.ALL)
@@ -28,6 +30,7 @@ public class Accessory implements Serializable {
     @JoinColumn(name = "trip", nullable = false)
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     private Trip trip;
+
 
 
     public Accessory() {

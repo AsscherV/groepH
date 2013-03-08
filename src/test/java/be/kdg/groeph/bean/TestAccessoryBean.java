@@ -78,7 +78,7 @@ public class TestAccessoryBean extends AbstractTransactionalJUnit4SpringContextT
     public void testAddAccessoryNoUser()
     {
         accessoryBean.setDescription(A_GOOD_SENSE_OF_HUMOR);
-        String redirect=accessoryBean.AddAccessory();
+        String redirect=accessoryBean.addAccessory();
         Trip trip = tripService.getTripById(1);
         assertEquals("AddAccessory should return SUCCESS", Tools.SUCCESS,redirect);
         assertEquals("The accessory 'A good sense of humor' should be present in the database linked to trip '"+ACCESSORYTEST + "'",A_GOOD_SENSE_OF_HUMOR,trip.getAccessories().get(0).getDescription());
@@ -89,12 +89,14 @@ public class TestAccessoryBean extends AbstractTransactionalJUnit4SpringContextT
         accessoryBean.setDescription(COOKIES);
         accessoryBean.addUser(UserMother.validUser2());
         accessoryBean.addUser(UserMother.validUser3());
-        String redirect=accessoryBean.AddAccessory();
+        String redirect=accessoryBean.addAccessory();
         Trip trip = tripService.getTripById(2);
         assertEquals("AddAccessory should return SUCCESS", Tools.SUCCESS,redirect);
         assertEquals("The accessory 'Cookies' should be present in the database linked to trip '"+ACCESSORYTEST +"' and linked to 2 users",2,trip.getAccessories().get(0).getTripUsers().size());
 
     }
+
+
 
 
 }

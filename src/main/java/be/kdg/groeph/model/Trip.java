@@ -289,4 +289,10 @@ public class Trip implements Nullable, Serializable {
         this.accessories.add(accessory);
     }
 
+
+    public void deleteAccessory(Accessory accessory) {
+        accessory.setTrip(null);
+        accessories.remove(accessory);
+
+    }
 }

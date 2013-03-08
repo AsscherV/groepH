@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
-import java.sql.SQLException;
 import java.util.List;
 
 @Repository
@@ -54,10 +53,6 @@ public class WaypointDaoImpl implements WaypointDao{
         return query.list();
     }
 
-    @Override
-    public List<Waypoint> fetchAllWaypoints() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
-    }
 
     //TODO: Aanpassen... --> Verwijderen
     @Override

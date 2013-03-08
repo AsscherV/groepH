@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.SQLException;
 import java.util.List;
 
 @Transactional
@@ -42,11 +41,6 @@ public class WaypointServiceImpl implements WaypointService{
     @Override
     public List<WaypointType> fetchAllWaypointTypes() {
         return waypointDao.fetchAllWaypointTypes();
-    }
-
-    @Override
-    public List<Waypoint> fetchTripWaypoints() {
-        return waypointDao.fetchAllWaypoints();
     }
 
     @Override

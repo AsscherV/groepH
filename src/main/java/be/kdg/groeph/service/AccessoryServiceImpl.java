@@ -21,4 +21,19 @@ public class AccessoryServiceImpl implements  AccessoryService{
         logger.info("Accessory: " + accessory.getDescription() + " created");
         return accessoryDao.addAccessory(accessory);
     }
+
+    @Override
+    public boolean updateAccessory(Accessory accessory) {
+        return accessoryDao.updateAccessory(accessory);
+    }
+
+    @Override
+    public boolean deleteAccessory(Accessory accessory) {
+        return accessoryDao.deleteAccessory(accessory);
+    }
+
+    @Override
+    public Accessory getAccessoryById(int id) {
+        return accessoryDao.getAccessoryById(id);
+    }
 }
