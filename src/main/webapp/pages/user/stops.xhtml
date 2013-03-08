@@ -9,6 +9,11 @@
     <h:outputStylesheet library="css" name="bootstrap.css"/>
     <h:outputStylesheet library="css" name="bootstrap-responsive.css"/>
     <h:outputStylesheet library="css" name="main.css"/>
+
+    <script type="text/javascript"
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCmZaUMdD7lz1F48ySOKKlEFdvZNw3keb0&amp;sensor=false">
+    </script>
+
 </h:head>
 <h:body>
     <ui:insert name="header">
@@ -61,8 +66,8 @@
                         <div id="stopsTab" class="tabContentsTrip">
                             <div class="box">
 
-                                <h:form>
-                                    <h:dataTable border="0" value="#{tripBean.currentTrip.waypoints}" var="waypoint">
+                                <h:form class="floatLeft marginRight">
+                                    <h:dataTable border="0" value="#{waypointBean.tripWaypoints}" var="waypoint">
                                         <h:column>
                                             <div>
                                                 <h:commandLink value="#{waypoint.label}"
@@ -71,14 +76,22 @@
                                                 </h:commandLink>
                                             </div>
                                         </h:column>
+                                        <h:column>
+                                            <h:inputHidden id="testID" value="#{waypointBean.positions}"/>
+                                        </h:column>
                                     </h:dataTable>
+
+                                    <c:if test="#{tripBean.currentTrip.tripUser == loginBean.user}">
+                                        <h:panelGroup rendered="#{loginBean.loggedIn}">
+                                            <a href="../user/createWaypoint.xhtml">+ Add a Waypoint</a>
+                                        </h:panelGroup>
+                                    </c:if>
                                 </h:form>
 
-                                <c:if test="#{tripBean.currentTrip.tripUser == loginBean.user}">
-                                    <h:panelGroup rendered="#{loginBean.loggedIn}">
-                                        <a href="../user/createWaypoint.xhtml">+ Add a Waypoint</a>
-                                    </h:panelGroup>
-                                </c:if>
+
+
+                                <div id="map_canvas"></div>
+
                             </div>
                         </div>
 
@@ -104,5 +117,6 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <h:outputScript name="js/jquery-1.9.0.min.js"/>
     <h:outputScript name="js/main.js"/>
+    <h:outputScript name="js/gMapsOverview.js"/>
 </h:body>
 </html> 

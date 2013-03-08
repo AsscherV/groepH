@@ -108,4 +108,21 @@ public class Waypoint implements Nullable, Serializable {
     public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Waypoint waypoint = (Waypoint) o;
+
+        if (id != waypoint.id) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return id;
+    }
 }

@@ -16,6 +16,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
@@ -137,6 +138,27 @@ public class TestWaypointBean extends AbstractTransactionalJUnit4SpringContextTe
         assertEquals("The waypointdelete must give Success as value", "SUCCESS", waypointBean.deleteWaypoint());
         trip = tripDao.getTripById(trip.getId());
         assertEquals("The trip must contain 0 waypoints", 0, trip.getWaypoints().size());
+    }
+
+    @Test
+    public void testGetAllWaypointsOfTrip(){
+        waypointBean.setLabel(START);
+        waypointBean.setDescription("This is where we meet before starting the trip");
+        waypointBean.setWaypointType("Start");
+        waypointBean.setLattitude(50.9);
+        waypointBean.setLongitude(4.3);
+        waypointBean.addWaypoint();
+        waypointBean.setLabel("labelTest");
+        waypointBean.setDescription("wa shit");
+        waypointBean.setWaypointType("Start");
+        waypointBean.setLattitude(20.0);
+        waypointBean.setLongitude(30.0);
+        waypointBean.addWaypoint();
+
+        List<Waypoint> list = waypointBean.getTripWaypoints();
+        String test = waypointBean.getPositions();
+        assertEquals("getTripWaypoints must return 2 waypoints", 2, list.size());
+
     }
 
 }

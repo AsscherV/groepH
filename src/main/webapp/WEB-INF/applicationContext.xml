@@ -57,7 +57,7 @@
             <props>
                 <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
                 <prop key="hibernate.show_sql">false</prop>
-                <prop key="hibernate.hbm2ddl.auto">update</prop>
+                <!--<prop key="hibernate.hbm2ddl.auto">update</prop>-->
             </props>
         </property>
         <property name="packagesToScan">
@@ -88,8 +88,8 @@
     <bean id="mailSender" class ="org.springframework.mail.javamail.JavaMailSenderImpl" >
         <property name="host" value="smtp.gmail.com" />
         <property name="port" value="587" />
-        <property name="username" value="groeph2013@gmail.com" />
-        <property name="password" value="groepH2013_softdev" />
+        <property name="username" value="groepHemail@gmail.com" />
+        <property name="password" value="groepH2013" />
         <property name="javaMailProperties">
             <props>
                 <prop key="mail.smtp.auth">true</prop>

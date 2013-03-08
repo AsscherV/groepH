@@ -2,6 +2,7 @@ package be.kdg.groeph.model;
 
 import be.kdg.groeph.model.Null.NullAddress;
 import be.kdg.groeph.model.Null.Nullable;
+import org.codehaus.jackson.annotate.JsonAutoDetect;
 
 import javax.persistence.*;
 import java.io.Serializable;

@@ -1,5 +1,6 @@
 package be.kdg.groeph.dao;
 
+import be.kdg.groeph.model.Trip;
 import be.kdg.groeph.model.Waypoint;
 import be.kdg.groeph.model.WaypointType;
 import org.apache.log4j.Logger;
@@ -33,6 +34,14 @@ public class WaypointDaoImpl implements WaypointDao{
             sessionFactory.getCurrentSession().delete(waypoint);
             return true;
         }
+
+    @Override
+    public List<Waypoint> getWaypointsByTrip(Trip trip) {
+        Query query = sessionFactory.getCurrentSession().createQuery("from Waypoint where trip=:trip");
+        query.setParameter("trip",trip);
+        return query.list();
+    }
+
     @Override
     public WaypointType getTypeByName(String name) {
         Query query = sessionFactory.getCurrentSession().createQuery("from WaypointType where type=:name");

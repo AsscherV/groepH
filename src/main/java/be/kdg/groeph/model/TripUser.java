@@ -2,9 +2,13 @@ package be.kdg.groeph.model;
 
 import be.kdg.groeph.model.Null.NullUser;
 import be.kdg.groeph.model.Null.Nullable;
+import org.codehaus.jackson.annotate.JsonAutoDetect;
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.map.util.JSONPObject;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -87,6 +91,7 @@ public class TripUser implements Nullable, Serializable {
     @LazyCollection(LazyCollectionOption.FALSE)
     @ManyToMany( mappedBy = "tripUsers")
     private List<Accessory> accessories;
+
 
 
 
