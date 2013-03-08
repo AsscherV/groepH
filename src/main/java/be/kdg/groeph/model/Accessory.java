@@ -6,6 +6,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -25,10 +26,10 @@ public class Accessory implements Serializable {
             @JoinColumn(name = "accessoryId", nullable = true, updatable = true)},
             inverseJoinColumns = {@JoinColumn(name = "tripUserId",
                     nullable = true, updatable = true)})
-    private Set<TripUser> tripUsers;
+    private List<TripUser> tripUsers;
     @ManyToOne
     @JoinColumn(name = "trip", nullable = false)
-    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
+    //@Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     private Trip trip;
 
 
@@ -36,7 +37,7 @@ public class Accessory implements Serializable {
     public Accessory() {
     }
 
-    public Accessory(String description, Set<TripUser> tripUsers) {
+    public Accessory(String description, List<TripUser> tripUsers) {
         this.description=description;
         this.tripUsers=tripUsers;
 
@@ -67,11 +68,17 @@ public class Accessory implements Serializable {
         this.description = description;
     }
 
-    public Set<TripUser> getTripUsers() {
+    public List<TripUser> getTripUsers() {
+        //TODO: rechtstreeks uit de databank halen -> geen refresh
         return tripUsers;
     }
 
-    public void setTripUsers(Set<TripUser> tripUsers) {
+    public void setTripUsers(List<TripUser> tripUsers) {
         this.tripUsers = tripUsers;
+    }
+
+    public void addTripUser(TripUser user){
+        this.tripUsers.add(user);
+
     }
 }

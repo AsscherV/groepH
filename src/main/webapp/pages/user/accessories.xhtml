@@ -2,85 +2,127 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
-    <h:head>
-        <title>Trippy Traveler</title>
-        <!-- css -->
-        <h:outputStylesheet library="css" name="bootstrap.css"/>
-        <h:outputStylesheet library="css" name="bootstrap-responsive.css"/>
-        <h:outputStylesheet library="css" name="main.css"/>
-    </h:head>
-    <h:body>
-        <ui:insert name="header">
-            <ui:include src="../header.xhtml"/>
-        </ui:insert>
-        <div class="container">
-            <div class="row">
+<h:head>
+    <title>Trippy Traveler</title>
+    <!-- css -->
+    <h:outputStylesheet library="css" name="bootstrap.css"/>
+    <h:outputStylesheet library="css" name="bootstrap-responsive.css"/>
+    <h:outputStylesheet library="css" name="main.css"/>
+</h:head>
+<h:body>
+    <ui:insert name="header">
+        <ui:include src="../header.xhtml"/>
+    </ui:insert>
 
-                <!-- trips / my trips -->
-                <ui:insert name="header">
-                    <ui:include src="tripmenu.xhtml"/>
-                </ui:insert>
+    <div class="container">
+        <div class="row">
 
-                <!-- trip info -->
-                <div class="span9">
-                    <div id="tabContainerTrip" class="tabContainer">
-                        <ul>
-                            <!-- Tab buttons -->
+            <!-- trips / my trips -->
+            <ui:insert name="header">
+                <ui:include src="tripmenu.xhtml"/>
+            </ui:insert>
+
+            <!-- trip info -->
+            <div class="span9">
+                <div id="tabContainerTrip" class="tabContainer">
+                    <ul>
+                        <!-- Tab buttons -->
+                        <li>
+                            <a class="button " href="trip.xhtml">#{tripBean.currentTrip.title}</a>
+                        </li>
+                        <h:panelGroup rendered="#{loginBean.loggedIn}">
                             <li>
-                                <a class="button " href="trip.xhtml">#{tripBean.currentTrip.title}</a>
+                                <a class="button" href="stops.xhtml">Stops</a>
                             </li>
-                            <h:panelGroup rendered="#{loginBean.loggedIn}">
+                            <li>
+                                <a class="button" href="participants.xhtml">Participants</a>
+                            </li>
+                            <li>
+                                <a class="button active" href="accessories.xhtml">Accessories</a>
+                            </li>
+                            <li>
+                                <a class="button" href="styling.xhtml">Styling</a>
+                            </li>
+                            <li>
+                                <a class="button" href="tripCosts.xhtml">Costs</a>
+                            </li>
+                            <h:panelGroup rendered="#{loginBean.user.admin}">
                                 <li>
-                                    <a class="button" href="stops.xhtml">Stops</a>
+                                    <a class="button" href="../admin/costs.xhtml">Costs</a>
                                 </li>
-                                <li>
-                                    <a class="button" href="participants.xhtml">Participants</a>
-                                </li>
-                                <li>
-                                    <a class="button active" href="accessories.xhtml">Accessories</a>
-                                </li>
-                                <li>
-                                    <a class="button" href="styling.xhtml">Styling</a>
-                                </li>
-                                <li>
-                                    <a class="button" href="tripCosts.xhtml">Costs</a>
-                                </li>
-                                <h:panelGroup rendered="#{loginBean.user.admin}">
-                                    <li>
-                                        <a class="button" href="../admin/costs.xhtml">Costs</a>
-                                    </li>
-                                </h:panelGroup>
-
                             </h:panelGroup>
-                        </ul>
-                        <!-- Tab content -->
-                        <div class="tabDetails">
 
-                            <div id="accesTab" class="tabContentsTrip">
-                                <div class="box">
+                        </h:panelGroup>
+                    </ul>
+                    <!-- Tab content -->
+                    <div class="tabDetails">
 
-                                </div>
+                        <div id="accesTab" class="tabContentsTrip">
+                            <div class="box">
+
+
+                                <h:form>
+
+                                    <h:inputText styleClass="span2" value="#{accessoryBean.description}"/>
+                                    <h:commandButton styleClass="btn btn-success" type="submit"
+                                                     action="#{accessoryBean.addAccessory}" value="Add an accessory"/>
+
+                                    <h:dataTable border="0" value="#{tripBean.currentTrip.accessories}" var="accessory">
+                                        <h:column>
+                                            <div>
+                                                <h:panelGrid columns="3">
+                                                    <h:outputLabel styleClass="span2" value="#{accessory.description}"
+                                                                   rendered="#{not accessoryBean.getEditable(accessory)}"/>
+                                                    <h:inputText styleClass="span2"
+                                                                 value="#{accessoryBean.newdescription}"
+                                                                 rendered="#{accessoryBean.getEditable(accessory)}"/>
+                                                    <h:commandLink  type="submit"
+                                                                     rendered="#{accessoryBean.getEditable(accessory)}"
+                                                                     action="#{accessoryBean.updateAccessory}"
+                                                                     value="Update">
+                                                        <f:param name="accessoryId" value="#{accessory.id}"/>
+                                                    </h:commandLink>
+                                                    <h:commandLink type="submit"
+                                                                     rendered="#{ not accessoryBean.getEditable(accessory)}"
+                                                                     action="#{accessoryBean.editAccessory}"
+                                                                     value="Edit">
+                                                        <f:param name="accessoryId" value="#{accessory.id}"/>
+                                                    </h:commandLink>
+                                                    <h:commandLink  type="submit"
+                                                                     rendered="#{ not accessoryBean.getEditable(accessory)}"
+                                                                     action="#{accessoryBean.deleteAccessory}"
+                                                                     value="Delete">
+                                                        <f:param name="accessoryId" value="#{accessory.id}"/>
+                                                    </h:commandLink>
+                                                    <!-- panelgrid -->
+
+                                                </h:panelGrid>
+                                            </div>
+                                        </h:column>
+                                    </h:dataTable>
+                                </h:form>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
 
-
-            <footer>
-                <p>
-                    © Trippy Traveler 2013
-                </p>
-            </footer>
-
         </div>
-        <!-- /container -->
 
-        <!-- javascript
-        ================================================== -->
-        <!-- Placed at the end of the document so the pages load faster -->
-        <h:outputScript name="js/jquery-1.9.0.min.js"/>
-        <h:outputScript name="js/main.js"/>
-    </h:body>
+
+        <footer>
+            <p>
+                © Trippy Traveler 2013
+            </p>
+        </footer>
+
+    </div>
+    <!-- /container -->
+
+    <!-- javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <h:outputScript name="js/jquery-1.9.0.min.js"/>
+    <h:outputScript name="js/main.js"/>
+</h:body>
 </html> 

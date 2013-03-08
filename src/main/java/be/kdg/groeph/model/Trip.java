@@ -126,6 +126,7 @@ public class Trip implements Nullable, Serializable {
     public void setAccessories(List<Accessory> accessories) {
         this.accessories = accessories;
     }
+
     public void addLabel(Label label) {
         label.setTrip(this);
         labels.add(label);

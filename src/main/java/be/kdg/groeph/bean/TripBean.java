@@ -277,4 +277,7 @@ public class TripBean implements Serializable {
         tripService.updateTrip(currentTrip);
         return true;
     }
+    public void refreshCurrentTrip(){
+        setCurrentTrip( tripService.getTripById(currentTrip.getId()));
+    }
 }

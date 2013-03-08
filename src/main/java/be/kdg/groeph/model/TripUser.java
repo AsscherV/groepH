@@ -110,6 +110,7 @@ public class TripUser implements Nullable, Serializable {
         this.dateRegistered = dateRegistered;
         this.role = role;
         trips = new ArrayList<Trip>();
+        accessories = new ArrayList<Accessory>();
     }
 
     public TripUser(String firstName, String lastName, Date dateOfBirth, String phoneNumber, char gender, String email, String password, String tempPassword, Address address, Date dateRegistered, String role) {
@@ -124,6 +125,7 @@ public class TripUser implements Nullable, Serializable {
         this.dateRegistered = dateRegistered;
         this.role = role;
         this.tempPassword = tempPassword;
+        accessories = new ArrayList<Accessory>();
     }
 
     public int getId() {
@@ -294,7 +296,9 @@ public class TripUser implements Nullable, Serializable {
     public List<Accessory> getAccessories() {
         return accessories;
     }
-
+    public void addAccessory(Accessory accessory){
+        accessories.add(accessory);
+    }
     public void setAccessories(List<Accessory> accessories) {
         this.accessories = accessories;
     }
@@ -351,4 +355,6 @@ public class TripUser implements Nullable, Serializable {
     public static TripUser INVALID_USER() {
         return new NullUser();
     }
+
+
 }

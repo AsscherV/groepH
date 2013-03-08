@@ -197,9 +197,9 @@ public class WaypointBean implements Serializable {
     public String deleteWaypoint() {
         Waypoint waypoint = getCurrentWaypoint();
         tripBean.getCurrentTrip().deleteWaypoint(waypoint);
-        System.out.println("id: "+waypoint.getId());
-        if (waypointService.deleteWaypoint(waypoint)) {
 
+        if (waypointService.deleteWaypoint(waypoint)) {
+            tripBean.refreshCurrentTrip();
             return Tools.SUCCESS;
         }
         return Tools.FAILURE;
