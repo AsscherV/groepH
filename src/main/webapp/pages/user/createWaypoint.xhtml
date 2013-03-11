@@ -99,14 +99,6 @@
                                             <h:inputText id="newlng" styleClass="span2" value="#{waypointBean.newlongitude}" rendered="#{waypointBean.editableWaypoint}"/>
                                             <h:message for="lng" styleClass="error"/>
 
-
-                                            <!--
-                                            <h:commandButton class="btn btn-success" value="add">
-                                                <f:ajax event="click" listener="tripBean.newLabel}"
-                                                        execute=":createTrip"/>
-                                            </h:commandButton>
-                                             -->
-
                                         </h:panelGrid>
                                         <h:commandButton type="submit" action="#{waypointBean.addWaypoint}" class="btn btn-success" value="#{msgs.addWaypoint}" rendered="#{not waypointBean.editableWaypoint}"/>
                                         <h:commandButton type="submit" action="#{waypointBean.updateWaypoint}" class="btn btn-success" value="#{msgs.updateWaypoint}" rendered="#{waypointBean.editableWaypoint}"/>

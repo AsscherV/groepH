@@ -9,7 +9,7 @@ $(function(){
 
 function initMap(){
     mapOptions = {
-        center: new google.maps.LatLng(50.892639,4.367065),
+        center: new google.maps.LatLng(0,0),
         zoom: 3,
         scrollwheel: true,
         navigationControl: true,
@@ -23,13 +23,17 @@ function initMap(){
 }
 
 function fetchPositions(){
-    var str = document.getElementById("j_idt94:j_idt95:1:testID").value;
+    var bounds = new google.maps.LatLngBounds ();
+    //var str = $('input[type=hidden]').val();
+    var str = document.getElementById("j_idt94:j_idt95:0:testID").value;
     var positionsArray = str.split(" ");
 
     for(var i = 0; i < positionsArray.length; i++){
         loc = new google.maps.LatLng(positionsArray[i++],positionsArray[i]);
+        bounds.extend(loc);
         placeMarker(loc);
     }
+    map.fitBounds(bounds);
 }
 
 function placeMarker(loc) {

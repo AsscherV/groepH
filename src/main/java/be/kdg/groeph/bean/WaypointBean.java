@@ -206,7 +206,6 @@ public class WaypointBean implements Serializable {
     }
 
     public String previousWaypoint() {
-        //TODO: refactor this code for previous
         waypointList = getTripWaypoints();
 
         if (waypointList.get(0).equals(currentWaypoint)) {
@@ -214,20 +213,17 @@ public class WaypointBean implements Serializable {
         } else {
             currentWaypoint = waypointList.get(waypointList.indexOf(currentWaypoint) -1);
         }
-
         return null;
     }
 
     public String nextWaypoint() {
         waypointList = getTripWaypoints();
-        System.out.println("AAA: " + waypointList.indexOf(currentWaypoint));
 
         if (waypointList.get(waypointList.size() -1).equals(currentWaypoint)) {
             currentWaypoint = waypointList.get(0);
         } else {
             currentWaypoint = waypointList.get(waypointList.indexOf(currentWaypoint) + 1);
         }
-
         return null;
     }
 
@@ -245,7 +241,6 @@ public class WaypointBean implements Serializable {
 
     public List<Waypoint> getTripWaypoints() {
         return waypointService.getWaypointsByTrip(tripBean.getCurrentTrip());
-        //return tripBean.getCurrentTrip().getWaypoints();
     }
 
     public void setCurrentWaypoint(Waypoint waypoint) {
@@ -263,7 +258,6 @@ public class WaypointBean implements Serializable {
         setCurrentWaypoint(waypoint);
         return WAYPOINT;
     }
-
 
     public String getPositions() {
         positions = "";

@@ -69,12 +69,19 @@
                                 <h:form class="floatLeft marginRight">
                                     <h:dataTable border="0" value="#{waypointBean.tripWaypoints}" var="waypoint">
                                         <h:column>
-                                            <div>
+                                            <!--
+                                            <h:selectOneMenu value="{waypointBean.waypointPosition}">
+
+                                                <f:selectItems value="{waypointBean.allWaypointPositions}" var="type"
+                                                               itemLabel="{waypoint.position}" itemValue="{type.type}" />
+
+                                            </h:selectOneMenu>
+                                              -->
                                                 <h:commandLink value="#{waypoint.label}"
                                                                action="#{waypointBean.setThisAsCurrentWaypoint}">
                                                     <f:param name="currentWaypointId" value="#{waypoint.id}"/>
                                                 </h:commandLink>
-                                            </div>
+
                                         </h:column>
                                         <h:column>
                                             <h:inputHidden id="testID" value="#{waypointBean.positions}"/>
