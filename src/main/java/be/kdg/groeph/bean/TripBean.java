@@ -56,6 +56,8 @@ public class TripBean implements Serializable {
     private boolean isVisible;
     private boolean started;
     private boolean hasCurrentTrip;
+    private boolean isInteractive;
+
 
     public TripBean() {
         isPublic = true;
@@ -227,11 +229,11 @@ public class TripBean implements Serializable {
     }
 
     public List<Trip> getAllInvitedTrips() {
-        return tripService.getAllInvitedTripsByUser(loginBean.getUser());
+        return Tools.filter(tripService.getAllInvitedTripsByUser(loginBean.getUser()),filter);
     }
 
     public List<Trip> getAllParticipatedTrips() {
-        return tripService.getAllParticipatedTripsByUser(loginBean.getUser());
+        return Tools.filter(tripService.getAllParticipatedTripsByUser(loginBean.getUser()),filter);
     }
 
     public List<Trip> getAllPrivateTrips() {

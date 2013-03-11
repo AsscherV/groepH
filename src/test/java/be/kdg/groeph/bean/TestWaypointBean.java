@@ -5,6 +5,7 @@ import be.kdg.groeph.dao.UserDao;
 import be.kdg.groeph.dao.WaypointDao;
 import be.kdg.groeph.mockMother.UserMother;
 import be.kdg.groeph.model.*;
+import be.kdg.groeph.service.TripService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,12 +26,14 @@ import static org.junit.Assert.assertEquals;
 public class TestWaypointBean extends AbstractTransactionalJUnit4SpringContextTests {
     public static final String SUCCESS = "SUCCESS";
     public static final String START = "Start";
+    public static final String GROENPLAATS = "Groenplaats";
     @Qualifier("waypointBean")
     @Autowired
     WaypointBean waypointBean;
     @Qualifier("tripBean")
     @Autowired
     TripBean tripBean;
+
     @Qualifier("loginBean")
     @Autowired
     LoginBean loginBean;
@@ -40,6 +43,8 @@ public class TestWaypointBean extends AbstractTransactionalJUnit4SpringContextTe
     private UserDao userDao;
     @Autowired
     private WaypointDao waypointDao;
+    @Autowired
+    TripService tripService;
 
     private TripUser user1;
     private Trip trip;
@@ -71,7 +76,7 @@ public class TestWaypointBean extends AbstractTransactionalJUnit4SpringContextTe
         tripBean.setPublic(true);
         tripBean.addTrip();
 
-        waypointDao.addWaypointType(new WaypointType("Start"));
+        waypointDao.addWaypointType(new WaypointType(START));
         waypointDao.addWaypointType(new WaypointType("End"));
         waypointDao.addWaypointType(new WaypointType("Overnight"));
         waypointDao.addWaypointType(new WaypointType("Meeting"));
@@ -85,7 +90,7 @@ public class TestWaypointBean extends AbstractTransactionalJUnit4SpringContextTe
         Trip trip = null;
         waypointBean.setLabel(START);
         waypointBean.setDescription("This is where we meet before starting the trip");
-        waypointBean.setWaypointType("Start");
+        waypointBean.setWaypointType(START);
         waypointBean.setLattitude(50.9);
         waypointBean.setLongitude(4.3);
         waypointBean.addWaypoint();
@@ -102,14 +107,14 @@ public class TestWaypointBean extends AbstractTransactionalJUnit4SpringContextTe
         Trip trip = null;
         waypointBean.setLabel(START);
         waypointBean.setDescription("This is where we meet before starting the trip");
-        waypointBean.setWaypointType("Start");
+        waypointBean.setWaypointType(START);
         waypointBean.setLattitude(50.9);
         waypointBean.setLongitude(4.3);
         waypointBean.addWaypoint();
 
         waypointBean.setNewlabel("Update");
         waypointBean.setNewdescription("This is where we meet before starting the trip");
-        waypointBean.setWaypointType("Start");
+        waypointBean.setWaypointType(START);
         waypointBean.setNewlattitude(50.9);
         waypointBean.setNewlongitude(4.3);
 
@@ -128,7 +133,7 @@ public class TestWaypointBean extends AbstractTransactionalJUnit4SpringContextTe
         Trip trip = null;
         waypointBean.setLabel(START);
         waypointBean.setDescription("This is where we meet before starting the trip");
-        waypointBean.setWaypointType("Start");
+        waypointBean.setWaypointType(START);
         waypointBean.setLattitude(50.9);
         waypointBean.setLongitude(4.3);
         waypointBean.addWaypoint();
@@ -136,21 +141,47 @@ public class TestWaypointBean extends AbstractTransactionalJUnit4SpringContextTe
 
         trip = daoTestUser.getTrips().get(0);
         assertEquals("The waypointdelete must give Success as value", "SUCCESS", waypointBean.deleteWaypoint());
-        trip = tripDao.getTripById(trip.getId());
+        trip = tripService.getTripById(trip.getId());
         assertEquals("The trip must contain 0 waypoints", 0, trip.getWaypoints().size());
     }
+    @Test
+    public void testAnswerWaypointQuestion() {
+        TripUser daoTestUser = null;
+        Trip trip = null;
+        waypointBean.setLabel(GROENPLAATS);
+        waypointBean.setInteractive(true);
+
+        waypointBean.setDescription("Hoeveel vingers heeft een hand in the simpsons");
+        waypointBean.setLattitude(50.9);
+        waypointBean.setLongitude(4.3);
+        waypointBean.addAnswer("2");
+        waypointBean.addAnswer("3");
+        waypointBean.addAnswer("4");
+        waypointBean.addAnswer("5");
+        waypointBean.setCorrectAnswer(3);
+        waypointBean.addWaypoint();
+        daoTestUser = userDao.getUserByEmail(loginBean.getUser().getEmail());
+
+        trip = daoTestUser.getTrips().get(0);
+        assertEquals("The trip must contain 1 waypoint", 1, trip.getWaypoints().size());
+        assertEquals("The waypoint must have 4 answers", 4, trip.getWaypoints().get(0).getAnswers().size());
+
+
+    }
+
+
 
     @Test
     public void testGetAllWaypointsOfTrip(){
         waypointBean.setLabel(START);
         waypointBean.setDescription("This is where we meet before starting the trip");
-        waypointBean.setWaypointType("Start");
+        waypointBean.setWaypointType(START);
         waypointBean.setLattitude(50.9);
         waypointBean.setLongitude(4.3);
         waypointBean.addWaypoint();
         waypointBean.setLabel("labelTest");
         waypointBean.setDescription("wa shit");
-        waypointBean.setWaypointType("Start");
+        waypointBean.setWaypointType(START);
         waypointBean.setLattitude(20.0);
         waypointBean.setLongitude(30.0);
         waypointBean.addWaypoint();

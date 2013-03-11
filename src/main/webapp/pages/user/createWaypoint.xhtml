@@ -70,6 +70,11 @@
 
                                     <h:form id="waypointForm" class="floatLeft marginRight">
                                         <h:panelGrid columns="1" border="0">
+                                            <h:selectOneRadio value="#{tripBean.public}">
+                                                <f:selectItem itemValue="#{true}" itemLabel="#{msgs.plain}"/>
+                                                <f:selectItem itemValue="#{false}" itemLabel="#{msgs.interactive}"/>
+                                            </h:selectOneRadio>
+
                                             <h:outputLabel value="#{msgs.title}"/>
                                             <h:inputText id="titel" styleClass="span2" value="#{waypointBean.label}" rendered="#{not waypointBean.editableWaypoint}"/>
                                             <h:inputText id="newtitel" styleClass="span2" value="#{waypointBean.newlabel}" rendered="#{waypointBean.editableWaypoint}"/>
