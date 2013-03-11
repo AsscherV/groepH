@@ -1,10 +1,12 @@
 var map;
 var mapOptions;
 var loc;
+var bounds;
 
 $(function(){
     initMap();
     fetchPositions();
+    addListeners();
 });
 
 function initMap(){
@@ -22,8 +24,14 @@ function initMap(){
         mapOptions);
 }
 
+function addListeners(){
+    $('#resetMap').click( function(){
+        map.fitBounds(bounds);
+    });
+}
+
 function fetchPositions(){
-    var bounds = new google.maps.LatLngBounds ();
+    bounds = new google.maps.LatLngBounds ();
     //var str = $('input[type=hidden]').val();
     var str = document.getElementById("j_idt94:j_idt95:0:testID").value;
     var positionsArray = str.split(" ");

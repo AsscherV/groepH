@@ -64,8 +64,9 @@ public class WaypointBean implements Serializable {
     private boolean editableWaypoint;
     private List<String> answers;
     private boolean isInteractive;
-    private int correctAnswer;
+    private Integer correctAnswer;
     private String positions;
+    private boolean visible;
 
 
     public WaypointBean() {
@@ -323,4 +324,5 @@ public class WaypointBean implements Serializable {
         answers.add(answer);
 
     }
+
 }

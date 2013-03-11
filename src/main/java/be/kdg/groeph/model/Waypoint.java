@@ -26,7 +26,7 @@ public class Waypoint implements Nullable, Serializable {
     @Column(name="longitude", nullable = false)
     private double longitude;
     @Column(name="correctAnswer", nullable = true)
-    private int correctAnswer;
+    private Integer correctAnswer;
 
     @ManyToOne
     @JoinColumn(name = "waypointType", nullable = true)
@@ -44,7 +44,7 @@ public class Waypoint implements Nullable, Serializable {
 
 
     public Waypoint(){
-
+        this.correctAnswer = 0;
     }
 
     public Waypoint(String label, String description, WaypointType waypointType, double lattitude, double longitude) {
@@ -54,10 +54,10 @@ public class Waypoint implements Nullable, Serializable {
         this.waypointType=waypointType;
         this.lattitude=lattitude;
         this.longitude=longitude;
-
+        this.correctAnswer = 0;
     }
 
-    public Waypoint(String label, WaypointType waypointType, double lattitude, double longitude, String question, List<String> answers, int correctAnswer) {
+    public Waypoint(String label, WaypointType waypointType, double lattitude, double longitude, String question, List<String> answers, Integer correctAnswer) {
         this.label=label;
         this.waypointType=waypointType;
         this.lattitude=lattitude;
@@ -146,11 +146,11 @@ public class Waypoint implements Nullable, Serializable {
         this.answers = answers;
     }
 
-    public int getCorrectAnswer() {
+    public Integer getCorrectAnswer() {
         return correctAnswer;
     }
 
-    public void setCorrectAnswer(int correctAnswer) {
+    public void setCorrectAnswer(Integer correctAnswer) {
         this.correctAnswer = correctAnswer;
     }
 
