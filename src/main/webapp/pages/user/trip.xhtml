@@ -120,9 +120,20 @@
                                                                          value="Change trip"
                                                                          immediate="true"
                                                                          rendered="#{not tripBean.currentTrip.started}"/>
+
                                                     </h:panelGroup>
+                                                    <h:panelGroup rendered="#{tripBean.currentTrip.visible}">
+                                                        <h:commandButton class="btn btn-succes"
+                                                                         action="#{socialBean.postTripOnFacebook}"
+                                                                         value="Post trip on facebook">
+                                                        </h:commandButton>
+                                                    </h:panelGroup>
+
+
                                                     <h:panelGroup rendered="#{tripBean.editableTrip}">
-                                                        <p class="text-error">This trips is in edit mode. Please conform: <a href="createTrip.xhtml">update trip</a></p>
+                                                        <p class="text-error">This trips is in edit mode. Please conform:
+                                                            <a
+                                                                    href="createTrip.xhtml">update trip</a></p>
                                                     </h:panelGroup>
                                                 </c:if>
 
@@ -156,4 +167,4 @@
     <h:outputScript name="js/jquery-1.9.0.min.js"/>
     <h:outputScript name="js/main.js"/>
 </h:body>
-</html> 
+</html>
