@@ -27,6 +27,7 @@ public class TestWaypointBean extends AbstractTransactionalJUnit4SpringContextTe
     public static final String SUCCESS = "SUCCESS";
     public static final String START = "Start";
     public static final String GROENPLAATS = "Groenplaats";
+    public static final String EXPECTED = "2";
     @Qualifier("waypointBean")
     @Autowired
     WaypointBean waypointBean;
@@ -154,17 +155,17 @@ public class TestWaypointBean extends AbstractTransactionalJUnit4SpringContextTe
         waypointBean.setDescription("Hoeveel vingers heeft een hand in the simpsons");
         waypointBean.setLattitude(50.9);
         waypointBean.setLongitude(4.3);
-        waypointBean.addAnswer("2");
-        waypointBean.addAnswer("3");
-        waypointBean.addAnswer("4");
-        waypointBean.addAnswer("5");
+        waypointBean.setAnswer1(EXPECTED);
+        waypointBean.setAnswer2("3");
+        waypointBean.setAnswer3("4");
+        waypointBean.setAnswer4("5");
         waypointBean.setCorrectAnswer(3);
         waypointBean.addWaypoint();
         daoTestUser = userDao.getUserByEmail(loginBean.getUser().getEmail());
 
         trip = daoTestUser.getTrips().get(0);
         assertEquals("The trip must contain 1 waypoint", 1, trip.getWaypoints().size());
-        assertEquals("The waypoint must have 4 answers", 4, trip.getWaypoints().get(0).getAnswers().size());
+        assertEquals("The waypoint must have the answer 1 field set with '2'", EXPECTED, trip.getWaypoints().get(0).getAnswer1());
 
 
     }

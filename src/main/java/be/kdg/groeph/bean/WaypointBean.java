@@ -17,7 +17,6 @@ import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -62,26 +61,21 @@ public class WaypointBean implements Serializable {
     private List<Waypoint> waypointList;
 
     private boolean editableWaypoint;
-    private List<String> answers;
     private boolean isInteractive;
+    @NotEmpty(message = "{correctAnswer} {notempty}")
     private Integer correctAnswer;
     private String positions;
+    private String answer1;
+    private String answer2;
+    private String answer3;
+    private String answer4;
     private boolean visible;
 
 
     public WaypointBean() {
         editableWaypoint = false;
-        answers= new ArrayList<String>();
-    }
 
-    public List<String> getAnswers() {
-        return answers;
     }
-
-    public void setAnswers(List<String> answers) {
-        this.answers = answers;
-    }
-
     public List<Waypoint> getWaypointList() {
         return waypointList;
     }
@@ -183,7 +177,7 @@ public class WaypointBean implements Serializable {
         WaypointType type = waypointService.getTypeByName(getWaypointType());
         if(isInteractive)
         {
-            waypoint= new Waypoint(getLabel(),type,getLattitude(),getLongitude(),getDescription(),getAnswers(),getCorrectAnswer());
+            waypoint= new Waypoint(getLabel(),type,getLattitude(),getLongitude(),getDescription(),getAnswer1(),getAnswer2(),getAnswer3(),getAnswer4(),getCorrectAnswer());
         }
         else
         {
@@ -320,9 +314,35 @@ public class WaypointBean implements Serializable {
     }
 
 
-    public void addAnswer(String answer) {
-        answers.add(answer);
-
+    public void setAnswer1(String answer1) {
+        this.answer1 = answer1;
     }
 
+    public String getAnswer1() {
+        return answer1;
+    }
+
+    public void setAnswer2(String answer2) {
+        this.answer2 = answer2;
+    }
+
+    public String getAnswer2() {
+        return answer2;
+    }
+
+    public void setAnswer3(String answer3) {
+        this.answer3 = answer3;
+    }
+
+    public String getAnswer3() {
+        return answer3;
+    }
+
+    public void setAnswer4(String answer4) {
+        this.answer4 = answer4;
+    }
+
+    public String getAnswer4() {
+        return answer4;
+    }
 }

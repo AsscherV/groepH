@@ -95,13 +95,19 @@
 
                                             <h:panelGrid id="quizInput" rendered="#{waypointBean.interactive}">
                                                 <h:outputLabel value="Answer 1"/>
-                                                <h:inputText id="answer1" styleClass="span2" />
+                                                <h:inputText id="answer1" styleClass="span2" value="#{waypointBean.answer1}"/>
                                                 <h:outputLabel value="Answer 2"/>
-                                                <h:inputText id="answer2" styleClass="span2" />
+                                                <h:inputText id="answer2" styleClass="span2" value="#{waypointBean.answer2}"/>
                                                 <h:outputLabel value="Answer 3"/>
-                                                <h:inputText id="answer3" styleClass="span2" />
+                                                <h:inputText id="answer3" styleClass="span2" value="#{waypointBean.answer3}"/>
                                                 <h:outputLabel value="Answer 4"/>
-                                                <h:inputText id="answer4" styleClass="span2" />
+                                                <h:inputText id="answer4" styleClass="span2" value="#{waypointBean.answer4}"/>
+                                                <h:selectOneRadio id="radioAnswer" value="#{waypointBean.correctAnswer}">
+                                                    <f:selectItem itemValue="#{1}" itemLabel="#{1}"/>
+                                                    <f:selectItem itemValue="#{2}" itemLabel="#{2}"/>
+                                                    <f:selectItem itemValue="#{3}" itemLabel="#{3}"/>
+                                                    <f:selectItem itemValue="#{4}" itemLabel="#{4}"/>
+                                                </h:selectOneRadio>
                                             </h:panelGrid>
 
                                             <h:outputLabel value="#{msgs.type}"/>
@@ -109,7 +115,6 @@
 
                                                 <f:selectItems value="#{waypointBean.allWaypointTypes}" var="type"
                                                                itemLabel="#{type.id} : #{type.type}" itemValue="#{type.type}" />
-
                                             </h:selectOneMenu>
                                             <h:column></h:column>
 

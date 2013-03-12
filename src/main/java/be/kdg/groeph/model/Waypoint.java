@@ -2,14 +2,9 @@ package be.kdg.groeph.model;
 
 
 import be.kdg.groeph.model.Null.Nullable;
-import org.hibernate.annotations.*;
 
 import javax.persistence.*;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name="t_waypoint")
@@ -27,6 +22,14 @@ public class Waypoint implements Nullable, Serializable {
     private double longitude;
     @Column(name="correctAnswer", nullable = true)
     private Integer correctAnswer;
+    @Column(name="answer1", nullable = true)
+    private String answer1;
+    @Column(name="answer2", nullable = true)
+    private String answer2;
+    @Column(name="answer3", nullable = true)
+    private String answer3;
+    @Column(name="answer4", nullable = true)
+    private String answer4;
 
     @ManyToOne
     @JoinColumn(name = "waypointType", nullable = true)
@@ -37,43 +40,33 @@ public class Waypoint implements Nullable, Serializable {
     //@Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     private Trip trip;
 
-    @LazyCollection(LazyCollectionOption.FALSE)
-    @OneToMany(mappedBy = "waypoint")     //,fetch = FetchType.EAGER
-    @Cascade({org.hibernate.annotations.CascadeType.DELETE})
-    private List<Answer> answers;
-
 
     public Waypoint(){
-        this.correctAnswer = 0;
+
     }
 
     public Waypoint(String label, String description, WaypointType waypointType, double lattitude, double longitude) {
-        this.answers= new ArrayList<Answer>();
         this.label=label;
         this.description=description;
         this.waypointType=waypointType;
         this.lattitude=lattitude;
         this.longitude=longitude;
-        this.correctAnswer = 0;
+
     }
 
-    public Waypoint(String label, WaypointType waypointType, double lattitude, double longitude, String question, List<String> answers, Integer correctAnswer) {
+    public Waypoint(String label, WaypointType waypointType, double lattitude, double longitude, String question,  String answer1, String answer2, String answer3, String answer4, int correctAnswer) {
         this.label=label;
         this.waypointType=waypointType;
         this.lattitude=lattitude;
         this.longitude=longitude;
         this.description=question;
         this.correctAnswer=correctAnswer;
-        this.answers= new ArrayList<Answer>();
-        for (String answer:answers)
-        {
-            this.answers.add(new Answer(answer,this));
-        }
-
-
+        this.answer1=answer1;
+        this.answer2=answer2;
+        this.answer3=answer3;
+        this.answer4=answer4;
 
     }
-
     public WaypointType getWaypointType() {
         return waypointType;
     }
@@ -138,13 +131,6 @@ public class Waypoint implements Nullable, Serializable {
         this.longitude = longitude;
     }
 
-    public List<Answer> getAnswers() {
-        return answers;
-    }
-
-    public void setAnswers(List<Answer> answers) {
-        this.answers = answers;
-    }
 
     public Integer getCorrectAnswer() {
         return correctAnswer;
@@ -152,6 +138,38 @@ public class Waypoint implements Nullable, Serializable {
 
     public void setCorrectAnswer(Integer correctAnswer) {
         this.correctAnswer = correctAnswer;
+    }
+
+    public String getAnswer1() {
+        return answer1;
+    }
+
+    public void setAnswer1(String answer1) {
+        this.answer1 = answer1;
+    }
+
+    public String getAnswer2() {
+        return answer2;
+    }
+
+    public void setAnswer2(String answer2) {
+        this.answer2 = answer2;
+    }
+
+    public String getAnswer3() {
+        return answer3;
+    }
+
+    public void setAnswer3(String answer3) {
+        this.answer3 = answer3;
+    }
+
+    public String getAnswer4() {
+        return answer4;
+    }
+
+    public void setAnswer4(String answer4) {
+        this.answer4 = answer4;
     }
 
     @Override
