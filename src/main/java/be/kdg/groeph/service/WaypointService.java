@@ -1,5 +1,6 @@
 package be.kdg.groeph.service;
 
+import be.kdg.groeph.model.Trip;
 import be.kdg.groeph.model.Waypoint;
 import be.kdg.groeph.model.WaypointType;
 
@@ -15,4 +16,6 @@ public interface WaypointService {
     Waypoint getWaypointByLabel(String waypointLabel);
     boolean updateWaypoint(Waypoint waypoint) ;
     boolean deleteWaypoint(Waypoint waypoint) ;
+
+    List<Waypoint> getWaypointsByTrip(Trip trip);
 }

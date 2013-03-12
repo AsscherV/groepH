@@ -94,16 +94,20 @@
                                 <h:outputLabel id="lng" value="#{waypointBean.currentWaypoint.longitude}"/>
 
                             </h:panelGrid>
-
                                 <h:form>
-                                    <h:commandButton action="#{waypointBean.editWaypoint}"
-                                                     value="#{msgs.updateWaypoint}"
+                                    <h:commandButton action="#{waypointBean.editWaypoint}" value="#{msgs.updateWaypoint}"
                                                      class="btn btn-success" id="editWaypoint"/>
-                                    <h:commandButton action="#{waypointBean.deleteWaypoint}"
-                                                     value="#{msgs.deleteWaypoint}"
+                                    <h:commandButton action="#{waypointBean.deleteWaypoint}"  value="#{msgs.deleteWaypoint}"
                                                      class="btn btn-success" id="deleteWaypoint"/>
                                 </h:form>
+                                </h:panelGrid>
 
+                               <h:form>
+                                   <h:commandButton action="#{waypointBean.editWaypoint}" value="#{msgs.updateWaypoint}"
+                                   class="btn btn-success" id="editWaypoint"/>
+                                   <h:commandButton action="#{waypointBean.deleteWaypoint}"  value="#{msgs.deleteWaypoint}"
+                                                                      class="btn btn-success" id="deleteWaypoint"/>
+                               </h:form>
                                 <div id="map_canvas"></div>
 
                                 <div>

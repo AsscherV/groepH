@@ -3,6 +3,7 @@ package be.kdg.groeph.service;
 import be.kdg.groeph.model.Address;
 import be.kdg.groeph.model.TripUser;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import flexjson.JSONSerializer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -26,17 +27,17 @@ public class RestService {
     @Produces(MediaType.APPLICATION_JSON)
     public String login(@QueryParam("Username") String Username,
                         @QueryParam("Password") String Password) {
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder().create();
 
         TripUser user = loginService.loginUser(Username,Password);
 
         if(user.isNull()){
               return "";
         }   else {
-            JSONSerializer serializer = new JSONSerializer();
-            //return gson.toJson(user);
+            //JSONSerializer serializer = new JSONSerializer();
+            return gson.toJson(user);
             //return serializer.include("trips").serialize(user);
-            return serializer.serialize(user);
+            //return serializer.serialize(user);
             //return gson.toJson(user, TripUser.class);
         }
     }

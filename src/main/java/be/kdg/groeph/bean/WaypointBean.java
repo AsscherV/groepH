@@ -1,6 +1,5 @@
 package be.kdg.groeph.bean;
 
-import be.kdg.groeph.model.Trip;
 import be.kdg.groeph.model.Waypoint;
 import be.kdg.groeph.model.WaypointType;
 import be.kdg.groeph.service.WaypointService;
@@ -18,6 +17,7 @@ import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -62,12 +62,41 @@ public class WaypointBean implements Serializable {
     private List<Waypoint> waypointList;
 
     private boolean editableWaypoint;
+    private List<String> answers;
+    private boolean isInteractive;
+    private Integer correctAnswer;
+    private String positions;
+    private boolean visible;
 
 
     public WaypointBean() {
         editableWaypoint = false;
+        answers= new ArrayList<String>();
     }
 
+    public List<String> getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(List<String> answers) {
+        this.answers = answers;
+    }
+
+    public List<Waypoint> getWaypointList() {
+        return waypointList;
+    }
+
+    public void setWaypointList(List<Waypoint> waypointList) {
+        this.waypointList = waypointList;
+    }
+
+    public boolean isInteractive() {
+        return isInteractive;
+    }
+
+    public void setInteractive(boolean interactive) {
+        isInteractive = interactive;
+    }
     public double getLattitude() {
         return lattitude;
     }
@@ -150,8 +179,17 @@ public class WaypointBean implements Serializable {
     }
 
     public String addWaypoint() {
+        Waypoint waypoint;
         WaypointType type = waypointService.getTypeByName(getWaypointType());
-        Waypoint waypoint = new Waypoint(getLabel(), getDescription(), type, getLattitude(), getLongitude());
+        if(isInteractive)
+        {
+            waypoint= new Waypoint(getLabel(),type,getLattitude(),getLongitude(),getDescription(),getAnswers(),getCorrectAnswer());
+        }
+        else
+        {
+            waypoint = new Waypoint(getLabel(), getDescription(), type, getLattitude(), getLongitude());
+
+        }
         tripBean.getCurrentTrip().addWaypoint(waypoint);
         setCurrentWaypoint(waypoint);
 
@@ -198,35 +236,33 @@ public class WaypointBean implements Serializable {
         Waypoint waypoint = getCurrentWaypoint();
         tripBean.getCurrentTrip().deleteWaypoint(waypoint);
         System.out.println("id: "+waypoint.getId());
-        if (waypointService.deleteWaypoint(waypoint)) {
 
+        if (waypointService.deleteWaypoint(waypoint)) {
             return Tools.SUCCESS;
         }
         return Tools.FAILURE;
     }
 
+
     public String previousWaypoint() {
-        //TODO: refactor this code for previous
         waypointList = getTripWaypoints();
 
-        if (waypointList.get(waypointList.size() - 1) == currentWaypoint) {
-            currentWaypoint = waypointList.get(0);
+        if (waypointList.get(0).equals(currentWaypoint)) {
+            currentWaypoint = waypointList.get(waypointList.size() -1);
         } else {
-            currentWaypoint = waypointList.get(waypointList.indexOf(currentWaypoint) + 1);
+            currentWaypoint = waypointList.get(waypointList.indexOf(currentWaypoint) -1);
         }
-
         return null;
     }
 
     public String nextWaypoint() {
         waypointList = getTripWaypoints();
 
-        if (waypointList.get(waypointList.size() - 1) == currentWaypoint) {
+        if (waypointList.get(waypointList.size() -1).equals(currentWaypoint)) {
             currentWaypoint = waypointList.get(0);
         } else {
             currentWaypoint = waypointList.get(waypointList.indexOf(currentWaypoint) + 1);
         }
-
         return null;
     }
 
@@ -243,7 +279,7 @@ public class WaypointBean implements Serializable {
     }
 
     public List<Waypoint> getTripWaypoints() {
-        return tripBean.getCurrentTrip().getWaypoints();
+        return waypointService.getWaypointsByTrip(tripBean.getCurrentTrip());
     }
 
     public void setCurrentWaypoint(Waypoint waypoint) {
@@ -262,5 +298,31 @@ public class WaypointBean implements Serializable {
         return WAYPOINT;
     }
 
+    public String getPositions() {
+        positions = "";
+        for(Waypoint wp:getTripWaypoints()){
+            positions += wp.getLattitude() + " ";
+            positions += wp.getLongitude() + " ";
+        }
+        return positions.trim();
+    }
+
+    public void setPositions(String positions) {
+        this.positions = positions;
+    }
+
+    public void setCorrectAnswer(int correctAnswer) {
+        this.correctAnswer = correctAnswer;
+    }
+
+    public int getCorrectAnswer() {
+        return correctAnswer;
+    }
+
+
+    public void addAnswer(String answer) {
+        answers.add(answer);
+
+    }
 
 }

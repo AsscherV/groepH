@@ -1,6 +1,7 @@
 package be.kdg.groeph.dao;
 
 
+import be.kdg.groeph.model.Trip;
 import be.kdg.groeph.model.Waypoint;
 import be.kdg.groeph.model.WaypointType;
 
@@ -15,4 +16,6 @@ public interface WaypointDao {
     Waypoint getWaypointById(int id);
     boolean updateWaypoint(Waypoint waypoint) ;
     boolean deleteWaypoint(Waypoint waypoint) ;
+
+    List<Waypoint> getWaypointsByTrip(Trip trip);
 }

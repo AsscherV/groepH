@@ -37,6 +37,10 @@ public class SocialBean implements Serializable {
     @ManagedProperty(value = "#{loginBean}")
     @Autowired
     LoginBean loginBean;
+    @Qualifier("tripBean")
+        @ManagedProperty(value = "#{tripBean}")
+        @Autowired
+        TripBean tripBean;
     @ManagedProperty(value = "#{mailService}")
     @Autowired
     MailService mailService;
@@ -46,16 +50,22 @@ public class SocialBean implements Serializable {
     private boolean loggedIn;
     private TripUser user;
     private Address address = new Address();
+    private String appId = "414428928649857";
+    private String redirectUrl;
+    private String url;
+    private String name ;
+    private String caption ;
+    private  String description ;
     public SocialBean() {
         loggedIn = false;
     }
     public void getFacebookUrlAuth() throws UnsupportedEncodingException {
 
-        String appId = "414428928649857";
+       redirectUrl = "http://localhost:8080/groepH-1.0/pages/index.xhtml";
 
-        String redirectUrl = "http://localhost:8080/groepH-1.0/pages/index.xhtml";
        redirectUrl = URLEncoder.encode(redirectUrl,"UTF-8");
-        String url = "https://www.facebook.com/dialog/oauth?client_id="
+
+       url = "https://www.facebook.com/dialog/oauth?client_id="
                 + appId + "&redirect_uri=" + redirectUrl
                 + "&scope=email,user_birthday,user_hometown&response_type=token";
         try {
@@ -66,6 +76,7 @@ public class SocialBean implements Serializable {
     public String login() {
         facebookClient = new DefaultFacebookClient(access_token);
         fbUser = facebookClient.fetchObject("me", User.class);
+
         user = userService.getUserByEmail(fbUser.getEmail());
         if (user.isNull()) {
             String newPassword = makeNewUserWithPassword();
@@ -119,6 +130,48 @@ public class SocialBean implements Serializable {
         facebookClient = null;
         user = null;
     }
+
+    public void postTripOnFacebook() throws UnsupportedEncodingException {
+            setNameCaptionDescription();
+
+            redirectUrl = "http://localhost:8080/groepH-1.0/pages/user/trip.xhtml";
+
+               redirectUrl = URLEncoder.encode(redirectUrl,"UTF-8");
+
+                 url = " https://www.facebook.com/dialog/feed?app_id="+ appId
+                         + "&link=" + redirectUrl
+                         + "&name="+ name
+                         + "&caption="+ caption
+                        + "&description="+ description
+                         +"&redirect_uri=" + redirectUrl;
+                try {
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(url);
+                } catch (Exception e) {
+                }
+    }
+
+    public void sendMessageToFriendsOnFacebook() throws UnsupportedEncodingException {
+        setNameCaptionDescription();
+        redirectUrl = "http://localhost:8080/groepH-1.0/pages/user/participants.xhtml";
+
+                       redirectUrl = URLEncoder.encode(redirectUrl,"UTF-8");
+                         url = " https://www.facebook.com/dialog/send?app_id="+ appId
+                                 + "&name="+ name
+                                 + "&link=" + "https://facebook.com"
+                                 +"&redirect_uri=" + redirectUrl;
+                        try {
+                            FacesContext.getCurrentInstance().getExternalContext().redirect(url);
+                        } catch (Exception e) {
+                        }
+        }
+
+    private void setNameCaptionDescription() {
+         name = "I'm going on a trip named "+ tripBean.getCurrentTrip().getTitle() +" with Trippy Travaler !" ;
+         caption = "TrippyLink" ;
+         description = tripBean.getCurrentTrip().getDescription();
+    }
+
+
     public boolean isLoggedIn() {
         return loggedIn;
     }

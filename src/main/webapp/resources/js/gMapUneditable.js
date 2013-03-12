@@ -8,13 +8,8 @@ var loc;
 $(function(){
     loc = new google.maps.LatLng(parseFloat(document.getElementById("lat").innerHTML),parseFloat(document.getElementById("lng").innerHTML));
     initMap();
-    //alert(parseFloat(document.getElementById("lat").innerHTML));
-    //lat = parseFloat(document.getElementById("lat").innerHTML);
-    //lng = parseFloat(document.getElementById("lng").innerHTML);
-
     placeMarker(loc);
     addListeners();
-
 });
 
 function initMap(){

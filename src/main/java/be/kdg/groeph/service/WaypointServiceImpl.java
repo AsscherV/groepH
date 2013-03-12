@@ -1,6 +1,7 @@
 package be.kdg.groeph.service;
 
 import be.kdg.groeph.dao.WaypointDao;
+import be.kdg.groeph.model.Trip;
 import be.kdg.groeph.model.Waypoint;
 import be.kdg.groeph.model.WaypointType;
 import org.apache.log4j.Logger;
@@ -32,6 +33,11 @@ public class WaypointServiceImpl implements WaypointService{
         public boolean deleteWaypoint(Waypoint waypoint) {
                     return waypointDao.deleteWaypoint(waypoint);
         }
+
+    @Override
+    public List<Waypoint> getWaypointsByTrip(Trip trip) {
+        return waypointDao.getWaypointsByTrip(trip);
+    }
 
     @Override
     public WaypointType getTypeByName(String name) {
