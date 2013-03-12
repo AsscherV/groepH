@@ -5,6 +5,7 @@ import be.kdg.groeph.model.TripUser;
 import be.kdg.groeph.service.AccessoryService;
 import be.kdg.groeph.service.TripService;
 import be.kdg.groeph.util.Tools;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -22,6 +23,7 @@ import java.util.*;
 @Named
 @RequestScoped
 public class AccessoryBean implements Serializable {
+    static Logger logger = Logger.getLogger(LoginBean.class);
 
     private String description;
     private TripUser user;
@@ -40,12 +42,12 @@ public class AccessoryBean implements Serializable {
     }
 
     @Qualifier("tripBean")
-        @Autowired
-        TripBean tripBean;
+    @Autowired
+    TripBean tripBean;
 
     @Qualifier("loginBean")
-        @Autowired
-        LoginBean loginBean;
+    @Autowired
+    LoginBean loginBean;
 
     @ManagedProperty(value = "#{accessoryService}")
     @Autowired
@@ -60,125 +62,201 @@ public class AccessoryBean implements Serializable {
     }
 
     public String addAccessory() {
-        if (!description.equals("")) {
-            Accessory accessory = new Accessory(description, new ArrayList<TripUser>());
-            tripBean.getCurrentTrip().addAccessory(accessory);
-            setCurrentAccessory(accessory);
+        try {
+            if (!description.equals("")) {
+                Accessory accessory = new Accessory(description, new ArrayList<TripUser>());
+                tripBean.getCurrentTrip().addAccessory(accessory);
+                setCurrentAccessory(accessory);
 
-            if (accessoryService.addAccessory(currentAccessory)) {
-                description = "";
-                editableAccessories.clear();
-                return Tools.SUCCESS;
+                if (accessoryService.addAccessory(currentAccessory)) {
+                    description = "";
+                    editableAccessories.clear();
+                    return Tools.SUCCESS;
+                }
             }
+            return Tools.FAILURE;
+        } catch (Exception e) {
+            logger.error(e);
+            return Tools.FAILURE;
         }
-        return Tools.FAILURE;
+    }
 
-    }
-    public List<TripUser> addableConfirmedTripUsers(Accessory accessory){
-        userlist.clear();
-        for(TripUser user:tripBean.currentTrip.getConfirmedTripUsers()){
-           if(!accessory.getTripUsers().contains(user)){
-               userlist.add(user);
-           }
+    public List<TripUser> addableConfirmedTripUsers(Accessory accessory) {
+        try {
+            userlist.clear();
+            for (TripUser user : tripBean.currentTrip.getConfirmedTripUsers()) {
+                if (!accessory.getTripUsers().contains(user)) {
+                    userlist.add(user);
+                }
+            }
+            return userlist;
+        } catch (Exception e) {
+            logger.error(e);
+            return null;
         }
-        return userlist;
     }
-    public boolean hasAddableTripUsers(Accessory accessory){
-        if(addableConfirmedTripUsers(accessory).size()>0){
-            return true;
-        }               else{
+
+    public boolean hasAddableTripUsers(Accessory accessory) {
+        try {
+            if (addableConfirmedTripUsers(accessory).size() > 0) {
+                return true;
+            } else {
+                return false;
+            }
+
+        } catch (Exception e) {
+            logger.error(e);
             return false;
         }
     }
 
     public void addUser() {
-        currentAccessory.addTripUser(user);
-        user.addAccessory(currentAccessory);
-        addableAccessories.clear();
-        accessoryService.updateAccessory(currentAccessory);
+        try {
+            currentAccessory.addTripUser(user);
+            user.addAccessory(currentAccessory);
+            addableAccessories.clear();
+            accessoryService.updateAccessory(currentAccessory);
+        } catch (Exception e) {
+            logger.error(e);
+        }
     }
+
     public void removeUser(Accessory accessory) {
-        System.out.println("remove user");
+        try {
+            System.out.println("remove user");
             setCurrentAccessory(accessory);
             currentAccessory.removeTripUser(user);
             accessoryService.updateAccessory(currentAccessory);
+        } catch (Exception e) {
+            logger.error(e);
         }
 
+    }
+
     public String editAccessory(Accessory accessory) {
-        System.out.println("edit acces");
-        setCurrentAccessory(accessory);
-        newdescription = currentAccessory.getDescription();
-        editableAccessories.put(currentAccessory.getDescription(), true);
-        return null;
+        try {
+
+            System.out.println("edit acces");
+            setCurrentAccessory(accessory);
+            newdescription = currentAccessory.getDescription();
+            editableAccessories.put(currentAccessory.getDescription(), true);
+
+            return null;
+        } catch (Exception e) {
+            logger.error(e);
+            return null;
+        }
     }
 
     public String changeAddUser(Accessory accessory) {
-           setCurrentAccessory(accessory);
+        try {
+
+            setCurrentAccessory(accessory);
             addableAccessories.put(currentAccessory.getDescription(), true);
             return null;
+        } catch (Exception e) {
+            logger.error(e);
+            return null;
         }
+    }
 
     public String updateAccessory() {
-        editableAccessories.clear();
-        addableAccessories.clear();
-        currentAccessory.setDescription(newdescription);
-        if (accessoryService.updateAccessory(currentAccessory)) {
-            description = null;
-            return Tools.SUCCESS;
+        try {
+
+            editableAccessories.clear();
+            addableAccessories.clear();
+            currentAccessory.setDescription(newdescription);
+            if (accessoryService.updateAccessory(currentAccessory)) {
+                description = null;
+                return Tools.SUCCESS;
+            }
+            return Tools.FAILURE;
+
+        } catch (Exception e) {
+            logger.error(e);
+            return null;
         }
-        return Tools.FAILURE;
     }
 
     public String cancel(Accessory accessory) {
-        setCurrentAccessory(accessory);
-        newdescription = "";
-        editableAccessories.clear();
-        addableAccessories.clear();
-        return null;
+        try {
+
+            setCurrentAccessory(accessory);
+            newdescription = "";
+            editableAccessories.clear();
+            addableAccessories.clear();
+            return null;
+        } catch (Exception e) {
+            logger.error(e);
+            return null;
+        }
     }
 
     public String deleteAccessory(Accessory accessory) {
-        setCurrentAccessory(accessory);
-        currentAccessory.getTripUsers().clear();
-        editableAccessories.clear();
-        tripBean.getCurrentTrip().deleteAccessory(currentAccessory);
-        if (accessoryService.deleteAccessory(currentAccessory)) {
+        try {
 
-            return Tools.SUCCESS;
+            setCurrentAccessory(accessory);
+            currentAccessory.getTripUsers().clear();
+            editableAccessories.clear();
+            tripBean.getCurrentTrip().deleteAccessory(currentAccessory);
+            if (accessoryService.deleteAccessory(currentAccessory)) {
+
+                return Tools.SUCCESS;
+            }
+            return Tools.FAILURE;
+        } catch (Exception e) {
+            logger.error(e);
+            return Tools.FAILURE;
         }
-        return Tools.FAILURE;
     }
+
     public void updateChecked(Accessory accessory) {
-        if(accessory.isChecked()){
-            accessory.setChecked(false);
-        }else{
-            accessory.setChecked(true);
+        try {
+            if (accessory.isChecked()) {
+                accessory.setChecked(false);
+            } else {
+                accessory.setChecked(true);
+            }
+            accessoryService.updateAccessory(accessory);
+        } catch (Exception e) {
+            logger.error(e);
         }
-        accessoryService.updateAccessory(accessory) ;
-        }
-
-    public boolean isAddedConfirmedUser(Accessory accessory){
-       if( accessory.getTripUsers().contains(loginBean.getUser())){
-           return true;
-       }else{
-           return false;
-       }
     }
-    public boolean isOrganizer(){
-        if(loginBean.getUser().getId() == tripBean.getCurrentTrip().getTripUser().getId() ){
-            return true;
-        } else{
+
+    public boolean isAddedConfirmedUser(Accessory accessory) {
+        try {
+            if (accessory.getTripUsers().contains(loginBean.getUser())) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            logger.error(e);
             return false;
         }
+    }
+
+    public boolean isOrganizer() {
+        try {
+            if (loginBean.getUser().getId() == tripBean.getCurrentTrip().getTripUser().getId()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            logger.error(e);
+            return false;
         }
+    }
 
     public Boolean getEditable(Accessory accessory) {
         return editableAccessories.get(accessory.getDescription());
     }
+
     public Boolean getAdable(Accessory accessory) {
 
-            return addableAccessories.get(accessory.getDescription());
-        }
+        return addableAccessories.get(accessory.getDescription());
+    }
 
     public boolean getContainsEditable() {
         return editableAccessories.containsValue(true);
@@ -218,10 +296,14 @@ public class AccessoryBean implements Serializable {
     }
 
     private void setUserByLastName(String userLastname) {
-        for (TripUser user : tripBean.getCurrentTrip().getConfirmedTripUsers()) {
-            if (user.getLastName().equals(userLastname)) {
-                this.user = user;
+        try {
+            for (TripUser user : tripBean.getCurrentTrip().getConfirmedTripUsers()) {
+                if (user.getLastName().equals(userLastname)) {
+                    this.user = user;
+                }
             }
+        } catch (Exception e) {
+            logger.error(e);
         }
     }
 

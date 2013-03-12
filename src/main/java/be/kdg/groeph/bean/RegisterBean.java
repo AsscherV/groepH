@@ -6,6 +6,7 @@ import be.kdg.groeph.service.MailService;
 import be.kdg.groeph.service.UserService;
 import be.kdg.groeph.util.SHAEncryption;
 import be.kdg.groeph.util.FMessage;
+import be.kdg.groeph.util.Tools;
 import org.apache.log4j.Logger;
 import org.apache.myfaces.extensions.cdi.core.api.scope.conversation.ViewAccessScoped;
 import org.hibernate.validator.constraints.Email;
@@ -34,9 +35,6 @@ import java.util.Date;
 @Named
 public class RegisterBean implements Serializable {
     static Logger logger = Logger.getLogger(RegisterBean.class);
-
-    private static final String SUCCESS = "SUCCESS";
-    private static final String FAILURE = "FAILURE";
 
     @ManagedProperty(value = "#{userService}")
     @Autowired
@@ -379,130 +377,169 @@ public class RegisterBean implements Serializable {
     }
 
     public String addUser() throws ParseException {
-        Address address = new Address(getStreet(), getStreetNumber(), getZipcode(), getCity());
-        setRole("ROLE_USER");
-        setDateRegistered(new Date());
-        TripUser user = new TripUser(getFirstName(), getLastName(), getDateOfBirth(), getPhoneNumber(), getGender(), getEmail(), SHAEncryption.encrypt(getPassword()), address, getDateRegistered(), getRole());
-        user.setAccountNonExpired(true);
-        user.setAccountNonLocked(true);
-        user.setCredentialsNonExpired(true);
-        user.setEnabled(true);
-        if (confirmPassword()) {
-            TripUser tripUser = userService.getUserByEmail(user.getEmail());
-            if (tripUser.isNull()) {
-                if (mailService.isSuccessfulRegistration(user.getEmail())) {
-                    userService.addUser(user);
-                    putNewValues(null, null, null, null, null, ' ', null, null, null, null);
+        try {
+            Address address = new Address(getStreet(), getStreetNumber(), getZipcode(), getCity());
+            setRole("ROLE_USER");
+            setDateRegistered(new Date());
+            TripUser user = new TripUser(getFirstName(), getLastName(), getDateOfBirth(), getPhoneNumber(), getGender(), getEmail(), SHAEncryption.encrypt(getPassword()), address, getDateRegistered(), getRole());
+            user.setAccountNonExpired(true);
+            user.setAccountNonLocked(true);
+            user.setCredentialsNonExpired(true);
+            user.setEnabled(true);
+            if (confirmPassword()) {
+                TripUser tripUser = userService.getUserByEmail(user.getEmail());
+                if (tripUser.isNull()) {
+                    if (mailService.isSuccessfulRegistration(user.getEmail())) {
+                        userService.addUser(user);
+                        putNewValues(null, null, null, null, null, ' ', null, null, null, null);
 
-                    FMessage.makeFacesMessage("Registration succesfull !", "info");
-                    registered = true;
-                    return SUCCESS;
+                        FMessage.makeFacesMessage("Registration succesfull !", "info");
+                        registered = true;
+                        return Tools.SUCCESS;
+                    } else {
+                        mailMessage = "Registration mail could not be send. Please try to registrate again.";
+                        FMessage.makeFacesMessage("Registration mail could not be send. Please try to registrate again.", "error");
+                        return Tools.FAILURE;
+                    }
                 } else {
-                    mailMessage = "Registration mail could not be send. Please try to registrate again.";
-                    FMessage.makeFacesMessage("Registration mail could not be send. Please try to registrate again.", "error");
-                    return FAILURE;
+                    FMessage.makeFacesMessage("This email already has an account !", "error");
+                    return Tools.FAILURE;
                 }
-            } else {
-                FMessage.makeFacesMessage("This email already has an account !", "error");
-                return FAILURE;
             }
+            return Tools.FAILURE;
+        } catch (Exception e) {
+            logger.error(e);
+            return Tools.FAILURE;
         }
-        return FAILURE;
     }
 
-    public String updateUser() throws SQLException {
-        TripUser tripUser = loginBean.getUser();
+    public String updateUser() {
+        try {
+            TripUser tripUser = loginBean.getUser();
 
-        tripUser.setFirstName(getNewfirstName());
-        tripUser.setLastName(getNewlastName());
-        tripUser.setDateOfBirth(getNewdateOfBirth());
-        tripUser.setPhoneNumber(getNewphoneNumber());
-        tripUser.setGender(getNewgender());
-        tripUser.setEmail(getNewemail());
-        tripUser.setDateRegistered(getNewdateRegistered());
+            tripUser.setFirstName(getNewfirstName());
+            tripUser.setLastName(getNewlastName());
+            tripUser.setDateOfBirth(getNewdateOfBirth());
+            tripUser.setPhoneNumber(getNewphoneNumber());
+            tripUser.setGender(getNewgender());
+            tripUser.setEmail(getNewemail());
+            tripUser.setDateRegistered(getNewdateRegistered());
 
-        Address adress = loginBean.getUser().getAddress();
-        adress.setZipcode(getNewzipcode());
-        adress.setStreet(getNewstreet());
-        adress.setStreetNumber(getNewstreetNumber());
-        adress.setCity(getNewcity());
-        tripUser.setAddress(adress);
+            Address adress = loginBean.getUser().getAddress();
+            adress.setZipcode(getNewzipcode());
+            adress.setStreet(getNewstreet());
+            adress.setStreetNumber(getNewstreetNumber());
+            adress.setCity(getNewcity());
+            tripUser.setAddress(adress);
 
-        userService.updateUser(tripUser);
-        editableUser = false;
+            userService.updateUser(tripUser);
+            editableUser = false;
 
-        return null;
+            return null;
+        } catch (Exception e) {
+            logger.error(e);
+            return null;
+        }
     }
 
     public String editUser() {
-        newfirstName = loginBean.getUser().getFirstName();
-        newlastName = loginBean.getUser().getLastName();
-        newdateOfBirth = loginBean.getUser().getDateOfBirth();
-        newphoneNumber = loginBean.getUser().getPhoneNumber();
-        newgender = loginBean.getUser().getGender();
-        newemail = loginBean.getUser().getEmail();
-        newdateRegistered = loginBean.getUser().getDateRegistered();
-        newzipcode = loginBean.getUser().getAddress().getZipcode();
-        newstreet = loginBean.getUser().getAddress().getStreet();
-        newstreetNumber = loginBean.getUser().getAddress().getStreetNumber();
-        newcity = loginBean.getUser().getAddress().getCity();
-        setEditableUser(true);
-        return null;
+        try {
+            newfirstName = loginBean.getUser().getFirstName();
+            newlastName = loginBean.getUser().getLastName();
+            newdateOfBirth = loginBean.getUser().getDateOfBirth();
+            newphoneNumber = loginBean.getUser().getPhoneNumber();
+            newgender = loginBean.getUser().getGender();
+            newemail = loginBean.getUser().getEmail();
+            newdateRegistered = loginBean.getUser().getDateRegistered();
+            newzipcode = loginBean.getUser().getAddress().getZipcode();
+            newstreet = loginBean.getUser().getAddress().getStreet();
+            newstreetNumber = loginBean.getUser().getAddress().getStreetNumber();
+            newcity = loginBean.getUser().getAddress().getCity();
+            setEditableUser(true);
+            return null;
+        } catch (Exception e) {
+            logger.error(e);
+            return null;
+        }
     }
 
     public String cancel() {
-        setEditableUser(false);
-        return null;
+        try {
+            setEditableUser(false);
+            return null;
+        } catch (Exception e) {
+            logger.error(e);
+            return null;
+        }
     }
 
     public void putNewValues(String email, String firstName, String lastName, Date dateOfBirth, String phoneNumber,
                              char gender, String zipcode, String street, String streetNumber, String city) {
-        setEmail(email);
-        setFirstName(firstName);
-        setLastName(lastName);
-        setDateOfBirth(dateOfBirth);
-        setPhoneNumber(phoneNumber);
-        setGender(gender);
-        setZipcode(zipcode);
-        setStreet(street);
-        setStreetNumber(streetNumber);
-        setCity(city);
+        try {
+            setEmail(email);
+            setFirstName(firstName);
+            setLastName(lastName);
+            setDateOfBirth(dateOfBirth);
+            setPhoneNumber(phoneNumber);
+            setGender(gender);
+            setZipcode(zipcode);
+            setStreet(street);
+            setStreetNumber(streetNumber);
+            setCity(city);
+        } catch (Exception e) {
+            logger.error(e);
+        }
     }
 
     public String changePassword() {
-        setEditablePassword(true);
-        return null;
+        try {
+            setEditablePassword(true);
+            return null;
+        } catch (Exception e) {
+            logger.error(e);
+            return null;
+        }
     }
 
     public String cancelPassword() {
-        setEditablePassword(false);
-        return null;
+        try {
+            setEditablePassword(false);
+            return null;
+        } catch (Exception e) {
+            logger.error(e);
+            return null;
+        }
     }
 
     public String updatePassword() throws SQLException {
-        if (SHAEncryption.encrypt(getPassword()).equals(loginBean.getUser().getPassword())) {
+        try {
+            if (SHAEncryption.encrypt(getPassword()).equals(loginBean.getUser().getPassword())) {
 
-            if (getNewpassword().equals(getNewsecondPassword())) {
+                if (getNewpassword().equals(getNewsecondPassword())) {
 
-                TripUser user = loginBean.getUser();
-                user.setPassword(SHAEncryption.encrypt(getNewpassword()));
-                userService.updateUser(user);
-                setPassword("");
-                setNewpassword("");
-                setNewsecondPassword("");
+                    TripUser user = loginBean.getUser();
+                    user.setPassword(SHAEncryption.encrypt(getNewpassword()));
+                    userService.updateUser(user);
+                    setPassword("");
+                    setNewpassword("");
+                    setNewsecondPassword("");
 
-                FMessage.makeFacesMessage("Password was successfully changed", "info");
-                setEditablePassword(false);
-                return "SUCCESS";
+                    FMessage.makeFacesMessage("Password was successfully changed", "info");
+                    setEditablePassword(false);
+                    return "SUCCESS";
+                } else {
+                    setNewpassword("");
+                    setNewsecondPassword("");
+                    FMessage.makeFacesMessage("Your new password wasn't the same", "error");
+                    return null;
+                }
+
             } else {
-                setNewpassword("");
-                setNewsecondPassword("");
-                FMessage.makeFacesMessage("Your new password wasn't the same", "error");
+                FMessage.makeFacesMessage("Wrong old password", "error");
                 return null;
             }
-
-        } else {
-            FMessage.makeFacesMessage("Wrong old password", "error");
+        } catch (Exception e) {
+            logger.error(e);
             return null;
         }
 

@@ -42,7 +42,7 @@ public class TripServiceImpl implements TripService {
     @Override
     @SuppressWarnings("unchecked")
     public List<Trip> fetchAllPublicTrips() {
-        return  tripDao.fetchAllPublicTrips();
+        return tripDao.fetchAllPublicTrips();
     }
 
     @Override
@@ -56,9 +56,9 @@ public class TripServiceImpl implements TripService {
     }
 
     @Override
-    public void addUserToTrip(Trip trip) {
-        userDao.addInvitedUser(trip.getTripUser());
-       //tripDao.addUserToTrip(trip);
+    public void addUserToTrip(Trip trip, TripUser user) {
+        userDao.addInvitedUser(user);
+        tripDao.addUserToTrip(trip);
     }
 
     @Override
@@ -90,6 +90,7 @@ public class TripServiceImpl implements TripService {
     public boolean addConfirmedTrip(Trip currentTrip) {
         return tripDao.addConfirmedTrip(currentTrip);
     }
+
     @Override
     public void addTripType(TripType tripType) {
         tripDao.addTripType(tripType);

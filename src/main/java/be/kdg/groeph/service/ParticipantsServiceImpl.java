@@ -61,6 +61,6 @@ public class ParticipantsServiceImpl implements ParticipantsService {
 
     public void setUserAndTrip(TripUser tripUser, Trip trip){
         trip.addTripUser(tripUser);
-        tripService.addUserToTrip(trip);
+        tripService.addUserToTrip(trip, tripUser);
     }
 }

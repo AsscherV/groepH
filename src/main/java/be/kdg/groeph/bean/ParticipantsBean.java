@@ -70,11 +70,16 @@ public class ParticipantsBean implements Serializable {
     }
 
     public boolean sendInvitations() {
-        if (validMails(emails)) {
-            Trip trip = tripBean.getCurrentTrip();
-            participantsService.addUsersToTrip(validEmails, trip);
-            return true;
-        } else {
+        try {
+            if (validMails(emails)) {
+                Trip trip = tripBean.getCurrentTrip();
+                participantsService.addUsersToTrip(validEmails, trip);
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            logger.error(e);
             return false;
         }
     }
@@ -85,31 +90,37 @@ public class ParticipantsBean implements Serializable {
             internetAddress.validate();
             return true;
         } catch (AddressException e) {
+            logger.error(e);
             return false;
         }
     }
 
     public boolean validMails(String pEmails) {
-        String[] emails = pEmails.split(";");
-        invalidEmails.clear();
-        validEmails.clear();
+        try {
+            String[] emails = pEmails.split(";");
+            invalidEmails.clear();
+            validEmails.clear();
 
-        for (int i = 0; i < emails.length; i++) {
-            if (isValidMail(emails[i].trim())) {
-                validEmails.add(emails[i].trim());
-                if (!(invalidEmails.size() > 0)) {
-                    hasInvalidEmails = false;
+            for (int i = 0; i < emails.length; i++) {
+                if (isValidMail(emails[i].trim())) {
+                    validEmails.add(emails[i].trim());
+                    if (!(invalidEmails.size() > 0)) {
+                        hasInvalidEmails = false;
+                    }
+                } else {
+                    hasInvalidEmails = true;
+                    invalidEmails.add(emails[i].trim());
                 }
-            } else {
-                hasInvalidEmails = true;
-                invalidEmails.add(emails[i].trim());
             }
-        }
 
-        if (invalidEmails.size() > 0) {
+            if (invalidEmails.size() > 0) {
+                return false;
+            } else {
+                return true;
+            }
+        } catch (Exception e) {
+            logger.error(e);
             return false;
-        } else {
-            return true;
         }
     }
 }

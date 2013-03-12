@@ -30,8 +30,6 @@ import java.util.List;
 @Named
 public class TripBean implements Serializable {
     static Logger logger = Logger.getLogger(TripBean.class);
-    private static final String SUCCESS = "SUCCESS";
-    private static final String FAILURE = "FAILURE";
     private static final String REAPTING = "Repeating";
     private static final String TIMEBOUND = "Timebound";
     private static final String ANYTIME = "Anytime";
@@ -82,7 +80,6 @@ public class TripBean implements Serializable {
     private boolean newIsPublic;
 
 
-
     Trip currentTrip;
     private String filter;
     private boolean isVisible;
@@ -90,6 +87,8 @@ public class TripBean implements Serializable {
     private boolean hasCurrentTrip;
     private boolean isInteractive;
     private boolean editableTrip;
+    boolean isRepeated;
+    boolean notAnytime;
 
 
     public TripBean() {
@@ -279,211 +278,6 @@ public class TripBean implements Serializable {
         this.newIsPublic = newIsPublic;
     }
 
-    public boolean isHasCurrentTrip() {
-        if (currentTrip == null) {
-            hasCurrentTrip = false;
-        } else {
-            hasCurrentTrip = true;
-        }
-        return hasCurrentTrip;
-    }
-
-    public void setHasCurrentTrip(boolean hasCurrentTrip) {
-        this.hasCurrentTrip = hasCurrentTrip;
-    }
-
-    public String NoCurrentTrip() {
-        setCurrentTrip(null);
-        return null;
-    }
-
-    public String setThisAsCurrentTrip() {
-        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-        Integer tripId = Integer.parseInt(request.getParameter("currentTrip"));
-        Trip trip = tripService.getTripById(tripId); //tripService.getTripByName(tripName);
-
-        setCurrentTrip(trip);
-        return SUCCESS;
-    }
-
-    public String addTrip() {
-        setVisible(false);
-        TripType type = tripService.getTypeByName(getTripType());
-        //public Trip(String title, String description, Date startTime, Date endTime, String label, TripType tripType, boolean isPublic) {
-
-        if (numberOfRepetitions != null) {
-            for (int i = 0; i < numberOfRepetitions; i++) {
-                Calendar calStart = Calendar.getInstance();
-                calStart.setTime(getStartTime());
-                Calendar calEnd = Calendar.getInstance();
-                calEnd.setTime(getEndTime());
-                switch (repetitionType) {
-                    case "Yearly":
-                        calStart.add(Calendar.YEAR,i);
-                        calEnd.add(Calendar.YEAR,i);
-                        break;
-                    case "Monthly":
-                        calStart.add(Calendar.MONTH,i);
-                        calEnd.add(Calendar.MONTH,i);
-                        break;
-                    case "Weekly":
-                        calStart.add(Calendar.WEEK_OF_YEAR, i);
-                        calEnd.add(Calendar.WEEK_OF_YEAR,i);
-                        break;
-                    case "Daily":
-                        calStart.add(Calendar.DAY_OF_MONTH, i);
-                        calEnd.add(Calendar.DAY_OF_MONTH,i);
-                        break;
-                }
-
-                Trip trip = new Trip(getTitle(), getDescription(), calStart.getTime(), calEnd.getTime(), getLabel(), type, getPublic(), isVisible);
-                trip.setStarted(false);
-
-                loginBean.getUser().addTrip(trip);
-                if (tripService.addTrip(trip)) {
-                    currentTrip = trip;
-                } else {
-                    return FAILURE;
-                }
-            }
-            clearFields();
-            return SUCCESS;
-        } else {
-
-            Trip trip = new Trip(getTitle(), getDescription(), getStartTime(), getEndTime(), getLabel(), type, getPublic(), isVisible);
-            trip.setStarted(false);
-
-            // Label label = new Label(getLabel());
-            //trip.addLabel(label);
-
-            loginBean.getUser().addTrip(trip);
-            if (tripService.addTrip(trip)) {
-                currentTrip = trip;
-                clearFields();
-                return SUCCESS;
-            } else {
-                return FAILURE;
-            }
-        }
-    }
-
-    public void clearFields() {
-        title = null;
-        description = null;
-        isPublic = true;
-        tripType = null;
-        startTime = null;
-        endTime = null;
-        label = null;
-        repetitionType = null;
-        numberOfRepetitions = null;
-        //labels = null;
-    }
-
-    public List<Trip> getAllPublicTrips() {
-        List<Trip> publictrips = tripService.fetchAllPublicTrips();
-        return Tools.filter(publictrips, filter);
-    }
-
-    public List<TripType> getAllTripTypes() {
-        return tripService.fetchAllTripTypes();
-    }
-
-    public List<RepeatingTripType> getAllRepeatingTripTypes() {
-        return tripService.fetchAllRepeatingTripTypes();
-    }
-
-    public List<Trip> getAllInvitedTrips() {
-        return Tools.filter(tripService.getAllInvitedTripsByUser(loginBean.getUser()),filter);
-    }
-
-    public List<Trip> getAllParticipatedTrips() {
-        return Tools.filter(tripService.getAllParticipatedTripsByUser(loginBean.getUser()),filter);
-    }
-
-    public List<Trip> getAllCreatedTrips() {
-        return Tools.filter(tripService.getAllCreatedTripsByUser(loginBean.getUser()), filter);
-    }
-
-    public void confirmParticipation() {
-        TripUser user = loginBean.getUser();
-        currentTrip.addConfirmedUser(user);
-        user.confirmParticipation(currentTrip);
-        tripService.addConfirmedTrip(currentTrip);
-    }
-
-    public boolean isConfirmInvitation() {
-        if (currentTrip != null) {
-            if (currentTrip.getTripUsers().contains(loginBean.getUser())) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-        return false;
-    }
-
-    public boolean publishTrip() {
-        currentTrip.setVisible(true);
-        if (tripService.updateTrip(currentTrip)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public boolean startTrip() {
-        currentTrip.setStarted(true);
-        tripService.updateTrip(currentTrip);
-        return true;
-    }
-
-    public boolean stopTrip() {
-        currentTrip.setStarted(false);
-        tripService.updateTrip(currentTrip);
-        return true;
-    }
-
-    public String updateTrip() {
-        Trip trip = getCurrentTrip();
-
-        trip.setDescription(getNewDescription());
-        trip.setLabel(getNewLabel());
-        //Label label = new Label(getNewLabel());
-        //trip.addLabel(label);
-        trip.setEndTime(getNewEndTime());
-        trip.setStartTime(getNewStartTime());
-        trip.setTitle(getNewTitle());
-        TripType tripType = tripService.getTypeByName(getNewTripType());
-        trip.setTripType(tripType);
-        trip.setPublic(isNewIsPublic());
-
-        if (tripService.updateTrip(trip)) {
-            editableTrip = false;
-            return Tools.SUCCESS;
-        }
-
-        return Tools.FAILURE;
-    }
-
-
-    public String editTrip() {
-        newDescription = currentTrip.getDescription();
-        newLabel = currentTrip.getLabel();
-        //newLabel = getCurrentTrip().getLabels().get(0).getName();
-        newEndTime = getCurrentTrip().getEndTime();
-        newStartTime = getCurrentTrip().getStartTime();
-        newTitle = getCurrentTrip().getTitle();
-        newTripType = getCurrentTrip().getTripType().getType();
-        newIsPublic = getCurrentTrip().isPublic();
-        editableTrip = true;
-        return EDITTRIP;
-    }
-
-
-    boolean isRepeated;
-    boolean notAnytime;
-
     public boolean isNotAnytime() {
         return notAnytime;
     }
@@ -500,21 +294,314 @@ public class TripBean implements Serializable {
         isRepeated = repeated;
     }
 
-    public void changeTripType() {
-        if (getTripType().equals(REAPTING)) {
-            isRepeated = true;
-        } else {
-            isRepeated = false;
+    public boolean isHasCurrentTrip() {
+        try {
+            if (currentTrip == null) {
+                hasCurrentTrip = false;
+            } else {
+                hasCurrentTrip = true;
+            }
+            return hasCurrentTrip;
+        } catch (Exception e) {
+            logger.error(e);
+            return false;
         }
+    }
 
-        if(getTripType().equals(ANYTIME)){
-            notAnytime = false;
-        } else {
-            notAnytime = true;
+    public void setHasCurrentTrip(boolean hasCurrentTrip) {
+        this.hasCurrentTrip = hasCurrentTrip;
+    }
+
+    public String NoCurrentTrip() {
+        try {
+            setCurrentTrip(null);
+            return null;
+        } catch (Exception e) {
+            return null;
         }
-        System.out.println(isRepeated);
     }
-    public void refreshCurrentTrip(){
-        setCurrentTrip( tripService.getTripById(currentTrip.getId()));
+
+    public String setThisAsCurrentTrip() {
+        try {
+            HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+            Integer tripId = Integer.parseInt(request.getParameter("currentTrip"));
+            Trip trip = tripService.getTripById(tripId); //tripService.getTripByName(tripName);
+
+            setCurrentTrip(trip);
+            return Tools.SUCCESS;
+        } catch (Exception e) {
+            logger.error(e);
+            return Tools.FAILURE;
+        }
     }
+
+    public String addTrip() {
+        try {
+            setVisible(false);
+            TripType type = tripService.getTypeByName(getTripType());
+            //public Trip(String title, String description, Date startTime, Date endTime, String label, TripType tripType, boolean isPublic) {
+
+            if (numberOfRepetitions != null) {
+                for (int i = 0; i < numberOfRepetitions; i++) {
+                    Calendar calStart = Calendar.getInstance();
+                    calStart.setTime(getStartTime());
+                    Calendar calEnd = Calendar.getInstance();
+                    calEnd.setTime(getEndTime());
+                    switch (repetitionType) {
+                        case "Yearly":
+                            calStart.add(Calendar.YEAR, i);
+                            calEnd.add(Calendar.YEAR, i);
+                            break;
+                        case "Monthly":
+                            calStart.add(Calendar.MONTH, i);
+                            calEnd.add(Calendar.MONTH, i);
+                            break;
+                        case "Weekly":
+                            calStart.add(Calendar.WEEK_OF_YEAR, i);
+                            calEnd.add(Calendar.WEEK_OF_YEAR, i);
+                            break;
+                        case "Daily":
+                            calStart.add(Calendar.DAY_OF_MONTH, i);
+                            calEnd.add(Calendar.DAY_OF_MONTH, i);
+                            break;
+                    }
+
+                    Trip trip = new Trip(getTitle(), getDescription(), calStart.getTime(), calEnd.getTime(), getLabel(), type, getPublic(), isVisible);
+                    trip.setStarted(false);
+
+                    loginBean.getUser().addTrip(trip);
+                    if (tripService.addTrip(trip)) {
+                        currentTrip = trip;
+                    } else {
+                        return Tools.FAILURE;
+                    }
+                }
+                clearFields();
+                return Tools.SUCCESS;
+            } else {
+
+                Trip trip = new Trip(getTitle(), getDescription(), getStartTime(), getEndTime(), getLabel(), type, getPublic(), isVisible);
+                trip.setStarted(false);
+
+                // Label label = new Label(getLabel());
+                //trip.addLabel(label);
+
+                loginBean.getUser().addTrip(trip);
+                if (tripService.addTrip(trip)) {
+                    currentTrip = trip;
+                    clearFields();
+                    return Tools.SUCCESS;
+                } else {
+                    return Tools.FAILURE;
+                }
+            }
+        } catch (Exception e) {
+            logger.error(e);
+            return Tools.FAILURE;
+        }
+    }
+
+    public void clearFields() {
+        try {
+            title = null;
+            description = null;
+            isPublic = true;
+            tripType = null;
+            startTime = null;
+            endTime = null;
+            label = null;
+            repetitionType = null;
+            numberOfRepetitions = null;
+            //labels = null;
+        } catch (Exception e) {
+            logger.error(e);
+        }
+    }
+
+    public List<Trip> getAllPublicTrips() {
+        try {
+            List<Trip> publictrips = tripService.fetchAllPublicTrips();
+            return Tools.filter(publictrips, filter);
+        } catch (Exception e) {
+            logger.error(e);
+            return null;
+        }
+    }
+
+    public List<TripType> getAllTripTypes() {
+        try {
+            return tripService.fetchAllTripTypes();
+        } catch (Exception e) {
+            logger.error(e);
+            return null;
+        }
+    }
+
+    public List<RepeatingTripType> getAllRepeatingTripTypes() {
+        try {
+            return tripService.fetchAllRepeatingTripTypes();
+        } catch (Exception e) {
+            logger.error(e);
+            return null;
+        }
+    }
+
+    public List<Trip> getAllInvitedTrips() {
+        try {
+            return Tools.filter(tripService.getAllInvitedTripsByUser(loginBean.getUser()), filter);
+        } catch (Exception e) {
+            logger.error(e);
+            return null;
+        }
+    }
+
+    public List<Trip> getAllParticipatedTrips() {
+        try {
+            return Tools.filter(tripService.getAllParticipatedTripsByUser(loginBean.getUser()), filter);
+        } catch (Exception e) {
+            logger.error(e);
+            return null;
+        }
+    }
+
+    public List<Trip> getAllCreatedTrips() {
+        try {
+            return Tools.filter(tripService.getAllCreatedTripsByUser(loginBean.getUser()), filter);
+        } catch (Exception e) {
+            logger.error(e);
+            return null;
+        }
+    }
+
+    public void confirmParticipation() {
+        try {
+            TripUser user = loginBean.getUser();
+            currentTrip.addConfirmedUser(user);
+            user.confirmParticipation(currentTrip);
+            tripService.addConfirmedTrip(currentTrip);
+        } catch (Exception e) {
+            logger.error(e);
+        }
+    }
+
+    public boolean isConfirmInvitation() {
+        try {
+            if (currentTrip != null) {
+                if (currentTrip.getTripUsers().contains(loginBean.getUser())) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+            return false;
+        } catch (Exception e) {
+            logger.error(e);
+            return false;
+        }
+    }
+
+    public boolean publishTrip() {
+        try {
+            currentTrip.setVisible(true);
+            if (tripService.updateTrip(currentTrip)) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            logger.error(e);
+            return false;
+        }
+    }
+
+    public boolean startTrip() {
+        try {
+            currentTrip.setStarted(true);
+            tripService.updateTrip(currentTrip);
+            return true;
+        } catch (Exception e) {
+            logger.error(e);
+            return false;
+        }
+    }
+
+    public boolean stopTrip() {
+        try {
+            currentTrip.setStarted(false);
+            tripService.updateTrip(currentTrip);
+            return true;
+        } catch (Exception e) {
+            logger.error(e);
+            return false;
+        }
+    }
+
+    public String updateTrip() {
+        try {
+            Trip trip = getCurrentTrip();
+
+            trip.setDescription(getNewDescription());
+            trip.setLabel(getNewLabel());
+            //Label label = new Label(getNewLabel());
+            //trip.addLabel(label);
+            trip.setEndTime(getNewEndTime());
+            trip.setStartTime(getNewStartTime());
+            trip.setTitle(getNewTitle());
+            TripType tripType = tripService.getTypeByName(getNewTripType());
+            trip.setTripType(tripType);
+            trip.setPublic(isNewIsPublic());
+
+            if (tripService.updateTrip(trip)) {
+                editableTrip = false;
+                return Tools.SUCCESS;
+            }
+
+            return Tools.FAILURE;
+        } catch (Exception e) {
+            logger.error(e);
+            return Tools.FAILURE;
+        }
+    }
+
+
+    public String editTrip() {
+        try {
+            newDescription = currentTrip.getDescription();
+            newLabel = currentTrip.getLabel();
+            //newLabel = getCurrentTrip().getLabels().get(0).getName();
+            newEndTime = getCurrentTrip().getEndTime();
+            newStartTime = getCurrentTrip().getStartTime();
+            newTitle = getCurrentTrip().getTitle();
+            newTripType = getCurrentTrip().getTripType().getType();
+            newIsPublic = getCurrentTrip().isPublic();
+            editableTrip = true;
+            return EDITTRIP;
+        } catch (Exception e) {
+            logger.error(e);
+            return null;
+        }
+    }
+
+
+    public void changeTripType() {
+        try {
+            if (getTripType().equals(REAPTING)) {
+                isRepeated = true;
+            } else {
+                isRepeated = false;
+            }
+
+            if (getTripType().equals(ANYTIME)) {
+                notAnytime = false;
+            } else {
+                notAnytime = true;
+            }
+        } catch (Exception e) {
+            logger.error(e);
+        }
+    }
+
+   /* public void refreshCurrentTrip() {
+        setCurrentTrip(tripService.getTripById(currentTrip.getId()));
+    } */
 }

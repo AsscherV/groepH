@@ -80,10 +80,12 @@
                                             <h:outputText value="#{tripBean.currentTrip.description}"/>
                                             <h:outputLabel value="#{msgs.type}"/>
                                             <h:outputText value="#{tripBean.currentTrip.tripType}"/>
-                                            <h:outputLabel value="#{msgs.tripStartTime}"/>
-                                            <h:outputText value="#{tripBean.currentTrip.startTime}"/>
-                                            <h:outputLabel value="#{msgs.tripEndTime}"/>
-                                            <h:outputText value="#{tripBean.currentTrip.endTime}"/>
+                                            <c:if test="#{tripBean.currentTrip.tripType != 'Anytime'}">
+                                                <h:outputLabel value="#{msgs.tripStartTime}"/>
+                                                <h:outputText value="#{tripBean.currentTrip.startTime}"/>
+                                                <h:outputLabel value="#{msgs.tripEndTime}"/>
+                                                <h:outputText value="#{tripBean.currentTrip.endTime}"/>
+                                            </c:if>
                                             <h:outputLabel value="#{msgs.label}"/>
                                             <h:outputText value="#{tripBean.currentTrip.label}"/>
 

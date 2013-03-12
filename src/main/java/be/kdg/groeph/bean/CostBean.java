@@ -6,6 +6,7 @@ import be.kdg.groeph.model.TripUser;
 import be.kdg.groeph.service.CostService;
 //import org.apache.myfaces.custom.fileupload.HtmlInputFileUpload;
 //import org.apache.myfaces.custom.fileupload.UploadedFile;
+import org.apache.log4j.Logger;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -30,6 +31,8 @@ import java.util.List;
 @Named
 @RequestScoped
 public class CostBean implements Serializable {
+    static Logger logger = Logger.getLogger(LoginBean.class);
+
     @Autowired
     CostService costService;
 
@@ -104,9 +107,13 @@ public class CostBean implements Serializable {
     }
 
     public void addCost() {
-        tripUser = loginBean.getUser();
-        currentTrip = tripBean.getCurrentTrip();
-        costService.addCost(text, costValue, tripUser,  currentTrip);
+        try {
+            tripUser = loginBean.getUser();
+            currentTrip = tripBean.getCurrentTrip();
+            costService.addCost(text, costValue, tripUser, currentTrip);
+        } catch (Exception e) {
+            logger.error(e);
+        }
     }
 }
 

@@ -4,6 +4,7 @@ import be.kdg.groeph.model.TripUser;
 import be.kdg.groeph.service.LoginService;
 import be.kdg.groeph.service.UserService;
 import be.kdg.groeph.util.SHAEncryption;
+import be.kdg.groeph.util.Tools;
 import org.apache.log4j.Logger;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -24,9 +25,7 @@ import java.io.UnsupportedEncodingException;
 @SessionScoped
 public class LoginBean implements Serializable {
     static Logger logger = Logger.getLogger(LoginBean.class);
-    public static final String RESET = "RESET";
-    private static final String SUCCESS = "SUCCESS";
-    private static final String FAILURE = "FAILURE";
+    public static final String RESET = "RESET";;
 
     @ManagedProperty(value = "#{loginService}")
     @Autowired
@@ -102,7 +101,7 @@ public class LoginBean implements Serializable {
         try {
             user = loginService.loginUser(email, SHAEncryption.encrypt(password));
             if (user.isNull()) {
-                return FAILURE;
+                return Tools.FAILURE;
             } else if (user.getTempPassword() != null && user.getTempPassword().equals(SHAEncryption.encrypt(password))) {
                 userService.changePassword(user, user.getTempPassword());
                 isLoggedIn = true;
@@ -110,31 +109,41 @@ public class LoginBean implements Serializable {
             } else {
 
                 isLoggedIn = true;
-                return SUCCESS;
+                return Tools.SUCCESS;
             }
         } catch (Exception e) {
-            return FAILURE;
+            logger.error(e);
+            return Tools.FAILURE;
         }
     }
 
 
     public String logOut() {
-        isLoggedIn = false;
-        SecurityContextHolder.getContext().setAuthentication(null);
-        if (socialBean.isLoggedIn()) {
-            socialBean.logout();
+        try {
+            isLoggedIn = false;
+            SecurityContextHolder.getContext().setAuthentication(null);
+            if (socialBean.isLoggedIn()) {
+                socialBean.logout();
+            }
+            tripBean.currentTrip = null;
+            //FacesContext.getCurrentInstance().getExternalContext().redirect(url);
+            return Tools.SUCCESS;
+        } catch (Exception e) {
+            logger.error(e);
+            return Tools.FAILURE;
         }
-        tripBean.currentTrip = null;
-        //FacesContext.getCurrentInstance().getExternalContext().redirect(url);
-        return SUCCESS;
     }
 
     public String tempPasswordLogin() {
-        if (password.equals(secondPassword)) {
-            userService.changePassword(user, SHAEncryption.encrypt(password));
+        try {
+            if (password.equals(secondPassword)) {
+                userService.changePassword(user, SHAEncryption.encrypt(password));
+            }
+            return Tools.SUCCESS;
+        } catch (Exception e) {
+            logger.error(e);
+            return Tools.FAILURE;
         }
-        return SUCCESS;
-
     }
 }
 

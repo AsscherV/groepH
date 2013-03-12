@@ -42,7 +42,12 @@ public class RecoverBean {
     }
 
     public boolean recoverPassword() {
-        return mailService.recoverPassword(getEmail());
+        try {
+            return mailService.recoverPassword(getEmail());
+        } catch (Exception e) {
+            logger.error(e);
+            return false;
+        }
     }
 }
 

@@ -1,5 +1,6 @@
 package be.kdg.groeph.dao;
 
+import be.kdg.groeph.model.Trip;
 import be.kdg.groeph.model.TripUser;
 
 import java.sql.SQLException;
