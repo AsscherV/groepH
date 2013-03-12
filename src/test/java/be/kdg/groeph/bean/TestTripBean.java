@@ -128,14 +128,7 @@ public class TestTripBean extends AbstractTransactionalJUnit4SpringContextTests 
         tripBean.setStartTime(cal.getTime());
         cal.set(2013, Calendar.MARCH, 29, 12, 00);
         tripBean.setEndTime(cal.getTime());
-       // ArrayList<Label> lbls = new ArrayList<Label>();
         tripBean.setLabel("Test");
-        /*lbls.add(new Label("Test"));
-        lbls.add(new Label("Test1"));
-        lbls.add(new Label("Test2"));
-        lbls.add(new Label("Test3"));
-        lbls.add(new Label("Test4"));
-        tripBean.setLabels(lbls);    */
         tripBean.setTripType(TIMEBOUND);
         tripBean.setPublic(true);
     }
@@ -154,6 +147,43 @@ public class TestTripBean extends AbstractTransactionalJUnit4SpringContextTests 
         assertEquals("List of organised trips should be 5 after adding", 5, loginBean.getUser().getTrips().size());
         assertNull("Field should be null after adding", tripBean.getTitle());
         assertEquals("Dao returns 5 trip", 5, tripDao.getTripByUserId(loginBean.getUser()).size());
+    }
+
+    @Test
+    public void testAddValidRepetitionTypeTrip() {
+
+        fillTripBeanForRepetitionType();
+        tripBean.setTitle("Yearly repetition trip");
+        tripBean.setRepetitionType("Yearly");
+        assertEquals("addTrip returns success", "SUCCESS", tripBean.addTrip());
+        assertEquals("Yearly trip should be 2 times in database", 2, tripDao.getTripsByName("Yearly repetition trip").size());
+
+        fillTripBeanForRepetitionType();
+        tripBean.setTitle("Monthly repetition trip");
+        tripBean.setRepetitionType("Monthly");
+        assertEquals("addTrip returns success", "SUCCESS", tripBean.addTrip());
+        assertEquals("Monthly trip should be 2 times in database", 2, tripDao.getTripsByName("Monthly repetition trip").size());
+
+        fillTripBeanForRepetitionType();
+        tripBean.setTitle("Weekly repetition trip");
+        tripBean.setRepetitionType("Weekly");
+        assertEquals("addTrip returns success", "SUCCESS", tripBean.addTrip());
+        assertEquals("Weekly trip should be 2 times in database", 2, tripDao.getTripsByName("Weekly repetition trip").size());
+
+        fillTripBeanForRepetitionType();
+        tripBean.setTitle("Daily repetition trip");
+        tripBean.setRepetitionType("Daily");
+        assertEquals("addTrip returns success", "SUCCESS", tripBean.addTrip());
+        assertEquals("Daily trip should be 2 times in database", 2, tripDao.getTripsByName("Daily repetition trip").size());
+    }
+
+    private void fillTripBeanForRepetitionType() {
+        tripBean.setDescription("Test for different repeating types");
+        tripBean.setStartTime(new Date());
+        tripBean.setEndTime(new Date());
+        tripBean.setLabel("repetition");
+        tripBean.setTripType(REPEATING);
+        tripBean.setNumberOfRepetitions(2);
     }
 
     @Test
@@ -235,7 +265,7 @@ public class TestTripBean extends AbstractTransactionalJUnit4SpringContextTests 
 
         tripBean.updateTrip();
 
-         updateTrip = tripDao.getTripsByName("TitleUpdate").get(0);
+        updateTrip = tripDao.getTripsByName("TitleUpdate").get(0);
 
         assertEquals("The trip is not editable anymore", false, tripBean.isEditableTrip());
         assertEquals("The trip must have 'Description after update' as description", "Description after update", updateTrip.getDescription());

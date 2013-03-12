@@ -25,9 +25,9 @@ public class Trip implements Nullable, Serializable {
     private String title;
     @Column(name = "description", nullable = true, length = 200)
     private String description;
-    @Column(name = "startTime", nullable = false)
+    @Column(name = "startTime", nullable = true)
     private Date startTime;
-    @Column(name = "endTime", nullable = false)
+    @Column(name = "endTime", nullable = true)
     private Date endTime;
     @Column(name = "isPubic", nullable = false)
     private boolean isPublic;

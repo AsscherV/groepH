@@ -62,6 +62,9 @@ public class TripBean implements Serializable {
     private String tripType;
     @NotEmpty(message = "repetitionType mag niet leeg zijn!")
     private String repetitionType;
+    @NotNull(message = "Number of repetitions is required")
+    private Integer numberOfRepetitions;
+
     private boolean isPublic;
 
     @NotEmpty(message = "{title} {notempty}")
@@ -78,8 +81,7 @@ public class TripBean implements Serializable {
     private String newTripType;
     private boolean newIsPublic;
 
-    @NotNull(message = "Number of repetitions is required")
-    private Integer numberOfRepetitions;
+
 
     Trip currentTrip;
     private String filter;
@@ -340,13 +342,12 @@ public class TripBean implements Serializable {
                 loginBean.getUser().addTrip(trip);
                 if (tripService.addTrip(trip)) {
                     currentTrip = trip;
-                    //clearFields();
-                    //return SUCCESS;
                 } else {
                     return FAILURE;
                 }
-
             }
+            clearFields();
+            return SUCCESS;
         } else {
 
             Trip trip = new Trip(getTitle(), getDescription(), getStartTime(), getEndTime(), getLabel(), type, getPublic(), isVisible);
@@ -364,8 +365,6 @@ public class TripBean implements Serializable {
                 return FAILURE;
             }
         }
-
-        return FAILURE;
     }
 
     public void clearFields() {
@@ -376,6 +375,8 @@ public class TripBean implements Serializable {
         startTime = null;
         endTime = null;
         label = null;
+        repetitionType = null;
+        numberOfRepetitions = null;
         //labels = null;
     }
 
