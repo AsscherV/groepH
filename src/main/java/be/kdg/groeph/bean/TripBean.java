@@ -400,9 +400,8 @@ public class TripBean implements Serializable {
         return Tools.filter(tripService.getAllParticipatedTripsByUser(loginBean.getUser()),filter);
     }
 
-    public List<Trip> getAllPrivateTrips() {
-
-        return Tools.filter(loginBean.getUser().getTrips(), filter);
+    public List<Trip> getAllCreatedTrips() {
+        return Tools.filter(tripService.getAllCreatedTripsByUser(loginBean.getUser()), filter);
     }
 
     public void confirmParticipation() {

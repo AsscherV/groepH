@@ -88,17 +88,16 @@ public class MailServiceImpl implements MailService {
 
     }
 
-    public boolean uponTripInvitation(ArrayList<String> emails, Trip trip) {
+    public boolean uponTripInvitation (String email, Trip trip) {
         SimpleMailMessage[] mailMessageArray = new SimpleMailMessage[1];
 
         SimpleMailMessage message = new SimpleMailMessage();
 
-        message.setBcc(emails.toArray(new String[emails.size()]));
+        message.setTo(email);
 
         message.setSubject("Trip invitation");
         message.setText("You are invited to: " + trip.getTitle() + ".\n ");
         mailMessageArray[0] = message;
-//TODO: nog zen account details verzende, want da gebeurt nog niet
         System.out.println("Sending email ....");
 
         try{
@@ -108,6 +107,27 @@ public class MailServiceImpl implements MailService {
             return false;
         }
     }
+
+    public boolean uponTripInvitationNewUser (String email, Trip trip, String newPassword) {
+        SimpleMailMessage[] mailMessageArray = new SimpleMailMessage[1];
+
+        SimpleMailMessage message = new SimpleMailMessage();
+
+        message.setTo(email);
+
+        message.setSubject("Trip invitation");
+        message.setText("You are invited to: " + trip.getTitle() + ".\n Your username: " + email + "\n Your password: " + newPassword);
+        mailMessageArray[0] = message;
+        System.out.println("Sending email ....");
+
+        try{
+            mailSender.send(mailMessageArray);
+            return true;
+        }  catch (MailException e){
+            return false;
+        }
+    }
+
 
     @Override
     public boolean recoverPassword(String email) {
@@ -151,10 +171,5 @@ public class MailServiceImpl implements MailService {
                     return false;
                 }
 
-    }
-
-    @Override
-    public boolean uponGeneratingNewAccountFromEmail(String email, String password) {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
     }
 }

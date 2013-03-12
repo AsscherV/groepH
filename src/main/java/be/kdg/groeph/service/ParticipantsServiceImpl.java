@@ -26,6 +26,9 @@ public class ParticipantsServiceImpl implements ParticipantsService {
     @Autowired
     TripService tripService;
 
+    @Autowired
+    MailService mailService;
+
     @Override
     public void addUsersToTrip(ArrayList<String> validEmails, Trip trip) {
 
@@ -34,13 +37,15 @@ public class ParticipantsServiceImpl implements ParticipantsService {
             tripUser = userService.getUserByEmail(email);
             if(!tripUser.isNull()) {
                 setUserAndTrip(tripUser, trip);
+                mailService.uponTripInvitation(tripUser.getEmail(), trip);
             } else{
-                setUserAndTrip(makeNewUserWithGeneratedPass(email), trip);
+                tripUser =  makeNewUserWithGeneratedPass(email, trip);
+                setUserAndTrip(tripUser, trip);
             }
         }
     }
 
-    private TripUser makeNewUserWithGeneratedPass(String email) {
+    private TripUser makeNewUserWithGeneratedPass(String email, Trip trip) {
         String newPassword = RandomPassword.generatePassword();
 
         Address address = new Address("no streetname", "no streetnumber", "no zip", "no Hometown");
@@ -50,6 +55,7 @@ public class ParticipantsServiceImpl implements ParticipantsService {
         tripUser.setCredentialsNonExpired(true);
         tripUser.setEnabled(true);
         userService.addUser(tripUser);
+        mailService.uponTripInvitationNewUser(email, trip, newPassword);
         return tripUser;
     }
 

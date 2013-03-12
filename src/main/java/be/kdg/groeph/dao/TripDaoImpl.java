@@ -150,4 +150,6 @@ public class TripDaoImpl implements TripDao {
         Query query = sessionFactory.getCurrentSession().createQuery("from RepeatingTripType");
         return query.list();
     }
+
+
 }

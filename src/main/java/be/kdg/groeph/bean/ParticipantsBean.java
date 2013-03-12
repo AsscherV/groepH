@@ -72,7 +72,6 @@ public class ParticipantsBean implements Serializable {
     public boolean sendInvitations() {
         if (validMails(emails)) {
             Trip trip = tripBean.getCurrentTrip();
-            mailService.uponTripInvitation(validEmails, trip);
             participantsService.addUsersToTrip(validEmails, trip);
             return true;
         } else {

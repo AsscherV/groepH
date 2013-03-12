@@ -101,4 +101,9 @@ public class TripServiceImpl implements TripService {
         return tripDao.fetchAllRepeatingTripTypes();
     }
 
+    @Override
+    public List<Trip> getAllCreatedTripsByUser(TripUser user) {
+        return tripDao.getTripByUserId(user);
+    }
+
 }

@@ -17,7 +17,7 @@ public class Tools {
             filter=filter.toLowerCase();
             for(Trip t:trips)
             {
-                if(t.getTripType().getType().toLowerCase().contains(filter)||t.getTitle().toLowerCase().contains(filter))//t.getLabels().contains(new Label(filter)))
+                if(t.getTripType().getType().toLowerCase().contains(filter)||t.getTitle().toLowerCase().contains(filter)|| t.getLabel().toLowerCase().equals(filter))//t.getLabels().contains(new Label(filter)))
                 {
                     filteredTrips.add(t);
                 }

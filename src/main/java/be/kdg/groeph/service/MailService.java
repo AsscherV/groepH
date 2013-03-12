@@ -11,8 +11,9 @@ public interface MailService {
     public void uponSuccessfulRegistration(String email);
 
     public boolean isSuccessfulRegistration(String email);
-    public boolean uponTripInvitation(ArrayList<String> emails, Trip trip);
     public boolean recoverPassword(String email);
     public boolean uponFacebookLoginNoAccount(String email, String password);
-    public boolean uponGeneratingNewAccountFromEmail(String email, String password);
+    public boolean uponTripInvitationNewUser (String email, Trip trip, String newPassword);
+    public boolean uponTripInvitation (String email, Trip trip);
+
 }

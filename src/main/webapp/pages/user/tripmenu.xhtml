@@ -70,7 +70,7 @@
                         <div class="box">
                             <h:panelGroup rendered="#{loginBean.loggedIn}">
                                 <h:form>
-                                    <h:dataTable border="0" value="#{tripBean.allPrivateTrips}" var="trip">
+                                    <h:dataTable border="0" value="#{tripBean.allCreatedTrips}" var="trip">
                                         <h:column>
                                             <div>
                                                 <h:commandLink value="#{trip.title}"

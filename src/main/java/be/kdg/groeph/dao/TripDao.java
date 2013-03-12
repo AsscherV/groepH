@@ -36,4 +36,5 @@ public interface TripDao {
     List<Trip> getTripByUserId(TripUser tripUser);
 
     List<RepeatingTripType> fetchAllRepeatingTripTypes();
+
 }

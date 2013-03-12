@@ -35,4 +35,7 @@ public interface TripService {
     void addTripType(TripType tripType);
 
     List<RepeatingTripType> fetchAllRepeatingTripTypes();
+
+
+    List<Trip> getAllCreatedTripsByUser(TripUser user);
 }
