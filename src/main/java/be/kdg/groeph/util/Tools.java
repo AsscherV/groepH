@@ -1,6 +1,6 @@
 package be.kdg.groeph.util;
 
-import be.kdg.groeph.model.Label;
+//import be.kdg.groeph.model.Label;
 import be.kdg.groeph.model.Trip;
 
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ public class Tools {
             filter=filter.toLowerCase();
             for(Trip t:trips)
             {
-                if(t.getTripType().getType().toLowerCase().contains(filter)||t.getTitle().toLowerCase().contains(filter)||t.getLabels().contains(new Label(filter)))
+                if(t.getTripType().getType().toLowerCase().contains(filter)||t.getTitle().toLowerCase().contains(filter))//t.getLabels().contains(new Label(filter)))
                 {
                     filteredTrips.add(t);
                 }

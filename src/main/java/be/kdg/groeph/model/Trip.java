@@ -35,15 +35,22 @@ public class Trip implements Nullable, Serializable {
     @Column(name="started", nullable = false)
     private boolean isStarted;
 
-    @LazyCollection(LazyCollectionOption.FALSE)
+    /*@LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(mappedBy = "trip")     //,fetch = FetchType.EAGER
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    private List<Label> labels = new ArrayList<Label>();
+    private List<Label> labels = new ArrayList<Label>();*/
+    @Column(name="label", nullable = false)
+    private String label;
 
     @ManyToOne
     @JoinColumn(name = "tripType", nullable = true)
     //@Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     private TripType tripType;
+
+    @ManyToOne
+    @JoinColumn(name = "repeatingTripType", nullable = true)
+    //@Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
+    private RepeatingTripType repeatingTripType;
 
     @ManyToOne
     @JoinColumn(name = "tripUser", nullable = false)
@@ -100,14 +107,25 @@ public class Trip implements Nullable, Serializable {
     public Trip() {
     }
 
-    public Trip(String title, String description, Date startTime, Date endTime, List<Label> labels, TripType tripType, boolean isPublic) {
+    public Trip(String title, String description, Date startTime, Date endTime, String label, TripType tripType, boolean isPublic) {
         this.title = title;
         this.description = description;
         this.startTime = startTime;
         this.endTime = endTime;
-        this.labels = labels;
+        this.label = label;
         this.tripType = tripType;
         this.isPublic = isPublic;
+    }
+
+    public Trip(String title, String description, Date startTime, Date endTime, String label, TripType tripType, boolean isPublic, boolean visible) {
+        this.title = title;
+        this.description = description;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.label = label;
+        this.tripType = tripType;
+        this.isPublic = isPublic;
+        this.isVisible = visible;
     }
 
     public Trip(String title, String description, Date startTime, Date endTime, TripType tripType, boolean isPublic,boolean visible) {
@@ -126,10 +144,6 @@ public class Trip implements Nullable, Serializable {
     public void setAccessories(List<Accessory> accessories) {
         this.accessories = accessories;
     }
-    public void addLabel(Label label) {
-        label.setTrip(this);
-        labels.add(label);
-    }
 
     public boolean isPublic() {
         return isPublic;
@@ -147,6 +161,14 @@ public class Trip implements Nullable, Serializable {
         isStarted = started;
     }
 
+    public RepeatingTripType getRepeatingTripType() {
+        return repeatingTripType;
+    }
+
+    public void setRepeatingTripType(RepeatingTripType repeatingTripType) {
+        this.repeatingTripType = repeatingTripType;
+    }
+
     public TripType getTripType() {
         return tripType;
     }
@@ -155,12 +177,12 @@ public class Trip implements Nullable, Serializable {
         this.tripType = tripType;
     }
 
-    public List<Label> getLabels() {
-        return labels;
+    public String getLabel() {
+        return label;
     }
 
-    public void setLabels(List<Label> labels) {
-        this.labels = labels;
+    public void setLabel(String label) {
+        this.label = label;
     }
 
     public void setTitle(String title) {

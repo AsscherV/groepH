@@ -3,7 +3,7 @@ package be.kdg.groeph.bean;
 import be.kdg.groeph.dao.TripDao;
 import be.kdg.groeph.dao.UserDao;
 import be.kdg.groeph.mockMother.UserMother;
-import be.kdg.groeph.model.Label;
+//import be.kdg.groeph.model.Label;
 import be.kdg.groeph.model.Trip;
 import be.kdg.groeph.model.TripType;
 import be.kdg.groeph.model.TripUser;
@@ -130,14 +130,14 @@ public class TestParticipantsBean extends AbstractTransactionalJUnit4SpringConte
         tripBean.setStartTime(cal.getTime());
         cal.set(2013, Calendar.MARCH, 29, 12, 00);
         tripBean.setEndTime(cal.getTime());
-        ArrayList<Label> lbls = new ArrayList<Label>();
+        //ArrayList<Label> lbls = new ArrayList<Label>();
         tripBean.setLabel("Test");
-        lbls.add(new Label("Test"));
+        /*lbls.add(new Label("Test"));
         lbls.add(new Label("Test1"));
         lbls.add(new Label("Test2"));
         lbls.add(new Label("Test3"));
         lbls.add(new Label("Test4"));
-        tripBean.setLabels(lbls);
+        tripBean.setLabels(lbls);   */
         tripBean.setTripType("Timebound");
         tripBean.setPublic(true);
         tripBean.addTrip();
@@ -162,14 +162,14 @@ public class TestParticipantsBean extends AbstractTransactionalJUnit4SpringConte
         tripBean.setStartTime(cal.getTime());
         cal.set(2013, Calendar.MARCH, 29, 12, 00);
         tripBean.setEndTime(cal.getTime());
-        ArrayList<Label> lbls = new ArrayList<Label>();
+        //ArrayList<Label> lbls = new ArrayList<Label>();
         tripBean.setLabel("Test");
-        lbls.add(new Label("Test"));
+        /*lbls.add(new Label("Test"));
         lbls.add(new Label("Test1"));
         lbls.add(new Label("Test2"));
         lbls.add(new Label("Test3"));
         lbls.add(new Label("Test4"));
-        tripBean.setLabels(lbls);
+        tripBean.setLabels(lbls);         */
         tripBean.setTripType("Timebound");
         tripBean.setPublic(true);
         tripBean.addTrip();

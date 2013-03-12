@@ -123,6 +123,7 @@ public class RegisterBean implements Serializable {
         registered = false;
         editableUser = false;
         editablePassword = false;
+        gender = 'M';
     }
 
     public String getFirstName() {
@@ -394,7 +395,7 @@ public class RegisterBean implements Serializable {
                     putNewValues(null, null, null, null, null, ' ', null, null, null, null);
 
                     FMessage.makeFacesMessage("Registration succesfull !", "info");
-                    registered=true;
+                    registered = true;
                     return SUCCESS;
                 } else {
                     mailMessage = "Registration mail could not be send. Please try to registrate again.";
@@ -445,13 +446,13 @@ public class RegisterBean implements Serializable {
         newstreet = loginBean.getUser().getAddress().getStreet();
         newstreetNumber = loginBean.getUser().getAddress().getStreetNumber();
         newcity = loginBean.getUser().getAddress().getCity();
-        editableUser = true;
+        setEditableUser(true);
         return null;
     }
 
-    public String cancel(){
-        editableUser = false;
-                return null;
+    public String cancel() {
+        setEditableUser(false);
+        return null;
     }
 
     public void putNewValues(String email, String firstName, String lastName, Date dateOfBirth, String phoneNumber,
@@ -468,20 +469,22 @@ public class RegisterBean implements Serializable {
         setCity(city);
     }
 
-    public String changePassword(){
+    public String changePassword() {
         setEditablePassword(true);
         return null;
     }
-    public String cancelPassword(){
+
+    public String cancelPassword() {
         setEditablePassword(false);
-                return null;
+        return null;
     }
+
     public String updatePassword() throws SQLException {
-        if(SHAEncryption.encrypt(getPassword()).equals(loginBean.getUser().getPassword())){
+        if (SHAEncryption.encrypt(getPassword()).equals(loginBean.getUser().getPassword())) {
 
-            if(getNewpassword().equals(getNewsecondPassword())){
+            if (getNewpassword().equals(getNewsecondPassword())) {
 
-               TripUser user = loginBean.getUser();
+                TripUser user = loginBean.getUser();
                 user.setPassword(SHAEncryption.encrypt(getNewpassword()));
                 userService.updateUser(user);
                 setPassword("");
@@ -491,14 +494,14 @@ public class RegisterBean implements Serializable {
                 FMessage.makeFacesMessage("Password was successfully changed", "info");
                 setEditablePassword(false);
                 return "SUCCESS";
-            }else{
+            } else {
                 setNewpassword("");
                 setNewsecondPassword("");
                 FMessage.makeFacesMessage("Your new password wasn't the same", "error");
                 return null;
             }
 
-        }else{
+        } else {
             FMessage.makeFacesMessage("Wrong old password", "error");
             return null;
         }

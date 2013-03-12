@@ -29,7 +29,12 @@
                     <ul>
                         <!-- Tab buttons -->
                         <li>
-                            <a class="button " href="trip.xhtml">#{tripBean.currentTrip.title}</a>
+                            <c:if test="#{tripBean.editableTrip == false}">
+                                <a class="button" href="trip.xhtml">#{tripBean.currentTrip.title}</a>
+                            </c:if>
+                            <c:if test="#{tripBean.editableTrip == true}">
+                                <a class="button" href="createTrip.xhtml">#{tripBean.currentTrip.title}</a>
+                            </c:if>
                         </li>
                         <h:panelGroup rendered="#{loginBean.loggedIn}">
                             <li>
@@ -65,20 +70,22 @@
                                         <p>Trip isn't published yet</p>
                                     </c:when>
                                     <c:when test="#{tripBean.currentTrip.visible == true}">
-                                        <c:if test="#{tripBean.currentTrip.tripUser == loginBean.user}">
-                                            <h:form>
-                                                <h:inputTextarea value="#{participantsBean.emails}"/>
-                                                <h:commandButton type="submit"
-                                                                 action="#{participantsBean.sendInvitations}"
-                                                                 class="btn btn-success" value="send invitations"/>
-                                            </h:form>
+                                        <c:if test="#{tripBean.currentTrip.started == false}">
+                                            <c:if test="#{tripBean.currentTrip.tripUser == loginBean.user}">
+                                                <h:form>
+                                                    <h:inputTextarea value="#{participantsBean.emails}"/>
+                                                    <h:commandButton type="submit"
+                                                                     action="#{participantsBean.sendInvitations}"
+                                                                     class="btn btn-success" value="send invitations"/>
+                                                </h:form>
+                                            </c:if>
+
+                                            <h:panelGroup rendered="#{participantsBean.hasInvalidEmails}">
+                                                <p>Invalid emails:</p>
+                                                <h:outputText value="#{participantsBean.invalidEmails}"/>
+                                            </h:panelGroup>
+
                                         </c:if>
-
-                                        <h:panelGroup rendered="#{participantsBean.hasInvalidEmails}">
-                                            <p>Invalid emails:</p>
-                                            <h:outputText value="#{participantsBean.invalidEmails}"/>
-                                        </h:panelGroup>
-
                                         <c:if test="#{tripBean.currentTrip.tripUsers.size() > 0}">
 
                                             <p>Invited users:</p>

@@ -1,6 +1,7 @@
 package be.kdg.groeph.dao;
 
-import be.kdg.groeph.model.Label;
+//import be.kdg.groeph.model.Label;
+import be.kdg.groeph.model.RepeatingTripType;
 import be.kdg.groeph.model.Trip;
 import be.kdg.groeph.model.TripType;
 import be.kdg.groeph.model.TripUser;
@@ -20,7 +21,7 @@ public interface TripDao {
 
     List<Trip> getTripsByName(String tripName);
 
-    List<Label> getLabels(Trip trip);
+   // List<Label> getLabels(Trip trip);
 
     Trip getTripById(int id);
 
@@ -33,4 +34,6 @@ public interface TripDao {
     boolean updateTrip(Trip trip);
 
     List<Trip> getTripByUserId(TripUser tripUser);
+
+    List<RepeatingTripType> fetchAllRepeatingTripTypes();
 }

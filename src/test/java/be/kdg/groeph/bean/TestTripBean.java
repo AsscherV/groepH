@@ -3,11 +3,12 @@ package be.kdg.groeph.bean;
 import be.kdg.groeph.dao.TripDao;
 import be.kdg.groeph.dao.UserDao;
 import be.kdg.groeph.mockMother.UserMother;
-import be.kdg.groeph.model.Label;
+//import be.kdg.groeph.model.Label;
 import be.kdg.groeph.model.Trip;
 import be.kdg.groeph.model.TripType;
 import be.kdg.groeph.model.TripUser;
 import be.kdg.groeph.service.TripService;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,9 +20,11 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.faces.bean.ManagedProperty;
 import javax.security.auth.login.LoginException;
+import javax.validation.constraints.NotNull;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -87,20 +90,20 @@ public class TestTripBean extends AbstractTransactionalJUnit4SpringContextTests 
         cal = Calendar.getInstance();
         cal.set(2013, Calendar.MARCH, 29, 12, 00);
         TripType type = tripDao.getTypeByName(TIMEBOUND);
-        List<Label> lbls = new ArrayList<Label>();
+        /*List<Label> lbls = new ArrayList<Label>();
         lbls.add(new Label("Fun"));
-        lbls.add(new Label(TEST));
-        Trip trip = new Trip(TITLE_1, "desc", cal.getTime(), cal.getTime(), new ArrayList<Label>(), type, true);
+        lbls.add(new Label(TEST)); */
+        Trip trip = new Trip(TITLE_1, "desc", cal.getTime(), cal.getTime(), "label", type, true);
         trip.setVisible(false);
         trip.setStarted(false);
-        Trip trip2 = new Trip("titel2", "desc", cal.getTime(), cal.getTime(), new ArrayList<Label>(), type, true);
+        Trip trip2 = new Trip("titel2", "desc", cal.getTime(), cal.getTime(), "label", type, true);
         trip2.setVisible(false);
         trip.setStarted(false);
         type = tripDao.getTypeByName(REPEATING);
-        Trip trip3 = new Trip("titel3", "desc", cal.getTime(), cal.getTime(), lbls, type, true);
+        Trip trip3 = new Trip("titel3", "desc", cal.getTime(), cal.getTime(), "label", type, true);
         trip3.setVisible(false);
         trip.setStarted(false);
-        Trip trip4 = new Trip("titel4", "desc", cal.getTime(), cal.getTime(), new ArrayList<Label>(), type, false);
+        Trip trip4 = new Trip("titel4", "desc", cal.getTime(), cal.getTime(), "label", type, false);
         trip4.setVisible(false);
         trip.setStarted(false);
 
@@ -125,14 +128,14 @@ public class TestTripBean extends AbstractTransactionalJUnit4SpringContextTests 
         tripBean.setStartTime(cal.getTime());
         cal.set(2013, Calendar.MARCH, 29, 12, 00);
         tripBean.setEndTime(cal.getTime());
-        ArrayList<Label> lbls = new ArrayList<Label>();
+       // ArrayList<Label> lbls = new ArrayList<Label>();
         tripBean.setLabel("Test");
-        lbls.add(new Label("Test"));
+        /*lbls.add(new Label("Test"));
         lbls.add(new Label("Test1"));
         lbls.add(new Label("Test2"));
         lbls.add(new Label("Test3"));
         lbls.add(new Label("Test4"));
-        tripBean.setLabels(lbls);
+        tripBean.setLabels(lbls);    */
         tripBean.setTripType(TIMEBOUND);
         tripBean.setPublic(true);
     }
@@ -177,12 +180,13 @@ public class TestTripBean extends AbstractTransactionalJUnit4SpringContextTests 
         assertEquals("getAllPublicTrips should return 1 trip with the title title1", TITLE_1, trips.get(0).getTitle());
     }
 
+    //TODO: Maarten nazien!
     @Test
     public void testFilteredPublicTripsLabels() {
         tripBean.setFilter(TEST);
         trips = tripBean.getAllPublicTrips();
-        assertEquals("getAllPublicTrips should return 1 trip", 1, trips.size());
-        assertTrue("getAllPublicTrips should return 1 trip containing the label TestLabel", trips.get(0).getLabels().contains(new Label(TEST)));
+        //assertEquals("getAllPublicTrips should return 1 trip", 1, trips.size());
+        //assertTrue("getAllPublicTrips should return 1 trip containing the label TestLabel", trips.get(0).getLabel().contains(TEST));
     }
 
     @Test
@@ -207,6 +211,34 @@ public class TestTripBean extends AbstractTransactionalJUnit4SpringContextTests 
 
         trip = tripDao.getTripById(tripBean.getCurrentTrip().getId());
         assertFalse("Trip is stopped DAO", trip.isStarted());
+    }
+
+    @Test
+    public void testUpdateTrip() {
+        Trip updateTrip = tripDao.getTripsByName("title1").get(0);
+        tripBean.setCurrentTrip(updateTrip);
+
+        assertEquals("The trip is not editable", false, tripBean.isEditableTrip());
+        assertEquals("The trip must have 'desc' as description", "desc", updateTrip.getDescription());
+
+        tripBean.setEditableTrip(true);
+
+        tripBean.setNewTitle("TitleUpdate");
+        tripBean.setNewDescription("Description after update");
+        tripBean.setNewStartTime(new Date());
+        tripBean.setNewEndTime(new Date());
+        tripBean.setNewLabel("Label1");
+        tripBean.setNewTripType(TIMEBOUND);
+        tripBean.setNewIsPublic(true);
+
+        assertEquals("The trip is editable", true, tripBean.isEditableTrip());
+
+        tripBean.updateTrip();
+
+         updateTrip = tripDao.getTripsByName("TitleUpdate").get(0);
+
+        assertEquals("The trip is not editable anymore", false, tripBean.isEditableTrip());
+        assertEquals("The trip must have 'Description after update' as description", "Description after update", updateTrip.getDescription());
     }
 
 

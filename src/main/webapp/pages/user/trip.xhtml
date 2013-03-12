@@ -29,7 +29,12 @@
                     <ul>
                         <!-- Tab buttons -->
                         <li>
-                            <a class="button active" href="trip.xhtml">#{tripBean.currentTrip.title}</a>
+                            <c:if test="#{tripBean.editableTrip == false}">
+                                <a class="button" href="trip.xhtml">#{tripBean.currentTrip.title}</a>
+                            </c:if>
+                            <c:if test="#{tripBean.editableTrip == true}">
+                                <a class="button" href="createTrip.xhtml">#{tripBean.currentTrip.title}</a>
+                            </c:if>
                         </li>
 
                         <h:panelGroup rendered="#{loginBean.loggedIn}">
@@ -70,22 +75,17 @@
                                     <c:when test="#{tripBean.currentTrip != null}">
                                         <h:panelGrid columns="2" border="0">
                                             <h:outputLabel value="#{msgs.title}"/>
-                                            <h:outputLabel value="#{tripBean.currentTrip.title}"/>
+                                            <h:outputText value="#{tripBean.currentTrip.title}"/>
                                             <h:outputLabel value="#{msgs.description}"/>
-                                            <h:outputLabel value="#{tripBean.currentTrip.description}"/>
+                                            <h:outputText value="#{tripBean.currentTrip.description}"/>
                                             <h:outputLabel value="#{msgs.type}"/>
-                                            <h:outputLabel value="#{tripBean.currentTrip.tripType}"/>
+                                            <h:outputText value="#{tripBean.currentTrip.tripType}"/>
                                             <h:outputLabel value="#{msgs.tripStartTime}"/>
-                                            <h:outputLabel value="#{tripBean.currentTrip.startTime}"/>
+                                            <h:outputText value="#{tripBean.currentTrip.startTime}"/>
                                             <h:outputLabel value="#{msgs.tripEndTime}"/>
-                                            <h:outputLabel value="#{tripBean.currentTrip.endTime}"/>
+                                            <h:outputText value="#{tripBean.currentTrip.endTime}"/>
                                             <h:outputLabel value="#{msgs.label}"/>
-                                            <h:dataTable value="#{tripBean.currentTrip.labels}" var="item">
-                                                <h:column>
-                                                    <h:outputLabel value="#{item.name}"/>
-                                                </h:column>
-                                            </h:dataTable>
-
+                                            <h:outputText value="#{tripBean.currentTrip.label}"/>
 
                                             <h:form>
                                                 <h:panelGroup rendered="#{tripBean.confirmInvitation}">
@@ -97,10 +97,35 @@
                                                                      value="Cancel Invitation"/>
 
                                                 </h:panelGroup>
-                                                <h:commandButton class="btn btn-success"
-                                                                 action="#{tripBean.publishTrip}"
-                                                                 value="Publish Trip"
-                                                                 rendered="#{not tripBean.currentTrip.visible}"/>
+
+                                                <c:if test="#{loginBean.user == tripBean.currentTrip.tripUser}">
+                                                    <h:panelGroup rendered="#{not tripBean.editableTrip}">
+                                                        <h:commandButton class="btn btn-success"
+                                                                         action="#{tripBean.publishTrip}"
+                                                                         value="Publish Trip"
+                                                                         rendered="#{not tripBean.currentTrip.visible}"/>
+
+                                                        <h:commandButton class="btn btn-success"
+                                                                         action="#{tripBean.startTrip}"
+                                                                         value="Start trip"
+                                                                         rendered="#{not tripBean.currentTrip.started}"/>
+
+                                                        <h:commandButton class="btn btn-success"
+                                                                         action="#{tripBean.stopTrip}"
+                                                                         value="Stop trip"
+                                                                         rendered="#{tripBean.currentTrip.started}"/>
+
+                                                        <h:commandButton class="btn btn-success"
+                                                                         action="#{tripBean.editTrip}"
+                                                                         value="Change trip"
+                                                                         immediate="true"
+                                                                         rendered="#{not tripBean.currentTrip.started}"/>
+                                                    </h:panelGroup>
+                                                    <h:panelGroup rendered="#{tripBean.editableTrip}">
+                                                        <p class="text-error">This trips is in edit mode. Please conform: <a href="createTrip.xhtml">update trip</a></p>
+                                                    </h:panelGroup>
+                                                </c:if>
+
                                             </h:form>
 
                                         </h:panelGrid>

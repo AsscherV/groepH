@@ -1,6 +1,7 @@
 package be.kdg.groeph.service;
 
-import be.kdg.groeph.model.Label;
+//import be.kdg.groeph.model.Label;
+import be.kdg.groeph.model.RepeatingTripType;
 import be.kdg.groeph.model.Trip;
 import be.kdg.groeph.model.TripType;
 import be.kdg.groeph.model.TripUser;
@@ -21,7 +22,7 @@ public interface TripService {
     List<Trip> getTripsByName(String tripName);
     Trip getTripById(int id);
 
-    List<Label> getLabels(Trip trip);
+    //List<Label> getLabels(Trip trip);
 
     List<Trip> getAllInvitedTripsByUser(TripUser user);
 
@@ -32,4 +33,6 @@ public interface TripService {
     boolean updateTrip(Trip Trip);
 
     void addTripType(TripType tripType);
+
+    List<RepeatingTripType> fetchAllRepeatingTripTypes();
 }

@@ -1,7 +1,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
 <h:head>
     <title>Trippy Traveler</title>
     <!-- css -->
@@ -19,6 +20,7 @@
     <ui:insert name="header">
         <ui:include src="../header.xhtml"/>
     </ui:insert>
+
     <div class="container">
         <div class="row">
 
@@ -33,7 +35,12 @@
                     <ul>
                         <!-- Tab buttons -->
                         <li>
-                            <a class="button" href="trip.xhtml">#{tripBean.currentTrip.title}</a>
+                            <c:if test="#{tripBean.editableTrip == false}">
+                                <a class="button" href="trip.xhtml">#{tripBean.currentTrip.title}</a>
+                            </c:if>
+                            <c:if test="#{tripBean.editableTrip == true}">
+                                <a class="button" href="createTrip.xhtml">#{tripBean.currentTrip.title}</a>
+                            </c:if>
                         </li>
                         <h:panelGroup rendered="#{loginBean.loggedIn}">
                             <li>
@@ -74,26 +81,29 @@
                                     <h:commandButton action="STOPS" value="Back to overview"
                                                      class="btn btn-success marginRight" id="overviewWaypoint"/>
 
-                                </h:form>                               <h:panelGrid class="floatLeft marginRight" columns="2" border="0">
-                                    <h:outputLabel value="#{msgs.title}"/>
-                                    <h:outputLabel value="#{waypointBean.currentWaypoint.label}"/>
-                                    <h:outputLabel value="#{msgs.description}"/>
-                                    <h:outputLabel value="#{waypointBean.currentWaypoint.description}"/>
-                                    <h:outputLabel value="#{msgs.type}"/>
-                                    <h:outputLabel value="#{waypointBean.currentWaypoint.waypointType.type}"/>
-                                    <h:outputLabel value="#{msgs.lat}"/>
-                                    <h:outputLabel id="lat" value="#{waypointBean.currentWaypoint.lattitude}"/>
-                                    <h:outputLabel value="#{msgs.lng}"/>
-                                    <h:outputLabel id="lng" value="#{waypointBean.currentWaypoint.longitude}"/>
+                                </h:form> <h:panelGrid class="floatLeft marginRight" columns="2" border="0">
+                                <h:outputLabel value="#{msgs.title}"/>
+                                <h:outputLabel value="#{waypointBean.currentWaypoint.label}"/>
+                                <h:outputLabel value="#{msgs.description}"/>
+                                <h:outputLabel value="#{waypointBean.currentWaypoint.description}"/>
+                                <h:outputLabel value="#{msgs.type}"/>
+                                <h:outputLabel value="#{waypointBean.currentWaypoint.waypointType.type}"/>
+                                <h:outputLabel value="#{msgs.lat}"/>
+                                <h:outputLabel id="lat" value="#{waypointBean.currentWaypoint.lattitude}"/>
+                                <h:outputLabel value="#{msgs.lng}"/>
+                                <h:outputLabel id="lng" value="#{waypointBean.currentWaypoint.longitude}"/>
 
-                                </h:panelGrid>
+                            </h:panelGrid>
 
-                               <h:form>
-                                   <h:commandButton action="#{waypointBean.editWaypoint}" value="#{msgs.updateWaypoint}"
-                                   class="btn btn-success" id="editWaypoint"/>
-                                   <h:commandButton action="#{waypointBean.deleteWaypoint}"  value="#{msgs.deleteWaypoint}"
-                                                                      class="btn btn-success" id="deleteWaypoint"/>
-                               </h:form>
+                                <h:form>
+                                    <h:commandButton action="#{waypointBean.editWaypoint}"
+                                                     value="#{msgs.updateWaypoint}"
+                                                     class="btn btn-success" id="editWaypoint"/>
+                                    <h:commandButton action="#{waypointBean.deleteWaypoint}"
+                                                     value="#{msgs.deleteWaypoint}"
+                                                     class="btn btn-success" id="deleteWaypoint"/>
+                                </h:form>
+
                                 <div id="map_canvas"></div>
 
                                 <div>

@@ -30,7 +30,12 @@
                     <ul>
                         <!-- Tab buttons -->
                         <li>
-                            <a class="button " href="trip.xhtml">#{tripBean.currentTrip.title}</a>
+                            <c:if test="#{tripBean.editableTrip == false}">
+                                <a class="button" href="trip.xhtml">#{tripBean.currentTrip.title}</a>
+                            </c:if>
+                            <c:if test="#{tripBean.editableTrip == true}">
+                                <a class="button" href="createTrip.xhtml">#{tripBean.currentTrip.title}</a>
+                            </c:if>
                         </li>
                         <h:panelGroup rendered="#{loginBean.loggedIn}">
                             <li>
@@ -83,25 +88,29 @@
                                 </h:dataTable>
 
                                 <!--2 fields (tekst,kost) , + filepicker -->
-                                <c:if test="#{tripBean.currentTrip.tripUser == loginBean.user}">
-                                    <h:form columns="3" border="0">
-                                        <h:outputLabel value="CostName"/>
-                                        <h:inputText id="text" styleClass="span2" value="#{costBean.text}"/>
-                                        <h:message for="text" styleClass="error"/>
+
+                                <c:if test="#{tripBean.currentTrip.started == false}">
+                                    <c:if test="#{tripBean.currentTrip.tripUser == loginBean.user}">
+                                        <h:form columns="3" border="0">
+                                            <h:outputLabel value="CostName"/>
+                                            <h:inputText id="text" styleClass="span2" value="#{costBean.text}"/>
+                                            <h:message for="text" styleClass="error"/>
 
 
-                                        <h:outputLabel value="CostValue"/>
-                                        <h:inputText id="costValue" styleClass="span2" value="#{costBean.costValue}"/>
-                                        <h:message for="costValue" styleClass="error"/>
+                                            <h:outputLabel value="CostValue"/>
+                                            <h:inputText id="costValue" styleClass="span2"
+                                                         value="#{costBean.costValue}"/>
+                                            <h:message for="costValue" styleClass="error"/>
 
-                                        <!-- Hier moet een date file picker
-                                        <h:outputLabel value="{msgs.Images}"/>
-                                        <t:inputFileUpload binding="{costBean.uFile}" />
-                                        <h:outputText value=""/>-->
-                                        <br/>
-                                        <h:commandButton value="submit" type="submit" action="#{costBean.addCost}"/>
-                                    </h:form>
+                                            <!-- Hier moet een date file picker
+                                            <h:outputLabel value="{msgs.Images}"/>
+                                            <t:inputFileUpload binding="{costBean.uFile}" />
+                                            <h:outputText value=""/>-->
+                                            <br/>
+                                            <h:commandButton value="submit" type="submit" action="#{costBean.addCost}"/>
+                                        </h:form>
 
+                                    </c:if>
                                 </c:if>
                             </div>
                         </div>

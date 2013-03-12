@@ -29,7 +29,12 @@
                     <ul>
                         <!-- Tab buttons -->
                         <li>
-                            <a class="button " href="trip.xhtml">#{tripBean.currentTrip.title}</a>
+                            <c:if test="#{tripBean.editableTrip == false}">
+                                <a class="button" href="trip.xhtml">#{tripBean.currentTrip.title}</a>
+                            </c:if>
+                            <c:if test="#{tripBean.editableTrip == true}">
+                                <a class="button" href="createTrip.xhtml">#{tripBean.currentTrip.title}</a>
+                            </c:if>
                         </li>
                         <h:panelGroup rendered="#{loginBean.loggedIn}">
                             <li>
@@ -75,9 +80,11 @@
                                 </h:form>
 
                                 <c:if test="#{tripBean.currentTrip.tripUser == loginBean.user}">
-                                    <h:panelGroup rendered="#{loginBean.loggedIn}">
-                                        <a href="../user/createWaypoint.xhtml">+ Add a Waypoint</a>
-                                    </h:panelGroup>
+                                    <c:if test="#{tripBean.currentTrip.started == false}">
+                                        <h:panelGroup rendered="#{loginBean.loggedIn}">
+                                            <a href="../user/createWaypoint.xhtml">+ Add a Waypoint</a>
+                                        </h:panelGroup>
+                                    </c:if>
                                 </c:if>
                             </div>
                         </div>

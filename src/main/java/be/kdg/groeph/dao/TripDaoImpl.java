@@ -1,6 +1,7 @@
 package be.kdg.groeph.dao;
 
-import be.kdg.groeph.model.Label;
+//import be.kdg.groeph.model.Label;
+import be.kdg.groeph.model.RepeatingTripType;
 import be.kdg.groeph.model.Trip;
 import be.kdg.groeph.model.TripUser;
 import be.kdg.groeph.model.TripType;
@@ -77,7 +78,7 @@ public class TripDaoImpl implements TripDao {
         return (List<Trip>) query.list();
     }
 
-    @Override
+    /*@Override
     public List<Label> getLabels(Trip trip) {
         if (trip != null) {
             Query query = sessionFactory.getCurrentSession().createQuery("from Label where trip=:trip");
@@ -86,7 +87,7 @@ public class TripDaoImpl implements TripDao {
             return (List<Label>) query.list();
         }
         return null;
-    }
+    }   */
 
     @Override
     public Trip getTripById(int id) {
@@ -142,5 +143,11 @@ public class TripDaoImpl implements TripDao {
         Query query = sessionFactory.getCurrentSession().createQuery("from Trip where tripUser=:tripUser");
         query.setParameter("tripUser", tripUser);
         return (List<Trip>) query.list();
+    }
+
+    @Override
+    public List<RepeatingTripType> fetchAllRepeatingTripTypes() {
+        Query query = sessionFactory.getCurrentSession().createQuery("from RepeatingTripType");
+        return query.list();
     }
 }

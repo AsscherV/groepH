@@ -2,7 +2,8 @@ package be.kdg.groeph.service;
 
 import be.kdg.groeph.dao.TripDao;
 import be.kdg.groeph.dao.UserDao;
-import be.kdg.groeph.model.Label;
+//import be.kdg.groeph.model.Label;
+import be.kdg.groeph.model.RepeatingTripType;
 import be.kdg.groeph.model.Trip;
 import be.kdg.groeph.model.TripType;
 import be.kdg.groeph.model.TripUser;
@@ -64,10 +65,11 @@ public class TripServiceImpl implements TripService {
     public List<Trip> getTripsByName(String tripName) {
         return tripDao.getTripsByName(tripName);
     }
-    @Override
+
+    /*@Override
     public List<Label> getLabels(Trip trip) {
         return tripDao.getLabels(trip);
-    }
+    }  */
 
     @Override
     public List<Trip> getAllInvitedTripsByUser(TripUser user) {
@@ -92,6 +94,11 @@ public class TripServiceImpl implements TripService {
     public void addTripType(TripType tripType) {
         tripDao.addTripType(tripType);
 
+    }
+
+    @Override
+    public List<RepeatingTripType> fetchAllRepeatingTripTypes() {
+        return tripDao.fetchAllRepeatingTripTypes();
     }
 
 }
