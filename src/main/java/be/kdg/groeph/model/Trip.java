@@ -2,10 +2,13 @@ package be.kdg.groeph.model;
 
 import be.kdg.groeph.model.Null.NullTrip;
 import be.kdg.groeph.model.Null.Nullable;
+import be.kdg.groeph.service.AccessoryService;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.faces.bean.ManagedProperty;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -94,8 +97,6 @@ public class Trip implements Nullable, Serializable {
     @OneToMany(mappedBy = "trip")
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     private List<Accessory> accessories = new ArrayList<Accessory>();
-
-
 
     public Trip() {
     }

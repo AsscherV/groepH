@@ -2,6 +2,9 @@ package be.kdg.groeph.service;
 
 
 import be.kdg.groeph.model.Accessory;
+import be.kdg.groeph.model.Trip;
+
+import java.util.List;
 
 public interface AccessoryService {
     boolean addAccessory(Accessory accessory);
@@ -11,4 +14,6 @@ public interface AccessoryService {
     boolean deleteAccessory(Accessory accessory);
 
     Accessory getAccessoryById(int id);
+
+    List<Accessory> getAccessoriesByTrip(Trip trip);
 }

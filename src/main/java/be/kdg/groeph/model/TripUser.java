@@ -299,6 +299,9 @@ public class TripUser implements Nullable, Serializable {
     public void addAccessory(Accessory accessory){
         accessories.add(accessory);
     }
+    public void removeAccessory(Accessory accessory){
+            accessories.remove(accessory);
+        }
     public void setAccessories(List<Accessory> accessories) {
         this.accessories = accessories;
     }

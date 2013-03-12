@@ -6,6 +6,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -35,6 +36,7 @@ public class Accessory implements Serializable {
 
 
     public Accessory() {
+        tripUsers = new ArrayList<TripUser>() ;
     }
 
     public Accessory(String description, List<TripUser> tripUsers) {
@@ -69,7 +71,6 @@ public class Accessory implements Serializable {
     }
 
     public List<TripUser> getTripUsers() {
-        //TODO: rechtstreeks uit de databank halen -> geen refresh
         return tripUsers;
     }
 
@@ -80,5 +81,17 @@ public class Accessory implements Serializable {
     public void addTripUser(TripUser user){
         this.tripUsers.add(user);
 
+    }
+    public void removeTripUser(TripUser user){
+            this.tripUsers.remove(user);
+
+        }
+
+    public boolean isChecked() {
+        return isChecked;
+    }
+
+    public void setChecked(boolean checked) {
+        isChecked = checked;
     }
 }

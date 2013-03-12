@@ -101,6 +101,9 @@
                                                                  action="#{tripBean.publishTrip}"
                                                                  value="Publish Trip"
                                                                  rendered="#{not tripBean.currentTrip.visible}"/>
+                                                <h:commandButton class="btn btn-success"
+                                                                 action="#{socialBean.postTripOnFacebook}"
+                                                                 value="Share trip on facebookwall"/>
                                             </h:form>
 
                                         </h:panelGrid>
