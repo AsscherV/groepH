@@ -94,6 +94,7 @@ public class TestWaypointBean extends AbstractTransactionalJUnit4SpringContextTe
         waypointBean.setWaypointType(START);
         waypointBean.setLattitude(50.9);
         waypointBean.setLongitude(4.3);
+        waypointBean.setInteractive(false);
         waypointBean.addWaypoint();
         daoTestUser = userDao.getUserByEmail(loginBean.getUser().getEmail());
 
@@ -111,6 +112,7 @@ public class TestWaypointBean extends AbstractTransactionalJUnit4SpringContextTe
         waypointBean.setWaypointType(START);
         waypointBean.setLattitude(50.9);
         waypointBean.setLongitude(4.3);
+        waypointBean.setInteractive(false);
         waypointBean.addWaypoint();
 
         waypointBean.setNewlabel("Update");
@@ -137,6 +139,7 @@ public class TestWaypointBean extends AbstractTransactionalJUnit4SpringContextTe
         waypointBean.setWaypointType(START);
         waypointBean.setLattitude(50.9);
         waypointBean.setLongitude(4.3);
+        waypointBean.setInteractive(false);
         waypointBean.addWaypoint();
         daoTestUser = userDao.getUserByEmail(loginBean.getUser().getEmail());
 
@@ -179,12 +182,14 @@ public class TestWaypointBean extends AbstractTransactionalJUnit4SpringContextTe
         waypointBean.setWaypointType(START);
         waypointBean.setLattitude(50.9);
         waypointBean.setLongitude(4.3);
+        waypointBean.setInteractive(false);
         waypointBean.addWaypoint();
         waypointBean.setLabel("labelTest");
         waypointBean.setDescription("wa shit");
         waypointBean.setWaypointType(START);
         waypointBean.setLattitude(20.0);
         waypointBean.setLongitude(30.0);
+        waypointBean.setInteractive(false);
         waypointBean.addWaypoint();
 
         List<Waypoint> list = waypointBean.getTripWaypoints();

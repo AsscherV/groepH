@@ -17,6 +17,7 @@ import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -62,20 +63,74 @@ public class WaypointBean implements Serializable {
 
     private boolean editableWaypoint;
     private boolean isInteractive;
-    @NotEmpty(message = "{correctAnswer} {notempty}")
+    @NotNull(message = "{correctAnswer} {notempty}")
     private Integer correctAnswer;
     private String positions;
+    private String titles;
+    @NotEmpty(message = "{answer} {notempty}")
     private String answer1;
+    @NotEmpty(message = "{answer} {notempty}")
+    private String newanswer1;
+    @NotEmpty(message = "{answer} {notempty}")
     private String answer2;
+    @NotEmpty(message = "{answer} {notempty}")
+    private String newanswer2;
     private String answer3;
+    private String newanswer3;
     private String answer4;
+    private String newanswer4;
     private boolean visible;
-
 
     public WaypointBean() {
         editableWaypoint = false;
-
+        correctAnswer = 1;
     }
+
+    public String getNewanswer1() {
+        return newanswer1;
+    }
+
+    public void setNewanswer1(String newanswer1) {
+        this.newanswer1 = newanswer1;
+    }
+
+    public String getNewanswer2() {
+        return newanswer2;
+    }
+
+    public void setNewanswer2(String newanswer2) {
+        this.newanswer2 = newanswer2;
+    }
+
+    public String getNewanswer3() {
+        return newanswer3;
+    }
+
+    public void setNewanswer3(String newanswer3) {
+        this.newanswer3 = newanswer3;
+    }
+
+    public String getNewanswer4() {
+        return newanswer4;
+    }
+
+    public void setNewanswer4(String newanswer4) {
+        this.newanswer4 = newanswer4;
+    }
+
+    public String getTitles() {
+        titles = "";
+        for(Waypoint wp:getTripWaypoints()){
+            titles += wp.getLabel() + ",";
+        }
+        titles = titles.substring(0, titles.length() - 1);
+        return titles;
+    }
+
+    public void setTitles(String titles) {
+        this.titles = titles;
+    }
+
     public List<Waypoint> getWaypointList() {
         return waypointList;
     }
@@ -200,6 +255,11 @@ public class WaypointBean implements Serializable {
         newlattitude = currentWaypoint.getLattitude();
         newlongitude = currentWaypoint.getLongitude();
         waypointType = currentWaypoint.getWaypointType().getType();
+        newanswer1 = currentWaypoint.getAnswer1();
+        newanswer2 = currentWaypoint.getAnswer2();
+        newanswer3 = currentWaypoint.getAnswer3();
+        newanswer4 =  currentWaypoint.getAnswer4();
+        correctAnswer = currentWaypoint.getCorrectAnswer();
 
         editableWaypoint = true;
         return "EDITWAYPOINT";
@@ -207,8 +267,22 @@ public class WaypointBean implements Serializable {
 
     public String updateWaypoint() {
         WaypointType newtype = waypointService.getTypeByName(getWaypointType());
-
         Waypoint waypoint = getCurrentWaypoint();
+
+        if(isInteractive){
+            waypoint.setAnswer1(newanswer1);
+            waypoint.setAnswer2(newanswer2);
+            waypoint.setAnswer3(newanswer3);
+            waypoint.setAnswer4(newanswer4);
+            waypoint.setCorrectAnswer(correctAnswer);
+        }else{
+            waypoint.setAnswer1(null);
+            waypoint.setAnswer2(null);
+            waypoint.setAnswer3(null);
+            waypoint.setAnswer4(null);
+            waypoint.setCorrectAnswer(null);
+        }
+
         waypoint.setLabel(newlabel);
         waypoint.setDescription(newdescription);
         waypoint.setWaypointType(newtype);
@@ -224,6 +298,7 @@ public class WaypointBean implements Serializable {
 
     public String cancel(){
         editableWaypoint = true;
+        isInteractive = false;
         return "CANCEL";
     }
     public String deleteWaypoint() {
@@ -266,6 +341,11 @@ public class WaypointBean implements Serializable {
         lattitude = 0;
         longitude = 0;
         waypointType = null;
+        answer1 = null;
+        answer2 = null;
+        answer3 = null;
+        answer4 = null;
+        correctAnswer = null;
     }
 
     public List<WaypointType> getAllWaypointTypes() {
@@ -305,11 +385,11 @@ public class WaypointBean implements Serializable {
         this.positions = positions;
     }
 
-    public void setCorrectAnswer(int correctAnswer) {
+    public void setCorrectAnswer(Integer correctAnswer) {
         this.correctAnswer = correctAnswer;
     }
 
-    public int getCorrectAnswer() {
+    public Integer getCorrectAnswer() {
         return correctAnswer;
     }
 
@@ -344,5 +424,9 @@ public class WaypointBean implements Serializable {
 
     public String getAnswer4() {
         return answer4;
+    }
+
+    public void setInitDefaultAnswer(){
+        correctAnswer = 1;
     }
 }

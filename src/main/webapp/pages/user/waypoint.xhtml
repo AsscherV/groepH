@@ -1,7 +1,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
 <h:head>
     <title>Trippy Traveler</title>
     <!-- css -->
@@ -19,6 +20,7 @@
     <ui:insert name="header">
         <ui:include src="../header.xhtml"/>
     </ui:insert>
+
     <div class="container">
         <div class="row">
 
@@ -76,30 +78,32 @@
                                     <h:commandButton action="STOPS" value="Back to overview"
                                                      class="btn btn-success marginRight" id="overviewWaypoint"/>
 
-                                </h:form>                               <h:panelGrid class="floatLeft marginRight" columns="2" border="0">
+                                </h:form>
+                                <h:panelGrid class="floatLeft marginRight" columns="2" border="0">
                                     <h:outputLabel value="#{msgs.title}"/>
                                     <h:outputLabel value="#{waypointBean.currentWaypoint.label}"/>
                                     <h:outputLabel value="#{msgs.description}" rendered="#{waypointBean.currentWaypoint.correctAnswer==null}"/>
                                     <h:outputLabel value="#{msgs.question}" rendered="#{waypointBean.currentWaypoint.correctAnswer!=null}"/>
-                                    <h:outputLabel value="#{waypointBean.currentWaypoint.label}"/>
-                                    <h:panelGrid rendered="#{waypointBean.currentWaypoint.correctAnswer!=null}">
-                                        <h:outputLabel value="#{msgs.answer} 1"/>
-                                        <h:outputLabel value="#{waypointBean.currentWaypoint.answer1}"/>
-                                        <h:outputLabel value="#{msgs.answer} 2"/>
-                                        <h:outputLabel value="#{waypointBean.currentWaypoint.answer2}"/>
-                                        <h:outputLabel value="#{msgs.answer} 3"/>
-                                        <h:outputLabel value="#{waypointBean.currentWaypoint.answer3}"/>
-                                        <h:outputLabel value="#{msgs.answer} 4"/>
-                                        <h:outputLabel value="#{waypointBean.currentWaypoint.answer4}"/>
-                                        <h:outputLabel value="#{msgs.correctAnswer} 4"/>
-                                        <h:outputLabel value="#{waypointBean.currentWaypoint.correctAnswer}"/>
-                                    </h:panelGrid>
+                                    <h:outputLabel value="#{waypointBean.currentWaypoint.description}"/>
+
+                                        <h:outputLabel rendered="#{waypointBean.currentWaypoint.correctAnswer!=null}" value="#{msgs.answer} 1"/>
+                                        <h:outputLabel rendered="#{waypointBean.currentWaypoint.correctAnswer!=null}" value="#{waypointBean.currentWaypoint.answer1}"/>
+                                        <h:outputLabel rendered="#{waypointBean.currentWaypoint.correctAnswer!=null}" value="#{msgs.answer} 2"/>
+                                        <h:outputLabel rendered="#{waypointBean.currentWaypoint.correctAnswer!=null}" value="#{waypointBean.currentWaypoint.answer2}"/>
+                                        <h:outputLabel rendered="#{waypointBean.currentWaypoint.correctAnswer!=null}" value="#{msgs.answer} 3"/>
+                                        <h:outputLabel rendered="#{waypointBean.currentWaypoint.correctAnswer!=null}" value="#{waypointBean.currentWaypoint.answer3}"/>
+                                        <h:outputLabel rendered="#{waypointBean.currentWaypoint.correctAnswer!=null}" value="#{msgs.answer} 4"/>
+                                        <h:outputLabel rendered="#{waypointBean.currentWaypoint.correctAnswer!=null}" value="#{waypointBean.currentWaypoint.answer4}"/>
+                                        <h:outputLabel rendered="#{waypointBean.currentWaypoint.correctAnswer!=null}" value="#{msgs.correctAnswer}"/>
+                                        <h:outputLabel rendered="#{waypointBean.currentWaypoint.correctAnswer!=null}" value="#{waypointBean.currentWaypoint.correctAnswer}"/>
+
                                     <h:outputLabel value="#{msgs.type}"/>
                                     <h:outputLabel value="#{waypointBean.currentWaypoint.waypointType.type}"/>
                                     <h:outputLabel value="#{msgs.lat}"/>
                                     <h:outputLabel id="lat" value="#{waypointBean.currentWaypoint.lattitude}"/>
                                     <h:outputLabel value="#{msgs.lng}"/>
                                     <h:outputLabel id="lng" value="#{waypointBean.currentWaypoint.longitude}"/>
+
 
                                 <h:form>
                                     <h:commandButton action="#{waypointBean.editWaypoint}" value="#{msgs.updateWaypoint}"
@@ -109,12 +113,7 @@
                                 </h:form>
                                 </h:panelGrid>
 
-                               <h:form>
-                                   <h:commandButton action="#{waypointBean.editWaypoint}" value="#{msgs.updateWaypoint}"
-                                   class="btn btn-success" id="editWaypoint"/>
-                                   <h:commandButton action="#{waypointBean.deleteWaypoint}"  value="#{msgs.deleteWaypoint}"
-                                                                      class="btn btn-success" id="deleteWaypoint"/>
-                               </h:form>
+                            
                                 <div id="map_canvas"></div>
 
                                 <div>

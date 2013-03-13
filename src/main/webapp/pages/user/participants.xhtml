@@ -71,7 +71,6 @@
                                     </c:when>
                                     <c:when test="#{tripBean.currentTrip.visible == true}">
                                         <c:if test="#{tripBean.currentTrip.tripUser == loginBean.user}">
-                                        <c:if test="#{tripBean.currentTrip.tripUser == loginBean.user}">
                                             <h:form>
                                                 <h:inputTextarea value="#{participantsBean.emails}"/>
                                                 <h:commandButton type="submit"
@@ -81,7 +80,6 @@
                                                                  action="#{socialBean.sendMessageToFriendsOnFacebook}"
                                                                  value="Share trip with friends"/>
                                             </h:form>
-                                        </c:if>
 
                                             <h:panelGroup rendered="#{participantsBean.hasInvalidEmails}">
                                                 <p>Invalid emails:</p>

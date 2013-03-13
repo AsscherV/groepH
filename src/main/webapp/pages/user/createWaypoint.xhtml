@@ -77,7 +77,7 @@
                                     <h:form id="waypointForm" class="floatLeft marginRight">
                                         <h:panelGrid columns="1" border="0">
                                             <h:selectOneRadio id="radioInteractive" value="#{waypointBean.interactive}">
-                                                <f:ajax render="@form"/>
+                                                <f:ajax render="@form" listener="#{waypointBean.setInitDefaultAnswer}"/>
                                                 <f:selectItem itemValue="#{false}" itemLabel="#{msgs.plain}"/>
                                                 <f:selectItem itemValue="#{true}" itemLabel="#{msgs.interactive}"/>
                                             </h:selectOneRadio>
@@ -85,29 +85,40 @@
                                             <h:outputLabel value="#{msgs.title}"/>
                                             <h:inputText id="titel" styleClass="span2" value="#{waypointBean.label}" rendered="#{not waypointBean.editableWaypoint}"/>
                                             <h:inputText id="newtitel" styleClass="span2" value="#{waypointBean.newlabel}" rendered="#{waypointBean.editableWaypoint}"/>
-                                            <h:message for="titel" styleClass="error"/>
+                                            <h:message for="newtitel" styleClass="error"/>
 
                                             <h:outputLabel value="#{msgs.description}" rendered="#{not waypointBean.interactive}"/>
                                             <h:outputLabel value="#{msgs.question}" rendered="#{waypointBean.interactive}"/>
                                             <h:inputText id="description" styleClass="span2" value="#{waypointBean.description}" rendered="#{not waypointBean.editableWaypoint}"/>
                                             <h:inputText id="newdescription" styleClass="span2" value="#{waypointBean.newdescription}" rendered="#{waypointBean.editableWaypoint}"/>
-                                            <h:message for="description" styleClass="error"/>
+                                            <h:message for="newdescription" styleClass="error"/>
 
                                             <h:panelGrid id="quizInput" rendered="#{waypointBean.interactive}">
                                                 <h:outputLabel value="Answer 1"/>
-                                                <h:inputText id="answer1" styleClass="span2" value="#{waypointBean.answer1}"/>
+                                                <h:inputText id="answer1" styleClass="span2" value="#{waypointBean.answer1}" rendered="#{not waypointBean.editableWaypoint}"/>
+                                                <h:inputText id="newanswer1" styleClass="span2" value="#{waypointBean.newanswer1}" rendered="#{waypointBean.editableWaypoint}"/>
+                                                <h:message for="newanswer1" styleClass="error"/>
+
                                                 <h:outputLabel value="Answer 2"/>
-                                                <h:inputText id="answer2" styleClass="span2" value="#{waypointBean.answer2}"/>
+                                                <h:inputText id="answer2" styleClass="span2" value="#{waypointBean.answer2}" rendered="#{not waypointBean.editableWaypoint}"/>
+                                                <h:inputText id="newanswer2" styleClass="span2" value="#{waypointBean.newanswer2}" rendered="#{waypointBean.editableWaypoint}"/>
+                                                <h:message for="newanswer2" styleClass="error"/>
+
                                                 <h:outputLabel value="Answer 3"/>
-                                                <h:inputText id="answer3" styleClass="span2" value="#{waypointBean.answer3}"/>
+                                                <h:inputText id="answer3" styleClass="span2" value="#{waypointBean.answer3}" rendered="#{not waypointBean.editableWaypoint}"/>
+                                                <h:inputText id="newanswer3" styleClass="span2" value="#{waypointBean.newanswer3}" rendered="#{waypointBean.editableWaypoint}"/>
+
                                                 <h:outputLabel value="Answer 4"/>
-                                                <h:inputText id="answer4" styleClass="span2" value="#{waypointBean.answer4}"/>
+                                                <h:inputText id="answer4" styleClass="span2" value="#{waypointBean.answer4}" rendered="#{not waypointBean.editableWaypoint}"/>
+                                                <h:inputText id="newanswer4" styleClass="span2" value="#{waypointBean.newanswer4}" rendered="#{waypointBean.editableWaypoint}"/>
+
                                                 <h:selectOneRadio id="radioAnswer" value="#{waypointBean.correctAnswer}">
-                                                    <f:selectItem itemValue="#{1}" itemLabel="#{1}"/>
-                                                    <f:selectItem itemValue="#{2}" itemLabel="#{2}"/>
-                                                    <f:selectItem itemValue="#{3}" itemLabel="#{3}"/>
-                                                    <f:selectItem itemValue="#{4}" itemLabel="#{4}"/>
+                                                    <f:selectItem itemValue="#{1}" itemLabel="1"/>
+                                                    <f:selectItem itemValue="#{2}" itemLabel="2"/>
+                                                    <f:selectItem itemValue="#{3}" itemLabel="3"/>
+                                                    <f:selectItem itemValue="#{4}" itemLabel="4"/>
                                                 </h:selectOneRadio>
+
                                             </h:panelGrid>
 
                                             <h:outputLabel value="#{msgs.type}"/>
@@ -116,7 +127,7 @@
                                                 <f:selectItems value="#{waypointBean.allWaypointTypes}" var="type"
                                                                itemLabel="#{type.id} : #{type.type}" itemValue="#{type.type}" />
                                             </h:selectOneMenu>
-                                            <h:column></h:column>
+
 
                                             <h:outputLabel value="#{msgs.lat}"/>
                                             <h:inputText id="lat" styleClass="span2" value="#{waypointBean.lattitude}" rendered="#{not waypointBean.editableWaypoint}"/>
@@ -131,7 +142,7 @@
                                         </h:panelGrid>
                                         <h:commandButton type="submit" action="#{waypointBean.addWaypoint}" class="btn btn-success" value="#{msgs.addWaypoint}" rendered="#{not waypointBean.editableWaypoint}"/>
                                         <h:commandButton type="submit" action="#{waypointBean.updateWaypoint}" class="btn btn-success" value="#{msgs.updateWaypoint}" rendered="#{waypointBean.editableWaypoint}"/>
-                                        <h:commandButton type="submit" action="#{waypointBean.cancel}" class="btn btn-success" value="#{msgs.cancelWaypoint}" rendered="#{waypointBean.editableWaypoint}"/>
+                                        <h:commandButton immediate="true" type="submit" action="#{waypointBean.cancel}" class="btn btn-success" value="#{msgs.cancelWaypoint}" rendered="#{waypointBean.editableWaypoint}"/>
                                     </h:form>
 
 

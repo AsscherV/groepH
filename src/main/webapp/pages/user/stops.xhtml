@@ -72,7 +72,7 @@
                             <div class="box">
 
                                 <h:form class="floatLeft marginRight">
-                                    <h:dataTable border="0" value="#{waypointBean.tripWaypoints}" var="waypoint">
+                                    <h:dataTable border="0" value="#{waypointBean.tripWaypoints}" var="waypoint" id="wayPointsTable">
                                         <h:column>
                                             <!--
                                             <h:selectOneMenu value="{waypointBean.waypointPosition}">
@@ -82,6 +82,7 @@
 
                                             </h:selectOneMenu>
                                               -->
+
                                                 <h:commandLink value="#{waypoint.label}"
                                                                action="#{waypointBean.setThisAsCurrentWaypoint}">
                                                     <f:param name="currentWaypointId" value="#{waypoint.id}"/>
@@ -89,19 +90,20 @@
 
                                         </h:column>
                                         <h:column>
-                                            <h:inputHidden id="testID" value="#{waypointBean.positions}"/>
+                                            <h:inputHidden id="positions" value="#{waypointBean.positions}"/>
+                                            <h:inputHidden id="titles" value="#{waypointBean.titles}"/>
                                         </h:column>
                                     </h:dataTable>
-                                </h:form>
 
-                                <c:if test="#{tripBean.currentTrip.tripUser == loginBean.user}">
-                                    <c:if test="#{tripBean.currentTrip.started == false}">
-                                        <h:panelGroup rendered="#{loginBean.loggedIn}">
-                                            <a href="../user/createWaypoint.xhtml">+ Add a Waypoint</a>
-                                        </h:panelGroup>
+                                    <c:if test="#{tripBean.currentTrip.tripUser == loginBean.user}">
+                                        <c:if test="#{tripBean.currentTrip.started == false}">
+                                            <h:panelGroup rendered="#{loginBean.loggedIn}">
+                                                <a href="../user/createWaypoint.xhtml">+ Add a Waypoint</a>
+                                            </h:panelGroup>
+                                        </c:if>
                                     </c:if>
-                                </c:if>
 
+                                </h:form>
 
                                 <div id="map_canvas"></div>
 
@@ -134,6 +136,7 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <h:outputScript name="js/jquery-1.9.0.min.js"/>
+    <h:outputScript name="js/jquery-ui.js"/>
     <h:outputScript name="js/main.js"/>
     <h:outputScript name="js/gMapsOverview.js"/>
 </h:body>
