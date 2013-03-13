@@ -24,7 +24,7 @@
                     </li>
                     <h:panelGroup rendered="#{loginBean.loggedIn}">
                         <li>
-                            <a id="myTrips" class="button" href="#myTripsTab">My trips</a>
+                            <a id="myTrips" class="button" href="#myTripsTab">Organised trips</a>
                         </li>
 
                         <li>
@@ -48,13 +48,11 @@
                     <div id="tripsTab" class="tabContentsTrips">
                         <div class="box">
                             <h:form>
-                                <h:dataTable border="0" value="#{tripBean.allPublicTrips}" var="trip">
+                                <h:dataTable border="0" value="#{tripBean.allPublicTrips}" var="publicTrip">
                                     <h:column>
                                         <div>
-                                            <h:commandLink value="#{trip.title}" rendered="#{trip.visible}"
-                                                           action="#{tripBean.setThisAsCurrentTrip}">
-                                                <f:param name="currentTrip" value="#{trip.id}"/>
-                                            </h:commandLink>
+                                            <h:commandLink value="#{publicTrip.title}" rendered="#{publicTrip.visible}"
+                                                           action="#{tripBean.setThisAsCurrentTrip(publicTrip)}"/>
 
                                         </div>
                                     </h:column>
@@ -70,13 +68,10 @@
                         <div class="box">
                             <h:panelGroup rendered="#{loginBean.loggedIn}">
                                 <h:form>
-                                    <h:dataTable border="0" value="#{tripBean.allCreatedTrips}" var="trip">
+                                    <h:dataTable border="0" value="#{tripBean.allCreatedTrips}" var="organised">
                                         <h:column>
                                             <div>
-                                                <h:commandLink value="#{trip.title}"
-                                                               action="#{tripBean.setThisAsCurrentTrip}">
-                                                    <f:param name="currentTrip" value="#{trip.id}"/>
-                                                </h:commandLink>
+                                                <h:commandLink value="#{organised.title}" action="#{tripBean.setThisAsCurrentTrip(organised)}"/>
 
                                             </div>
                                         </h:column>
@@ -95,13 +90,11 @@
                         <div class="box">
                             <h:form rendered="#{loginBean.loggedIn}">
                                 <h:dataTable border="0" value="#{tripBean.allParticipatedTrips}"
-                                             var="participatedTrips">
+                                             var="participatedTrip">
                                     <h:column>
                                         <div>
-                                            <h:commandLink value="#{participatedTrips.title}"
-                                                           action="#{tripBean.setThisAsCurrentTrip}">
-                                                <f:param name="currentTrip" value="#{participatedTrips.id}"/>
-                                            </h:commandLink>
+                                            <h:commandLink value="#{participatedTrip.title}"
+                                                           action="#{tripBean.setThisAsCurrentTrip(participatedTrip)}"/>
                                         </div>
                                     </h:column>
                                 </h:dataTable>
@@ -117,13 +110,11 @@
 
                         <div class="box">
                             <h:form rendered="#{loginBean.loggedIn}">
-                                <h:dataTable border="0" value="#{tripBean.allInvitedTrips}" var="invitations">
+                                <h:dataTable border="0" value="#{tripBean.allInvitedTrips}" var="invitation">
                                     <h:column>
                                         <div>
-                                            <h:commandLink value="#{invitations.title}"
-                                                           action="#{tripBean.setThisAsCurrentTrip}">
-                                                <f:param name="currentTrip" value="#{invitations.id}"/>
-                                            </h:commandLink>
+                                            <h:commandLink value="#{invitation.title}"
+                                                           action="#{tripBean.setThisAsCurrentTrip(invitation)}"/>
                                         </div>
                                     </h:column>
                                 </h:dataTable>

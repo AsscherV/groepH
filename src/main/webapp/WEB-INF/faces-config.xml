@@ -69,10 +69,10 @@
             <redirect/>
         </navigation-case>
     </navigation-rule>
+
     <navigation-rule>
         <navigation-case>
-            <from-action>#{tripBean.setThisAsCurrentTrip}</from-action>
-            <from-outcome>SUCCESS</from-outcome>
+            <from-outcome>SETTRIP</from-outcome>
             <to-view-id>/pages/user/trip.xhtml</to-view-id>
             <redirect/>
         </navigation-case>

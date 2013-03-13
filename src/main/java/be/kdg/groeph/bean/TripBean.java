@@ -321,18 +321,10 @@ public class TripBean implements Serializable {
         }
     }
 
-    public String setThisAsCurrentTrip() {
-        try {
-            HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-            Integer tripId = Integer.parseInt(request.getParameter("currentTrip"));
-            Trip trip = tripService.getTripById(tripId); //tripService.getTripByName(tripName);
-
+    public String setThisAsCurrentTrip(Trip trip) {
             setCurrentTrip(trip);
-            return Tools.SUCCESS;
-        } catch (Exception e) {
-            logger.error(e);
-            return Tools.FAILURE;
-        }
+            System.out.println(currentTrip.getId());
+            return "SETTRIP";
     }
 
     public String addTrip() {
@@ -582,7 +574,6 @@ public class TripBean implements Serializable {
         }
     }
 
-
     public void changeTripType() {
         try {
             if (getTripType().equals(REAPTING)) {
@@ -601,7 +592,4 @@ public class TripBean implements Serializable {
         }
     }
 
-   /* public void refreshCurrentTrip() {
-        setCurrentTrip(tripService.getTripById(currentTrip.getId()));
-    } */
 }

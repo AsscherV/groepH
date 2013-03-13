@@ -60,14 +60,7 @@ public class TestAccessoryBean extends AbstractTransactionalJUnit4SpringContextT
         tripBean.setStartTime(cal.getTime());
         cal.set(2013, Calendar.MARCH, 29, 12, 00);
         tripBean.setEndTime(cal.getTime());
-        //ArrayList<Label> lbls = new ArrayList<Label>();
         tripBean.setLabel("Test");
-        /*lbls.add(new Label("Test"));
-        lbls.add(new Label("Test1"));
-        lbls.add(new Label("Test2"));
-        lbls.add(new Label("Test3"));
-        lbls.add(new Label("Test4"));
-        tripBean.setLabels(lbls);   */
         tripBean.setTripType("Timebound");
         tripBean.setPublic(true);
         tripBean.addTrip();

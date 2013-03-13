@@ -31,13 +31,13 @@ public class AccessoryBean implements Serializable {
     private Accessory currentAccessory;
     private boolean editableAccessory;
     private String newdescription;
-    private Map<String, Boolean> editableAccessories;
-    private Map<String, Boolean> addableAccessories;
+    private Map<Integer, Boolean> editableAccessories;
+    private Map<Integer, Boolean> addableAccessories;
     private ArrayList<TripUser> userlist;
 
     public AccessoryBean() {
-        editableAccessories = new HashMap<String, Boolean>();
-        addableAccessories = new HashMap<String, Boolean>();
+        editableAccessories = new HashMap<Integer, Boolean>();
+        addableAccessories = new HashMap<Integer, Boolean>();
         userlist = new ArrayList<TripUser>();
     }
 
@@ -137,7 +137,7 @@ public class AccessoryBean implements Serializable {
         try {
             setCurrentAccessory(accessory);
             newdescription = currentAccessory.getDescription();
-            editableAccessories.put(currentAccessory.getDescription(), true);
+            editableAccessories.put(currentAccessory.getId(), true);
 
             return null;
         } catch (Exception e) {
@@ -150,7 +150,7 @@ public class AccessoryBean implements Serializable {
         try {
 
             setCurrentAccessory(accessory);
-            addableAccessories.put(currentAccessory.getDescription(), true);
+            addableAccessories.put(currentAccessory.getId(), true);
             return null;
         } catch (Exception e) {
             logger.error(e);
@@ -248,12 +248,12 @@ public class AccessoryBean implements Serializable {
     }
 
     public Boolean getEditable(Accessory accessory) {
-        return editableAccessories.get(accessory.getDescription());
+        return editableAccessories.get(accessory.getId());
     }
 
     public Boolean getAdable(Accessory accessory) {
 
-        return addableAccessories.get(accessory.getDescription());
+        return addableAccessories.get(accessory.getId());
     }
 
     public boolean getContainsEditable() {

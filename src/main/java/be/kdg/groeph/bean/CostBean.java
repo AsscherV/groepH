@@ -142,7 +142,7 @@ public class CostBean implements Serializable {
 
     }
 
-    private Double getTotalCostPerUser(TripUser user) {
+    public Double getTotalCostPerUser(TripUser user) {
         totalCostByUser = costService.getTotalCostByUser(currentTrip, user);
         if (totalCostByUser == null) {
             return 0.0;
