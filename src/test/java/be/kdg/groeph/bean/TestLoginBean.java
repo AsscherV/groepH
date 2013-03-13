@@ -42,8 +42,8 @@ public class TestLoginBean extends AbstractTransactionalJUnit4SpringContextTests
     @Autowired
     RecoverBean recoverBean;
 
-
     private final String validEmail = "greg.deckers@student.kdg.be";
+    private final String adminEmail = "gunther.laurijssens@student.kdg.be";
     private final String SUCCESS = "SUCCESS";
     private final String FAILURE = "FAILURE";
     private String recoverypassword = "testrecovery";
@@ -56,6 +56,13 @@ public class TestLoginBean extends AbstractTransactionalJUnit4SpringContextTests
         tripUser1.setAccountNonExpired(true);
         tripUser1.setCredentialsNonExpired(true);
         userDao.addUser(tripUser1);
+
+        TripUser tripUser2 = UserMother.validAdmin();
+        tripUser2.setEnabled(true);
+        tripUser2.setAccountNonLocked(true);
+        tripUser2.setAccountNonExpired(true);
+        tripUser2.setCredentialsNonExpired(true);
+        userDao.addUser(tripUser2);
     }
 
     @Test
@@ -63,9 +70,9 @@ public class TestLoginBean extends AbstractTransactionalJUnit4SpringContextTests
         loginBean.setEmail(validEmail);
         loginBean.setPassword("password");
         setLoginBean(validEmail, "password");
-        assertFalse("IsLoggedIn is FALSE before login",loginBean.isLoggedIn());
+        assertFalse("IsLoggedIn is FALSE before login", loginBean.isLoggedIn());
         assertEquals(SUCCESS, loginBean.loginUser());
-        assertTrue("IsLoggedIn is TRUE after successful login",loginBean.isLoggedIn());
+        assertTrue("IsLoggedIn is TRUE after successful login", loginBean.isLoggedIn());
     }
 
     @Test
@@ -73,9 +80,9 @@ public class TestLoginBean extends AbstractTransactionalJUnit4SpringContextTests
         loginBean.setEmail(validEmail);
         loginBean.setPassword("qsdqs");
         setLoginBean(validEmail, "qsdqs");
-        assertFalse("IsLoggedIn is FALSE before login",loginBean.isLoggedIn());
+        assertFalse("IsLoggedIn is FALSE before login", loginBean.isLoggedIn());
         assertEquals(FAILURE, loginBean.loginUser());
-        assertFalse("IsLoggedIn is FALSE after login",loginBean.isLoggedIn());
+        assertFalse("IsLoggedIn is FALSE after login", loginBean.isLoggedIn());
     }
 
     @Test
@@ -83,12 +90,21 @@ public class TestLoginBean extends AbstractTransactionalJUnit4SpringContextTests
         setLoginBean(validEmail, "password");
         loginBean.loginUser();
         assertEquals(SUCCESS, loginBean.logOut());
-        assertFalse("IsLoggedIn is FALSE after logout",loginBean.isLoggedIn());
+        assertFalse("IsLoggedIn is FALSE after logout", loginBean.isLoggedIn());
     }
 
     @Test
-    public void testIsAdmin() {
-        assertFalse("User has no admin rights", loginBean.user.isAdmin());
+    public void testIsNotAdmin() throws LoginException {
+        setLoginBean(validEmail, "password");
+        loginBean.loginUser();
+        assertFalse("User has no admin rights", loginBean.getUser().isAdmin());
+    }
+
+    @Test
+    public void testIsAdmin() throws LoginException {
+        setLoginBean(adminEmail, "password");
+        loginBean.loginUser();
+        assertTrue("User has  admin rights", loginBean.getUser().isAdmin());
     }
 
     public void setLoginBean(String email, String password) throws LoginException {
@@ -111,7 +127,6 @@ public class TestLoginBean extends AbstractTransactionalJUnit4SpringContextTests
         assertEquals("The new password must be equal to the passwordfield in user", SHAEncryption.encrypt(recoverypassword), user.getPassword());
         assertTrue("TempPassword field must be empty", user.getTempPassword().isEmpty());
     }
-
 
 
 }

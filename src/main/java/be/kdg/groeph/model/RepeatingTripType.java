@@ -14,12 +14,14 @@ public class RepeatingTripType implements Serializable, Nullable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     @Column(name = "repeatingType", nullable = false, length = 100)
     private String repeatingType;
 
     @OneToMany(mappedBy = "repeatingTripType")
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     private List<Trip> trips = new ArrayList<Trip>();
+
 
     public RepeatingTripType() {
 

@@ -77,6 +77,10 @@ public class TripBean implements Serializable {
     private String newLabel;
     @NotEmpty(message = "{tripType} {notempty}")
     private String newTripType;
+    @NotEmpty(message = "repetitionType mag niet leeg zijn!")
+    private String newRepetitionType;
+    @NotNull(message = "Number of repetitions is required")
+    private Integer newNumberOfRepetitions;
     private boolean newIsPublic;
 
 
@@ -97,6 +101,22 @@ public class TripBean implements Serializable {
         //labels = new ArrayList<Label>();
         filter = "";
         numberOfRepetitions = null;
+    }
+
+    public String getNewRepetitionType() {
+        return newRepetitionType;
+    }
+
+    public void setNewRepetitionType(String newRepetitionType) {
+        this.newRepetitionType = newRepetitionType;
+    }
+
+    public Integer getNewNumberOfRepetitions() {
+        return newNumberOfRepetitions;
+    }
+
+    public void setNewNumberOfRepetitions(Integer newNumberOfRepetitions) {
+        this.newNumberOfRepetitions = newNumberOfRepetitions;
     }
 
     public String getFilter() {
@@ -303,7 +323,7 @@ public class TripBean implements Serializable {
             }
             return hasCurrentTrip;
         } catch (Exception e) {
-            logger.error(e);
+            logger.error(e.toString());
             return false;
         }
     }
@@ -317,20 +337,28 @@ public class TripBean implements Serializable {
             setCurrentTrip(null);
             return null;
         } catch (Exception e) {
+            logger.info(e.toString());
             return null;
         }
     }
 
     public String setThisAsCurrentTrip(Trip trip) {
+        try {
             setCurrentTrip(trip);
             System.out.println(currentTrip.getId());
             return "SETTRIP";
+        } catch (Exception e) {
+            logger.error(e.toString());
+            return Tools.FAILURE;
+        }
     }
 
     public String addTrip() {
         try {
+            Trip trip;
             setVisible(false);
             TripType type = tripService.getTypeByName(getTripType());
+            RepeatingTripType repeatingTripType = tripService.getRepetitionTypeByName(getRepetitionType());
             //public Trip(String title, String description, Date startTime, Date endTime, String label, TripType tripType, boolean isPublic) {
 
             if (numberOfRepetitions != null) {
@@ -358,7 +386,7 @@ public class TripBean implements Serializable {
                             break;
                     }
 
-                    Trip trip = new Trip(getTitle(), getDescription(), calStart.getTime(), calEnd.getTime(), getLabel(), type, getPublic(), isVisible);
+                    trip = new Trip(getTitle(), getDescription(), calStart.getTime(), calEnd.getTime(), getLabel(), type, repeatingTripType, getPublic(), isVisible);
                     trip.setStarted(false);
 
                     loginBean.getUser().addTrip(trip);
@@ -368,11 +396,12 @@ public class TripBean implements Serializable {
                         return Tools.FAILURE;
                     }
                 }
+                logger.info("Trip: " + currentTrip + " has been added");
                 clearFields();
                 return Tools.SUCCESS;
             } else {
 
-                Trip trip = new Trip(getTitle(), getDescription(), getStartTime(), getEndTime(), getLabel(), type, getPublic(), isVisible);
+                trip = new Trip(getTitle(), getDescription(), getStartTime(), getEndTime(), getLabel(), type, repeatingTripType, getPublic(), isVisible);
                 trip.setStarted(false);
 
                 // Label label = new Label(getLabel());
@@ -381,14 +410,16 @@ public class TripBean implements Serializable {
                 loginBean.getUser().addTrip(trip);
                 if (tripService.addTrip(trip)) {
                     currentTrip = trip;
+                    logger.info("Trip: " + currentTrip + " has been added");
                     clearFields();
                     return Tools.SUCCESS;
                 } else {
+                    logger.info("Trip could not be added");
                     return Tools.FAILURE;
                 }
             }
         } catch (Exception e) {
-            logger.error(e);
+            logger.error(e.toString());
             return Tools.FAILURE;
         }
     }
@@ -406,61 +437,67 @@ public class TripBean implements Serializable {
             numberOfRepetitions = null;
             //labels = null;
         } catch (Exception e) {
-            logger.error(e);
+            logger.error(e.toString());
         }
     }
 
     public List<Trip> getAllPublicTrips() {
         try {
             List<Trip> publictrips = tripService.fetchAllPublicTrips();
+            logger.info("All public trips fetched");
             return Tools.filter(publictrips, filter);
         } catch (Exception e) {
-            logger.error(e);
+            logger.error(e.toString());
             return null;
         }
     }
 
     public List<TripType> getAllTripTypes() {
         try {
+            logger.info("All trip types fetched.");
             return tripService.fetchAllTripTypes();
         } catch (Exception e) {
-            logger.error(e);
+            logger.error(e.toString());
             return null;
         }
     }
 
     public List<RepeatingTripType> getAllRepeatingTripTypes() {
         try {
+            logger.info("all repeating trips fetched.");
             return tripService.fetchAllRepeatingTripTypes();
         } catch (Exception e) {
-            logger.error(e);
+            logger.error(e.toString());
             return null;
         }
     }
 
     public List<Trip> getAllInvitedTrips() {
         try {
+            logger.info("All invited trips for user: " + loginBean.getUser().getEmail() + " get.");
             return Tools.filter(tripService.getAllInvitedTripsByUser(loginBean.getUser()), filter);
         } catch (Exception e) {
-            logger.error(e);
+            logger.error(e.toString());
             return null;
         }
     }
 
     public List<Trip> getAllParticipatedTrips() {
         try {
+            logger.info("All participated trips for user: " + loginBean.getUser().getEmail() + " get.");
             return Tools.filter(tripService.getAllParticipatedTripsByUser(loginBean.getUser()), filter);
         } catch (Exception e) {
-            logger.error(e);
+            logger.error(e.toString());
             return null;
         }
     }
 
     public List<Trip> getAllCreatedTrips() {
         try {
+            logger.info("All created trips from user: " + loginBean.getUser().getEmail() + " get.");
             return Tools.filter(tripService.getAllCreatedTripsByUser(loginBean.getUser()), filter);
         } catch (Exception e) {
-            logger.error(e);
+            logger.error(e.toString());
             return null;
         }
     }
@@ -471,8 +508,9 @@ public class TripBean implements Serializable {
             currentTrip.addConfirmedUser(user);
             user.confirmParticipation(currentTrip);
             tripService.addConfirmedTrip(currentTrip);
+            logger.info("Participation for user: " + user.getEmail() + " confirmed for trip: " + currentTrip.getTitle());
         } catch (Exception e) {
-            logger.error(e);
+            logger.error(e.toString());
         }
     }
 
@@ -496,12 +534,14 @@ public class TripBean implements Serializable {
         try {
             currentTrip.setVisible(true);
             if (tripService.updateTrip(currentTrip)) {
+                logger.info("Trip: " + currentTrip.getTitle() + " is published.");
                 return true;
             } else {
+                logger.error("Trip: " + currentTrip.getTitle() + " could not be published.");
                 return false;
             }
         } catch (Exception e) {
-            logger.error(e);
+            logger.error(e.toString());
             return false;
         }
     }
@@ -509,10 +549,15 @@ public class TripBean implements Serializable {
     public boolean startTrip() {
         try {
             currentTrip.setStarted(true);
-            tripService.updateTrip(currentTrip);
-            return true;
+            if (tripService.updateTrip(currentTrip)) {
+                logger.info("Trip: " + currentTrip.getTitle() + " is started.");
+                return true;
+            } else {
+                logger.error("Trip: " + currentTrip.getTitle() + " could not be started.");
+                return false;
+            }
         } catch (Exception e) {
-            logger.error(e);
+            logger.error(e.toString());
             return false;
         }
     }
@@ -520,10 +565,15 @@ public class TripBean implements Serializable {
     public boolean stopTrip() {
         try {
             currentTrip.setStarted(false);
-            tripService.updateTrip(currentTrip);
-            return true;
+            if (tripService.updateTrip(currentTrip)) {
+                logger.info("Trip: " + currentTrip.getTitle() + " is stopped.");
+                return true;
+            } else {
+                logger.error("Trip: " + currentTrip.getTitle() + " could not be stopped.");
+                return false;
+            }
         } catch (Exception e) {
-            logger.error(e);
+            logger.error(e.toString());
             return false;
         }
     }
@@ -543,14 +593,19 @@ public class TripBean implements Serializable {
             trip.setTripType(tripType);
             trip.setPublic(isNewIsPublic());
 
+            RepeatingTripType repetitionType = tripService.getRepetitionTypeByName(getNewRepetitionType());
+            trip.setRepeatingTripType(repetitionType);
+
             if (tripService.updateTrip(trip)) {
                 editableTrip = false;
+                logger.info("Trip: " + currentTrip.getTitle() + " is updated.");
                 return Tools.SUCCESS;
             }
 
+            logger.info("Trip: " + currentTrip.getTitle() + " could not be updated.");
             return Tools.FAILURE;
         } catch (Exception e) {
-            logger.error(e);
+            logger.error(e.toString());
             return Tools.FAILURE;
         }
     }
@@ -561,16 +616,43 @@ public class TripBean implements Serializable {
             newDescription = currentTrip.getDescription();
             newLabel = currentTrip.getLabel();
             //newLabel = getCurrentTrip().getLabels().get(0).getName();
-            newEndTime = getCurrentTrip().getEndTime();
-            newStartTime = getCurrentTrip().getStartTime();
-            newTitle = getCurrentTrip().getTitle();
             newTripType = getCurrentTrip().getTripType().getType();
+            if (!newTripType.toString().equals("Anytime")) {
+                newEndTime = getCurrentTrip().getEndTime();
+                newStartTime = getCurrentTrip().getStartTime();
+            }
+            newTitle = getCurrentTrip().getTitle();
             newIsPublic = getCurrentTrip().isPublic();
+            if (newTripType.toString().equals("Repeating")) {
+                newRepetitionType = getCurrentTrip().getRepeatingTripType().getRepeatingType();
+            }
             editableTrip = true;
             return EDITTRIP;
         } catch (Exception e) {
             logger.error(e);
             return null;
+        }
+    }
+
+
+    public void changeUpdateTripType() {
+        try {
+            System.out.println(getNewTripType());
+            if (getNewTripType().equals(REAPTING)) {
+                isRepeated = true;
+            } else {
+                isRepeated = false;
+            }
+
+            if (getNewTripType().equals(ANYTIME)) {
+                notAnytime = false;
+            } else {
+                notAnytime = true;
+            }
+
+            logger.info("Trip type for trip: " + currentTrip.getTitle() + " has been changed.");
+        } catch (Exception e) {
+            logger.error(e);
         }
     }
 
@@ -587,9 +669,14 @@ public class TripBean implements Serializable {
             } else {
                 notAnytime = true;
             }
+
+            logger.info("Trip type for trip: " + currentTrip.getTitle() + " has been changed.");
         } catch (Exception e) {
             logger.error(e);
         }
     }
 
+   /* public void refreshCurrentTrip() {
+        setCurrentTrip(tripService.getTripById(currentTrip.getId()));
+    } */
 }

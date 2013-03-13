@@ -12,18 +12,18 @@ import org.springframework.stereotype.Component;
 
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
-import javax.faces.context.FacesContext;
-import javax.faces.event.ValueChangeEvent;
 import javax.inject.Named;
-import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Component
 @Named
 @RequestScoped
 public class AccessoryBean implements Serializable {
-    static Logger logger = Logger.getLogger(LoginBean.class);
+    static Logger logger = Logger.getLogger(AccessoryBean.class);
 
     private String description;
     private TripUser user;
@@ -71,16 +71,18 @@ public class AccessoryBean implements Serializable {
                 if (accessoryService.addAccessory(currentAccessory)) {
                     description = "";
                     editableAccessories.clear();
+                    logger.info(accessory.getDescription() + "added.");
                     return Tools.SUCCESS;
                 }
             }
             return Tools.FAILURE;
         } catch (Exception e) {
-            logger.error(e);
+            logger.error("Failed to add accessory " + e.toString());
             return Tools.FAILURE;
         }
     }
 
+    //Addable users = Users that haven't got the accesory yet.
     public List<TripUser> addableConfirmedTripUsers(Accessory accessory) {
         try {
             userlist.clear();
@@ -91,7 +93,7 @@ public class AccessoryBean implements Serializable {
             }
             return userlist;
         } catch (Exception e) {
-            logger.error(e);
+            logger.error(e.toString());
             return null;
         }
     }
@@ -105,30 +107,31 @@ public class AccessoryBean implements Serializable {
             }
 
         } catch (Exception e) {
-            logger.error(e);
+            logger.error(e.toString());
             return false;
         }
     }
 
-    public void addUser() {
+    public void addUserToAccessory() {
         try {
             currentAccessory.addTripUser(user);
             user.addAccessory(currentAccessory);
             addableAccessories.clear();
             accessoryService.updateAccessory(currentAccessory);
+            logger.info("User: " + user.getEmail() + " added to accessory: " + currentAccessory.getDescription());
         } catch (Exception e) {
-            logger.error(e);
+            logger.error(e.toString());
         }
     }
 
-    public void removeUser(Accessory accessory) {
+    public void removeUserFromAccessory(Accessory accessory) {
         try {
-            System.out.println("remove user");
             setCurrentAccessory(accessory);
             currentAccessory.removeTripUser(user);
             accessoryService.updateAccessory(currentAccessory);
+            logger.info("User: " + user.getEmail() + " removed from accessory: " + accessory.getDescription());
         } catch (Exception e) {
-            logger.error(e);
+            logger.error(e.toString());
         }
 
     }
@@ -141,19 +144,18 @@ public class AccessoryBean implements Serializable {
 
             return null;
         } catch (Exception e) {
-            logger.error(e);
+            logger.error(e.toString());
             return null;
         }
     }
 
     public String changeAddUser(Accessory accessory) {
         try {
-
             setCurrentAccessory(accessory);
             addableAccessories.put(currentAccessory.getId(), true);
             return null;
         } catch (Exception e) {
-            logger.error(e);
+            logger.error(e.toString());
             return null;
         }
     }
@@ -166,44 +168,44 @@ public class AccessoryBean implements Serializable {
             currentAccessory.setDescription(newdescription);
             if (accessoryService.updateAccessory(currentAccessory)) {
                 description = null;
+                logger.info("Accessory: " + currentAccessory.getDescription() + " changed");
                 return Tools.SUCCESS;
             }
+            logger.info("Accessory: " + currentAccessory.getDescription() + " could not be changed");
             return Tools.FAILURE;
 
         } catch (Exception e) {
-            logger.error(e);
-            return null;
+            logger.error(e.toString());
+            return Tools.FAILURE;
         }
     }
 
     public String cancel(Accessory accessory) {
         try {
-
             setCurrentAccessory(accessory);
             newdescription = "";
             editableAccessories.clear();
             addableAccessories.clear();
             return null;
         } catch (Exception e) {
-            logger.error(e);
+            logger.error(e.toString());
             return null;
         }
     }
 
     public String deleteAccessory(Accessory accessory) {
         try {
-
             setCurrentAccessory(accessory);
             currentAccessory.getTripUsers().clear();
             editableAccessories.clear();
             tripBean.getCurrentTrip().deleteAccessory(currentAccessory);
             if (accessoryService.deleteAccessory(currentAccessory)) {
-
+                logger.info("Accessory: " + accessory.getDescription() + " removed");
                 return Tools.SUCCESS;
             }
             return Tools.FAILURE;
         } catch (Exception e) {
-            logger.error(e);
+            logger.error(e.toString());
             return Tools.FAILURE;
         }
     }
@@ -216,8 +218,9 @@ public class AccessoryBean implements Serializable {
                 accessory.setChecked(true);
             }
             accessoryService.updateAccessory(accessory);
+            logger.info("Accessory: " + accessory.getDescription() + " checked changed");
         } catch (Exception e) {
-            logger.error(e);
+            logger.error(e.toString());
         }
     }
 
@@ -229,7 +232,7 @@ public class AccessoryBean implements Serializable {
                 return false;
             }
         } catch (Exception e) {
-            logger.error(e);
+            logger.error(e.toString());
             return false;
         }
     }
@@ -242,26 +245,45 @@ public class AccessoryBean implements Serializable {
                 return false;
             }
         } catch (Exception e) {
-            logger.error(e);
+            logger.error(e.toString());
             return false;
         }
     }
 
     public Boolean getEditable(Accessory accessory) {
-        return editableAccessories.get(accessory.getId());
+        try {
+            return editableAccessories.get(accessory.getId());
+        } catch (Exception e) {
+            logger.error(e.toString());
+            return false;
+        }
     }
 
     public Boolean getAdable(Accessory accessory) {
-
-        return addableAccessories.get(accessory.getId());
+        try {
+            return addableAccessories.get(accessory.getId());
+        } catch (Exception e) {
+            logger.error(e.toString());
+            return false;
+        }
     }
 
     public boolean getContainsEditable() {
-        return editableAccessories.containsValue(true);
+        try {
+            return editableAccessories.containsValue(true);
+        } catch (Exception e) {
+            logger.error(e.toString());
+            return false;
+        }
     }
 
     public List<Accessory> getTripaccessories() {
-        return accessoryService.getAccessoriesByTrip(tripBean.getCurrentTrip());
+        try {
+            return accessoryService.getAccessoriesByTrip(tripBean.getCurrentTrip());
+        } catch (Exception e) {
+            logger.error(e.toString());
+            return null;
+        }
     }
 
     public String getDescription() {

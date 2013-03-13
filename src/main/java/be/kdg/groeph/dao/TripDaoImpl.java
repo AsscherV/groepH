@@ -1,6 +1,7 @@
 package be.kdg.groeph.dao;
 
 //import be.kdg.groeph.model.Label;
+
 import be.kdg.groeph.model.RepeatingTripType;
 import be.kdg.groeph.model.Trip;
 import be.kdg.groeph.model.TripUser;
@@ -26,56 +27,94 @@ public class TripDaoImpl implements TripDao {
     @Override
     @SuppressWarnings("unchecked")
     public boolean addTrip(Trip trip) {
-        sessionFactory.getCurrentSession().saveOrUpdate(trip);
-        return true;
+        try {
+            sessionFactory.getCurrentSession().saveOrUpdate(trip);
+            return true;
+        } catch (Exception e) {
+            logger.error(e);
+            return false;
+        }
     }
 
     @Override
     public void addUserToTrip(Trip trip) {
-        sessionFactory.getCurrentSession().saveOrUpdate(trip);
+        try {
+            sessionFactory.getCurrentSession().saveOrUpdate(trip);
+        } catch (Exception e) {
+            logger.error(e);
+        }
     }
 
     @Override
     public boolean updateTrip(Trip trip) {
-        sessionFactory.getCurrentSession().update(trip);
-        return true;
+        try {
+            sessionFactory.getCurrentSession().update(trip);
+            return true;
+        } catch (Exception e) {
+            logger.error(e);
+            return false;
+        }
     }
 
     @Override
     @SuppressWarnings("unchecked")
     public List<Trip> fetchAllPublicTrips() {
-        Query query = sessionFactory.getCurrentSession().createQuery("from Trip where isPublic=:public");
-        query.setParameter("public", true);
-        return query.list();
+        try {
+            Query query = sessionFactory.getCurrentSession().createQuery("from Trip where isPublic=:public");
+            query.setParameter("public", true);
+            return query.list();
+        } catch (Exception e) {
+            logger.error(e);
+            return null;
+        }
     }
 
     @Override
     @SuppressWarnings("unchecked")
     public List<TripType> fetchAllTripTypes() {
-        Query query = sessionFactory.getCurrentSession().createQuery("from TripType");
-        return query.list();
+        try {
+            Query query = sessionFactory.getCurrentSession().createQuery("from TripType");
+            return query.list();
+        } catch (Exception e) {
+            logger.error(e);
+            return null;
+        }
     }
 
     @Override
     @SuppressWarnings("unchecked")
     public TripType getTypeByName(String naam) {
-        Query query = sessionFactory.getCurrentSession().createQuery("from TripType where type=:naam");
-        query.setParameter("naam", naam);
-        return (TripType) query.uniqueResult();
+        try {
+            Query query = sessionFactory.getCurrentSession().createQuery("from TripType where type=:naam");
+            query.setParameter("naam", naam);
+            return (TripType) query.uniqueResult();
+        } catch (Exception e) {
+            logger.error(e);
+            return null;
+        }
     }
 
     @Override
     @SuppressWarnings("unchecked")
     public void addTripType(TripType tripType) {
-        sessionFactory.getCurrentSession().saveOrUpdate(tripType);
+        try {
+            sessionFactory.getCurrentSession().saveOrUpdate(tripType);
+        } catch (Exception e) {
+            logger.error(e);
+        }
     }
 
     //TODO: Werkt niet
     @Override
     public List<Trip> getTripsByName(String tripName) {
-        Query query = sessionFactory.getCurrentSession().createQuery("from Trip where title=:tripName");
-        query.setParameter("tripName", tripName);
-        return (List<Trip>) query.list();
+        try {
+            Query query = sessionFactory.getCurrentSession().createQuery("from Trip where title=:tripName");
+            query.setParameter("tripName", tripName);
+            return (List<Trip>) query.list();
+        } catch (Exception e) {
+            logger.error(e);
+            return null;
+        }
     }
 
     /*@Override
@@ -91,64 +130,107 @@ public class TripDaoImpl implements TripDao {
 
     @Override
     public Trip getTripById(int id) {
-        Query query = sessionFactory.getCurrentSession().createQuery("from Trip where id=:id");
-        query.setParameter("id", id);
-        return (Trip) query.uniqueResult();
+        try {
+            Query query = sessionFactory.getCurrentSession().createQuery("from Trip where id=:id");
+            query.setParameter("id", id);
+            return (Trip) query.uniqueResult();
+        } catch (Exception e) {
+            logger.error(e);
+            return null;
+        }
     }
 
     @Override
     public List<Trip> getAllInvitedTripsByUser(TripUser user) {
-        Query query = sessionFactory.getCurrentSession().createQuery("from Trip trip left join trip.tripUsers tripUsers where tripUsers =:id");
-        query.setParameter("id", user);
-        List<Object[]> trips = query.list();
+        try {
+            Query query = sessionFactory.getCurrentSession().createQuery("from Trip trip left join trip.tripUsers tripUsers where tripUsers =:id");
+            query.setParameter("id", user);
+            List<Object[]> trips = query.list();
 
-        List<Trip> returnTripList = new ArrayList<Trip>();
-        for (int i = 0; i < trips.size(); i++) {
+            List<Trip> returnTripList = new ArrayList<Trip>();
+            for (int i = 0; i < trips.size(); i++) {
 
-            Object[] tripArray = trips.get(i);
-            if (Trip.class == tripArray[0].getClass()) {
-                Trip tripToAdd = (Trip) tripArray[0];
-                returnTripList.add(tripToAdd);
+                Object[] tripArray = trips.get(i);
+                if (Trip.class == tripArray[0].getClass()) {
+                    Trip tripToAdd = (Trip) tripArray[0];
+                    returnTripList.add(tripToAdd);
+                }
             }
+            return returnTripList;
+        } catch (Exception e) {
+            logger.error(e);
+            return null;
         }
-        return returnTripList;
     }
 
     @Override
     public List<Trip> getAllParticipatedTripsByUser(TripUser user) {
-        Query query = sessionFactory.getCurrentSession().createQuery("from Trip trip left join trip.confirmedTripUsers tripUsers where tripUsers =:id");
-        query.setParameter("id", user);
-        List<Object[]> trips = query.list();
+        try {
+            Query query = sessionFactory.getCurrentSession().createQuery("from Trip trip left join trip.confirmedTripUsers tripUsers where tripUsers =:id");
+            query.setParameter("id", user);
+            List<Object[]> trips = query.list();
 
-        List<Trip> returnTripList = new ArrayList<Trip>();
-        for (int i = 0; i < trips.size(); i++) {
+            List<Trip> returnTripList = new ArrayList<Trip>();
+            for (int i = 0; i < trips.size(); i++) {
 
-            Object[] tripArray = trips.get(i);
-            if (Trip.class == tripArray[0].getClass()) {
-                Trip tripToAdd = (Trip) tripArray[0];
-                returnTripList.add(tripToAdd);
+                Object[] tripArray = trips.get(i);
+                if (Trip.class == tripArray[0].getClass()) {
+                    Trip tripToAdd = (Trip) tripArray[0];
+                    returnTripList.add(tripToAdd);
+                }
             }
+            return returnTripList;
+        } catch (Exception e) {
+            logger.error(e);
+            return null;
         }
-        return returnTripList;
     }
 
     @Override
     public boolean addConfirmedTrip(Trip currentTrip) {
-        sessionFactory.getCurrentSession().saveOrUpdate(currentTrip);
-        return true;
+        try {
+            sessionFactory.getCurrentSession().saveOrUpdate(currentTrip);
+            return true;
+        } catch (Exception e) {
+            logger.error(e);
+            return false;
+        }
     }
 
     @Override
     public List<Trip> getTripByUserId(TripUser tripUser) {
-        Query query = sessionFactory.getCurrentSession().createQuery("from Trip where tripUser=:tripUser");
-        query.setParameter("tripUser", tripUser);
-        return (List<Trip>) query.list();
+        try {
+            Query query = sessionFactory.getCurrentSession().createQuery("from Trip where tripUser=:tripUser");
+            query.setParameter("tripUser", tripUser);
+            return (List<Trip>) query.list();
+        } catch (Exception e) {
+            logger.error(e);
+            return null;
+        }
     }
 
     @Override
     public List<RepeatingTripType> fetchAllRepeatingTripTypes() {
-        Query query = sessionFactory.getCurrentSession().createQuery("from RepeatingTripType");
-        return query.list();
+        try {
+            Query query = sessionFactory.getCurrentSession().createQuery("from RepeatingTripType");
+            return query.list();
+        } catch (Exception e) {
+            logger.error(e);
+            return null;
+        }
+    }
+
+    @Override
+    public RepeatingTripType getRepetitionTypeByName(String repetitionType) {
+        try  {
+            Query query = sessionFactory.getCurrentSession().createQuery("from RepeatingTripType where repeatingType=:repetitionType");
+            query.setParameter("repetitionType", repetitionType);
+            return (RepeatingTripType) query.uniqueResult();
+
+        }   catch (Exception e){
+            logger.error(e);
+            return null;
+        }
     }
 
 

@@ -13,35 +13,60 @@ import java.util.List;
 
 @Transactional
 @Service("accessoryService")
-public class AccessoryServiceImpl implements  AccessoryService{
-    static Logger logger = Logger.getLogger(AccessoryService.class);
+public class AccessoryServiceImpl implements AccessoryService {
+    static Logger logger = Logger.getLogger(AccessoryServiceImpl.class);
     @Qualifier("accessoryDaoImpl")
     @Autowired
     AccessoryDao accessoryDao;
 
     @Override
     public boolean addAccessory(Accessory accessory) {
-        logger.info("Accessory: " + accessory.getDescription() + " created");
-        return accessoryDao.addAccessory(accessory);
+        try {
+            logger.info("Accessory: " + accessory.getDescription() + " created");
+            return accessoryDao.addAccessory(accessory);
+        } catch (Exception e) {
+            logger.error(e);
+            return false;
+        }
     }
 
     @Override
     public boolean updateAccessory(Accessory accessory) {
-        return accessoryDao.updateAccessory(accessory);
+        try {
+            return accessoryDao.updateAccessory(accessory);
+        } catch (Exception e) {
+            logger.error(e);
+            return false;
+        }
     }
 
     @Override
     public boolean deleteAccessory(Accessory accessory) {
-        return accessoryDao.deleteAccessory(accessory);
+        try {
+            return accessoryDao.deleteAccessory(accessory);
+        } catch (Exception e) {
+            logger.error(e);
+            return false;
+        }
     }
 
     @Override
     public Accessory getAccessoryById(int id) {
-        return accessoryDao.getAccessoryById(id);
+        try {
+            return accessoryDao.getAccessoryById(id);
+        } catch (Exception e) {
+            logger.error(e);
+            return null;
+        }
     }
 
     @Override
     public List<Accessory> getAccessoriesByTrip(Trip trip) {
-        return accessoryDao.getAccessoriesByTrip(trip);
+        try {
+            return accessoryDao.getAccessoriesByTrip(trip);
+        } catch (Exception e) {
+            logger.error(e);
+            return null;
+        }
     }
 }

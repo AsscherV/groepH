@@ -36,7 +36,7 @@ import java.util.Map;
 @Named
 @RequestScoped
 public class CostBean implements Serializable {
-    static Logger logger = Logger.getLogger(LoginBean.class);
+    static Logger logger = Logger.getLogger(CostBean.class);
 
     @Autowired
     CostService costService;

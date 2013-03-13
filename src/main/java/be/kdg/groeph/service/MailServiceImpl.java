@@ -33,7 +33,7 @@ public class MailServiceImpl implements MailService {
     @Resource(name = "mailSender")
     private MailSender mailSender;
 
-   
+
     @Qualifier("userDaoImpl")
     @Autowired
     UserDao userDao;
@@ -41,26 +41,32 @@ public class MailServiceImpl implements MailService {
     @Deprecated
     @Override
     public void uponSuccessfulRegistration(String email) {
-       
-
-        String text="The user '" + email + "' is successfully registered";
-        String subject="User Registration successful";
-        sendMail(email,subject,text);
+        try {
+            String text = "The user '" + email + "' is successfully registered";
+            String subject = "User Registration successful";
+            sendMail(email, subject, text);
+        } catch (Exception e) {
+            logger.error(e);
+        }
 
     }
 
     private void sendMail(String email, String subject, String text) {
-        SimpleMailMessage[] mailMessageArray = new SimpleMailMessage[1];
+        try {
+            SimpleMailMessage[] mailMessageArray = new SimpleMailMessage[1];
 
-        SimpleMailMessage message = new SimpleMailMessage();
+            SimpleMailMessage message = new SimpleMailMessage();
 
-        message.setTo(email);
-        message.setSubject(subject);
-        message.setText(text);
-        mailMessageArray[0] = message;
+            message.setTo(email);
+            message.setSubject(subject);
+            message.setText(text);
+            mailMessageArray[0] = message;
 
-        System.out.println("Sending email ....");
-        mailSender.send(mailMessageArray);
+            System.out.println("Sending email ....");
+            mailSender.send(mailMessageArray);
+        } catch (Exception e) {
+            logger.error(e);
+        }
     }
 
     /*
@@ -68,62 +74,78 @@ public class MailServiceImpl implements MailService {
      */
     @Override
     public boolean isSuccessfulRegistration(String email) {
-        SimpleMailMessage[] mailMessageArray = new SimpleMailMessage[1];
+        try {
+            SimpleMailMessage[] mailMessageArray = new SimpleMailMessage[1];
 
-        SimpleMailMessage message = new SimpleMailMessage();
+            SimpleMailMessage message = new SimpleMailMessage();
 
-        String toAddress = email;
-        message.setTo(toAddress);
-        message.setSubject("User Registration successful");
-        message.setText("The user '" + toAddress + "' is successfully registered!");
-        mailMessageArray[0] = message;
+            String toAddress = email;
+            message.setTo(toAddress);
+            message.setSubject("User Registration successful");
+            message.setText("The user '" + toAddress + "' is successfully registered!");
+            mailMessageArray[0] = message;
 
-        try{
-            mailSender.send(mailMessageArray);
+            try {
+                mailSender.send(mailMessageArray);
+                System.out.println("Sending email ....");
+                return true;
+            } catch (MailException e) {
+                return false;
+            }
+        } catch (Exception e) {
+            logger.error(e);
+            return false;
+        }
+
+    }
+
+    public boolean uponTripInvitation(String email, Trip trip) {
+        try {
+            SimpleMailMessage[] mailMessageArray = new SimpleMailMessage[1];
+
+            SimpleMailMessage message = new SimpleMailMessage();
+
+            message.setTo(email);
+
+            message.setSubject("Trip invitation");
+            message.setText("You are invited to: " + trip.getTitle() + ".\n ");
+            mailMessageArray[0] = message;
             System.out.println("Sending email ....");
-            return true;
-        }  catch (MailException e){
-            return false;
-        }
 
-    }
-
-    public boolean uponTripInvitation (String email, Trip trip) {
-        SimpleMailMessage[] mailMessageArray = new SimpleMailMessage[1];
-
-        SimpleMailMessage message = new SimpleMailMessage();
-
-        message.setTo(email);
-
-        message.setSubject("Trip invitation");
-        message.setText("You are invited to: " + trip.getTitle() + ".\n ");
-        mailMessageArray[0] = message;
-        System.out.println("Sending email ....");
-
-        try{
-            mailSender.send(mailMessageArray);
-            return true;
-        }  catch (MailException e){
+            try {
+                mailSender.send(mailMessageArray);
+                return true;
+            } catch (MailException e) {
+                logger.error(e);
+                return false;
+            }
+        } catch (Exception e) {
+            logger.error(e);
             return false;
         }
     }
 
-    public boolean uponTripInvitationNewUser (String email, Trip trip, String newPassword) {
-        SimpleMailMessage[] mailMessageArray = new SimpleMailMessage[1];
+    public boolean uponTripInvitationNewUser(String email, Trip trip, String newPassword) {
+        try {
+            SimpleMailMessage[] mailMessageArray = new SimpleMailMessage[1];
 
-        SimpleMailMessage message = new SimpleMailMessage();
+            SimpleMailMessage message = new SimpleMailMessage();
 
-        message.setTo(email);
+            message.setTo(email);
 
-        message.setSubject("Trip invitation");
-        message.setText("You are invited to: " + trip.getTitle() + ".\n Your username: " + email + "\n Your password: " + newPassword);
-        mailMessageArray[0] = message;
-        System.out.println("Sending email ....");
+            message.setSubject("Trip invitation");
+            message.setText("You are invited to: " + trip.getTitle() + ".\n Your username: " + email + "\n Your password: " + newPassword);
+            mailMessageArray[0] = message;
+            System.out.println("Sending email ....");
 
-        try{
-            mailSender.send(mailMessageArray);
-            return true;
-        }  catch (MailException e){
+            try {
+                mailSender.send(mailMessageArray);
+                return true;
+            } catch (MailException e) {
+                return false;
+            }
+        } catch (Exception e) {
+            logger.error(e);
             return false;
         }
     }
@@ -131,45 +153,55 @@ public class MailServiceImpl implements MailService {
 
     @Override
     public boolean recoverPassword(String email) {
-        TripUser userByEmail = userDao.getUserByEmail(email);
-        if (userByEmail.isNull()) {
-            return false;
-        }
-        String pw =  RandomPassword.generatePassword();
-        userByEmail.setTempPassword(SHAEncryption.encrypt(pw) );
-
         try {
-            userDao.updateUser(userByEmail);
-            logger.info("User updated| TempPassword is set for user: " + userByEmail.getEmail());
-        } catch (SQLException e) {
-            logger.warn("User update of TempPassword for user: " + userByEmail.getEmail() + " failed");
+            TripUser userByEmail = userDao.getUserByEmail(email);
+            if (userByEmail.isNull()) {
+                return false;
+            }
+            String pw = RandomPassword.generatePassword();
+            userByEmail.setTempPassword(SHAEncryption.encrypt(pw));
+
+            try {
+                userDao.updateUser(userByEmail);
+                logger.info("User updated| TempPassword is set for user: " + userByEmail.getEmail());
+            } catch (SQLException e) {
+                logger.warn("User update of TempPassword for user: " + userByEmail.getEmail() + " failed");
+                return false;
+            }
+
+            sendMail(email, "Password recovery", "** This is an automated message -- please do not reply as you will not receive a response. **" + "\n \n This message is in response to your request to reset your account password. \n \n Username: " + userByEmail.getEmail() + "\n New password: " + pw);
+
+            return true;
+        } catch (Exception e) {
+            logger.error(e);
             return false;
         }
-
-        sendMail(email,"Password recovery","** This is an automated message -- please do not reply as you will not receive a response. **" + "\n \n This message is in response to your request to reset your account password. \n \n Username: " + userByEmail.getEmail() + "\n New password: " + pw);
-
-        return true;
     }
 
     @Override
     public boolean uponFacebookLoginNoAccount(String email, String password) {
-        SimpleMailMessage[] mailMessageArray = new SimpleMailMessage[1];
+        try {
+            SimpleMailMessage[] mailMessageArray = new SimpleMailMessage[1];
 
-                SimpleMailMessage message = new SimpleMailMessage();
+            SimpleMailMessage message = new SimpleMailMessage();
 
-                String toAddress = email;
-                message.setTo(toAddress);
-                message.setSubject("Facebook user registration successful!");
-                message.setText("You have registered with facebook if you want to login please use \nemail: "+toAddress+" \npassword: "+ password );
-                mailMessageArray[0] = message;
+            String toAddress = email;
+            message.setTo(toAddress);
+            message.setSubject("Facebook user registration successful!");
+            message.setText("You have registered with facebook if you want to login please use \nemail: " + toAddress + " \npassword: " + password);
+            mailMessageArray[0] = message;
 
-                System.out.println("Sending email ....");
-                try{
-                    mailSender.send(mailMessageArray);
-                    return true;
-                }  catch (MailException e){
-                    return false;
-                }
+            System.out.println("Sending email ....");
+            try {
+                mailSender.send(mailMessageArray);
+                return true;
+            } catch (MailException e) {
+                return false;
+            }
+        } catch (Exception e) {
+            logger.error(e);
+            return false;
+        }
 
     }
 }

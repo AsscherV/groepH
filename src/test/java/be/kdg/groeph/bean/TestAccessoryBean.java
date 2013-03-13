@@ -118,8 +118,8 @@ public class TestAccessoryBean extends AbstractTransactionalJUnit4SpringContextT
         accessoryBean.setUser(UserMother.validUser3());
         String redirect = accessoryBean.addAccessory();
 
-        accessoryBean.addUser();
-        accessoryBean.addUser();
+        accessoryBean.addUserToAccessory();
+        accessoryBean.addUserToAccessory();
         Trip trip = tripService.getTripById(8);
         assertEquals("AddAccessory should return SUCCESS", Tools.SUCCESS, redirect);
         assertEquals("The accessory 'Cookies' should be present in the database linked to trip '" + ACCESSORYTEST + "' and linked to 2 users", 2, trip.getAccessories().get(0).getTripUsers().size());
@@ -152,10 +152,10 @@ public class TestAccessoryBean extends AbstractTransactionalJUnit4SpringContextT
         accessoryBean.setUser(UserMother.validUser2());
         String redirect = accessoryBean.addAccessory();
 
-        accessoryBean.addUser();
+        accessoryBean.addUserToAccessory();
         Trip trip = tripService.getTripById(1);
         assertEquals("The accessory should have 1 user ", 1, trip.getAccessories().get(0).getTripUsers().size());
-        accessoryBean.removeUser(accessoryBean.getCurrentAccessory());
+        accessoryBean.removeUserFromAccessory(accessoryBean.getCurrentAccessory());
         assertEquals("The accessory should have 0 users ", 0, trip.getAccessories().get(0).getTripUsers().size());
     }
 

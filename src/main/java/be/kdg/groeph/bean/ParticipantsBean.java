@@ -22,7 +22,7 @@ import java.util.ArrayList;
 @Named
 @ViewAccessScoped
 public class ParticipantsBean implements Serializable {
-    static Logger logger = Logger.getLogger(LoginBean.class);
+    static Logger logger = Logger.getLogger(ParticipantsBean.class);
 
     String emails;
     ArrayList<String> invalidEmails = new ArrayList<String>();
@@ -74,12 +74,14 @@ public class ParticipantsBean implements Serializable {
             if (validMails(emails)) {
                 Trip trip = tripBean.getCurrentTrip();
                 participantsService.addUsersToTrip(validEmails, trip);
+                logger.info("Invitation for trip: " + trip.getTitle() + " has been send to: " + validEmails);
                 return true;
             } else {
+                logger.info("Invitation for trip: " + tripBean.currentTrip.getTitle() + " has not been send");
                 return false;
             }
         } catch (Exception e) {
-            logger.error(e);
+            logger.error(e.toString());
             return false;
         }
     }

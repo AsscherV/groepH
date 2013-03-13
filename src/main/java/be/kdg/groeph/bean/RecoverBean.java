@@ -43,9 +43,10 @@ public class RecoverBean {
 
     public boolean recoverPassword() {
         try {
+            logger.info("Password recovered for email: " + getEmail());
             return mailService.recoverPassword(getEmail());
         } catch (Exception e) {
-            logger.error(e);
+            logger.error(e.toString());
             return false;
         }
     }

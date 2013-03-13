@@ -30,6 +30,14 @@ public class UserMother {
         return new TripUser("Gunther", "Laurijssens", cal.getTime(), "0498216718", 'M', "gunther.laurijssens@student.kdg.be", SHAEncryption.encrypt("password"), address, new Date(), USER);
     }
 
+    public static TripUser validAdmin() {
+        Calendar cal;
+        cal = Calendar.getInstance();
+        cal.set(1988, Calendar.FEBRUARY, 10);
+        Address address = new Address("Baanhof", "76", "2330", "Merksplas");
+        return new TripUser("Gunther", "Laurijssens", cal.getTime(), "0498216718", 'M', "gunther.laurijssens@student.kdg.be", SHAEncryption.encrypt("password"), address, new Date(), ADMIN);
+    }
+
     public static TripUser validUser2() {
         Calendar cal;
         cal = Calendar.getInstance();

@@ -37,4 +37,5 @@ public interface TripDao {
 
     List<RepeatingTripType> fetchAllRepeatingTripTypes();
 
+    RepeatingTripType getRepetitionTypeByName(String repetitionType);
 }

@@ -121,7 +121,7 @@
                                                                     <h:commandLink type="submit"
                                                                                    rendered="#{accessoryBean.getEditable(accessory)}"
                                                                                    value="X">
-                                                                        <f:ajax listener="#{accessoryBean.removeUser(accessory)}"
+                                                                        <f:ajax listener="#{accessoryBean.removeUserFromAccessory(accessory)}"
                                                                                 render="@form"/>
                                                                     </h:commandLink>
                                                                 </h:column>
@@ -141,7 +141,7 @@
                                                         </h:column>
                                                         <h:commandButton styleClass="btn btn-success" type="submit"
                                                                          rendered="#{  accessoryBean.getAdable(accessory)}"
-                                                                         action="#{accessoryBean.addUser}"
+                                                                         action="#{accessoryBean.addUserToAccessory}"
                                                                          value="add"/>
                                                         <h:panelGroup
                                                                 rendered="#{ accessoryBean.hasAddableTripUsers(accessory)}">

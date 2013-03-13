@@ -393,19 +393,23 @@ public class RegisterBean implements Serializable {
                         userService.addUser(user);
                         putNewValues(null, null, null, null, null, ' ', null, null, null, null);
 
-                        FMessage.makeFacesMessage("Registration succesfull !", "info");
+                        FMessage.makeFacesMessage("Registration successful !", "info");
                         registered = true;
+                        logger.info("User: " + user.getEmail() + " is successfully added");
                         return Tools.SUCCESS;
                     } else {
                         mailMessage = "Registration mail could not be send. Please try to registrate again.";
                         FMessage.makeFacesMessage("Registration mail could not be send. Please try to registrate again.", "error");
+                        logger.error("Registration mail for user: " + user.getEmail() + " could not be send.");
                         return Tools.FAILURE;
                     }
                 } else {
                     FMessage.makeFacesMessage("This email already has an account !", "error");
+                    logger.error("The registration to: " + user.getEmail() + " could not be send. Email already exists.");
                     return Tools.FAILURE;
                 }
             }
+            logger.error("Registration for email: " + user.getEmail() + " failed");
             return Tools.FAILURE;
         } catch (Exception e) {
             logger.error(e);
@@ -425,19 +429,20 @@ public class RegisterBean implements Serializable {
             tripUser.setEmail(getNewemail());
             tripUser.setDateRegistered(getNewdateRegistered());
 
-            Address adress = loginBean.getUser().getAddress();
-            adress.setZipcode(getNewzipcode());
-            adress.setStreet(getNewstreet());
-            adress.setStreetNumber(getNewstreetNumber());
-            adress.setCity(getNewcity());
-            tripUser.setAddress(adress);
+            Address address = loginBean.getUser().getAddress();
+            address.setZipcode(getNewzipcode());
+            address.setStreet(getNewstreet());
+            address.setStreetNumber(getNewstreetNumber());
+            address.setCity(getNewcity());
+            tripUser.setAddress(address);
 
             userService.updateUser(tripUser);
             editableUser = false;
 
+            logger.info("User: " + tripUser + " has been updated.");
             return null;
         } catch (Exception e) {
-            logger.error(e);
+            logger.error(e.toString());
             return null;
         }
     }
@@ -458,7 +463,7 @@ public class RegisterBean implements Serializable {
             setEditableUser(true);
             return null;
         } catch (Exception e) {
-            logger.error(e);
+            logger.error(e.toString());
             return null;
         }
     }
@@ -466,9 +471,10 @@ public class RegisterBean implements Serializable {
     public String cancel() {
         try {
             setEditableUser(false);
+            logger.info("User: " + loginBean.getUser().getEmail() + " pressed cancel for profile change.");
             return null;
         } catch (Exception e) {
-            logger.error(e);
+            logger.error(e.toString());
             return null;
         }
     }
@@ -487,7 +493,7 @@ public class RegisterBean implements Serializable {
             setStreetNumber(streetNumber);
             setCity(city);
         } catch (Exception e) {
-            logger.error(e);
+            logger.error(e.toString());
         }
     }
 
@@ -496,7 +502,7 @@ public class RegisterBean implements Serializable {
             setEditablePassword(true);
             return null;
         } catch (Exception e) {
-            logger.error(e);
+            logger.error(e.toString());
             return null;
         }
     }
@@ -504,6 +510,7 @@ public class RegisterBean implements Serializable {
     public String cancelPassword() {
         try {
             setEditablePassword(false);
+            logger.info("User: " + loginBean.getUser().getEmail() + " pressed cancel with change password.");
             return null;
         } catch (Exception e) {
             logger.error(e);
@@ -511,12 +518,10 @@ public class RegisterBean implements Serializable {
         }
     }
 
-    public String updatePassword() throws SQLException {
+    public String updatePassword() {
         try {
             if (SHAEncryption.encrypt(getPassword()).equals(loginBean.getUser().getPassword())) {
-
                 if (getNewpassword().equals(getNewsecondPassword())) {
-
                     TripUser user = loginBean.getUser();
                     user.setPassword(SHAEncryption.encrypt(getNewpassword()));
                     userService.updateUser(user);
@@ -526,19 +531,22 @@ public class RegisterBean implements Serializable {
 
                     FMessage.makeFacesMessage("Password was successfully changed", "info");
                     setEditablePassword(false);
+                    logger.info("User: " + loginBean.getUser().getEmail() + " changed his password.");
                     return "SUCCESS";
                 } else {
                     setNewpassword("");
                     setNewsecondPassword("");
                     FMessage.makeFacesMessage("Your new password wasn't the same", "error");
+                    logger.info("User: " + loginBean.getUser().getEmail() + " tried to change password but both new passwords weren't the same. ");
                     return null;
                 }
 
             } else {
                 FMessage.makeFacesMessage("Wrong old password", "error");
+                logger.info("User: " + loginBean.getUser().getEmail() + " tried to change password but current password was incorrect.");
                 return null;
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             logger.error(e);
             return null;
         }

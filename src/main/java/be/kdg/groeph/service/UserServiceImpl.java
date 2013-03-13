@@ -28,78 +28,112 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     UserDao userDao;
 
     public boolean addUser(TripUser user) {
-        TripUser userByEmail = userDao.getUserByEmail(user.getEmail());
-        if (userByEmail.isNull()) {
-            userDao.addUser(user);
-            logger.info("User " + user.getEmail() + " created");
-            return true;
+        try {
+            TripUser userByEmail = userDao.getUserByEmail(user.getEmail());
+            if (userByEmail.isNull()) {
+                userDao.addUser(user);
+                return true;
+            }
+            return false;
+        } catch (Exception e) {
+            logger.error(e);
+            return false;
         }
-        logger.warn("Failed to create user: " + user.getEmail());
-        return false;
     }
 
     @Override
     public boolean changePassword(TripUser user, String newPassword) {
-        if (!user.isNull()) {
-            user.setPassword(newPassword);
-            user.setTempPassword("");
-            try {
-                userDao.updateUser(user);
-                logger.info("Password changed for user: " + user.getEmail());
-            } catch (SQLException e) {
-                logger.warn(e.getMessage().toString());
-                return false;
+        try {
+            if (!user.isNull()) {
+                user.setPassword(newPassword);
+                user.setTempPassword("");
+                try {
+                    userDao.updateUser(user);
+                    logger.info("Password changed for user: " + user.getEmail());
+                } catch (SQLException e) {
+                    logger.warn(e.getMessage().toString());
+                    return false;
+                }
+                return true;
             }
-            return true;
+            return false;
+        } catch (Exception e) {
+            logger.error(e);
+            return false;
         }
-        return false;
     }
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException, DataAccessException {
-        boolean accountNonExpired = true;
-        boolean accountNonLocked = true;
-        boolean credentialsNonExpired = true;
-        boolean enabled = true;
-        User user = new User("test", "test", enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, getDefaultAuthority());
+        try {
+            boolean accountNonExpired = true;
+            boolean accountNonLocked = true;
+            boolean credentialsNonExpired = true;
+            boolean enabled = true;
+            User user = new User("test", "test", enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, getDefaultAuthority());
 
-        TripUser userDB = userDao.getUserByEmail(email);
+            TripUser userDB = userDao.getUserByEmail(email);
 
-        if (userDB.getRole().equals("ROLE_ADMIN")) {
-            user = new User(userDB.getEmail(), userDB.getPassword(),
-                    userDB.isEnabled(), userDB.isAccountNonExpired(), userDB.isCredentialsNonExpired(), userDB.isAccountNonLocked(), getAdminAuthority());
-        } else if (userDB.getRole().equals("ROLE_USER")) {
-            user = new User(userDB.getEmail(), userDB.getPassword(),
-                    userDB.isEnabled(), userDB.isAccountNonExpired(), userDB.isCredentialsNonExpired(), userDB.isAccountNonLocked(), getDefaultAuthority());
+            if (userDB.getRole().equals("ROLE_ADMIN")) {
+                user = new User(userDB.getEmail(), userDB.getPassword(),
+                        userDB.isEnabled(), userDB.isAccountNonExpired(), userDB.isCredentialsNonExpired(), userDB.isAccountNonLocked(), getAdminAuthority());
+            } else if (userDB.getRole().equals("ROLE_USER")) {
+                user = new User(userDB.getEmail(), userDB.getPassword(),
+                        userDB.isEnabled(), userDB.isAccountNonExpired(), userDB.isCredentialsNonExpired(), userDB.isAccountNonLocked(), getDefaultAuthority());
+            }
+            return user;
+        } catch (Exception e) {
+            logger.error(e);
+            return null;
         }
-        return user;
     }
 
     private Collection<GrantedAuthority> getDefaultAuthority() {
-        Collection<GrantedAuthority> userAuthorities = new ArrayList<GrantedAuthority>();
-        userAuthorities.add(new SimpleGrantedAuthority("ROLE_USER"));
-        return userAuthorities;
+        try {
+            Collection<GrantedAuthority> userAuthorities = new ArrayList<GrantedAuthority>();
+            userAuthorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+            return userAuthorities;
+        } catch (Exception e) {
+            logger.error(e);
+            return null;
+        }
     }
 
     private Collection<GrantedAuthority> getAdminAuthority() {
-        Collection<GrantedAuthority> userAuthorities = new ArrayList<GrantedAuthority>();
-        userAuthorities.add(new SimpleGrantedAuthority("ROLE_USER"));
-        userAuthorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
-        return userAuthorities;
+        try {
+            Collection<GrantedAuthority> userAuthorities = new ArrayList<GrantedAuthority>();
+            userAuthorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+            userAuthorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+            return userAuthorities;
+        } catch (Exception e) {
+            logger.error(e);
+            return null;
+        }
     }
 
     @Override
-    public void updateUser(TripUser user) throws SQLException {
-        userDao.updateUser(user);
+    public void updateUser(TripUser user) {
+        try {
+
+            userDao.updateUser(user);
+
+        } catch (SQLException e) {
+            logger.error(e);
+        }
     }
 
     @Override
     public TripUser getUserByEmail(String s) {
-        TripUser tripUser = userDao.getUserByEmail(s);
-        if (tripUser.isNull()) {
-             return TripUser.INVALID_USER();
-        } else {
-            return userDao.getUserByEmail(s);
+        try {
+            TripUser tripUser = userDao.getUserByEmail(s);
+            if (tripUser.isNull()) {
+                return TripUser.INVALID_USER();
+            } else {
+                return userDao.getUserByEmail(s);
+            }
+        } catch (Exception e) {
+            logger.error(e);
+            return TripUser.INVALID_USER();
         }
     }
 

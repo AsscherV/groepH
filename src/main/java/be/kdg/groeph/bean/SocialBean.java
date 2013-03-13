@@ -20,6 +20,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import java.io.IOException;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -64,7 +65,7 @@ public class SocialBean implements Serializable {
         loggedIn = false;
     }
 
-    public void getFacebookUrlAuth() throws UnsupportedEncodingException {
+    public void getFacebookUrlAuth() {
         try {
             redirectUrl = "http://localhost:8080/groepH-1.0/pages/index.xhtml";
 
@@ -75,8 +76,11 @@ public class SocialBean implements Serializable {
                     + "&scope=email,user_birthday,user_hometown&response_type=token";
 
             FacesContext.getCurrentInstance().getExternalContext().redirect(url);
-        } catch (Exception e) {
-            logger.error(e);
+            logger.info("User logged in with facebook and gets redirected to 'index' ");
+        } catch (UnsupportedEncodingException e) {
+            logger.error(e.toString());
+        } catch (IOException e) {
+            logger.error(e.toString());
         }
     }
 
@@ -87,8 +91,9 @@ public class SocialBean implements Serializable {
 
             user = userService.getUserByEmail(fbUser.getEmail());
             if (user.isNull()) {
-                String newPassword = makeNewUserWithPassword();
+                String newPassword = makeNewUserReturnPassword();
                 mailService.uponFacebookLoginNoAccount(user.getEmail(), newPassword);
+                logger.info("User created with facebook.");
                 return setAndLoginUser(newPassword, false);
             } else {
                 return setAndLoginUser(user.getPassword(), true);
@@ -105,24 +110,28 @@ public class SocialBean implements Serializable {
             TripUser loggedInUser;
             if (isEncrypted) {
                 loggedInUser = loginService.loginUser(user.getEmail(), password);
+                logger.info("User: "+ loggedInUser.getEmail() +"  with previously existing account logs in with facebook.");
             } else {
                 loggedInUser = loginService.loginUser(user.getEmail(), SHAEncryption.encrypt(password));
+                logger.info("User: "+ loggedInUser.getEmail() +" without previously existing account logs in with facebook and his password gets encrypted.");
             }
             if (loggedInUser.isNull()) {
+                logger.error("User could not be logged in.");
                 return Tools.FAILURE;
             } else {
                 loginBean.setUser(loggedInUser);
                 loginBean.setLoggedIn(true);
                 loggedIn = true;
+                logger.info("User: " + loginBean.getUser().getEmail() + " is set and logged in");
                 return Tools.SUCCESS;
             }
         } catch (Exception e) {
-            logger.error(e);
+            logger.error(e.toString());
             return Tools.FAILURE;
         }
     }
 
-    private String makeNewUserWithPassword() {
+    private String makeNewUserReturnPassword() {
         try {
             String newPassword = RandomPassword.generatePassword();
             char gender;
@@ -140,9 +149,10 @@ public class SocialBean implements Serializable {
             user.setCredentialsNonExpired(true);
             user.setEnabled(true);
             userService.addUser(user);
+            logger.info("Generated password created for user: " + user.getEmail());
             return newPassword;
         } catch (Exception e) {
-            logger.error(e);
+            logger.error(e.toString());
             return null;
         }
     }
@@ -152,8 +162,9 @@ public class SocialBean implements Serializable {
             loggedIn = false;
             facebookClient = null;
             user = null;
+            logger.info("User logged out.");
         } catch (Exception e) {
-            logger.error(e);
+            logger.error(e.toString());
         }
     }
 
@@ -173,8 +184,10 @@ public class SocialBean implements Serializable {
                     + "&redirect_uri=" + redirectUrl;
 
             FacesContext.getCurrentInstance().getExternalContext().redirect(url);
+
+            logger.info("Redirected to facebook to write on wall about trip: " + tripBean.getCurrentTrip().getTitle());
         } catch (Exception e) {
-            logger.error(e);
+            logger.error(e.toString());
         }
     }
 
@@ -190,18 +203,20 @@ public class SocialBean implements Serializable {
                     + "&redirect_uri=" + redirectUrl;
 
             FacesContext.getCurrentInstance().getExternalContext().redirect(url);
+            logger.info("Redirected to facebook to send message to friends on facebook about trip: " + tripBean.getCurrentTrip().getTitle());
         } catch (Exception e) {
-            logger.error(e);
+            logger.error(e.toString());
         }
     }
 
     private void setNameCaptionDescription() {
         try {
-        name = "I'm going on a trip named " + tripBean.getCurrentTrip().getTitle() + " with Trippy Travaler !";
-        caption = "TrippyLink";
-        description = tripBean.getCurrentTrip().getDescription();
-        } catch (Exception e){
-            logger.error(e);
+            name = "I'm going on a trip named " + tripBean.getCurrentTrip().getTitle() + " with Trippy Travaler !";
+            caption = "TrippyLink";
+            description = tripBean.getCurrentTrip().getDescription();
+            logger.info("name, caption and description for facebook has been set.");
+        } catch (Exception e) {
+            logger.error(e.toString());
         }
     }
 

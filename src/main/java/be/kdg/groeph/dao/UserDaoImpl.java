@@ -22,29 +22,47 @@ public class UserDaoImpl implements UserDao {
     @Override
     @SuppressWarnings("unchecked")
     public boolean addUser(TripUser user) {
+        try {
         sessionFactory.getCurrentSession().saveOrUpdate(user);
         return true;
+        } catch (Exception e){
+            logger.error(e);
+            return false;
+        }
     }
 
     @Override
     public TripUser getUserByEmail(String email) {
+        try {
         Query query = sessionFactory.getCurrentSession().createQuery("from TripUser where email=:email");
         query.setParameter("email", email);
         if (query.uniqueResult() == null) {
             return TripUser.INVALID_USER();
         }
         return (TripUser) query.uniqueResult();
+        } catch (Exception e){
+            logger.error(e);
+            return null;
+        }
     }
 
     @Override
-    public void updateUser(TripUser user) throws SQLException {
+    public void updateUser(TripUser user) {
+        try {
         sessionFactory.getCurrentSession().update(user);
+        } catch (Exception e){
+            logger.error(e);
+        }
     }
 
 
     @Override
     public void addInvitedUser(TripUser tripUser) {
+        try {
         sessionFactory.getCurrentSession().saveOrUpdate(tripUser);
+        } catch (Exception e){
+            logger.error(e);
+        }
     }
 
 

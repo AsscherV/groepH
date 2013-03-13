@@ -30,19 +30,34 @@ public class TripServiceImpl implements TripService {
 
     @Override
     public boolean addTrip(Trip trip) {
-        logger.info("Trip: " + trip.getTitle() + " created");
-        return tripDao.addTrip(trip);
+        try {
+            logger.info("Trip: " + trip.getTitle() + " created");
+            return tripDao.addTrip(trip);
+        } catch (Exception e) {
+            logger.error(e);
+            return false;
+        }
     }
 
     @Override
     public boolean updateTrip(Trip trip) {
-        return tripDao.updateTrip(trip);
+        try {
+            return tripDao.updateTrip(trip);
+        } catch (Exception e) {
+            logger.error(e);
+            return false;
+        }
     }
 
     @Override
     @SuppressWarnings("unchecked")
     public List<Trip> fetchAllPublicTrips() {
-        return tripDao.fetchAllPublicTrips();
+        try {
+            return tripDao.fetchAllPublicTrips();
+        } catch (Exception e) {
+            logger.error(e);
+            return null;
+        }
     }
 
     @Override
@@ -52,18 +67,32 @@ public class TripServiceImpl implements TripService {
 
     @Override
     public TripType getTypeByName(String naam) {
-        return tripDao.getTypeByName(naam);
+        try {
+            return tripDao.getTypeByName(naam);
+        } catch (Exception e) {
+            logger.error(e);
+            return null;
+        }
     }
 
     @Override
     public void addUserToTrip(Trip trip, TripUser user) {
-        userDao.addInvitedUser(user);
-        tripDao.addUserToTrip(trip);
+        try {
+            userDao.addInvitedUser(user);
+            tripDao.addUserToTrip(trip);
+        } catch (Exception e) {
+            logger.error(e);
+        }
     }
 
     @Override
     public List<Trip> getTripsByName(String tripName) {
-        return tripDao.getTripsByName(tripName);
+        try {
+            return tripDao.getTripsByName(tripName);
+        } catch (Exception e) {
+            logger.error(e);
+            return null;
+        }
     }
 
     /*@Override
@@ -73,38 +102,82 @@ public class TripServiceImpl implements TripService {
 
     @Override
     public List<Trip> getAllInvitedTripsByUser(TripUser user) {
-        return tripDao.getAllInvitedTripsByUser(user);
+        try {
+            return tripDao.getAllInvitedTripsByUser(user);
+        } catch (Exception e) {
+            logger.error(e);
+            return null;
+        }
     }
 
     @Override
     public List<Trip> getAllParticipatedTripsByUser(TripUser user) {
-        return tripDao.getAllParticipatedTripsByUser(user);
+        try {
+            return tripDao.getAllParticipatedTripsByUser(user);
+        } catch (Exception e) {
+            logger.error(e);
+            return null;
+        }
     }
 
     @Override
     public Trip getTripById(int id) {
-        return tripDao.getTripById(id);
+        try {
+            return tripDao.getTripById(id);
+        } catch (Exception e) {
+            logger.error(e);
+            return null;
+        }
     }
 
     @Override
     public boolean addConfirmedTrip(Trip currentTrip) {
-        return tripDao.addConfirmedTrip(currentTrip);
+        try {
+            return tripDao.addConfirmedTrip(currentTrip);
+        } catch (Exception e) {
+            logger.error(e);
+            return false;
+        }
     }
 
     @Override
     public void addTripType(TripType tripType) {
-        tripDao.addTripType(tripType);
+        try {
+            tripDao.addTripType(tripType);
+        } catch (Exception e) {
+            logger.error(e);
+        }
 
     }
 
     @Override
     public List<RepeatingTripType> fetchAllRepeatingTripTypes() {
-        return tripDao.fetchAllRepeatingTripTypes();
+        try {
+            return tripDao.fetchAllRepeatingTripTypes();
+        } catch (Exception e) {
+            logger.error(e);
+            return null;
+        }
     }
 
     @Override
     public List<Trip> getAllCreatedTripsByUser(TripUser user) {
-        return tripDao.getTripByUserId(user);
+        try {
+            return tripDao.getTripByUserId(user);
+        } catch (Exception e) {
+            logger.error(e);
+            return null;
+        }
+    }
+
+    @Override
+    public RepeatingTripType getRepetitionTypeByName(String repetitionType) {
+        try {
+             return tripDao.getRepetitionTypeByName(repetitionType);
+        } catch (Exception e) {
+            logger.error(e.toString());
+            return null;
+        }
     }
 
 }

@@ -101,18 +101,20 @@ public class LoginBean implements Serializable {
         try {
             user = loginService.loginUser(email, SHAEncryption.encrypt(password));
             if (user.isNull()) {
+                logger.info("User with: " + email + " is null when trying to log in.");
                 return Tools.FAILURE;
             } else if (user.getTempPassword() != null && user.getTempPassword().equals(SHAEncryption.encrypt(password))) {
                 userService.changePassword(user, user.getTempPassword());
                 isLoggedIn = true;
+                logger.info("User: " + user.getEmail() + " logged in with temporary password.");
                 return RESET;
             } else {
-
                 isLoggedIn = true;
+                logger.info("User: " + user.getEmail() + " logged in");
                 return Tools.SUCCESS;
             }
         } catch (Exception e) {
-            logger.error(e);
+            logger.error(e.toString());
             return Tools.FAILURE;
         }
     }
@@ -127,9 +129,10 @@ public class LoginBean implements Serializable {
             }
             tripBean.currentTrip = null;
             //FacesContext.getCurrentInstance().getExternalContext().redirect(url);
+            logger.info("User: " + user.getEmail() + " logged out");
             return Tools.SUCCESS;
         } catch (Exception e) {
-            logger.error(e);
+            logger.error(e.toString());
             return Tools.FAILURE;
         }
     }
@@ -139,9 +142,10 @@ public class LoginBean implements Serializable {
             if (password.equals(secondPassword)) {
                 userService.changePassword(user, SHAEncryption.encrypt(password));
             }
+            logger.info("user: " + user.getEmail() + " his temporary password set to current password and temporary password has been removed.");
             return Tools.SUCCESS;
         } catch (Exception e) {
-            logger.error(e);
+            logger.error(e.toString());
             return Tools.FAILURE;
         }
     }

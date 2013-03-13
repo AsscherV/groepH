@@ -14,49 +14,90 @@ import java.util.List;
 
 @Transactional
 @Service("waypointService")
-public class WaypointServiceImpl implements WaypointService{
+public class WaypointServiceImpl implements WaypointService {
     static Logger logger = Logger.getLogger(WaypointServiceImpl.class);
     @Qualifier("waypointDaoImpl")
     @Autowired
     WaypointDao waypointDao;
+
     @Override
     public boolean addWaypoint(Waypoint waypoint) {
-        logger.info("Waypoint: " + waypoint.getLabel() + " created");
-        return waypointDao.addWaypoint(waypoint);
+        try {
+            return waypointDao.addWaypoint(waypoint);
+        } catch (Exception e) {
+            logger.error(e);
+            return false;
+        }
     }
 
     @Override
     public boolean updateWaypoint(Waypoint waypoint) {
-                return waypointDao.updateWaypoint(waypoint);
-    }
-    @Override
-        public boolean deleteWaypoint(Waypoint waypoint) {
-                    return waypointDao.deleteWaypoint(waypoint);
+        try {
+            return waypointDao.updateWaypoint(waypoint);
+        } catch (Exception e) {
+            logger.error(e);
+            return false;
         }
+    }
+
+    @Override
+    public boolean deleteWaypoint(Waypoint waypoint) {
+        try {
+            return waypointDao.deleteWaypoint(waypoint);
+        } catch (Exception e) {
+            logger.error(e);
+            return false;
+        }
+    }
 
     @Override
     public List<Waypoint> getWaypointsByTrip(Trip trip) {
-        return waypointDao.getWaypointsByTrip(trip);
+        try {
+            return waypointDao.getWaypointsByTrip(trip);
+        } catch (Exception e) {
+            logger.error(e);
+            return null;
+        }
     }
 
     @Override
     public WaypointType getTypeByName(String name) {
-        return waypointDao.getTypeByName(name);
+        try {
+            return waypointDao.getTypeByName(name);
+        } catch (Exception e) {
+            logger.error(e);
+            return null;
+        }
     }
 
     @Override
     public List<WaypointType> fetchAllWaypointTypes() {
-        return waypointDao.fetchAllWaypointTypes();
+        try {
+            return waypointDao.fetchAllWaypointTypes();
+        } catch (Exception e) {
+            logger.error(e);
+            return null;
+        }
     }
 
     @Override
     public Waypoint getWaypointByLabel(String waypointLabel) {
-        return waypointDao.getWaypointByLabel(waypointLabel);
+        try {
+            return waypointDao.getWaypointByLabel(waypointLabel);
+        } catch (Exception e) {
+            logger.error(e);
+            return null;
+        }
     }
 
     @Override
     public Waypoint getWaypointById(int id) {
-        return waypointDao.getWaypointById(id);
+        try {
+            return waypointDao.getWaypointById(id);
+        } catch (Exception e) {
+            logger.error(e);
+            return null;
+        }
     }
 
 }

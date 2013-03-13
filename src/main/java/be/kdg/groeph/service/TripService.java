@@ -38,4 +38,6 @@ public interface TripService {
 
 
     List<Trip> getAllCreatedTripsByUser(TripUser user);
+
+    RepeatingTripType getRepetitionTypeByName(String repetitionType);
 }
