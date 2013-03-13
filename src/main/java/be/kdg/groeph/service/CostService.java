@@ -14,7 +14,11 @@ import java.util.List;
  */
 public interface CostService {
 
-    public void addCost(String CostName, String CostValue, TripUser user, Trip currentTrip);
-    public List<Cost> getCostsByTripBeanId(Trip trip);
+    public boolean addCost(Cost cost);
+    public boolean updateCost(Cost cost);
+    public boolean deleteCost(Cost cost);
+    public List<Cost> getCostsByTrip(Trip trip);
     public Cost getCostByCostId(int id);
+    public  Double getTotalCostByTrip(Trip trip);
+    public  Double getTotalCostByUser(Trip trip, TripUser tripUser);
 }

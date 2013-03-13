@@ -135,8 +135,6 @@ public class AccessoryBean implements Serializable {
 
     public String editAccessory(Accessory accessory) {
         try {
-
-            System.out.println("edit acces");
             setCurrentAccessory(accessory);
             newdescription = currentAccessory.getDescription();
             editableAccessories.put(currentAccessory.getDescription(), true);

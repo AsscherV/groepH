@@ -15,9 +15,17 @@ import java.util.List;
  */
 public interface CostDao {
 
-    public void addCost(String CostName, String CostValue, TripUser user, Trip currentTrip);
+    public boolean addCost(Cost cost);
 
-    public List<Cost> getCostByTripId(Trip trip);
+    public boolean updateCost(Cost cost);
+
+    public boolean deleteCost(Cost cost);
+
+    public List<Cost> getCostByTrip(Trip trip);
 
     public Cost getCostByCostId(int id);
+
+    public Double getTotalCostByTrip(Trip trip);
+
+    public Double getTotalCostByUser(Trip trip, TripUser tripUser);
 }

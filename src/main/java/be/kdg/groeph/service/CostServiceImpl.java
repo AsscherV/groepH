@@ -26,17 +26,36 @@ public class CostServiceImpl implements CostService {
     CostDao costDao;
 
     @Override
-    public void addCost(String CostName, String CostValue, TripUser user, Trip currentTrip) {
-        costDao.addCost(CostName, CostValue, user, currentTrip);
+    public boolean addCost(Cost cost) {
+        return costDao.addCost(cost);
     }
 
     @Override
-    public List<Cost> getCostsByTripBeanId(Trip trip) {
-        return costDao.getCostByTripId(trip);
+    public boolean updateCost(Cost cost) {
+        return costDao.updateCost(cost);
+    }
+
+    @Override
+    public boolean deleteCost(Cost cost) {
+        return costDao.deleteCost(cost);
+    }
+
+    @Override
+    public List<Cost> getCostsByTrip(Trip trip) {
+        return costDao.getCostByTrip(trip);
     }
     @Override
     public Cost getCostByCostId(int id) {
         return costDao.getCostByCostId(id);
     }
 
+    @Override
+    public Double getTotalCostByTrip(Trip trip) {
+        return costDao.getTotalCostByTrip(trip);
+    }
+
+    @Override
+    public Double getTotalCostByUser(Trip trip, TripUser tripUser) {
+        return costDao.getTotalCostByUser(trip, tripUser);
+    }
 }

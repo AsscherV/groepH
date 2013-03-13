@@ -29,7 +29,7 @@ public class Cost {
     String text;
 
     @Column(name="costValue", nullable = false, length = 100)
-    int costValue;
+    Double costValue;
 
     @ManyToOne
     @JoinColumn(name = "tripUser")
@@ -44,12 +44,27 @@ public class Cost {
     public Cost() {
     }
 
+    public Cost(String text, Double costValue, TripUser tripUser, Trip trip) {
+        this.text = text;
+        this.costValue = costValue;
+        this.tripUser = tripUser;
+        this.trip = trip;
+    }
+
     public Trip getTrip() {
         return trip;
     }
 
     public void setTrip(Trip trip) {
         this.trip = trip;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getText() {
@@ -60,11 +75,11 @@ public class Cost {
         this.text = text;
     }
 
-    public int getCostValue() {
+    public Double getCostValue() {
         return costValue;
     }
 
-    public void setCostValue(int costValue) {
+    public void setCostValue(Double costValue) {
         this.costValue = costValue;
     }
 

@@ -27,20 +27,27 @@ public class CostDaoImpl implements CostDao {
     private SessionFactory sessionFactory;
 
     @Override
-    public void addCost(String CostName, String CostValue, TripUser user, Trip currentTrip) {
-       // Blob blob = sessionFactory.getCurrentSession().getLobHelper().createBlob(image);
-        Cost cost = new Cost();
-        cost.setText(CostName);
-        cost.setCostValue(Integer.parseInt(CostValue));
-        cost.setTripUser(user);
-        cost.setTrip(currentTrip);
-        sessionFactory.getCurrentSession().saveOrUpdate(cost);
+    public boolean addCost(Cost cost) {
+        sessionFactory.getCurrentSession().save(cost);
+        return true;
     }
 
     @Override
-    public List<Cost> getCostByTripId(Trip trip) {
-        Query query = sessionFactory.getCurrentSession().createQuery("from Cost where trip=:id");
-        query.setParameter("id",trip);
+    public boolean updateCost(Cost cost) {
+        sessionFactory.getCurrentSession().update(cost);
+        return true;
+    }
+
+    @Override
+    public boolean deleteCost(Cost cost) {
+        sessionFactory.getCurrentSession().delete(cost);
+        return true;
+    }
+
+    @Override
+    public List<Cost> getCostByTrip(Trip trip) {
+        Query query = sessionFactory.getCurrentSession().createQuery("from Cost where trip=:trip");
+        query.setParameter("trip",trip);
          return (List<Cost>)query.list();
     }
 
@@ -50,4 +57,19 @@ public class CostDaoImpl implements CostDao {
         query.setParameter("id",id);
         return (Cost)query.uniqueResult();
     }
+
+    @Override
+    public Double getTotalCostByTrip(Trip trip) {
+        Query query = sessionFactory.getCurrentSession().createQuery("SELECT SUM(costValue) from Cost where trip=:trip");
+                query.setParameter("trip",trip);
+                 return (Double) query.uniqueResult();
+    }
+
+    @Override
+        public Double getTotalCostByUser(Trip trip, TripUser tripUser) {
+            Query query = sessionFactory.getCurrentSession().createQuery("SELECT SUM(costValue) from Cost where trip=:trip and tripUser=:tripUser");
+            query.setParameter("trip",trip);
+            query.setParameter("tripUser",tripUser);
+            return (Double) query.uniqueResult();
+        }
 }
