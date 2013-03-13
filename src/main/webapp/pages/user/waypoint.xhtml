@@ -35,8 +35,10 @@
                     <ul>
                         <!-- Tab buttons -->
                         <li>
-                            <h:outputLink class="button" value="trip.xhtml" rendered="#{not tripBean.editableTrip}">#{tripBean.currentTrip.title}</h:outputLink>
-                            <h:outputLink class="button" value="createTrip.xhtml" rendered="#{tripBean.editableTrip}">#{tripBean.currentTrip.title}</h:outputLink>
+                            <h:outputLink class="button" value="trip.xhtml"
+                                          rendered="#{not tripBean.editableTrip}">#{tripBean.currentTrip.title}</h:outputLink>
+                            <h:outputLink class="button" value="createTrip.xhtml"
+                                          rendered="#{tripBean.editableTrip}">#{tripBean.currentTrip.title}</h:outputLink>
 
                         </li>
                         <h:panelGroup rendered="#{loginBean.loggedIn}">
@@ -82,21 +84,24 @@
                                 <h:panelGrid class="floatLeft marginRight" columns="2" border="0">
                                     <h:outputLabel value="#{msgs.title}"/>
                                     <h:outputLabel value="#{waypointBean.currentWaypoint.label}"/>
-                                    <h:outputLabel value="#{msgs.description}" rendered="#{waypointBean.currentWaypoint.correctAnswer==null}"/>
-                                    <h:outputLabel value="#{msgs.question}" rendered="#{waypointBean.currentWaypoint.correctAnswer!=null}"/>
+                                    <h:panelGroup rendered="#{waypointBean.currentWaypoint.correctAnswer==null}">
+                                        <h:outputLabel value="#{msgs.description}"/>
+                                        <h:outputLabel value="#{msgs.question}"/>
+                                    </h:panelGroup>
                                     <h:outputLabel value="#{waypointBean.currentWaypoint.description}"/>
 
-                                        <h:outputLabel rendered="#{waypointBean.currentWaypoint.correctAnswer!=null}" value="#{msgs.answer} 1"/>
-                                        <h:outputLabel rendered="#{waypointBean.currentWaypoint.correctAnswer!=null}" value="#{waypointBean.currentWaypoint.answer1}"/>
-                                        <h:outputLabel rendered="#{waypointBean.currentWaypoint.correctAnswer!=null}" value="#{msgs.answer} 2"/>
-                                        <h:outputLabel rendered="#{waypointBean.currentWaypoint.correctAnswer!=null}" value="#{waypointBean.currentWaypoint.answer2}"/>
-                                        <h:outputLabel rendered="#{waypointBean.currentWaypoint.correctAnswer!=null}" value="#{msgs.answer} 3"/>
-                                        <h:outputLabel rendered="#{waypointBean.currentWaypoint.correctAnswer!=null}" value="#{waypointBean.currentWaypoint.answer3}"/>
-                                        <h:outputLabel rendered="#{waypointBean.currentWaypoint.correctAnswer!=null}" value="#{msgs.answer} 4"/>
-                                        <h:outputLabel rendered="#{waypointBean.currentWaypoint.correctAnswer!=null}" value="#{waypointBean.currentWaypoint.answer4}"/>
-                                        <h:outputLabel rendered="#{waypointBean.currentWaypoint.correctAnswer!=null}" value="#{msgs.correctAnswer}"/>
-                                        <h:outputLabel rendered="#{waypointBean.currentWaypoint.correctAnswer!=null}" value="#{waypointBean.currentWaypoint.correctAnswer}"/>
-
+                                    <h:panelGroup rendered="#{waypointBean.currentWaypoint.correctAnswer!=null}">
+                                        <h:outputLabel value="#{msgs.answer} 1"/>
+                                        <h:outputLabel value="#{waypointBean.currentWaypoint.answer1}"/>
+                                        <h:outputLabel value="#{msgs.answer} 2"/>
+                                        <h:outputLabel value="#{waypointBean.currentWaypoint.answer2}"/>
+                                        <h:outputLabel value="#{msgs.answer} 3"/>
+                                        <h:outputLabel value="#{waypointBean.currentWaypoint.answer3}"/>
+                                        <h:outputLabel value="#{msgs.answer} 4"/>
+                                        <h:outputLabel value="#{waypointBean.currentWaypoint.answer4}"/>
+                                        <h:outputLabel value="#{msgs.correctAnswer}"/>
+                                        <h:outputLabel value="#{waypointBean.currentWaypoint.correctAnswer}"/>
+                                    </h:panelGroup>
                                     <h:outputLabel value="#{msgs.type}"/>
                                     <h:outputLabel value="#{waypointBean.currentWaypoint.waypointType.type}"/>
                                     <h:outputLabel value="#{msgs.lat}"/>
@@ -105,15 +110,17 @@
                                     <h:outputLabel id="lng" value="#{waypointBean.currentWaypoint.longitude}"/>
 
 
-                                <h:form>
-                                    <h:commandButton action="#{waypointBean.editWaypoint}" value="#{msgs.updateWaypoint}"
-                                                     class="btn btn-success" id="editWaypoint"/>
-                                    <h:commandButton action="#{waypointBean.deleteWaypoint}"  value="#{msgs.deleteWaypoint}"
-                                                     class="btn btn-success" id="deleteWaypoint"/>
-                                </h:form>
+                                    <h:form>
+                                        <h:commandButton action="#{waypointBean.editWaypoint}"
+                                                         value="#{msgs.updateWaypoint}"
+                                                         class="btn btn-success" id="editWaypoint"/>
+                                        <h:commandButton action="#{waypointBean.deleteWaypoint}"
+                                                         value="#{msgs.deleteWaypoint}"
+                                                         class="btn btn-success" id="deleteWaypoint"/>
+                                    </h:form>
                                 </h:panelGrid>
 
-                            
+
                                 <div id="map_canvas"></div>
 
                                 <div>

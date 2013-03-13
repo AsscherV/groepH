@@ -364,10 +364,7 @@ public class WaypointBean implements Serializable {
         return currentWaypoint;
     }
 
-    public String setThisAsCurrentWaypoint() {
-        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-        String waypointId = request.getParameter("currentWaypointId");
-        Waypoint waypoint = waypointService.getWaypointById(Integer.parseInt(waypointId));
+    public String setThisAsCurrentWaypoint(Waypoint waypoint) {
         setCurrentWaypoint(waypoint);
         return WAYPOINT;
     }

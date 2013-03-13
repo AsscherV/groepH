@@ -95,7 +95,6 @@
 
     <navigation-rule>
         <navigation-case>
-            <from-action>#{waypointBean.setThisAsCurrentWaypoint}</from-action>
             <from-outcome>WAYPOINT</from-outcome>
             <to-view-id>/pages/user/waypoint.xhtml</to-view-id>
             <redirect/>

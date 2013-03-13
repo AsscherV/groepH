@@ -84,9 +84,7 @@
                                               -->
 
                                                 <h:commandLink value="#{waypoint.label}"
-                                                               action="#{waypointBean.setThisAsCurrentWaypoint}">
-                                                    <f:param name="currentWaypointId" value="#{waypoint.id}"/>
-                                                </h:commandLink>
+                                                               action="#{waypointBean.setThisAsCurrentWaypoint(waypoint)}"/>
 
                                         </h:column>
                                         <h:column>
