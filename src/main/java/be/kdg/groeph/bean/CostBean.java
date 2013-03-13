@@ -106,18 +106,20 @@ public class CostBean implements Serializable {
     public Double getAverageCostPerUser() {
         totalCost = getTotalCost();
         thisTripUsers = getConfirmedTripUsers();
-
-        //TODO: organiser needs to be removed, not a confirmed tripuser
-        TripUser organiser = tripBean.currentTrip.getTripUser();
-        thisTripUsers.add(organiser);
-
-        return totalCost / thisTripUsers.size();
-
-
+        if (totalCost != 0) {
+            return totalCost / thisTripUsers.size();
+        } else {
+            return 0.0;
+        }
     }
 
     public Double getTotalCost() {
-        return costService.getTotalCostByTrip(currentTrip);
+        Double total = costService.getTotalCostByTrip(currentTrip);
+        if (total == null) {
+            return 0.0;
+        } else {
+            return total;
+        }
     }
 
     public List<Cost> getCostsPerTripUser() {
@@ -127,22 +129,25 @@ public class CostBean implements Serializable {
         totalCost = getTotalCost();
 
         thisTripUsers = getConfirmedTripUsers();
-        //TODO: organiser needs to be removed, not a confirmed tripuser
-        TripUser organiser = getCurrentTrip().getTripUser();
-        thisTripUsers.add(organiser);
 
         averageCostPerUser = getAverageCostPerUser();
-        if (averageCostPerUser != null) {
-            for (TripUser user : thisTripUsers) {
-                totalCostByUser = costService.getTotalCostByUser(currentTrip, user);
-                calculatedCostPerUser = averageCostPerUser - totalCostByUser;
-                calculatedCosts.add(new Cost("total cost", calculatedCostPerUser, user, currentTrip));
-            }
 
-            return calculatedCosts;
+        for (TripUser user : thisTripUsers) {
+            totalCostByUser = getTotalCostPerUser(user);
+            calculatedCostPerUser = averageCostPerUser - totalCostByUser;
+            calculatedCosts.add(new Cost("total cost", calculatedCostPerUser, user, currentTrip));
+        }
+
+        return calculatedCosts;
+
+    }
+
+    private Double getTotalCostPerUser(TripUser user) {
+        totalCostByUser = costService.getTotalCostByUser(currentTrip, user);
+        if (totalCostByUser == null) {
+            return 0.0;
         } else {
-            calculatedCosts.add(new Cost("No total cost", 0.0, loginBean.getUser(), currentTrip));
-            return calculatedCosts;
+            return totalCostByUser;
         }
     }
 
@@ -193,7 +198,11 @@ public class CostBean implements Serializable {
     }
 
     public List<TripUser> getConfirmedTripUsers() {
-        return tripService.getTripById(getCurrentTrip().getId()).getConfirmedTripUsers();
+        List<TripUser> confirmedUsers = tripService.getTripById(getCurrentTrip().getId()).getConfirmedTripUsers();
+        //TODO: organiser needs to be removed, not a confirmed tripuser
+        TripUser organiser = getCurrentTrip().getTripUser();
+        confirmedUsers.add(organiser);
+        return confirmedUsers;
     }
 
     public Cost getCurrentCost() {

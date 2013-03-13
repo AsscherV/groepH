@@ -66,11 +66,12 @@
 
                         <div id="partTab" class="tabContentsTrip">
                             <div class="box">
-                                <h1 class="error">GEEN KOSTEN INVOEREN WERKT NIET!</h1>
-                                <h1>Costs of TRIP <h:outputText value="#{costBean.currentTrip.title}"/></h1>
 
-                                <!--HIer nen list met alle kosten + Bijlage -->
+                                <h1>Costs of TRIP <h:outputText value="#{costBean.currentTrip.title}"/></h1>
                                 <c:if test="#{tripBean.currentTrip.started == false}">
+                                    <c:if test="#{costBean.hasCosts == false}">
+                                        <h1> No Costs </h1>
+                                    </c:if>
                                     <c:if test="#{costBean.hasCosts == true}">
                                         <table>
                                             <tr>
@@ -105,16 +106,18 @@
                                                     <f:facet name="header">Description cost</f:facet>
                                                     <h:outputText value="#{cost.text}"
                                                                   rendered="#{not costBean.getEditable(cost)}"/>
-                                                    <h:inputText value="#{costBean.newtext}"
+                                                    <h:inputText id="newtext" value="#{costBean.newtext}"
                                                                  rendered="#{costBean.getEditable(cost)}"/>
+                                                    <h:message for="newtext" styleClass="error"/>
 
                                                 </h:column>
                                                 <h:column>
                                                     <f:facet name="header">Value of cost</f:facet>
                                                     <h:outputText value="#{cost.costValue}"
                                                                   rendered="#{not costBean.getEditable(cost)}"/>
-                                                    <h:inputText value="#{costBean.newcostValue}"
+                                                    <h:inputText id="newcostValue" value="#{costBean.newcostValue}"
                                                                  rendered="#{costBean.getEditable(cost)}"/>
+                                                    <h:message for="newcostValue" styleClass="error"/>
                                                 </h:column>
                                                 <h:column>
                                                     <f:facet name="header">UserName</f:facet>
@@ -129,26 +132,27 @@
                                                 <h:column>
                                                     <h:commandLink type="submit"
                                                                    rendered="#{costBean.getEditable(cost)}"
+                                                                   action="#{costBean.cancel(cost)}"
                                                                    value="Cancel">
-                                                        <f:ajax listener="#{costBean.cancel(cost)}"
-                                                                render="@form"/>
                                                     </h:commandLink>
                                                 </h:column>
 
-                                                        <h:column>
-                                                            <h:commandLink value="Edit" type="submit"
-                                                                           rendered="#{ not costBean.getEditable(cost)}">
-                                                                <f:ajax listener="#{costBean.editCost(cost)}"
-                                                                        render="@form"/>
-                                                            </h:commandLink>
-                                                        </h:column>
-                                                        <h:column>
-                                                            <h:commandLink value="Delete" type="submit"
-                                                                           rendered="#{ not costBean.getEditable(cost)}">
-                                                                <f:ajax listener="#{costBean.deleteCost(cost)}"
-                                                                        render="@form"/>
-                                                            </h:commandLink>
-                                                        </h:column>
+                                                <c:if test="#{costBean.organizer == true}">
+                                                    <c:if test="#{costBean.containsEditable == false}">
+                                                <h:column>
+                                                    <h:commandLink value="Edit" type="submit"
+                                                                   rendered="#{ not costBean.getEditable(cost)}"
+                                                                   action="#{costBean.editCost(cost)}">
+                                                    </h:commandLink>
+                                                </h:column>
+                                                <h:column>
+                                                    <h:commandLink value="Delete" type="submit"
+                                                                   rendered="#{ not costBean.getEditable(cost)}"
+                                                            action="#{costBean.deleteCost(cost)}">
+                                                    </h:commandLink>
+                                                </h:column>
+                                                </c:if>
+                                                </c:if>
                                             </h:dataTable>
                                         </h:form>
                                         <table>
@@ -159,9 +163,10 @@
                                                 <td><h:outputText value="#{costBean.totalCost}"/></td>
                                             </tr>
                                         </table>
-                                        <!--2 fields (tekst,kost) , + filepicker -->
 
                                     </c:if>
+
+                                    <hr/>
                                     <h:form columns="3" border="0">
                                         <h:outputLabel value="CostName"/>
                                         <h:inputText id="text" styleClass="span2" value="#{costBean.text}"/>
@@ -172,11 +177,6 @@
                                         <h:inputText id="costValue" styleClass="span2"
                                                      value="#{costBean.costValue}"/>
                                         <h:message for="costValue" styleClass="error"/>
-
-                                        <!-- Hier moet een date file picker
-                                        <h:outputLabel value="{msgs.Images}"/>
-                                        <t:inputFileUpload binding="{costBean.uFile}" />
-                                        <h:outputText value=""/>-->
                                         <br/>
                                         <h:commandButton value="submit" type="submit" action="#{costBean.addCost}"/>
                                     </h:form>
