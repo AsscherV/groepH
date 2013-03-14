@@ -28,40 +28,7 @@
             <!-- trip info -->
             <div class="span9">
                 <div id="tabContainerTrip" class="tabContainer">
-                    <ul>
-                        <!-- Tab buttons -->
-                        <li>
-                            <c:if test="#{tripBean.editableTrip == false}">
-                                <a class="button" href="trip.xhtml">#{tripBean.currentTrip.title}</a>
-                            </c:if>
-                            <c:if test="#{tripBean.editableTrip == true}">
-                                <a class="button" href="createTrip.xhtml">#{tripBean.currentTrip.title}</a>
-                            </c:if>
-                        </li>
-                        <h:panelGroup rendered="#{loginBean.loggedIn}">
-                            <li>
-                                <a class="button" href="stops.xhtml">Stops</a>
-                            </li>
-                            <li>
-                                <a class="button active" href="participants.xhtml">Participants</a>
-                            </li>
-                            <li>
-                                <a class="button" href="accessories.xhtml">Accessories</a>
-                            </li>
-                            <li>
-                                <a class="button" href="styling.xhtml">Styling</a>
-                            </li>
-                            <li>
-                                <a class="button" href="tripCosts.xhtml">Costs</a>
-                            </li>
-                            <h:panelGroup rendered="#{loginBean.user.admin}">
-                                <li>
-                                    <a class="button" href="../admin/costs.xhtml">Costs</a>
-                                </li>
-                            </h:panelGroup>
-
-                        </h:panelGroup>
-                    </ul>
+                    <div class="noButton"></div>
                     <!-- Tab content -->
                     <div class="tabDetails">
 
@@ -167,25 +134,25 @@
                                     </h:panelGrid>
                                     <h:panelGrid columns="2" border="0"
                                                  rendered="#{ not registerBean.editablePassword}">
-                                        <h:commandButton value="Change profile" immediate="true"
+                                        <h:commandButton value="#{msgs.editProfile}" immediate="true"
                                                          action="#{registerBean.editUser}"
                                                          rendered="#{not registerBean.editableUser}"
                                                          styleClass="btn btn-success"/>
-                                        <h:commandButton value="Change password" action="#{registerBean.changePassword}"
+                                        <h:commandButton value="#{msgs.editPassword}" action="#{registerBean.changePassword}"
                                                          rendered="#{not registerBean.editableUser}"
                                                          styleClass="btn btn-success"/>
-                                        <h:commandButton value="Save" action="#{registerBean.updateUser}"
+                                        <h:commandButton value="#{msgs.save}" action="#{registerBean.updateUser}"
                                                          rendered="#{registerBean.editableUser}"
                                                          styleClass="btn btn-success"/>
-                                        <h:commandButton value="Cancel" action="#{registerBean.cancel}"
+                                        <h:commandButton value="#{msgs.cancel}" action="#{registerBean.cancel}"
                                                          rendered="#{registerBean.editableUser}"
                                                          styleClass="btn btn-success"/>
                                     </h:panelGrid>
                                     <h:panelGrid columns="2" border="0"
                                                  rendered="#{ registerBean.editablePassword}">
-                                        <h:commandButton value="Change Password" action="#{registerBean.updatePassword}"
+                                        <h:commandButton value="#{msgs.save}" action="#{registerBean.updatePassword}"
                                                          styleClass="btn btn-success"/>
-                                        <h:commandButton value="Cancel" action="#{registerBean.cancelPassword}" immediate="true"
+                                        <h:commandButton value="#{msgs.cancel}" action="#{registerBean.cancelPassword}" immediate="true"
                                                          styleClass="btn btn-success"/>
                                     </h:panelGrid>
                                 </h:form>
