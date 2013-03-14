@@ -140,7 +140,7 @@
                                             <h:message for="lng" styleClass="error"/>
 
                                         </h:panelGrid>
-                                        <h:commandButton type="submit" action="#{waypointBean.addWaypoint}" class="btn btn-success" value="#{msgs.addWaypoint}" rendered="#{not waypointBean.editableWaypoint}"/>
+                                        <h:commandButton type="submit" action="#{waypointBean.addWaypoint}" class="btn btn-success" value="#{msgs.add}" rendered="#{not waypointBean.editableWaypoint}"/>
                                         <h:commandButton type="submit" action="#{waypointBean.updateWaypoint}" class="btn btn-success" value="#{msgs.updateWaypoint}" rendered="#{waypointBean.editableWaypoint}"/>
                                         <h:commandButton immediate="true" type="submit" action="#{waypointBean.cancel}" class="btn btn-success" value="#{msgs.cancelWaypoint}" rendered="#{waypointBean.editableWaypoint}"/>
                                     </h:form>
