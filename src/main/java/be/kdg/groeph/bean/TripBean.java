@@ -83,7 +83,6 @@ public class TripBean implements Serializable {
     private Integer newNumberOfRepetitions;
     private boolean newIsPublic;
 
-
     Trip currentTrip;
     private String filter;
     private boolean isVisible;
@@ -91,8 +90,10 @@ public class TripBean implements Serializable {
     private boolean hasCurrentTrip;
     private boolean isInteractive;
     private boolean editableTrip;
-    boolean isRepeated;
-    boolean notAnytime;
+    private boolean isRepeated;
+    private boolean notAnytime;
+    private Calendar calStart;
+    private Calendar calEnd;
 
 
     public TripBean() {
@@ -101,6 +102,7 @@ public class TripBean implements Serializable {
         //labels = new ArrayList<Label>();
         filter = "";
         numberOfRepetitions = null;
+        isRepeated = false;
     }
 
     public String getNewRepetitionType() {
@@ -344,6 +346,7 @@ public class TripBean implements Serializable {
 
     public String setThisAsCurrentTrip(Trip trip) {
         try {
+            cancelUpdate();
             setCurrentTrip(trip);
             System.out.println(currentTrip.getId());
             if (loginBean.isLoggedIn()) {
@@ -357,40 +360,27 @@ public class TripBean implements Serializable {
         }
     }
 
+    public String cancelUpdate() {
+        clearFields();
+        editableTrip = false;
+        return Tools.SUCCESS;
+    }
+
     public String addTrip() {
         try {
             Trip trip;
             setVisible(false);
             TripType type = tripService.getTypeByName(getTripType());
-            RepeatingTripType repeatingTripType = tripService.getRepetitionTypeByName(getRepetitionType());
-            //public Trip(String title, String description, Date startTime, Date endTime, String label, TripType tripType, boolean isPublic) {
 
             if (numberOfRepetitions != null) {
                 for (int i = 0; i < numberOfRepetitions; i++) {
-                    Calendar calStart = Calendar.getInstance();
-                    calStart.setTime(getStartTime());
-                    Calendar calEnd = Calendar.getInstance();
-                    calEnd.setTime(getEndTime());
-                    switch (repetitionType) {
-                        case "Yearly":
-                            calStart.add(Calendar.YEAR, i);
-                            calEnd.add(Calendar.YEAR, i);
-                            break;
-                        case "Monthly":
-                            calStart.add(Calendar.MONTH, i);
-                            calEnd.add(Calendar.MONTH, i);
-                            break;
-                        case "Weekly":
-                            calStart.add(Calendar.WEEK_OF_YEAR, i);
-                            calEnd.add(Calendar.WEEK_OF_YEAR, i);
-                            break;
-                        case "Daily":
-                            calStart.add(Calendar.DAY_OF_MONTH, i);
-                            calEnd.add(Calendar.DAY_OF_MONTH, i);
-                            break;
-                    }
 
-                    trip = new Trip(getTitle(), getDescription(), calStart.getTime(), calEnd.getTime(), getLabel(), type, repeatingTripType, getPublic(), isVisible);
+                    if (!tripType.equals(ANYTIME)) {
+                        switchRepetitionType(repetitionType, i);
+                        trip = new Trip(getTitle(), getDescription(), calStart.getTime(), calEnd.getTime(), getLabel(), type, getPublic(), isVisible);
+                    } else {
+                        trip = new Trip(getTitle(), getDescription(), null, null, getLabel(), type, getPublic(), isVisible);
+                    }
                     trip.setStarted(false);
 
                     loginBean.getUser().addTrip(trip);
@@ -399,17 +389,17 @@ public class TripBean implements Serializable {
                     } else {
                         return Tools.FAILURE;
                     }
+
                 }
+
                 logger.info("Trip: " + currentTrip + " has been added");
                 clearFields();
                 return Tools.SUCCESS;
+
             } else {
 
-                trip = new Trip(getTitle(), getDescription(), getStartTime(), getEndTime(), getLabel(), type, repeatingTripType, getPublic(), isVisible);
+                trip = new Trip(getTitle(), getDescription(), getStartTime(), getEndTime(), getLabel(), type, getPublic(), isVisible);
                 trip.setStarted(false);
-
-                // Label label = new Label(getLabel());
-                //trip.addLabel(label);
 
                 loginBean.getUser().addTrip(trip);
                 if (tripService.addTrip(trip)) {
@@ -426,6 +416,7 @@ public class TripBean implements Serializable {
             logger.error(e.toString());
             return Tools.FAILURE;
         }
+
     }
 
     public void clearFields() {
@@ -590,27 +581,91 @@ public class TripBean implements Serializable {
             trip.setLabel(getNewLabel());
             //Label label = new Label(getNewLabel());
             //trip.addLabel(label);
-            trip.setEndTime(getNewEndTime());
-            trip.setStartTime(getNewStartTime());
+
             trip.setTitle(getNewTitle());
             TripType tripType = tripService.getTypeByName(getNewTripType());
             trip.setTripType(tripType);
+
+            if (!getNewTripType().equals(ANYTIME)) {
+                trip.setEndTime(getNewEndTime());
+                trip.setStartTime(getNewStartTime());
+            } else {
+                trip.setEndTime(null);
+                trip.setStartTime(null);
+            }
             trip.setPublic(isNewIsPublic());
 
-            RepeatingTripType repetitionType = tripService.getRepetitionTypeByName(getNewRepetitionType());
-            trip.setRepeatingTripType(repetitionType);
+            if (numberOfRepetitions != null) {
+                for (int i = 0; i < numberOfRepetitions; i++) {
+                    if (!getNewTripType().equals(ANYTIME)) {
+                        switchRepetitionType(repetitionType, i);
+                    }
+                    if (i == 0) {
+                        if (tripService.updateTrip(trip)) {
+                            editableTrip = false;
+                        } else {
+                            logger.info("Trip: " + currentTrip.getTitle() + " could not be updated.");
+                            return Tools.FAILURE;
+                        }
+                    } else {
+                        setDescription(getNewDescription());
+                        setLabel(getNewLabel());
+                        setTitle(getNewTitle());
+                        setTripType(tripService.getTypeByName(getNewTripType()).getType());
 
-            if (tripService.updateTrip(trip)) {
-                editableTrip = false;
+                        if (!getNewTripType().equals(ANYTIME)) {
+                            setEndTime(getNewEndTime());
+                            setStartTime(getNewStartTime());
+                        } else {
+                            setEndTime(null);
+                            setStartTime(null);
+                        }
+                        setPublic(isNewIsPublic());
+                        addTrip();
+                    }
+
+                }
                 logger.info("Trip: " + currentTrip.getTitle() + " is updated.");
                 return Tools.SUCCESS;
+            } else {
+                if (tripService.updateTrip(trip)) {
+                    editableTrip = false;
+                    logger.info("Trip: " + currentTrip.getTitle() + " is updated.");
+                    return Tools.SUCCESS;
+                } else {
+                    logger.info("Trip: " + currentTrip.getTitle() + " could not be updated.");
+                    return Tools.FAILURE;
+                }
             }
-
-            logger.info("Trip: " + currentTrip.getTitle() + " could not be updated.");
-            return Tools.FAILURE;
         } catch (Exception e) {
             logger.error(e.toString());
             return Tools.FAILURE;
+        }
+
+    }
+
+    private void switchRepetitionType(String repetitionType, int i) {
+        calStart = Calendar.getInstance();
+        calStart.setTime(getStartTime());
+        calEnd = Calendar.getInstance();
+        calEnd.setTime(getEndTime());
+        switch (repetitionType) {
+            case "Yearly":
+                calStart.add(Calendar.YEAR, i);
+                calEnd.add(Calendar.YEAR, i);
+                break;
+            case "Monthly":
+                calStart.add(Calendar.MONTH, i);
+                calEnd.add(Calendar.MONTH, i);
+                break;
+            case "Weekly":
+                calStart.add(Calendar.WEEK_OF_YEAR, i);
+                calEnd.add(Calendar.WEEK_OF_YEAR, i);
+                break;
+            case "Daily":
+                calStart.add(Calendar.DAY_OF_MONTH, i);
+                calEnd.add(Calendar.DAY_OF_MONTH, i);
+                break;
         }
     }
 
@@ -628,9 +683,11 @@ public class TripBean implements Serializable {
             newTitle = getCurrentTrip().getTitle();
             newIsPublic = getCurrentTrip().isPublic();
             if (newTripType.toString().equals("Repeating")) {
-                newRepetitionType = getCurrentTrip().getRepeatingTripType().getRepeatingType();
+                //newRepetitionType = getCurrentTrip().getTripType().getRepeatingTripType().getRepeatingType();
             }
             editableTrip = true;
+            isRepeated = false;
+            changeUpdateTripType();
             return EDITTRIP;
         } catch (Exception e) {
             logger.error(e);
@@ -639,41 +696,26 @@ public class TripBean implements Serializable {
     }
 
 
-    public void changeUpdateTripType() {
-        try {
-            System.out.println(getNewTripType());
-            if (getNewTripType().equals(REAPTING)) {
-                isRepeated = true;
-            } else {
-                isRepeated = false;
-            }
-
-            if (getNewTripType().equals(ANYTIME)) {
-                notAnytime = false;
-            } else {
-                notAnytime = true;
-            }
-
-            logger.info("Trip type for trip: " + currentTrip.getTitle() + " has been changed.");
-        } catch (Exception e) {
-            logger.error(e);
-        }
-    }
-
     public void changeTripType() {
         try {
-            if (getTripType().equals(REAPTING)) {
-                isRepeated = true;
-            } else {
-                isRepeated = false;
-            }
-
             if (getTripType().equals(ANYTIME)) {
                 notAnytime = false;
             } else {
                 notAnytime = true;
             }
+            logger.info("Trip type for trip: " + currentTrip.getTitle() + " has been changed.");
+        } catch (Exception e) {
+            logger.error(e.toString());
+        }
+    }
 
+    public void changeUpdateTripType() {
+        try {
+            if (getNewTripType().equals(ANYTIME)) {
+                notAnytime = false;
+            } else {
+                notAnytime = true;
+            }
             logger.info("Trip type for trip: " + currentTrip.getTitle() + " has been changed.");
         } catch (Exception e) {
             logger.error(e);

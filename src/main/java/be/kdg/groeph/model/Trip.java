@@ -47,10 +47,7 @@ public class Trip implements Nullable, Serializable {
     //@Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     private TripType tripType;
 
-    @ManyToOne
-    @JoinColumn(name = "repeatingTripType", nullable = true)
-    //@Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    private RepeatingTripType repeatingTripType;
+
 
     @ManyToOne
     @JoinColumn(name = "tripUser", nullable = false)
@@ -116,7 +113,7 @@ public class Trip implements Nullable, Serializable {
         this.isPublic = isPublic;
     }
 
-    public Trip(String title, String description, Date startTime, Date endTime, String label, TripType tripType, RepeatingTripType repeatingTripType, boolean isPublic, boolean visible) {
+    public Trip(String title, String description, Date startTime, Date endTime, String label, TripType tripType,  boolean isPublic, boolean visible) {
         this.title = title;
         this.description = description;
         this.startTime = startTime;
@@ -125,7 +122,6 @@ public class Trip implements Nullable, Serializable {
         this.tripType = tripType;
         this.isPublic = isPublic;
         this.isVisible = visible;
-        this.repeatingTripType = repeatingTripType;
     }
 
     public Trip(String title, String description, Date startTime, Date endTime, TripType tripType, boolean isPublic,boolean visible) {
@@ -166,13 +162,7 @@ public class Trip implements Nullable, Serializable {
         isStarted = started;
     }
 
-    public RepeatingTripType getRepeatingTripType() {
-        return repeatingTripType;
-    }
 
-    public void setRepeatingTripType(RepeatingTripType repeatingTripType) {
-        this.repeatingTripType = repeatingTripType;
-    }
 
     public TripType getTripType() {
         return tripType;

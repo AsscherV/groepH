@@ -25,6 +25,7 @@ public class TripType implements Serializable, Nullable {
     public TripType() {
 
     }
+
     public TripType(String type) {
         this.type = type;
     }
@@ -37,7 +38,7 @@ public class TripType implements Serializable, Nullable {
         this.trips = trips;
     }
 
-    public void addTrip(Trip trip){
+    public void addTrip(Trip trip) {
         trip.setTripType(this);
         trips.add(trip);
     }
@@ -57,6 +58,7 @@ public class TripType implements Serializable, Nullable {
     public void setType(String type) {
         this.type = type;
     }
+
 
     @Override
     public boolean isNull() {

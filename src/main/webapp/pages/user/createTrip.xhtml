@@ -32,10 +32,10 @@
     <!-- Tab buttons -->
     <li>
         <h:outputLink class="button active" value="trip.xhtml" rendered="#{not tripBean.editableTrip}">
-            <h:outputText value="#{tripBean.currentTrip.title}" />
+            <h:outputText value="#{tripBean.currentTrip.title}"/>
         </h:outputLink>
         <h:outputLink class="button active" value="createTrip.xhtml" rendered="#{tripBean.editableTrip}">
-            <h:outputText value="#{tripBean.currentTrip.title}" />
+            <h:outputText value="#{tripBean.currentTrip.title}"/>
         </h:outputLink>
     </li>
     <h:panelGroup rendered="#{loginBean.loggedIn and tripBean.currentTrip!=null}">
@@ -108,7 +108,7 @@
                             <f:selectItems value="#{tripBean.allTripTypes}" var="type"
                                            itemLabel="#{type.id} : #{type.type}"
                                            itemValue="#{type.type}"/>
-                            <f:ajax listener="#{tripBean.changeTripType}" render="RepeatingGroup"/>
+                            <f:ajax listener="#{tripBean.changeTripType}" render="typeGroup"/>
                         </h:selectOneMenu>
 
                         <h:selectOneMenu value="#{tripBean.newTripType}"
@@ -116,11 +116,18 @@
                             <f:selectItems value="#{tripBean.allTripTypes}" var="type"
                                            itemLabel="#{type.id} : #{type.type}"
                                            itemValue="#{type.type}"/>
-                            <f:ajax listener="#{tripBean.changeUpdateTripType}" render="RepeatingGroup"/>
+                            <f:ajax listener="#{tripBean.changeUpdateTripType}" render="typeGroup"/>
                         </h:selectOneMenu>
                         <h:column></h:column>
 
-                        <h:panelGroup id="RepeatingGroup">
+                        <h:outputLabel value="{Repeating trip???}"/>
+                        <h:selectOneRadio id="radioRepeating" value="#{tripBean.repeated}">
+                            <f:selectItem itemValue="#{false}" itemLabel="{Not repeated}"/>
+                            <f:selectItem itemValue="#{true}" itemLabel="{Repeated}"/>
+                            <f:ajax render="typeGroup"/>
+                        </h:selectOneRadio>
+
+                        <h:panelGroup id="typeGroup">
                             <h:panelGroup rendered="#{tripBean.repeated}">
                                 <h:outputLabel value="#{msgs.repetitionType}"/>
                                 <h:selectOneMenu value="#{tripBean.repetitionType}"
@@ -128,15 +135,6 @@
                                     <f:selectItems value="#{tripBean.allRepeatingTripTypes}" var="repeatingType"
                                                    itemLabel="#{repeatingType.id} : #{repeatingType.repeatingType}"
                                                    itemValue="#{repeatingType.repeatingType}"/>
-                                    <f:ajax listener="#{tripBean.changeTripType}" render="RepeatingGroup"/>
-                                </h:selectOneMenu>
-
-                                <h:selectOneMenu value="#{tripBean.newRepetitionType}"
-                                                 rendered="#{tripBean.editableTrip}">
-                                    <f:selectItems value="#{tripBean.allRepeatingTripTypes}" var="repeatingType"
-                                                   itemLabel="#{repeatingType.id} : #{repeatingType.repeatingType}"
-                                                   itemValue="#{repeatingType.repeatingType}"/>
-                                    <f:ajax listener="#{tripBean.changeTripType}" render="RepeatingGroup"/>
                                 </h:selectOneMenu>
 
                                 <h:column> <h:outputLabel value="#{msgs.amountRepeated}: "/> </h:column>
@@ -222,6 +220,9 @@
 
                     <h:commandButton type="submit" action="#{tripBean.updateTrip}"
                                      class="btn btn-success" value="update trip"
+                                     rendered="#{tripBean.editableTrip}"/>
+                    <h:commandButton type="submit" action="#{tripBean.cancelUpdate}"
+                                     class="btn btn-success" value="Cancel "
                                      rendered="#{tripBean.editableTrip}"/>
                 </h:form>
             </h:panelGroup>

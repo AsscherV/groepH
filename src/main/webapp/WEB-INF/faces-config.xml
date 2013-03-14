@@ -169,6 +169,15 @@
             <!-- hier nog navigation rule voor failure-->
         </navigation-case>
     </navigation-rule>
+    <navigation-rule>
+            <navigation-case>
+                <from-action>#{tripBean.cancelUpdate}</from-action>
+                <from-outcome>SUCCESS</from-outcome>
+                <to-view-id>/pages/user/trip.xhtml</to-view-id>
+                <redirect/>
+                <!-- hier nog navigation rule voor failure-->
+            </navigation-case>
+        </navigation-rule>
 
     <navigation-rule>
         <navigation-case>

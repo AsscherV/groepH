@@ -124,7 +124,7 @@ public class TestCostBean extends AbstractTransactionalJUnit4SpringContextTests 
         costBean.setText("FOOD");
         costBean.addCost();
         costBean.editCost(costBean.getCurrentCost());
-        costBean.cancel(costBean.getCurrentCost());
+        costBean.cancel();
 
         assertEquals("Texts should be equal", "", costBean.getNewtext());
     }

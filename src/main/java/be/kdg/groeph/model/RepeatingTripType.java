@@ -18,10 +18,6 @@ public class RepeatingTripType implements Serializable, Nullable {
     @Column(name = "repeatingType", nullable = false, length = 100)
     private String repeatingType;
 
-    @OneToMany(mappedBy = "repeatingTripType")
-    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    private List<Trip> trips = new ArrayList<Trip>();
-
 
     public RepeatingTripType() {
 
@@ -33,19 +29,6 @@ public class RepeatingTripType implements Serializable, Nullable {
 
     public void setRepeatingType(String repeatingType) {
         this.repeatingType = repeatingType;
-    }
-
-    public List<Trip> getTrips() {
-        return trips;
-    }
-
-    public void setTrips(List<Trip> trips) {
-        this.trips = trips;
-    }
-
-    public void addTrip(Trip trip){
-        trip.setRepeatingTripType(this);
-        trips.add(trip);
     }
 
     public int getId() {

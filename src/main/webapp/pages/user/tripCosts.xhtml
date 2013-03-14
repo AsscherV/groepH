@@ -125,12 +125,13 @@
                                                 <h:column>
                                                     <h:commandLink type="submit"
                                                                    rendered="#{costBean.getEditable(cost)}"
-                                                                   action="#{costBean.cancel(cost)}"
+                                                                   action="#{costBean.cancel}"
                                                                    value="#{msgs.cancel}">
                                                     </h:commandLink>
                                                 </h:column>
 
-                                                <c:if test="#{costBean.organizer and not costBean.containsEditable}">
+                                                <c:if test="#{costBean.organizer and not costBean.containsEditable }">
+
                                                 <h:column>
                                                     <h:commandLink value="#{msgs.edit}" type="submit"
                                                                    rendered="#{ not costBean.getEditable(cost)}"
@@ -158,6 +159,7 @@
                                     </c:if>
 
                                     <hr/>
+                                <c:if test="#{not tripBean.confirmInvitation }">
                                     <h:form columns="3" border="0">
                                         <h:outputLabel value="#{msgs.costName}"/>
                                         <h:inputText id="text" styleClass="span2" value="#{costBean.text}"/>
@@ -171,7 +173,7 @@
                                         <br/>
                                         <h:commandButton value="#{msgs.add}" type="submit" action="#{costBean.addCost}"/>
                                     </h:form>
-
+                                    </c:if>
                                 </c:if>
                             </div>
                         </div>

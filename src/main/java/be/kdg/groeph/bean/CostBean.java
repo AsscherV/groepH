@@ -253,9 +253,8 @@ public class CostBean implements Serializable {
         }
     }
 
-    public void cancel(Cost cost) {
+    public void cancel() {
         try {
-            setCurrentCost(cost);
             newtext = "";
             newcostValue = "";
             editableCosts.clear();
