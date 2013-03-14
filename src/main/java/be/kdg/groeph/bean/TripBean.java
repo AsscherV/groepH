@@ -346,7 +346,11 @@ public class TripBean implements Serializable {
         try {
             setCurrentTrip(trip);
             System.out.println(currentTrip.getId());
-            return "SETTRIP";
+            if (loginBean.isLoggedIn()) {
+                return "SETTRIP";
+            } else {
+                return "LOGIN";
+            }
         } catch (Exception e) {
             logger.error(e.toString());
             return Tools.FAILURE;

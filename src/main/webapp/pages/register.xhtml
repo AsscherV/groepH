@@ -15,6 +15,7 @@
     <ui:insert name="header">
         <ui:include src="header.xhtml"/>
     </ui:insert>
+
     <div class="container">
         <div class="row">
             <!-- trips / my trips -->
@@ -24,14 +25,19 @@
             <!-- trip info -->
             <div class="span9">
                 <div id="tabContainerTrip" class="tabContainer">
-                    <div class="noButton"></div>
+                    <ul>
+                        <li>
+                            <a class="button active" >Register</a>
+                        </li>
+                    </ul>
                     <!-- Tab content -->
                     <div class="tabDetails">
                         <div id="registerTab" class="tabContentsTrip">
                             <div class="box">
-                                <h:form rendered="#{not registerBean.registered}" >
-                                    <h:messages globalOnly="true" errorStyle="color: red" infoStyle="color: green" layout="table" />
-                                    <h:panelGrid columns="3" border="0" >
+                                <h:form rendered="#{not registerBean.registered}">
+                                    <h:messages globalOnly="true" errorStyle="color: red" infoStyle="color: green"
+                                                layout="table"/>
+                                    <h:panelGrid columns="3" border="0">
                                         <h:outputLabel value="#{msgs.email}"/>
                                         <h:inputText id="email" styleClass="span2" value="#{registerBean.email}"/>
                                         <h:message for="email" styleClass="error"/>
@@ -81,7 +87,7 @@
                                     </h:panelGrid>
                                     <h:commandButton type="submit" action="#{registerBean.addUser}"
                                                      class="btn btn-success" value="#{msgs.register}"/>
-                                    <h:outputLabel value="#{registerBean.mailMessage}" />
+                                    <h:outputLabel value="#{registerBean.mailMessage}"/>
                                 </h:form>
                             </div>
                         </div>

@@ -1,0 +1,107 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+    <title>Trippy Traveler</title>
+    <!-- css -->
+    <h:outputStylesheet library="css" name="bootstrap.css"/>
+    <h:outputStylesheet library="css" name="bootstrap-responsive.css"/>
+    <h:outputStylesheet library="css" name="main.css"/>
+</h:head>
+<h:body>
+    <ui:insert name="header">
+        <ui:include src="header.xhtml"/>
+    </ui:insert>
+
+    <div class="container">
+        <div class="row">
+
+            <!-- trips / my trips -->
+            <ui:insert name="header">
+                <ui:include src="user/tripmenu.xhtml"/>
+            </ui:insert>
+
+            <!-- trip info -->
+            <div class="span9">
+                <div id="tabContainerTrip" class="tabContainer">
+                    <ul>
+                        <!-- Tab buttons --> <c:if test="#{tripBean.currentTrip != null}">
+                        <li>
+                            <a class="button  active" href="trip.xhtml">#{tripBean.currentTrip.title}</a>
+                        </li>
+                        <li>
+                            <a class="button" href="stops.xhtml">Stops</a>
+                        </li>
+                        <li>
+                            <a class="button " href="accessories.xhtml">Accessories</a>
+                        </li>
+                        <li>
+                            <a class="buttonMore btn-success " href="register.xhtml">MORE !</a>
+                        </li>
+
+                    </c:if>
+                    </ul>
+                    <!-- Tab content -->
+                    <div class="tabDetails">
+
+                        <div id="accesTab" class="tabContentsTrip">
+                            <div class="box">
+                                <c:choose>
+                                    <c:when test="#{tripBean.currentTrip == null}">
+                                        <p>No trip selected</p>
+                                    </c:when>
+                                    <c:when test="#{tripBean.currentTrip != null}">
+                                        <h:panelGrid columns="2" border="0">
+                                            <h:outputLabel value="#{msgs.title}"/>
+                                            <h:outputText value="#{tripBean.currentTrip.title}"/>
+                                            <h:outputLabel value="#{msgs.description}"/>
+                                            <h:outputText value="#{tripBean.currentTrip.description}"/>
+                                            <h:outputLabel value="#{msgs.type}"/>
+                                            <h:outputText value="#{tripBean.currentTrip.tripType}"/>
+                                            <c:if test="#{tripBean.currentTrip.tripType != 'Anytime'}">
+                                                <h:outputLabel value="#{msgs.tripStartTime}"/>
+                                                <h:outputText value="#{tripBean.currentTrip.startTime}"/>
+                                                <h:outputLabel value="#{msgs.tripEndTime}"/>
+                                                <h:outputText value="#{tripBean.currentTrip.endTime}"/>
+                                            </c:if>
+                                            <h:outputLabel value="#{msgs.label}"/>
+                                            <h:outputText value="#{tripBean.currentTrip.label}"/>
+
+                                            <h:form>
+                                                <h:commandButton class="btn btn-succes"
+                                                                 action="#{socialBean.postTripOnFacebook}"
+                                                                 value="Post trip on facebook">
+                                                </h:commandButton>
+                                            </h:form>
+
+                                        </h:panelGrid>
+                                    </c:when>
+                                </c:choose>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <footer>
+            <p>
+                © Trippy Traveler 2013
+            </p>
+        </footer>
+
+    </div>
+    <!-- /container -->
+
+    <!-- javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <h:outputScript name="js/jquery-1.9.0.min.js"/>
+    <h:outputScript name="js/main.js"/>
+</h:body>
+</html>
