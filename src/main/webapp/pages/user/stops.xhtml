@@ -34,35 +34,29 @@
                     <ul>
                         <!-- Tab buttons -->
                         <li>
-                            <c:if test="#{tripBean.editableTrip == false}">
+                            <c:if test="#{not tripBean.editableTrip}">
                                 <a class="button" href="trip.xhtml">#{tripBean.currentTrip.title}</a>
                             </c:if>
-                            <c:if test="#{tripBean.editableTrip == true}">
+                            <c:if test="#{tripBean.editableTrip}">
                                 <a class="button" href="createTrip.xhtml">#{tripBean.currentTrip.title}</a>
                             </c:if>
                         </li>
                         <h:panelGroup rendered="#{loginBean.loggedIn}">
                             <li>
-                                <a class="button active" href="stops.xhtml">Stops</a>
+                                <a class="button active" href="stops.xhtml">#{msgs.waypoints}</a>
                             </li>
                             <li>
-                                <a class="button" href="participants.xhtml">Participants</a>
+                                <a class="button active" href="participants.xhtml">#{msgs.participants}</a>
                             </li>
                             <li>
-                                <a class="button" href="accessories.xhtml">Accessories</a>
+                                <a class="button" href="accessories.xhtml">#{msgs.accessories}</a>
                             </li>
                             <li>
-                                <a class="button" href="styling.xhtml">Styling</a>
+                                <a class="button" href="styling.xhtml">#{msgs.styling}</a>
                             </li>
                             <li>
-                                <a class="button" href="tripCosts.xhtml">Costs</a>
+                                <a class="button" href="tripCosts.xhtml">#{msgs.costs}</a>
                             </li>
-                            <h:panelGroup rendered="#{loginBean.user.admin}">
-                                <li>
-                                    <a class="button" href="../admin/costs.xhtml">Costs</a>
-                                </li>
-                            </h:panelGroup>
-
                         </h:panelGroup>
                     </ul>
                     <!-- Tab content -->
@@ -93,13 +87,12 @@
                                         </h:column>
                                     </h:dataTable>
 
-                                    <c:if test="#{tripBean.currentTrip.tripUser == loginBean.user}">
-                                        <c:if test="#{tripBean.currentTrip.started == false}">
-                                            <h:panelGroup rendered="#{loginBean.loggedIn}">
-                                                <a href="../user/createWaypoint.xhtml">+ Add a Waypoint</a>
-                                            </h:panelGroup>
-                                        </c:if>
-                                    </c:if>
+
+                                    <h:panelGroup rendered="#{loginBean.loggedIn
+                                                                and tripBean.currentTrip.tripUser.equals(loginBean.user)
+                                                                and not tripBean.currentTrip.started}">
+                                        <a href="../user/createWaypoint.xhtml">+ #{msgs.addWaypoint}</a>
+                                    </h:panelGroup>
 
                                 </h:form>
 
