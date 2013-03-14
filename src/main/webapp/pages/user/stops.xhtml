@@ -34,19 +34,19 @@
                     <ul>
                         <!-- Tab buttons -->
                         <li>
-                            <c:if test="#{not tripBean.editableTrip}">
-                                <a class="button" href="trip.xhtml">#{tripBean.currentTrip.title}</a>
-                            </c:if>
-                            <c:if test="#{tripBean.editableTrip}">
-                                <a class="button" href="createTrip.xhtml">#{tripBean.currentTrip.title}</a>
-                            </c:if>
+                            <h:outputLink class="button" value="trip.xhtml" rendered="#{not tripBean.editableTrip}">
+                                <h:outputText value="#{tripBean.currentTrip.title}" />
+                            </h:outputLink>
+                            <h:outputLink class="button" value="createTrip.xhtml" rendered="#{tripBean.editableTrip}">
+                                <h:outputText value="#{tripBean.currentTrip.title}" />
+                            </h:outputLink>
                         </li>
                         <h:panelGroup rendered="#{loginBean.loggedIn}">
                             <li>
                                 <a class="button active" href="stops.xhtml">#{msgs.waypoints}</a>
                             </li>
                             <li>
-                                <a class="button active" href="participants.xhtml">#{msgs.participants}</a>
+                                <a class="button" href="participants.xhtml">#{msgs.participants}</a>
                             </li>
                             <li>
                                 <a class="button" href="accessories.xhtml">#{msgs.accessories}</a>
