@@ -1,5 +1,6 @@
 package be.kdg.groeph.bean;
 
+import be.kdg.groeph.model.Answer;
 import be.kdg.groeph.model.Waypoint;
 import be.kdg.groeph.model.WaypointType;
 import be.kdg.groeph.service.WaypointService;
@@ -12,12 +13,9 @@ import org.springframework.stereotype.Component;
 
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
 import javax.inject.Named;
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -255,10 +253,11 @@ public class WaypointBean implements Serializable {
         newlattitude = currentWaypoint.getLattitude();
         newlongitude = currentWaypoint.getLongitude();
         waypointType = currentWaypoint.getWaypointType().getType();
-        newanswer1 = currentWaypoint.getAnswer1();
-        newanswer2 = currentWaypoint.getAnswer2();
-        newanswer3 = currentWaypoint.getAnswer3();
-        newanswer4 =  currentWaypoint.getAnswer4();
+        List<Answer> answers = currentWaypoint.getAnswers();
+        newanswer1 = answers.get(0).toString();
+        newanswer2 = answers.get(1).toString();
+        newanswer3 = answers.get(2).toString();
+        newanswer4 =  answers.get(3).toString();
         correctAnswer = currentWaypoint.getCorrectAnswer();
 
         editableWaypoint = true;
@@ -270,16 +269,13 @@ public class WaypointBean implements Serializable {
         Waypoint waypoint = getCurrentWaypoint();
 
         if(isInteractive){
-            waypoint.setAnswer1(newanswer1);
-            waypoint.setAnswer2(newanswer2);
-            waypoint.setAnswer3(newanswer3);
-            waypoint.setAnswer4(newanswer4);
+            waypoint.getAnswers().set(0,new Answer(newanswer1));
+            waypoint.getAnswers().set(1,new Answer(newanswer2));
+            waypoint.getAnswers().set(2,new Answer(newanswer3));
+            waypoint.getAnswers().set(3,new Answer(newanswer4));
             waypoint.setCorrectAnswer(correctAnswer);
         }else{
-            waypoint.setAnswer1(null);
-            waypoint.setAnswer2(null);
-            waypoint.setAnswer3(null);
-            waypoint.setAnswer4(null);
+            waypoint.getAnswers().clear();
             waypoint.setCorrectAnswer(null);
         }
 

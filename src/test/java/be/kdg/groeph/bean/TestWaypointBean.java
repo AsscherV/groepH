@@ -15,7 +15,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -168,7 +167,7 @@ public class TestWaypointBean extends AbstractTransactionalJUnit4SpringContextTe
 
         trip = daoTestUser.getTrips().get(0);
         assertEquals("The trip must contain 1 waypoint", 1, trip.getWaypoints().size());
-        assertEquals("The waypoint must have the answer 1 field set with '2'", EXPECTED, trip.getWaypoints().get(0).getAnswer1());
+        assertEquals("The waypoint must have the answer 1 field set with '2'", EXPECTED, trip.getWaypoints().get(0).getAnswers().get(0).toString());
 
 
     }

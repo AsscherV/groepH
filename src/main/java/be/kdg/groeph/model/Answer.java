@@ -73,4 +73,9 @@ public class Answer implements Serializable {
     public int hashCode() {
         return answer.hashCode();
     }
+
+    @Override
+    public String toString() {
+        return answer;
+    }
 }
