@@ -29,38 +29,30 @@
                     <ul>
                         <!-- Tab buttons -->
                         <li>
-                            <c:if test="#{tripBean.editableTrip == false}">
-                                <a class="button" href="trip.xhtml">#{tripBean.currentTrip.title}</a>
-                            </c:if>
-                            <c:if test="#{tripBean.editableTrip == true}">
-                                <a class="button" href="createTrip.xhtml">#{tripBean.currentTrip.title}</a>
-                            </c:if>
+                            <h:outputLink class="button active" value="trip.xhtml" rendered="#{not tripBean.editableTrip}">
+                                <h:outputText value="#{tripBean.currentTrip.title}" />
+                            </h:outputLink>
+                            <h:outputLink class="button active" value="createTrip.xhtml" rendered="#{tripBean.editableTrip}">
+                                <h:outputText value="#{tripBean.currentTrip.title}" />
+                            </h:outputLink>
                         </li>
 
-                        <h:panelGroup rendered="#{loginBean.loggedIn}">
-                            <c:if test="#{tripBean.currentTrip != null}">
-                                <li>
-                                    <a class="button" href="stops.xhtml">Stops</a>
-                                </li>
-                                <li>
-                                    <a class="button" href="participants.xhtml">Participants</a>
-                                </li>
-                                <li>
-                                    <a class="button " href="accessories.xhtml">Accessories</a>
-                                </li>
-                                <li>
-                                    <a class="button" href="styling.xhtml">Styling</a>
-                                </li>
-                                <li>
-                                    <a class="button" href="tripCosts.xhtml">Costs</a>
-                                </li>
-                                <h:panelGroup rendered="#{loginBean.user.admin}">
-                                    <li>
-                                        <a class="button" href="../admin/costs.xhtml">Costs</a>
-                                    </li>
-                                </h:panelGroup>
-                            </c:if>
-
+                        <h:panelGroup rendered="#{loginBean.loggedIn and tripBean.currentTrip != null}">
+                            <li>
+                                <a class="button" href="stops.xhtml">#{msgs.waypoints}</a>
+                            </li>
+                            <li>
+                                <a class="button" href="participants.xhtml">#{msgs.participants}</a>
+                            </li>
+                            <li>
+                                <a class="button" href="accessories.xhtml">#{msgs.accessories}</a>
+                            </li>
+                            <li>
+                                <a class="button" href="styling.xhtml">#{msgs.styling}</a>
+                            </li>
+                            <li>
+                                <a class="button" href="tripCosts.xhtml">#{msgs.costs}</a>
+                            </li>
                         </h:panelGroup>
                     </ul>
                     <!-- Tab content -->
@@ -70,7 +62,7 @@
                             <div class="box">
                                 <c:choose>
                                     <c:when test="#{tripBean.currentTrip == null}">
-                                        <p>No trip selected</p>
+                                        <p>#{msgs.noTripSelected}</p>
                                     </c:when>
                                     <c:when test="#{tripBean.currentTrip != null}">
                                         <h:panelGrid columns="2" border="0">
@@ -80,7 +72,7 @@
                                             <h:outputText value="#{tripBean.currentTrip.description}"/>
                                             <h:outputLabel value="#{msgs.type}"/>
                                             <h:outputText value="#{tripBean.currentTrip.tripType}"/>
-                                            <c:if test="#{tripBean.currentTrip.tripType != 'Anytime'}">
+                                            <c:if test="#{not tripBean.currentTrip.tripType.type.equals('Anytime')}">
                                                 <h:outputLabel value="#{msgs.tripStartTime}"/>
                                                 <h:outputText value="#{tripBean.currentTrip.startTime}"/>
                                                 <h:outputLabel value="#{msgs.tripEndTime}"/>
@@ -94,32 +86,32 @@
 
                                                     <h:commandButton class="btn btn-success"
                                                                      action="#{tripBean.confirmParticipation()}"
-                                                                     value="Confirm Participation"/>
+                                                                     value="#{msgs.confirmParticipation}"/>
                                                     <h:commandButton class="btn btn-success"
-                                                                     value="Cancel Invitation"/>
+                                                                     value="#{msgs.cancelInvite}"/>
 
                                                 </h:panelGroup>
 
-                                                <c:if test="#{loginBean.user == tripBean.currentTrip.tripUser}">
+                                                <c:if test="#{loginBean.user.equals(tripBean.currentTrip.tripUser)}">
                                                     <h:panelGroup rendered="#{not tripBean.editableTrip}">
                                                         <h:commandButton class="btn btn-success"
                                                                          action="#{tripBean.publishTrip}"
-                                                                         value="Publish Trip"
+                                                                         value="#{msgs.publishTrip}"
                                                                          rendered="#{not tripBean.currentTrip.visible}"/>
 
                                                         <h:commandButton class="btn btn-success"
                                                                          action="#{tripBean.startTrip}"
-                                                                         value="Start trip"
+                                                                         value="#{msgs.startTrip}"
                                                                          rendered="#{not tripBean.currentTrip.started}"/>
 
                                                         <h:commandButton class="btn btn-success"
                                                                          action="#{tripBean.stopTrip}"
-                                                                         value="Stop trip"
+                                                                         value="#{msgs.stopTrip}"
                                                                          rendered="#{tripBean.currentTrip.started}"/>
 
                                                         <h:commandButton class="btn btn-success"
                                                                          action="#{tripBean.editTrip}"
-                                                                         value="Change trip"
+                                                                         value="#{msgs.edit}"
                                                                          immediate="true"
                                                                          rendered="#{not tripBean.currentTrip.started}"/>
 
@@ -127,15 +119,14 @@
                                                     <h:panelGroup rendered="#{tripBean.currentTrip.visible}">
                                                         <h:commandButton class="btn btn-succes"
                                                                          action="#{socialBean.postTripOnFacebook}"
-                                                                         value="Post trip on facebook">
+                                                                         value="#{msgs.postTripFacebook}">
                                                         </h:commandButton>
                                                     </h:panelGroup>
 
 
                                                     <h:panelGroup rendered="#{tripBean.editableTrip}">
-                                                        <p class="text-error">This trips is in edit mode. Please conform:
-                                                            <a
-                                                                    href="createTrip.xhtml">update trip</a></p>
+                                                        <p class="text-error">#{msgs.editMode}:
+                                                            <a href="createTrip.xhtml">#{msgs.update}</a></p>
                                                     </h:panelGroup>
                                                 </c:if>
 

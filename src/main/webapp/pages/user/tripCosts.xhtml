@@ -30,35 +30,30 @@
                     <ul>
                         <!-- Tab buttons -->
                         <li>
-                            <c:if test="#{tripBean.editableTrip == false}">
-                                <a class="button" href="trip.xhtml">#{tripBean.currentTrip.title}</a>
-                            </c:if>
-                            <c:if test="#{tripBean.editableTrip == true}">
-                                <a class="button" href="createTrip.xhtml">#{tripBean.currentTrip.title}</a>
-                            </c:if>
+                            <h:outputLink class="button" value="trip.xhtml" rendered="#{not tripBean.editableTrip}">
+                                <h:outputText value="#{tripBean.currentTrip.title}" />
+                            </h:outputLink>
+                            <h:outputLink class="button" value="createTrip.xhtml" rendered="#{tripBean.editableTrip}">
+                                <h:outputText value="#{tripBean.currentTrip.title}" />
+                            </h:outputLink>
                         </li>
-                        <h:panelGroup rendered="#{loginBean.loggedIn}">
-                            <li>
-                                <a class="button" href="stops.xhtml">Stops</a>
-                            </li>
-                            <li>
-                                <a class="button" href="participants.xhtml">Participants</a>
-                            </li>
-                            <li>
-                                <a class="button" href="accessories.xhtml">Accessories</a>
-                            </li>
-                            <li>
-                                <a class="button" href="styling.xhtml">Styling</a>
-                            </li>
-                            <li>
-                                <a class="button active" href="tripCosts.xhtml">Costs</a>
-                            </li>
-                            <h:panelGroup rendered="#{loginBean.user.admin}">
-                                <li>
-                                    <a class="button" href="../admin/costs.xhtml">Costs</a>
-                                </li>
-                            </h:panelGroup>
 
+                        <h:panelGroup rendered="#{loginBean.loggedIn and tripBean.currentTrip != null}">
+                            <li>
+                                <a class="button" href="stops.xhtml">#{msgs.waypoints}</a>
+                            </li>
+                            <li>
+                                <a class="button" href="participants.xhtml">#{msgs.participants}</a>
+                            </li>
+                            <li>
+                                <a class="button" href="accessories.xhtml">#{msgs.accessories}</a>
+                            </li>
+                            <li>
+                                <a class="button" href="styling.xhtml">#{msgs.styling}</a>
+                            </li>
+                            <li>
+                                <a class="button active" href="tripCosts.xhtml">#{msgs.costs}</a>
+                            </li>
                         </h:panelGroup>
                     </ul>
                     <!-- Tab content -->
@@ -66,16 +61,14 @@
 
                         <div id="partTab" class="tabContentsTrip">
                             <div class="box">
-
-                                <h1>Costs of TRIP <h:outputText value="#{costBean.currentTrip.title}"/></h1>
-                                <c:if test="#{tripBean.currentTrip.started == false}">
-                                    <c:if test="#{costBean.hasCosts == false}">
-                                        <h1> No Costs </h1>
+                                <c:if test="#{not tripBean.currentTrip.started}">
+                                    <c:if test="#{not costBean.hasCosts}">
+                                        <h1>#{msgs.noCosts}</h1>
                                     </c:if>
-                                    <c:if test="#{costBean.hasCosts == true}">
+                                    <c:if test="#{costBean.hasCosts}">
                                         <table>
                                             <tr>
-                                                <th>Average Cost Per User</th>
+                                                <th>#{msgs.averageCost}</th>
                                             </tr>
                                             <tr>
                                                 <td><h:outputText value="#{costBean.averageCostPerUser}"/></td>
@@ -84,17 +77,17 @@
                                         <h:dataTable value="#{costBean.costsPerTripUser}" var="cost">
 
                                             <h:column>
-                                                <f:facet name="header">Description cost</f:facet>
+                                                <f:facet name="header">#{msgs.description}</f:facet>
 
                                                 <h:outputText value="#{cost.text}"/> <br/>
 
                                             </h:column>
                                             <h:column>
-                                                <f:facet name="header">Value of cost</f:facet>
+                                                <f:facet name="header">#{msgs.valueOfCost}</f:facet>
                                                 <h:outputText value="#{cost.costValue}"/> <br/>
                                             </h:column>
                                             <h:column>
-                                                <f:facet name="header">UserName</f:facet>
+                                                <f:facet name="header">#{msgs.username}</f:facet>
                                                 <h:outputText value="#{cost.tripUser.firstName}"/>
                                             </h:column>
 
@@ -103,7 +96,7 @@
                                             <h:dataTable value="#{costBean.costs}" var="cost">
 
                                                 <h:column>
-                                                    <f:facet name="header">Description cost</f:facet>
+                                                    <f:facet name="header">#{msgs.description}</f:facet>
                                                     <h:outputText value="#{cost.text}"
                                                                   rendered="#{not costBean.getEditable(cost)}"/>
                                                     <h:inputText id="newtext" value="#{costBean.newtext}"
@@ -112,7 +105,7 @@
 
                                                 </h:column>
                                                 <h:column>
-                                                    <f:facet name="header">Value of cost</f:facet>
+                                                    <f:facet name="header">#{msgs.valueOfCost}</f:facet>
                                                     <h:outputText value="#{cost.costValue}"
                                                                   rendered="#{not costBean.getEditable(cost)}"/>
                                                     <h:inputText id="newcostValue" value="#{costBean.newcostValue}"
@@ -120,44 +113,42 @@
                                                     <h:message for="newcostValue" styleClass="error"/>
                                                 </h:column>
                                                 <h:column>
-                                                    <f:facet name="header">UserName</f:facet>
+                                                    <f:facet name="header">#{msgs.username}</f:facet>
                                                     <h:outputText value="#{cost.tripUser.firstName}"/>
                                                 </h:column>
                                                 <h:column>
                                                     <h:commandLink type="submit"
                                                                    rendered="#{costBean.getEditable(cost)}"
                                                                    action="#{costBean.updateCost}"
-                                                                   value="Update"/>
+                                                                   value="#{msgs.update}"/>
                                                 </h:column>
                                                 <h:column>
                                                     <h:commandLink type="submit"
                                                                    rendered="#{costBean.getEditable(cost)}"
                                                                    action="#{costBean.cancel(cost)}"
-                                                                   value="Cancel">
+                                                                   value="#{msgs.cancel}">
                                                     </h:commandLink>
                                                 </h:column>
 
-                                                <c:if test="#{costBean.organizer == true}">
-                                                    <c:if test="#{costBean.containsEditable == false}">
+                                                <c:if test="#{costBean.organizer and not costBean.containsEditable}">
                                                 <h:column>
-                                                    <h:commandLink value="Edit" type="submit"
+                                                    <h:commandLink value="#{msgs.edit}" type="submit"
                                                                    rendered="#{ not costBean.getEditable(cost)}"
                                                                    action="#{costBean.editCost(cost)}">
                                                     </h:commandLink>
                                                 </h:column>
                                                 <h:column>
-                                                    <h:commandLink value="Delete" type="submit"
+                                                    <h:commandLink value="#{msgs.delete}" type="submit"
                                                                    rendered="#{ not costBean.getEditable(cost)}"
                                                             action="#{costBean.deleteCost(cost)}">
                                                     </h:commandLink>
                                                 </h:column>
                                                 </c:if>
-                                                </c:if>
                                             </h:dataTable>
                                         </h:form>
                                         <table>
                                             <tr>
-                                                <th>Total Cost</th>
+                                                <th>#{msgs.totalCost}</th>
                                             </tr>
                                             <tr>
                                                 <td><h:outputText value="#{costBean.totalCost}"/></td>
@@ -168,17 +159,17 @@
 
                                     <hr/>
                                     <h:form columns="3" border="0">
-                                        <h:outputLabel value="CostName"/>
+                                        <h:outputLabel value="#{msgs.costName}"/>
                                         <h:inputText id="text" styleClass="span2" value="#{costBean.text}"/>
                                         <h:message for="text" styleClass="error"/>
 
 
-                                        <h:outputLabel value="CostValue"/>
+                                        <h:outputLabel value="#{msgs.costValue}"/>
                                         <h:inputText id="costValue" styleClass="span2"
                                                      value="#{costBean.costValue}"/>
                                         <h:message for="costValue" styleClass="error"/>
                                         <br/>
-                                        <h:commandButton value="submit" type="submit" action="#{costBean.addCost}"/>
+                                        <h:commandButton value="#{msgs.add}" type="submit" action="#{costBean.addCost}"/>
                                     </h:form>
 
                                 </c:if>
