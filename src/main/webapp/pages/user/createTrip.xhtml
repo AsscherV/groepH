@@ -31,8 +31,12 @@
 <ul>
     <!-- Tab buttons -->
     <li>
-        <h:link class="button active" href="trip.xhtml" rendered="#{not tripBean.editableTrip}">#{tripBean.currentTrip.title}</h:link>
-        <h:link class="button active" href="createTrip.xhtml" rendered="#{tripBean.editableTrip}">#{tripBean.currentTrip.title}</h:link>
+        <c:if test="#{ not tripBean.editableTrip}">
+            <a class="button active" href="trip.xhtml">#{tripBean.currentTrip.title}</a>
+        </c:if>
+        <c:if test="#{tripBean.editableTrip}">
+            <a class="button active" href="createTrip.xhtml">#{tripBean.currentTrip.title}</a>
+        </c:if>
     </li>
     <h:panelGroup rendered="#{loginBean.loggedIn and tripBean.currentTrip!=null}">
         <li>
