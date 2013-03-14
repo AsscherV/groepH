@@ -31,32 +31,25 @@
 <ul>
     <!-- Tab buttons -->
     <li>
-        <c:if test="#{not tripBean.editableTrip}">
-            <a class="button" href="trip.xhtml">#{tripBean.currentTrip.title}</a>
-        </c:if>
-        <c:if test="#{tripBean.editableTrip}">
-            <a class="button" href="createTrip.xhtml">#{tripBean.currentTrip.title}</a>
-        </c:if>
+        <h:link class="button active" href="trip.xhtml" rendered="#{not tripBean.editableTrip}">#{tripBean.currentTrip.title}</h:link>
+        <h:link class="button active" href="createTrip.xhtml" rendered="#{tripBean.editableTrip}">#{tripBean.currentTrip.title}</h:link>
     </li>
-    <h:panelGroup rendered="#{loginBean.loggedIn}">
+    <h:panelGroup rendered="#{loginBean.loggedIn and tripBean.currentTrip!=null}">
         <li>
-            <a class="button" href="stops.xhtml">Stops</a>
+            <a class="button" href="stops.xhtml">#{msgs.waypoints}</a>
         </li>
         <li>
-            <a class="button " href="participants.xhtml">Participants</a>
+            <a class="button " href="participants.xhtml">#{msgs.participants}</a>
         </li>
         <li>
-            <a class="button" href="accessories.xhtml">Accessories</a>
+            <a class="button" href="accessories.xhtml">#{msgs.accessories}</a>
         </li>
         <li>
-            <a class="button" href="styling.xhtml">Styling</a>
+            <a class="button" href="styling.xhtml">#{msgs.styling}</a>
         </li>
-        <h:panelGroup rendered="#{loginBean.user.admin}">
-            <li>
-                <a class="button" href="../admin/costs.xhtml">Costs</a>
-            </li>
-        </h:panelGroup>
-
+        <li>
+            <a class="button" href="tripCosts.xhtml">#{msgs.costs}</a>
+        </li>
     </h:panelGroup>
 </ul>
 <!-- Tab content -->
@@ -93,14 +86,14 @@
 
                         <h:selectOneRadio value="#{tripBean.public}"
                                           rendered="#{not tripBean.editableTrip}">
-                            <f:selectItem itemValue="#{true}" itemLabel="Public"/>
-                            <f:selectItem itemValue="#{false}" itemLabel="Private"/>
+                            <f:selectItem itemValue="#{true}" itemLabel="#{msgs.public}"/>
+                            <f:selectItem itemValue="#{false}" itemLabel="#{msgs.private}"/>
                         </h:selectOneRadio>
 
                         <h:selectOneRadio value="#{tripBean.newIsPublic}"
                                           rendered="#{tripBean.editableTrip}">
-                            <f:selectItem itemValue="#{true}" itemLabel="Public"/>
-                            <f:selectItem itemValue="#{false}" itemLabel="Private"/>
+                            <f:selectItem itemValue="#{true}" itemLabel="#{msgs.public}"/>
+                            <f:selectItem itemValue="#{false}" itemLabel="#{msgs.private}"/>
                         </h:selectOneRadio>
                         <h:column></h:column>
                         <h:column></h:column>
@@ -125,7 +118,7 @@
 
                         <h:panelGroup id="RepeatingGroup">
                             <h:panelGroup rendered="#{tripBean.repeated}">
-                                <h:outputLabel value="Repetition type"/>
+                                <h:outputLabel value="#{msgs.repetitionType}"/>
                                 <h:selectOneMenu value="#{tripBean.repetitionType}"
                                                  rendered="#{not tripBean.editableTrip}">
                                     <f:selectItems value="#{tripBean.allRepeatingTripTypes}" var="repeatingType"
@@ -142,7 +135,7 @@
                                     <f:ajax listener="#{tripBean.changeTripType}" render="RepeatingGroup"/>
                                 </h:selectOneMenu>
 
-                                <h:column> <h:outputLabel value="Aantal keren herhalen: "/> </h:column>
+                                <h:column> <h:outputLabel value="#{msgs.amountRepeated}: "/> </h:column>
                                 <h:column>
                                     <h:inputText id="numberOfRepetitions" styleClass="span2"
                                                  value="#{tripBean.numberOfRepetitions}"/>
