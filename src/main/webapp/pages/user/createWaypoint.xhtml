@@ -37,35 +37,25 @@
                     <ul>
                         <!-- Tab buttons -->
                         <li>
-                            <c:if test="#{tripBean.editableTrip == false}">
-                                <a class="button" href="trip.xhtml">#{tripBean.currentTrip.title}</a>
-                            </c:if>
-                            <c:if test="#{tripBean.editableTrip == true}">
-                                <a class="button" href="createTrip.xhtml">#{tripBean.currentTrip.title}</a>
-                            </c:if>
+                            <h:link class="button" href="trip.xhtml" rendered="#{not tripBean.editableTrip}">#{tripBean.currentTrip.title}</h:link>
+                            <h:link class="button" href="createTrip.xhtml" rendered="#{tripBean.editableTrip}">#{tripBean.currentTrip.title}</h:link>
                         </li>
                         <h:panelGroup rendered="#{loginBean.loggedIn}">
                             <li>
-                                <a class="button active" href="stops.xhtml">Stops</a>
+                                <a class="button active" href="stops.xhtml">#{msgs.waypoints}</a>
                             </li>
                             <li>
-                                <a class="button " href="participants.xhtml">Participants</a>
+                                <a class="button " href="participants.xhtml">#{msgs.participants}</a>
                             </li>
                             <li>
-                                <a class="button" href="accessories.xhtml">Accessories</a>
+                                <a class="button" href="accessories.xhtml">#{msgs.accessories}</a>
                             </li>
                             <li>
-                                <a class="button" href="styling.xhtml">Styling</a>
+                                <a class="button" href="styling.xhtml">#{msgs.styling}</a>
                             </li>
                             <li>
-                                <a class="button" href="tripCosts.xhtml">Costs</a>
+                                <a class="button" href="tripCosts.xhtml">#{msgs.costs}</a>
                             </li>
-                            <h:panelGroup rendered="#{loginBean.user.admin}">
-                                <li>
-                                    <a class="button" href="../admin/costs.xhtml">Costs</a>
-                                </li>
-                            </h:panelGroup>
-
                         </h:panelGroup>
                     </ul>
                     <!-- Tab content -->
@@ -94,21 +84,21 @@
                                             <h:message for="newdescription" styleClass="error"/>
 
                                             <h:panelGrid id="quizInput" rendered="#{waypointBean.interactive}">
-                                                <h:outputLabel value="Answer 1"/>
+                                                <h:outputLabel value="#{msgs.answer} 1"/>
                                                 <h:inputText id="answer1" styleClass="span2" value="#{waypointBean.answer1}" rendered="#{not waypointBean.editableWaypoint}"/>
                                                 <h:inputText id="newanswer1" styleClass="span2" value="#{waypointBean.newanswer1}" rendered="#{waypointBean.editableWaypoint}"/>
                                                 <h:message for="newanswer1" styleClass="error"/>
 
-                                                <h:outputLabel value="Answer 2"/>
+                                                <h:outputLabel value="#{msgs.answer} 2"/>
                                                 <h:inputText id="answer2" styleClass="span2" value="#{waypointBean.answer2}" rendered="#{not waypointBean.editableWaypoint}"/>
                                                 <h:inputText id="newanswer2" styleClass="span2" value="#{waypointBean.newanswer2}" rendered="#{waypointBean.editableWaypoint}"/>
                                                 <h:message for="newanswer2" styleClass="error"/>
 
-                                                <h:outputLabel value="Answer 3"/>
+                                                <h:outputLabel value="#{msgs.answer} 3"/>
                                                 <h:inputText id="answer3" styleClass="span2" value="#{waypointBean.answer3}" rendered="#{not waypointBean.editableWaypoint}"/>
                                                 <h:inputText id="newanswer3" styleClass="span2" value="#{waypointBean.newanswer3}" rendered="#{waypointBean.editableWaypoint}"/>
 
-                                                <h:outputLabel value="Answer 4"/>
+                                                <h:outputLabel value="#{msgs.answer} 4"/>
                                                 <h:inputText id="answer4" styleClass="span2" value="#{waypointBean.answer4}" rendered="#{not waypointBean.editableWaypoint}"/>
                                                 <h:inputText id="newanswer4" styleClass="span2" value="#{waypointBean.newanswer4}" rendered="#{waypointBean.editableWaypoint}"/>
 
