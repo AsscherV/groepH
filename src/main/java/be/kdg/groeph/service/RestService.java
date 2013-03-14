@@ -21,6 +21,14 @@ import java.util.Date;
 public class RestService {
     @Autowired
     LoginService loginService;
+    @Autowired
+    TripService tripService;
+    @Autowired
+    CostService costService;
+    @Autowired
+    ParticipantsService participantsService;
+    @Autowired
+    UserService userService;
 
     @GET
     @Path("/login")
@@ -32,13 +40,28 @@ public class RestService {
         TripUser user = loginService.loginUser(Username,Password);
 
         if(user.isNull()){
-              return "";
+            return "";
         }   else {
-            //JSONSerializer serializer = new JSONSerializer();
-            return gson.toJson(user);
+            JSONSerializer serializer = new JSONSerializer();
+            //return gson.toJson(user);
             //return serializer.include("trips").serialize(user);
-            //return serializer.serialize(user);
+            return serializer.serialize(user);
             //return gson.toJson(user, TripUser.class);
         }
+    }
+
+    @GET
+    @Path("/publicTrips")
+    public String getAllPublicTrips() {
+        JSONSerializer serializer = new JSONSerializer();
+        return serializer.serialize(tripService.fetchAllPublicTrips());
+    }
+
+    @GET
+    @Path("/organizedTrips")
+    public String getAllOrganizedTrips(@QueryParam("tripUserEmail") String Email) {
+        JSONSerializer serializer = new JSONSerializer();
+        TripUser user = userService.getUserByEmail(Email);
+        return serializer.serialize(tripService.getAllCreatedTripsByUser(user));
     }
 }

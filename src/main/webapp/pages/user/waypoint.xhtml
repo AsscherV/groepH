@@ -84,24 +84,21 @@
                                 <h:panelGrid class="floatLeft marginRight" columns="2" border="0">
                                     <h:outputLabel value="#{msgs.title}"/>
                                     <h:outputLabel value="#{waypointBean.currentWaypoint.label}"/>
-                                    <h:panelGroup rendered="#{waypointBean.currentWaypoint.correctAnswer==null}">
-                                        <h:outputLabel value="#{msgs.description}"/>
-                                        <h:outputLabel value="#{msgs.question}"/>
-                                    </h:panelGroup>
+                                    <h:outputLabel value="#{msgs.description}" rendered="#{waypointBean.currentWaypoint.correctAnswer == null}"/>
+                                    <h:outputLabel value="#{msgs.question}" rendered="#{waypointBean.currentWaypoint.correctAnswer != null}"/>
                                     <h:outputLabel value="#{waypointBean.currentWaypoint.description}"/>
 
-                                    <h:panelGroup rendered="#{waypointBean.currentWaypoint.correctAnswer!=null}">
-                                        <h:outputLabel value="#{msgs.answer} 1"/>
-                                        <h:outputLabel value="#{waypointBean.currentWaypoint.answer1}"/>
-                                        <h:outputLabel value="#{msgs.answer} 2"/>
-                                        <h:outputLabel value="#{waypointBean.currentWaypoint.answer2}"/>
-                                        <h:outputLabel value="#{msgs.answer} 3"/>
-                                        <h:outputLabel value="#{waypointBean.currentWaypoint.answer3}"/>
-                                        <h:outputLabel value="#{msgs.answer} 4"/>
-                                        <h:outputLabel value="#{waypointBean.currentWaypoint.answer4}"/>
-                                        <h:outputLabel value="#{msgs.correctAnswer}"/>
-                                        <h:outputLabel value="#{waypointBean.currentWaypoint.correctAnswer}"/>
-                                    </h:panelGroup>
+                                        <h:outputLabel value="#{msgs.answer} 1" rendered="#{waypointBean.currentWaypoint.correctAnswer != null}"/>
+                                        <h:outputLabel value="#{waypointBean.currentWaypoint.answer1}" rendered="#{waypointBean.currentWaypoint.correctAnswer != null}"/>
+                                        <h:outputLabel value="#{msgs.answer} 2" rendered="#{waypointBean.currentWaypoint.correctAnswer != null}"/>
+                                        <h:outputLabel value="#{waypointBean.currentWaypoint.answer2}" rendered="#{waypointBean.currentWaypoint.correctAnswer != null}"/>
+                                        <h:outputLabel value="#{msgs.answer} 3" rendered="#{waypointBean.currentWaypoint.correctAnswer != null}"/>
+                                        <h:outputLabel value="#{waypointBean.currentWaypoint.answer3}" rendered="#{waypointBean.currentWaypoint.correctAnswer != null}"/>
+                                        <h:outputLabel value="#{msgs.answer} 4" rendered="#{waypointBean.currentWaypoint.correctAnswer != null}"/>
+                                        <h:outputLabel value="#{waypointBean.currentWaypoint.answer4}" rendered="#{waypointBean.currentWaypoint.correctAnswer != null}"/>
+                                        <h:outputLabel value="#{msgs.correctAnswer}" rendered="#{waypointBean.currentWaypoint.correctAnswer != null}"/>
+                                        <h:outputLabel value="#{waypointBean.currentWaypoint.correctAnswer}" rendered="#{waypointBean.currentWaypoint.correctAnswer != null}"/>
+
                                     <h:outputLabel value="#{msgs.type}"/>
                                     <h:outputLabel value="#{waypointBean.currentWaypoint.waypointType.type}"/>
                                     <h:outputLabel value="#{msgs.lat}"/>

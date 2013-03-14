@@ -46,8 +46,8 @@ function addListeners(){
 function fetchPositions(){
     bounds = new google.maps.LatLngBounds ();
     //var str = $('input[type=hidden]').val();
-    var str = document.getElementById("j_idt96:wayPointsTable:0:positions").value;
-    var str2= document.getElementById("j_idt96:wayPointsTable:2:positions").value;
+    var str = document.getElementById("waypointsForm:wayPointsTable:0:positions").value;
+    var str2= document.getElementById("waypointsForm:wayPointsTable:0:titles").value;
     var positionsArray = str.split(" ");
     var titlesArray = str2.split(",");
 
