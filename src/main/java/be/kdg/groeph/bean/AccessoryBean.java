@@ -57,10 +57,6 @@ public class AccessoryBean implements Serializable {
     @Autowired
     TripService tripService;
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public String addAccessory() {
         try {
             if (!description.equals("")) {
@@ -76,7 +72,7 @@ public class AccessoryBean implements Serializable {
                 }
             }
             return Tools.FAILURE;
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
             logger.error("Failed to add accessory " + e.toString());
             return Tools.FAILURE;
         }
@@ -92,7 +88,7 @@ public class AccessoryBean implements Serializable {
                 }
             }
             return userlist;
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
             logger.error(e.toString());
             return null;
         }
@@ -106,7 +102,7 @@ public class AccessoryBean implements Serializable {
                 return false;
             }
 
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
             logger.error(e.toString());
             return false;
         }
@@ -119,7 +115,7 @@ public class AccessoryBean implements Serializable {
             addableAccessories.clear();
             accessoryService.updateAccessory(currentAccessory);
             logger.info("User: " + user.getEmail() + " added to accessory: " + currentAccessory.getDescription());
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
             logger.error(e.toString());
         }
     }
@@ -130,7 +126,7 @@ public class AccessoryBean implements Serializable {
             currentAccessory.removeTripUser(user);
             accessoryService.updateAccessory(currentAccessory);
             logger.info("User: " + user.getEmail() + " removed from accessory: " + accessory.getDescription());
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
             logger.error(e.toString());
         }
 
@@ -143,7 +139,7 @@ public class AccessoryBean implements Serializable {
             editableAccessories.put(currentAccessory.getId(), true);
 
             return null;
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
             logger.error(e.toString());
             return null;
         }
@@ -154,7 +150,7 @@ public class AccessoryBean implements Serializable {
             setCurrentAccessory(accessory);
             addableAccessories.put(currentAccessory.getId(), true);
             return null;
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
             logger.error(e.toString());
             return null;
         }
@@ -174,7 +170,7 @@ public class AccessoryBean implements Serializable {
             logger.info("Accessory: " + currentAccessory.getDescription() + " could not be changed");
             return Tools.FAILURE;
 
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
             logger.error(e.toString());
             return Tools.FAILURE;
         }
@@ -187,7 +183,7 @@ public class AccessoryBean implements Serializable {
             editableAccessories.clear();
             addableAccessories.clear();
             return null;
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
             logger.error(e.toString());
             return null;
         }
@@ -204,7 +200,7 @@ public class AccessoryBean implements Serializable {
                 return Tools.SUCCESS;
             }
             return Tools.FAILURE;
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
             logger.error(e.toString());
             return Tools.FAILURE;
         }
@@ -219,7 +215,7 @@ public class AccessoryBean implements Serializable {
             }
             accessoryService.updateAccessory(accessory);
             logger.info("Accessory: " + accessory.getDescription() + " checked changed");
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
             logger.error(e.toString());
         }
     }
@@ -231,7 +227,7 @@ public class AccessoryBean implements Serializable {
             } else {
                 return false;
             }
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
             logger.error(e.toString());
             return false;
         }
@@ -244,7 +240,7 @@ public class AccessoryBean implements Serializable {
             } else {
                 return false;
             }
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
             logger.error(e.toString());
             return false;
         }
@@ -253,7 +249,7 @@ public class AccessoryBean implements Serializable {
     public Boolean getEditable(Accessory accessory) {
         try {
             return editableAccessories.get(accessory.getId());
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
             logger.error(e.toString());
             return false;
         }
@@ -262,7 +258,7 @@ public class AccessoryBean implements Serializable {
     public Boolean getAdable(Accessory accessory) {
         try {
             return addableAccessories.get(accessory.getId());
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
             logger.error(e.toString());
             return false;
         }
@@ -271,7 +267,7 @@ public class AccessoryBean implements Serializable {
     public boolean getContainsEditable() {
         try {
             return editableAccessories.containsValue(true);
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
             logger.error(e.toString());
             return false;
         }
@@ -280,7 +276,7 @@ public class AccessoryBean implements Serializable {
     public List<Accessory> getTripaccessories() {
         try {
             return accessoryService.getAccessoriesByTrip(tripBean.getCurrentTrip());
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
             logger.error(e.toString());
             return null;
         }
@@ -288,6 +284,10 @@ public class AccessoryBean implements Serializable {
 
     public String getDescription() {
         return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public TripUser getUser() {
@@ -322,8 +322,8 @@ public class AccessoryBean implements Serializable {
                     this.user = user;
                 }
             }
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException e) {
+            logger.error(e.getMessage());
         }
     }
 

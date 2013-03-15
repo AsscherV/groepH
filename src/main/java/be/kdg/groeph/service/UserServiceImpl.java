@@ -3,6 +3,7 @@ package be.kdg.groeph.service;
 import be.kdg.groeph.dao.UserDao;
 import be.kdg.groeph.model.TripUser;
 import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataAccessException;
@@ -35,8 +36,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
                 return true;
             }
             return false;
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException|HibernateException e) {
+            logger.error(e.getMessage());
             return false;
         }
     }
@@ -51,14 +52,14 @@ public class UserServiceImpl implements UserService, UserDetailsService {
                     userDao.updateUser(user);
                     logger.info("Password changed for user: " + user.getEmail());
                 } catch (SQLException e) {
-                    logger.warn(e.getMessage().toString());
+                    logger.warn(e.getMessage());
                     return false;
                 }
                 return true;
             }
             return false;
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException|HibernateException e) {
+            logger.error(e.getMessage());
             return false;
         }
     }
@@ -82,8 +83,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
                         userDB.isEnabled(), userDB.isAccountNonExpired(), userDB.isCredentialsNonExpired(), userDB.isAccountNonLocked(), getDefaultAuthority());
             }
             return user;
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException|HibernateException e) {
+            logger.error(e.getMessage());
             return null;
         }
     }
@@ -93,8 +94,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
             Collection<GrantedAuthority> userAuthorities = new ArrayList<GrantedAuthority>();
             userAuthorities.add(new SimpleGrantedAuthority("ROLE_USER"));
             return userAuthorities;
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException|HibernateException e) {
+            logger.error(e.getMessage());
             return null;
         }
     }
@@ -105,8 +106,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
             userAuthorities.add(new SimpleGrantedAuthority("ROLE_USER"));
             userAuthorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
             return userAuthorities;
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException|HibernateException e) {
+            logger.error(e.getMessage());
             return null;
         }
     }
@@ -117,8 +118,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
             userDao.updateUser(user);
 
-        } catch (SQLException e) {
-            logger.error(e);
+        } catch (SQLException|HibernateException  e) {
+            logger.error(e.getMessage());
         }
     }
 
@@ -131,8 +132,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
             } else {
                 return userDao.getUserByEmail(s);
             }
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException|HibernateException e) {
+            logger.error(e.getMessage());
             return TripUser.INVALID_USER();
         }
     }

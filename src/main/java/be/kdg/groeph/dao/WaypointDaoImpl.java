@@ -4,6 +4,7 @@ import be.kdg.groeph.model.Trip;
 import be.kdg.groeph.model.Waypoint;
 import be.kdg.groeph.model.WaypointType;
 import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +25,8 @@ public class WaypointDaoImpl implements WaypointDao {
         try {
             sessionFactory.getCurrentSession().saveOrUpdate(waypoint);
             return true;
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException|HibernateException e) {
+            logger.error(e.getMessage());
             return false;
         }
     }
@@ -35,8 +36,8 @@ public class WaypointDaoImpl implements WaypointDao {
         try {
             sessionFactory.getCurrentSession().update(waypoint);
             return true;
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException|HibernateException e) {
+            logger.error(e.getMessage());
             return false;
         }
     }
@@ -46,8 +47,8 @@ public class WaypointDaoImpl implements WaypointDao {
         try {
         sessionFactory.getCurrentSession().delete(waypoint);
         return true;
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException|HibernateException e) {
+            logger.error(e.getMessage());
             return false;
         }
     }
@@ -58,8 +59,8 @@ public class WaypointDaoImpl implements WaypointDao {
         Query query = sessionFactory.getCurrentSession().createQuery("from Waypoint where trip=:trip");
         query.setParameter("trip", trip);
         return query.list();
-        } catch (Exception e){
-            logger.error(e);
+        } catch (NullPointerException|HibernateException e){
+            logger.error(e.getMessage());
             return null;
         }
     }
@@ -70,8 +71,8 @@ public class WaypointDaoImpl implements WaypointDao {
         Query query = sessionFactory.getCurrentSession().createQuery("from WaypointType where type=:name");
         query.setParameter("name", name);
         return (WaypointType) query.uniqueResult();
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException|HibernateException e) {
+            logger.error(e.getMessage());
             return null;
         }
     }
@@ -80,8 +81,8 @@ public class WaypointDaoImpl implements WaypointDao {
     public void addWaypointType(WaypointType type) {
         try {
         sessionFactory.getCurrentSession().saveOrUpdate(type);
-        } catch (Exception e){
-            logger.error(e);
+        } catch (NullPointerException|HibernateException e){
+            logger.error(e.getMessage());
         }
     }
 
@@ -91,8 +92,8 @@ public class WaypointDaoImpl implements WaypointDao {
         try {
         Query query = sessionFactory.getCurrentSession().createQuery("from WaypointType");
         return query.list();
-        } catch (Exception e){
-            logger.error(e);
+        } catch (NullPointerException|HibernateException e){
+            logger.error(e.getMessage());
             return null;
         }
     }
@@ -105,8 +106,8 @@ public class WaypointDaoImpl implements WaypointDao {
         Query query = sessionFactory.getCurrentSession().createQuery("from Waypoint where label=:waypointLabel");
         query.setParameter("waypointLabel", waypointLabel);
         return (Waypoint) query.uniqueResult();
-        } catch (Exception e){
-            logger.error(e);
+        } catch (NullPointerException|HibernateException e){
+            logger.error(e.getMessage());
             return null;
         }
     }
@@ -117,8 +118,8 @@ public class WaypointDaoImpl implements WaypointDao {
         Query query = sessionFactory.getCurrentSession().createQuery("from Waypoint where id=:id");
         query.setParameter("id", id);
         return (Waypoint) query.uniqueResult();
-        } catch (Exception e){
-            logger.error(e);
+        } catch (NullPointerException|HibernateException e){
+            logger.error(e.getMessage());
             return null;
         }
     }

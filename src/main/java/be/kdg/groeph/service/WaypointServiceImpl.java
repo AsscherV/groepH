@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.hibernate.HibernateException;
 
+import java.sql.SQLException;
 import java.util.List;
 
 @Transactional
@@ -24,8 +26,8 @@ public class WaypointServiceImpl implements WaypointService {
     public boolean addWaypoint(Waypoint waypoint) {
         try {
             return waypointDao.addWaypoint(waypoint);
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException|HibernateException  e) {
+            logger.error(e.getMessage());
             return false;
         }
     }
@@ -34,8 +36,8 @@ public class WaypointServiceImpl implements WaypointService {
     public boolean updateWaypoint(Waypoint waypoint) {
         try {
             return waypointDao.updateWaypoint(waypoint);
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException|HibernateException  e) {
+            logger.error(e.getMessage());
             return false;
         }
     }
@@ -44,8 +46,8 @@ public class WaypointServiceImpl implements WaypointService {
     public boolean deleteWaypoint(Waypoint waypoint) {
         try {
             return waypointDao.deleteWaypoint(waypoint);
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException|HibernateException  e) {
+            logger.error(e.getMessage());
             return false;
         }
     }
@@ -54,8 +56,8 @@ public class WaypointServiceImpl implements WaypointService {
     public List<Waypoint> getWaypointsByTrip(Trip trip) {
         try {
             return waypointDao.getWaypointsByTrip(trip);
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException|HibernateException  e) {
+            logger.error(e.getMessage());
             return null;
         }
     }
@@ -64,8 +66,8 @@ public class WaypointServiceImpl implements WaypointService {
     public WaypointType getTypeByName(String name) {
         try {
             return waypointDao.getTypeByName(name);
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException|HibernateException  e) {
+            logger.error(e.getMessage());
             return null;
         }
     }
@@ -74,8 +76,8 @@ public class WaypointServiceImpl implements WaypointService {
     public List<WaypointType> fetchAllWaypointTypes() {
         try {
             return waypointDao.fetchAllWaypointTypes();
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException|HibernateException  e) {
+            logger.error(e.getMessage());
             return null;
         }
     }
@@ -84,8 +86,8 @@ public class WaypointServiceImpl implements WaypointService {
     public Waypoint getWaypointByLabel(String waypointLabel) {
         try {
             return waypointDao.getWaypointByLabel(waypointLabel);
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException|HibernateException  e) {
+            logger.error(e.getMessage());
             return null;
         }
     }
@@ -94,8 +96,8 @@ public class WaypointServiceImpl implements WaypointService {
     public Waypoint getWaypointById(int id) {
         try {
             return waypointDao.getWaypointById(id);
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException |HibernateException e) {
+            logger.error(e.getMessage());
             return null;
         }
     }

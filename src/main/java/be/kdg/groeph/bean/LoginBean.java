@@ -113,7 +113,7 @@ public class LoginBean implements Serializable {
                 logger.info("User: " + user.getEmail() + " logged in");
                 return Tools.SUCCESS;
             }
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
             logger.error(e.toString());
             return Tools.FAILURE;
         }
@@ -131,7 +131,7 @@ public class LoginBean implements Serializable {
             //FacesContext.getCurrentInstance().getExternalContext().redirect(url);
             logger.info("User: " + user.getEmail() + " logged out");
             return Tools.SUCCESS;
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
             logger.error(e.toString());
             return Tools.FAILURE;
         }
@@ -144,7 +144,7 @@ public class LoginBean implements Serializable {
             }
             logger.info("user: " + user.getEmail() + " his temporary password set to current password and temporary password has been removed.");
             return Tools.SUCCESS;
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
             logger.error(e.toString());
             return Tools.FAILURE;
         }

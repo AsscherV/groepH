@@ -98,8 +98,8 @@ public class SocialBean implements Serializable {
             } else {
                 return setAndLoginUser(user.getPassword(), true);
             }
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException e) {
+            logger.error(e.getMessage());
             return null;
         }
     }
@@ -125,7 +125,7 @@ public class SocialBean implements Serializable {
                 logger.info("User: " + loginBean.getUser().getEmail() + " is set and logged in");
                 return Tools.SUCCESS;
             }
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
             logger.error(e.toString());
             return Tools.FAILURE;
         }
@@ -151,7 +151,7 @@ public class SocialBean implements Serializable {
             userService.addUser(user);
             logger.info("Generated password created for user: " + user.getEmail());
             return newPassword;
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
             logger.error(e.toString());
             return null;
         }
@@ -163,7 +163,7 @@ public class SocialBean implements Serializable {
             facebookClient = null;
             user = null;
             logger.info("User logged out.");
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
             logger.error(e.toString());
         }
     }
@@ -186,9 +186,11 @@ public class SocialBean implements Serializable {
             FacesContext.getCurrentInstance().getExternalContext().redirect(url);
 
             logger.info("Redirected to facebook to write on wall about trip: " + tripBean.getCurrentTrip().getTitle());
-        } catch (Exception e) {
-            logger.error(e.toString());
-        }
+        } catch (NullPointerException|UnsupportedEncodingException e) {
+                    logger.error(e.toString());
+                } catch (IOException e) {
+                    logger.error(e.toString());
+                }
     }
 
     public void sendMessageToFriendsOnFacebook() {
@@ -204,7 +206,9 @@ public class SocialBean implements Serializable {
 
             FacesContext.getCurrentInstance().getExternalContext().redirect(url);
             logger.info("Redirected to facebook to send message to friends on facebook about trip: " + tripBean.getCurrentTrip().getTitle());
-        } catch (Exception e) {
+        } catch (NullPointerException|UnsupportedEncodingException e) {
+            logger.error(e.toString());
+        } catch (IOException e) {
             logger.error(e.toString());
         }
     }
@@ -215,7 +219,7 @@ public class SocialBean implements Serializable {
             caption = "TrippyLink";
             description = tripBean.getCurrentTrip().getDescription();
             logger.info("name, caption and description for facebook has been set.");
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
             logger.error(e.toString());
         }
     }

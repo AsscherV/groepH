@@ -30,8 +30,8 @@ public class TripDaoImpl implements TripDao {
         try {
             sessionFactory.getCurrentSession().saveOrUpdate(trip);
             return true;
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException e) {
+            logger.error(e.getMessage());
             return false;
         }
     }
@@ -40,8 +40,8 @@ public class TripDaoImpl implements TripDao {
     public void addUserToTrip(Trip trip) {
         try {
             sessionFactory.getCurrentSession().saveOrUpdate(trip);
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException e) {
+            logger.error(e.getMessage());
         }
     }
 
@@ -50,8 +50,8 @@ public class TripDaoImpl implements TripDao {
         try {
             sessionFactory.getCurrentSession().update(trip);
             return true;
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException e) {
+            logger.error(e.getMessage());
             return false;
         }
     }
@@ -63,8 +63,8 @@ public class TripDaoImpl implements TripDao {
             Query query = sessionFactory.getCurrentSession().createQuery("from Trip where isPublic=:public");
             query.setParameter("public", true);
             return query.list();
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException e) {
+            logger.error(e.getMessage());
             return null;
         }
     }
@@ -75,8 +75,8 @@ public class TripDaoImpl implements TripDao {
         try {
             Query query = sessionFactory.getCurrentSession().createQuery("from TripType");
             return query.list();
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException e) {
+            logger.error(e.getMessage());
             return null;
         }
     }
@@ -88,8 +88,8 @@ public class TripDaoImpl implements TripDao {
             Query query = sessionFactory.getCurrentSession().createQuery("from TripType where type=:naam");
             query.setParameter("naam", naam);
             return (TripType) query.uniqueResult();
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException e) {
+            logger.error(e.getMessage());
             return null;
         }
     }
@@ -99,8 +99,8 @@ public class TripDaoImpl implements TripDao {
     public void addTripType(TripType tripType) {
         try {
             sessionFactory.getCurrentSession().saveOrUpdate(tripType);
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException e) {
+            logger.error(e.getMessage());
         }
     }
 
@@ -111,8 +111,8 @@ public class TripDaoImpl implements TripDao {
             Query query = sessionFactory.getCurrentSession().createQuery("from Trip where title=:tripName");
             query.setParameter("tripName", tripName);
             return (List<Trip>) query.list();
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException e) {
+            logger.error(e.getMessage());
             return null;
         }
     }
@@ -134,8 +134,8 @@ public class TripDaoImpl implements TripDao {
             Query query = sessionFactory.getCurrentSession().createQuery("from Trip where id=:id");
             query.setParameter("id", id);
             return (Trip) query.uniqueResult();
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException e) {
+            logger.error(e.getMessage());
             return null;
         }
     }
@@ -157,8 +157,8 @@ public class TripDaoImpl implements TripDao {
                 }
             }
             return returnTripList;
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException e) {
+            logger.error(e.getMessage());
             return null;
         }
     }
@@ -180,8 +180,8 @@ public class TripDaoImpl implements TripDao {
                 }
             }
             return returnTripList;
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException e) {
+            logger.error(e.getMessage());
             return null;
         }
     }
@@ -191,8 +191,8 @@ public class TripDaoImpl implements TripDao {
         try {
             sessionFactory.getCurrentSession().saveOrUpdate(currentTrip);
             return true;
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException e) {
+            logger.error(e.getMessage());
             return false;
         }
     }
@@ -203,8 +203,8 @@ public class TripDaoImpl implements TripDao {
             Query query = sessionFactory.getCurrentSession().createQuery("from Trip where tripUser=:tripUser");
             query.setParameter("tripUser", tripUser);
             return (List<Trip>) query.list();
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException e) {
+            logger.error(e.getMessage());
             return null;
         }
     }
@@ -214,8 +214,8 @@ public class TripDaoImpl implements TripDao {
         try {
             Query query = sessionFactory.getCurrentSession().createQuery("from RepeatingTripType");
             return query.list();
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException e) {
+            logger.error(e.getMessage());
             return null;
         }
     }
@@ -227,8 +227,8 @@ public class TripDaoImpl implements TripDao {
             query.setParameter("repetitionType", repetitionType);
             return (RepeatingTripType) query.uniqueResult();
 
-        }   catch (Exception e){
-            logger.error(e);
+        }   catch (NullPointerException e){
+            logger.error(e.getMessage());
             return null;
         }
     }

@@ -34,8 +34,8 @@ public class CostDaoImpl implements CostDao {
         try {
             sessionFactory.getCurrentSession().save(cost);
             return true;
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException e) {
+            logger.error(e.getMessage());
             return false;
         }
     }
@@ -45,8 +45,8 @@ public class CostDaoImpl implements CostDao {
         try {
             sessionFactory.getCurrentSession().update(cost);
             return true;
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException e) {
+            logger.error(e.getMessage());
             return false;
         }
     }
@@ -56,8 +56,8 @@ public class CostDaoImpl implements CostDao {
         try {
             sessionFactory.getCurrentSession().delete(cost);
             return true;
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException e) {
+            logger.error(e.getMessage());
             return false;
         }
     }
@@ -68,8 +68,8 @@ public class CostDaoImpl implements CostDao {
             Query query = sessionFactory.getCurrentSession().createQuery("from Cost where trip=:trip");
             query.setParameter("trip", trip);
             return (List<Cost>) query.list();
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException e) {
+            logger.error(e.getMessage());
             return null;
         }
     }
@@ -80,8 +80,8 @@ public class CostDaoImpl implements CostDao {
             Query query = sessionFactory.getCurrentSession().createQuery("from Cost where id=:id");
             query.setParameter("id", id);
             return (Cost) query.uniqueResult();
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException e) {
+            logger.error(e.getMessage());
             return null;
         }
     }
@@ -92,8 +92,8 @@ public class CostDaoImpl implements CostDao {
             Query query = sessionFactory.getCurrentSession().createQuery("SELECT SUM(costValue) from Cost where trip=:trip");
             query.setParameter("trip", trip);
             return (Double) query.uniqueResult();
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException e) {
+            logger.error(e.getMessage());
             return null;
         }
     }
@@ -105,8 +105,8 @@ public class CostDaoImpl implements CostDao {
             query.setParameter("trip", trip);
             query.setParameter("tripUser", tripUser);
             return (Double) query.uniqueResult();
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException e) {
+            logger.error(e.getMessage());
             return null;
         }
     }

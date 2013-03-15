@@ -222,8 +222,8 @@ public class CostBean implements Serializable {
             editableCosts.clear();
             text = "";
             costValue = "";
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException e) {
+            logger.error(e.getMessage());
         }
     }
 
@@ -233,8 +233,8 @@ public class CostBean implements Serializable {
             newtext = currentCost.getText();
             newcostValue = String.valueOf(currentCost.getCostValue());
             editableCosts.put(currentCost.getId(), true);
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException e) {
+            logger.error(e.getMessage());
         }
     }
 
@@ -248,8 +248,8 @@ public class CostBean implements Serializable {
                 costValue = null;
             }
 
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException e) {
+            logger.error(e.getMessage());
         }
     }
 
@@ -258,8 +258,8 @@ public class CostBean implements Serializable {
             newtext = "";
             newcostValue = "";
             editableCosts.clear();
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException e) {
+            logger.error(e.getMessage());
         }
     }
 
@@ -270,8 +270,8 @@ public class CostBean implements Serializable {
             if (costService.deleteCost(currentCost)) {
 
             }
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException e) {
+            logger.error(e.getMessage());
         }
     }
 
@@ -290,8 +290,8 @@ public class CostBean implements Serializable {
             } else {
                 return false;
             }
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException e) {
+            logger.error(e.getMessage());
             return false;
         }
     }

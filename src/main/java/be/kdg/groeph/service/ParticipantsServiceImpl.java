@@ -8,6 +8,7 @@ import be.kdg.groeph.model.TripUser;
 import be.kdg.groeph.util.RandomPassword;
 import be.kdg.groeph.util.SHAEncryption;
 import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -45,8 +46,8 @@ public class ParticipantsServiceImpl implements ParticipantsService {
                     setUserAndTrip(tripUser, trip);
                 }
             }
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException|HibernateException e) {
+            logger.error(e.getMessage());
         }
     }
 
@@ -63,8 +64,8 @@ public class ParticipantsServiceImpl implements ParticipantsService {
             userService.addUser(tripUser);
             mailService.uponTripInvitationNewUser(email, trip, newPassword);
             return tripUser;
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException|HibernateException e) {
+            logger.error(e.getMessage());
             return TripUser.INVALID_USER();
         }
     }
@@ -73,8 +74,8 @@ public class ParticipantsServiceImpl implements ParticipantsService {
         try {
         trip.addTripUser(tripUser);
         tripService.addUserToTrip(trip, tripUser);
-        } catch (Exception e ){
-            logger.error(e);
+        } catch (NullPointerException|HibernateException e ){
+            logger.error(e.getMessage());
         }
     }
 }

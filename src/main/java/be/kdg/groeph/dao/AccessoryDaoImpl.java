@@ -25,8 +25,8 @@ public class AccessoryDaoImpl implements AccessoryDao {
         try {
             sessionFactory.getCurrentSession().saveOrUpdate(accessory);
             return true;
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException e) {
+            logger.error(e.getMessage());
             return false;
         }
     }
@@ -36,8 +36,8 @@ public class AccessoryDaoImpl implements AccessoryDao {
         try {
             sessionFactory.getCurrentSession().update(accessory);
             return true;
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException e) {
+            logger.error(e.getMessage());
             return false;
         }
     }
@@ -47,8 +47,8 @@ public class AccessoryDaoImpl implements AccessoryDao {
         try {
             sessionFactory.getCurrentSession().delete(accessory);
             return true;
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException e) {
+            logger.error(e.getMessage());
             return false;
         }
     }
@@ -59,8 +59,8 @@ public class AccessoryDaoImpl implements AccessoryDao {
             Query query = sessionFactory.getCurrentSession().createQuery("from Accessory where id=:id");
             query.setParameter("id", id);
             return (Accessory) query.uniqueResult();
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException e) {
+            logger.error(e.getMessage());
             return null;
         }
     }
@@ -71,8 +71,8 @@ public class AccessoryDaoImpl implements AccessoryDao {
             Query query = sessionFactory.getCurrentSession().createQuery("from Accessory where trip=:trip");
             query.setParameter("trip", trip);
             return query.list();
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException e) {
+            logger.error(e.getMessage());
             return null;
         }
     }

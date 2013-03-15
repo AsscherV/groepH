@@ -326,7 +326,7 @@ public class TripBean implements Serializable {
         try {
             setCurrentTrip(null);
             return null;
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
             logger.info(e.toString());
             return null;
         }
@@ -344,7 +344,7 @@ public class TripBean implements Serializable {
             } else {
                 return "LOGIN";
             }
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
             logger.error(e.toString());
             return Tools.FAILURE;
         }
@@ -402,7 +402,7 @@ public class TripBean implements Serializable {
                     return Tools.FAILURE;
                 }
             }
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
             logger.error(e.toString());
             return Tools.FAILURE;
         }
@@ -421,7 +421,7 @@ public class TripBean implements Serializable {
             repetitionType = null;
             numberOfRepetitions = null;
             //labels = null;
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
             logger.error(e.toString());
         }
     }
@@ -431,7 +431,7 @@ public class TripBean implements Serializable {
             List<Trip> publictrips = tripService.fetchAllPublicTrips();
             logger.info("All public trips fetched");
             return Tools.filter(publictrips, filter);
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
             logger.error(e.toString());
             return null;
         }
@@ -441,7 +441,7 @@ public class TripBean implements Serializable {
         try {
             logger.info("All trip types fetched.");
             return tripService.fetchAllTripTypes();
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
             logger.error(e.toString());
             return null;
         }
@@ -451,7 +451,7 @@ public class TripBean implements Serializable {
         try {
             logger.info("all repeating trips fetched.");
             return tripService.fetchAllRepeatingTripTypes();
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
             logger.error(e.toString());
             return null;
         }
@@ -461,7 +461,7 @@ public class TripBean implements Serializable {
         try {
             logger.info("All invited trips for user: " + loginBean.getUser().getEmail() + " get.");
             return Tools.filter(tripService.getAllInvitedTripsByUser(loginBean.getUser()), filter);
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
             logger.error(e.toString());
             return null;
         }
@@ -471,7 +471,7 @@ public class TripBean implements Serializable {
         try {
             logger.info("All participated trips for user: " + loginBean.getUser().getEmail() + " get.");
             return Tools.filter(tripService.getAllParticipatedTripsByUser(loginBean.getUser()), filter);
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
             logger.error(e.toString());
             return null;
         }
@@ -481,7 +481,7 @@ public class TripBean implements Serializable {
         try {
             logger.info("All created trips from user: " + loginBean.getUser().getEmail() + " get.");
             return Tools.filter(tripService.getAllCreatedTripsByUser(loginBean.getUser()), filter);
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
             logger.error(e.toString());
             return null;
         }
@@ -494,7 +494,7 @@ public class TripBean implements Serializable {
             user.confirmParticipation(currentTrip);
             tripService.addConfirmedTrip(currentTrip);
             logger.info("Participation for user: " + user.getEmail() + " confirmed for trip: " + currentTrip.getTitle());
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
             logger.error(e.toString());
         }
     }
@@ -509,8 +509,8 @@ public class TripBean implements Serializable {
                 }
             }
             return false;
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException e) {
+            logger.error(e.getMessage());
             return false;
         }
     }
@@ -525,7 +525,7 @@ public class TripBean implements Serializable {
                 logger.error("Trip: " + currentTrip.getTitle() + " could not be published.");
                 return false;
             }
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
             logger.error(e.toString());
             return false;
         }
@@ -541,7 +541,7 @@ public class TripBean implements Serializable {
                 logger.error("Trip: " + currentTrip.getTitle() + " could not be started.");
                 return false;
             }
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
             logger.error(e.toString());
             return false;
         }
@@ -557,7 +557,7 @@ public class TripBean implements Serializable {
                 logger.error("Trip: " + currentTrip.getTitle() + " could not be stopped.");
                 return false;
             }
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
             logger.error(e.toString());
             return false;
         }
@@ -627,7 +627,7 @@ public class TripBean implements Serializable {
                     return Tools.FAILURE;
                 }
             }
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
             logger.error(e.toString());
             return Tools.FAILURE;
         }
@@ -679,8 +679,8 @@ public class TripBean implements Serializable {
             isRepeated = false;
             changeUpdateTripType();
             return EDITTRIP;
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException e) {
+            logger.error(e.getMessage());
             return null;
         }
     }
@@ -694,7 +694,7 @@ public class TripBean implements Serializable {
                 notAnytime = true;
             }
             logger.info("Trip type for trip: " + currentTrip.getTitle() + " has been changed.");
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
             logger.error(e.toString());
         }
     }
@@ -707,8 +707,8 @@ public class TripBean implements Serializable {
                 notAnytime = true;
             }
             logger.info("Trip type for trip: " + currentTrip.getTitle() + " has been changed.");
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException e) {
+            logger.error(e.getMessage());
         }
     }
 

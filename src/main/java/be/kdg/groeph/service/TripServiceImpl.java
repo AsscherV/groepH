@@ -8,11 +8,13 @@ import be.kdg.groeph.model.Trip;
 import be.kdg.groeph.model.TripType;
 import be.kdg.groeph.model.TripUser;
 import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.SQLException;
 import java.util.List;
 
 @Transactional
@@ -33,8 +35,8 @@ public class TripServiceImpl implements TripService {
         try {
             logger.info("Trip: " + trip.getTitle() + " created");
             return tripDao.addTrip(trip);
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException | HibernateException e) {
+            logger.error(e.getMessage());
             return false;
         }
     }
@@ -43,8 +45,8 @@ public class TripServiceImpl implements TripService {
     public boolean updateTrip(Trip trip) {
         try {
             return tripDao.updateTrip(trip);
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException | HibernateException e) {
+            logger.error(e.getMessage());
             return false;
         }
     }
@@ -54,23 +56,28 @@ public class TripServiceImpl implements TripService {
     public List<Trip> fetchAllPublicTrips() {
         try {
             return tripDao.fetchAllPublicTrips();
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException | HibernateException e) {
+            logger.error(e.getMessage());
             return null;
         }
     }
 
     @Override
     public List<TripType> fetchAllTripTypes() {
-        return tripDao.fetchAllTripTypes();
+        try {
+            return tripDao.fetchAllTripTypes();
+        } catch (NullPointerException | HibernateException e) {
+            logger.error(e.getMessage());
+            return null;
+        }
     }
 
     @Override
     public TripType getTypeByName(String naam) {
         try {
             return tripDao.getTypeByName(naam);
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException | HibernateException e) {
+            logger.error(e.getMessage());
             return null;
         }
     }
@@ -80,8 +87,8 @@ public class TripServiceImpl implements TripService {
         try {
             userDao.addInvitedUser(user);
             tripDao.addUserToTrip(trip);
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException | HibernateException e) {
+            logger.error(e.getMessage());
         }
     }
 
@@ -89,23 +96,18 @@ public class TripServiceImpl implements TripService {
     public List<Trip> getTripsByName(String tripName) {
         try {
             return tripDao.getTripsByName(tripName);
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException | HibernateException e) {
+            logger.error(e.getMessage());
             return null;
         }
     }
-
-    /*@Override
-    public List<Label> getLabels(Trip trip) {
-        return tripDao.getLabels(trip);
-    }  */
 
     @Override
     public List<Trip> getAllInvitedTripsByUser(TripUser user) {
         try {
             return tripDao.getAllInvitedTripsByUser(user);
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException | HibernateException e) {
+            logger.error(e.getMessage());
             return null;
         }
     }
@@ -114,8 +116,8 @@ public class TripServiceImpl implements TripService {
     public List<Trip> getAllParticipatedTripsByUser(TripUser user) {
         try {
             return tripDao.getAllParticipatedTripsByUser(user);
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException | HibernateException e) {
+            logger.error(e.getMessage());
             return null;
         }
     }
@@ -124,8 +126,8 @@ public class TripServiceImpl implements TripService {
     public Trip getTripById(int id) {
         try {
             return tripDao.getTripById(id);
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException | HibernateException e) {
+            logger.error(e.getMessage());
             return null;
         }
     }
@@ -134,8 +136,8 @@ public class TripServiceImpl implements TripService {
     public boolean addConfirmedTrip(Trip currentTrip) {
         try {
             return tripDao.addConfirmedTrip(currentTrip);
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException | HibernateException e) {
+            logger.error(e.getMessage());
             return false;
         }
     }
@@ -144,8 +146,8 @@ public class TripServiceImpl implements TripService {
     public void addTripType(TripType tripType) {
         try {
             tripDao.addTripType(tripType);
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException | HibernateException e) {
+            logger.error(e.getMessage());
         }
 
     }
@@ -154,8 +156,8 @@ public class TripServiceImpl implements TripService {
     public List<RepeatingTripType> fetchAllRepeatingTripTypes() {
         try {
             return tripDao.fetchAllRepeatingTripTypes();
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException | HibernateException e) {
+            logger.error(e.getMessage());
             return null;
         }
     }
@@ -164,8 +166,8 @@ public class TripServiceImpl implements TripService {
     public List<Trip> getAllCreatedTripsByUser(TripUser user) {
         try {
             return tripDao.getTripByUserId(user);
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException | HibernateException e) {
+            logger.error(e.getMessage());
             return null;
         }
     }
@@ -173,8 +175,8 @@ public class TripServiceImpl implements TripService {
     @Override
     public RepeatingTripType getRepetitionTypeByName(String repetitionType) {
         try {
-             return tripDao.getRepetitionTypeByName(repetitionType);
-        } catch (Exception e) {
+            return tripDao.getRepetitionTypeByName(repetitionType);
+        } catch (NullPointerException | HibernateException e) {
             logger.error(e.toString());
             return null;
         }

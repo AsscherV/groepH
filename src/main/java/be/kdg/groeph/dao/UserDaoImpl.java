@@ -3,6 +3,7 @@ package be.kdg.groeph.dao;
 import be.kdg.groeph.model.Trip;
 import be.kdg.groeph.model.TripUser;
 import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +26,8 @@ public class UserDaoImpl implements UserDao {
         try {
         sessionFactory.getCurrentSession().saveOrUpdate(user);
         return true;
-        } catch (Exception e){
-            logger.error(e);
+        } catch (NullPointerException|HibernateException e){
+            logger.error(e.getMessage());
             return false;
         }
     }
@@ -40,8 +41,8 @@ public class UserDaoImpl implements UserDao {
             return TripUser.INVALID_USER();
         }
         return (TripUser) query.uniqueResult();
-        } catch (Exception e){
-            logger.error(e);
+        } catch (NullPointerException|HibernateException e){
+            logger.error(e.getMessage());
             return null;
         }
     }
@@ -50,8 +51,8 @@ public class UserDaoImpl implements UserDao {
     public void updateUser(TripUser user) {
         try {
         sessionFactory.getCurrentSession().update(user);
-        } catch (Exception e){
-            logger.error(e);
+        } catch (NullPointerException|HibernateException e){
+            logger.error(e.getMessage());
         }
     }
 
@@ -60,8 +61,8 @@ public class UserDaoImpl implements UserDao {
     public void addInvitedUser(TripUser tripUser) {
         try {
         sessionFactory.getCurrentSession().saveOrUpdate(tripUser);
-        } catch (Exception e){
-            logger.error(e);
+        } catch (NullPointerException|HibernateException e){
+            logger.error(e.getMessage());
         }
     }
 

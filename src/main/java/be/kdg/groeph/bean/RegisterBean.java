@@ -411,8 +411,8 @@ public class RegisterBean implements Serializable {
             }
             logger.error("Registration for email: " + user.getEmail() + " failed");
             return Tools.FAILURE;
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException e) {
+            logger.error(e.getMessage());
             return Tools.FAILURE;
         }
     }
@@ -441,7 +441,10 @@ public class RegisterBean implements Serializable {
 
             logger.info("User: " + tripUser + " has been updated.");
             return null;
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
+            logger.error(e.toString());
+            return null;
+        } catch (SQLException e) {
             logger.error(e.toString());
             return null;
         }
@@ -462,7 +465,7 @@ public class RegisterBean implements Serializable {
             newcity = loginBean.getUser().getAddress().getCity();
             setEditableUser(true);
             return null;
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
             logger.error(e.toString());
             return null;
         }
@@ -473,7 +476,7 @@ public class RegisterBean implements Serializable {
             setEditableUser(false);
             logger.info("User: " + loginBean.getUser().getEmail() + " pressed cancel for profile change.");
             return null;
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
             logger.error(e.toString());
             return null;
         }
@@ -492,7 +495,7 @@ public class RegisterBean implements Serializable {
             setStreet(street);
             setStreetNumber(streetNumber);
             setCity(city);
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
             logger.error(e.toString());
         }
     }
@@ -501,7 +504,7 @@ public class RegisterBean implements Serializable {
         try {
             setEditablePassword(true);
             return null;
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
             logger.error(e.toString());
             return null;
         }
@@ -512,8 +515,8 @@ public class RegisterBean implements Serializable {
             setEditablePassword(false);
             logger.info("User: " + loginBean.getUser().getEmail() + " pressed cancel with change password.");
             return null;
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException e) {
+            logger.error(e.getMessage());
             return null;
         }
     }
@@ -547,14 +550,14 @@ public class RegisterBean implements Serializable {
                 return null;
             }
         } catch (SQLException e) {
-            logger.error(e);
+            logger.error(e.getMessage());
             return null;
         }
 
     }
 
-    public String notRegistered(){
-        registered=false;
+    public String notRegistered() {
+        registered = false;
         return "REGISTER";
     }
 }

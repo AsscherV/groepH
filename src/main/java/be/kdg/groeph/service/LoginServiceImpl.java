@@ -3,6 +3,7 @@ package be.kdg.groeph.service;
 import be.kdg.groeph.dao.UserDao;
 import be.kdg.groeph.model.TripUser;
 import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -56,8 +57,8 @@ public class LoginServiceImpl implements LoginService {
             }
             logger.warn("Login failure.");
             return TripUser.INVALID_USER();
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException|HibernateException e) {
+            logger.error(e.getMessage());
             return TripUser.INVALID_USER();
         }
     }

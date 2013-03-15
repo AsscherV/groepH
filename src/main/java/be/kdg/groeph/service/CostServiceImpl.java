@@ -31,8 +31,8 @@ public class CostServiceImpl implements CostService {
     public boolean addCost(Cost cost) {
         try {
         return costDao.addCost(cost);
-        } catch (Exception e){
-            logger.error(e);
+        } catch (NullPointerException e){
+            logger.error(e.getMessage());
             return false;
         }
     }
@@ -41,8 +41,8 @@ public class CostServiceImpl implements CostService {
     public boolean updateCost(Cost cost) {
         try {
         return costDao.updateCost(cost);
-        } catch (Exception e){
-            logger.error(e);
+        } catch (NullPointerException e){
+            logger.error(e.getMessage());
             return false;
         }
 
@@ -52,8 +52,8 @@ public class CostServiceImpl implements CostService {
     public boolean deleteCost(Cost cost) {
         try {
         return costDao.deleteCost(cost);
-        } catch (Exception e){
-            logger.error(e);
+        } catch (NullPointerException e){
+            logger.error(e.getMessage());
             return false;
         }
     }
@@ -62,8 +62,8 @@ public class CostServiceImpl implements CostService {
     public List<Cost> getCostsByTrip(Trip trip) {
         try {
         return costDao.getCostByTrip(trip);
-        } catch (Exception e){
-            logger.error(e);
+        } catch (NullPointerException e){
+            logger.error(e.getMessage());
             return null;
         }
     }
@@ -71,8 +71,8 @@ public class CostServiceImpl implements CostService {
     public Cost getCostByCostId(int id) {
         try {
         return costDao.getCostByCostId(id);
-        } catch (Exception e ){
-            logger.error(e);
+        } catch (NullPointerException e ){
+            logger.error(e.getMessage());
             return null;
         }
     }
@@ -81,8 +81,8 @@ public class CostServiceImpl implements CostService {
     public Double getTotalCostByTrip(Trip trip) {
         try {
         return costDao.getTotalCostByTrip(trip);
-        } catch (Exception e){
-            logger.error(e);
+        } catch (NullPointerException e){
+            logger.error(e.getMessage());
             return null;
         }
     }
@@ -91,8 +91,8 @@ public class CostServiceImpl implements CostService {
     public Double getTotalCostByUser(Trip trip, TripUser tripUser) {
         try {
         return costDao.getTotalCostByUser(trip, tripUser);
-        } catch (Exception e){
-            logger.error(e);
+        } catch (NullPointerException e){
+            logger.error(e.getMessage());
             return null;
         }
     }

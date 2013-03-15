@@ -45,8 +45,8 @@ public class MailServiceImpl implements MailService {
             String text = "The user '" + email + "' is successfully registered";
             String subject = "User Registration successful";
             sendMail(email, subject, text);
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException e) {
+            logger.error(e.getMessage());
         }
 
     }
@@ -64,8 +64,8 @@ public class MailServiceImpl implements MailService {
 
             System.out.println("Sending email ....");
             mailSender.send(mailMessageArray);
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException e) {
+            logger.error(e.getMessage());
         }
     }
 
@@ -92,8 +92,8 @@ public class MailServiceImpl implements MailService {
             } catch (MailException e) {
                 return false;
             }
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException e) {
+            logger.error(e.getMessage());
             return false;
         }
 
@@ -116,11 +116,11 @@ public class MailServiceImpl implements MailService {
                 mailSender.send(mailMessageArray);
                 return true;
             } catch (MailException e) {
-                logger.error(e);
+                logger.error(e.getMessage());
                 return false;
             }
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException e) {
+            logger.error(e.getMessage());
             return false;
         }
     }
@@ -144,8 +144,8 @@ public class MailServiceImpl implements MailService {
             } catch (MailException e) {
                 return false;
             }
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException e) {
+            logger.error(e.getMessage());
             return false;
         }
     }
@@ -172,8 +172,8 @@ public class MailServiceImpl implements MailService {
             sendMail(email, "Password recovery", "** This is an automated message -- please do not reply as you will not receive a response. **" + "\n \n This message is in response to your request to reset your account password. \n \n Username: " + userByEmail.getEmail() + "\n New password: " + pw);
 
             return true;
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException e) {
+            logger.error(e.getMessage());
             return false;
         }
     }
@@ -198,8 +198,8 @@ public class MailServiceImpl implements MailService {
             } catch (MailException e) {
                 return false;
             }
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException e) {
+            logger.error(e.getMessage());
             return false;
         }
 

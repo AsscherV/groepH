@@ -80,7 +80,7 @@ public class ParticipantsBean implements Serializable {
                 logger.info("Invitation for trip: " + tripBean.currentTrip.getTitle() + " has not been send");
                 return false;
             }
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
             logger.error(e.toString());
             return false;
         }
@@ -92,7 +92,7 @@ public class ParticipantsBean implements Serializable {
             internetAddress.validate();
             return true;
         } catch (AddressException e) {
-            logger.error(e);
+            logger.error(e.getMessage());
             return false;
         }
     }
@@ -120,8 +120,8 @@ public class ParticipantsBean implements Serializable {
             } else {
                 return true;
             }
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (NullPointerException e) {
+            logger.error(e.getMessage());
             return false;
         }
     }
