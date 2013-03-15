@@ -42,7 +42,7 @@
                                 <h:outputText value="#{tripBean.currentTrip.title}" />
                             </h:outputLink>
                         </li>
-                        <h:panelGroup rendered="#{loginBean.loggedIn}">
+                        <h:panelGroup rendered="#{tripBean.hasCurrentTrip}">
                             <li>
                                 <a class="button active" href="stops.xhtml">#{msgs.waypoints}</a>
                             </li>

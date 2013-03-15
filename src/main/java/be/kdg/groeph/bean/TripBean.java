@@ -14,13 +14,9 @@ import org.springframework.stereotype.Component;
 
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
 import javax.inject.Named;
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.text.DateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -89,7 +85,6 @@ public class TripBean implements Serializable {
     private String filter;
     private boolean isVisible;
     private boolean started;
-    private boolean hasCurrentTrip;
     private boolean isInteractive;
     private boolean editableTrip;
     private boolean isRepeated;
@@ -320,20 +315,11 @@ public class TripBean implements Serializable {
 
     public boolean isHasCurrentTrip() {
         try {
-            if (currentTrip == null) {
-                hasCurrentTrip = false;
-            } else {
-                hasCurrentTrip = true;
-            }
-            return hasCurrentTrip;
+            return (currentTrip!=null);
         } catch (Exception e) {
             logger.error(e.toString());
             return false;
         }
-    }
-
-    public void setHasCurrentTrip(boolean hasCurrentTrip) {
-        this.hasCurrentTrip = hasCurrentTrip;
     }
 
     public String NoCurrentTrip() {

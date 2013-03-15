@@ -26,6 +26,7 @@
             <!-- trip info -->
             <div class="span9">
                 <div id="tabContainerTrip" class="tabContainer">
+                    <h:panelGroup rendered="#{tripBean.hasCurrentTrip}">
                     <ul>
                         <!-- Tab buttons -->
                         <li>
@@ -41,7 +42,9 @@
                         <li>
                             <a class="buttonMore btn-success " href="register.xhtml">#{msgs.more}</a>
                         </li>
+
                     </ul>
+                    </h:panelGroup>
                     <!-- Tab content -->
                     <div class="tabDetails">
 

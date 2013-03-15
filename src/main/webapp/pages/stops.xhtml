@@ -34,19 +34,18 @@
                     <ul>
                         <!-- Tab buttons -->
                         <li>
-                            <a class="button" href="trip.xhtml">#{tripBean.currentTrip.title}</a>
-                        </li>
-                        <li>
-                            <a class="button active" href="stops.xhtml">Stops</a>
-                        </li>
-                        <li>
-                            <a class="button" href="accessories.xhtml">Accessories</a>
-                        </li>
-                        <li>
-                            <a class="buttonMore btn-success " href="more.xhtml">MORE !</a>
+                            <a class="button " href="trip.xhtml">#{tripBean.currentTrip.title}</a>
                         </li>
 
-
+                        <li>
+                            <a class="button active" href="stops.xhtml">#{msgs.waypoints}</a>
+                        </li>
+                        <li>
+                            <a class="button" href="accessories.xhtml">#{msgs.accessories}</a>
+                        </li>
+                        <li>
+                            <a class="buttonMore btn-success " href="more.xhtml">#{msgs.more}</a>
+                        </li>
                     </ul>
                     <!-- Tab content -->
                     <div class="tabDetails">
@@ -82,7 +81,7 @@
                                 <div id="map_canvas"></div>
 
                                 <div>
-                                    <h:commandButton value="Reset map"
+                                    <h:commandButton value="#{msgs.resetMap}"
                                                      class="btn btn-success" id="resetMap"/>
                                 </div>
 
