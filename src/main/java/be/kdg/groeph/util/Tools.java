@@ -6,7 +6,7 @@ import be.kdg.groeph.model.Trip;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Tools {
+public final class Tools {
     public static final String SUCCESS = "SUCCESS";
     public static final String FAILURE = "FAILURE";
     public static List<Trip> filter(List<Trip> trips, String filter) {

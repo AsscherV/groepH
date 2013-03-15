@@ -10,7 +10,7 @@
     <h:outputStylesheet library="css" name="main.css"/>
 </h:head>
 <h:body>
-
+    <f:loadBundle basename="messages" var="msgs"/>
     <ui:insert name="header">
         <ui:include src="../header.xhtml"/>
     </ui:insert>
@@ -33,7 +33,7 @@
                     <div class="tabDetails">
                         <div id="tripTab" class="tabContentsTrip">
                             <div class="box">
-                                WELCOME
+                                #{msgs.welcome}
                             </div>
                         </div>
                     </div>

@@ -26,21 +26,21 @@
                 </h:form>
                 <div class="navbar-form pull-right">
                 <h:form  >
-                    <h:commandButton class="btn  btn-primary btn-mini" value="Sign in with facebook"
+                    <h:commandButton class="btn  btn-primary btn-mini" value="#{msgs.signInFacebook}"
                                      action="#{socialBean.getFacebookUrlAuth}" immediate="true" rendered="#{not loginBean.loggedIn}"/>
                 </h:form>
                     <h:form  >
 
                     <h:panelGrid columns="2" cellpadding="2" rendered="#{not loginBean.loggedIn}">
 
-                        <h:outputLabel value="Email"/>
+                        <h:outputLabel value="#{msgs.email}"/>
                         <h:inputText id="email" styleClass="span2 loginInput" value="#{loginBean.email}"/>
-                        <h:outputLabel value="Password"/>
+                        <h:outputLabel value="#{msgs.password}"/>
                         <h:inputSecret id="password" styleClass="span2 loginInput" value="#{loginBean.password}"/>
-                        <h:commandButton class="btn btn-mini" type="submit" value="Sign in"
+                        <h:commandButton class="btn btn-mini" type="submit" value="#{msgs.login}"
                                          action="#{loginBean.loginUser}"/>
-                        <h:link class="floatRight" outcome="register.xhtml" value="Register"></h:link>
-                        <h:link class="floatLeft btn-mini" outcome="forgotPassword.xhtml" value="Forgot password"></h:link>
+                        <h:link class="floatRight" outcome="register.xhtml" value="#{msgs.register}"></h:link>
+                        <h:link class="floatLeft btn-mini" outcome="forgotPassword.xhtml" value="#{msgs.forgotPassword}"></h:link>
                     </h:panelGrid>
 
                     <table>
@@ -57,9 +57,9 @@
                     <h:panelGrid rendered="#{loginBean.loggedIn}" columns="2" cellpadding="2">
                         <h:outputLabel class="welcomeMessage">Welcome </h:outputLabel>
                         <h:outputLabel class="welcomeMessage">#{loginBean.user.firstName}</h:outputLabel >
-                        <h:commandLink id="login" class="btn btn-mini" type="submit" value="Sign off"
+                        <h:commandLink id="login" class="btn btn-mini" type="submit" value="#{msgs.signOff}"
                                          action="#{loginBean.logOut}"/>
-                        <h:link outcome="profile" value="profile"/>
+                        <h:link outcome="profile" value="#{msgs.profile}"/>
                     </h:panelGrid>
 
                 </h:form>

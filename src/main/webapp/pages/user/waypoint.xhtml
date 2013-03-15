@@ -35,34 +35,29 @@
                     <ul>
                         <!-- Tab buttons -->
                         <li>
-                            <h:outputLink class="button" value="trip.xhtml"
-                                          rendered="#{not tripBean.editableTrip}">#{tripBean.currentTrip.title}</h:outputLink>
-                            <h:outputLink class="button" value="createTrip.xhtml"
-                                          rendered="#{tripBean.editableTrip}">#{tripBean.currentTrip.title}</h:outputLink>
-
+                            <h:outputLink class="button" value="trip.xhtml" rendered="#{not tripBean.editableTrip}">
+                                <h:outputText value="#{tripBean.currentTrip.title}" />
+                            </h:outputLink>
+                            <h:outputLink class="button" value="createTrip.xhtml" rendered="#{tripBean.editableTrip}">
+                                <h:outputText value="#{tripBean.currentTrip.title}" />
+                            </h:outputLink>
                         </li>
                         <h:panelGroup rendered="#{loginBean.loggedIn}">
                             <li>
-                                <a class="button active" href="stops.xhtml">Stops</a>
+                                <a class="button active" href="stops.xhtml">#{msgs.waypoints}</a>
                             </li>
                             <li>
-                                <a class="button" href="participants.xhtml">Participants</a>
+                                <a class="button" href="participants.xhtml">#{msgs.participants}</a>
                             </li>
                             <li>
-                                <a class="button " href="accessories.xhtml">Accessories</a>
+                                <a class="button" href="accessories.xhtml">#{msgs.accessories}</a>
                             </li>
                             <li>
-                                <a class="button" href="styling.xhtml">Styling</a>
+                                <a class="button" href="styling.xhtml">#{msgs.styling}</a>
                             </li>
                             <li>
-                                <a class="button" href="tripCosts.xhtml">Costs</a>
+                                <a class="button" href="tripCosts.xhtml">#{msgs.costs}</a>
                             </li>
-                            <h:panelGroup rendered="#{loginBean.user.admin}">
-                                <li>
-                                    <a class="button" href="../admin/costs.xhtml">Costs</a>
-                                </li>
-                            </h:panelGroup>
-
                         </h:panelGroup>
                     </ul>
                     <!-- Tab content -->
@@ -73,11 +68,11 @@
                                 <h:form>
                                     <h:commandButton type="submit" action="#{waypointBean.previousWaypoint}"
                                                      class="btn btn-success marginRight"
-                                                     value="Previous"/>
+                                                     value="#{msgs.previous}"/>
                                     <h:commandButton type="submit" action="#{waypointBean.nextWaypoint}"
                                                      class="btn btn-success marginRight"
-                                                     value="Next"/>
-                                    <h:commandButton action="STOPS" value="Back to overview"
+                                                     value="#{msgs.next}"/>
+                                    <h:commandButton action="STOPS" value="#{msgs.overview}"
                                                      class="btn btn-success marginRight" id="overviewWaypoint"/>
 
                                 </h:form>
@@ -121,7 +116,7 @@
                                 <div id="map_canvas"></div>
 
                                 <div>
-                                    <h:commandButton value="Reset map"
+                                    <h:commandButton value="#{msgs.resetMap}"
                                                      class="btn btn-success" id="resetMap"/>
                                 </div>
 

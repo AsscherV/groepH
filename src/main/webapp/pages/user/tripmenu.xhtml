@@ -24,15 +24,15 @@
                     </li>
                     <h:panelGroup rendered="#{loginBean.loggedIn}">
                         <li>
-                            <a id="myTrips" class="button" href="#myTripsTab">Organised trips</a>
+                            <a id="myTrips" class="button" href="#myTripsTab">#{msgs.organisedTrips}</a>
                         </li>
 
                         <li>
-                            <a id="invitedTrips" class="button" href="#invitedTripsTab">Invitations</a>
+                            <a id="invitedTrips" class="button" href="#invitedTripsTab">#{msgs.invitations}</a>
                         </li>
                         <li>
                             <a id="participatingTrips" class="button"
-                               href="#participatingTripsTab">Participating trips</a>
+                               href="#participatingTripsTab">#{msgs.participatingTrips}</a>
                         </li>
 
                     </h:panelGroup>
@@ -60,7 +60,7 @@
                             </h:form>
                         </div>
                         <h:panelGroup rendered="#{loginBean.loggedIn}">
-                            <a href="../user/createTrip.xhtml">+ Make a trip</a>
+                            <a href="../user/createTrip.xhtml">+ #{msgs.createTrip}</a>
                         </h:panelGroup>
                     </div>
                     <!-- //tripsTab -->
@@ -80,7 +80,7 @@
                             </h:panelGroup>
                         </div>
                         <h:panelGroup rendered="#{loginBean.loggedIn}">
-                            <a href="createTrip.xhtml">+ Make a trip</a>
+                            <a href="createTrip.xhtml">+ #{msgs.createTrip}</a>
                         </h:panelGroup>
                     </div>
 

@@ -120,10 +120,9 @@
                         </h:selectOneMenu>
                         <h:column></h:column>
 
-                        <h:outputLabel value="{Repeating trip???}"/>
                         <h:selectOneRadio id="radioRepeating" value="#{tripBean.repeated}">
-                            <f:selectItem itemValue="#{false}" itemLabel="{Not repeated}"/>
-                            <f:selectItem itemValue="#{true}" itemLabel="{Repeated}"/>
+                            <f:selectItem itemValue="#{false}" itemLabel="#{msgs.notRepeating}"/>
+                            <f:selectItem itemValue="#{true}" itemLabel="#{msgs.repeating}"/>
                             <f:ajax render="typeGroup"/>
                         </h:selectOneRadio>
 
@@ -183,9 +182,6 @@
 
                         </h:panelGroup>
                         <h:column></h:column>
-                        <h:column></h:column>
-
-
                         <h:outputLabel value="#{msgs.label}"/>
                         <h:inputText id="label" styleClass="span2" value="#{tripBean.label}"
                                      rendered="#{not tripBean.editableTrip}"/>
@@ -204,10 +200,10 @@
                                      rendered="#{not tripBean.editableTrip}"/>
 
                     <h:commandButton type="submit" action="#{tripBean.updateTrip}"
-                                     class="btn btn-success" value="update trip"
+                                     class="btn btn-success" value="#{msgs.update}"
                                      rendered="#{tripBean.editableTrip}"/>
                     <h:commandButton type="submit" action="#{tripBean.cancelUpdate}"
-                                     class="btn btn-success" value="Cancel "
+                                     class="btn btn-success" value="#{msgs.cancel} "
                                      rendered="#{tripBean.editableTrip}"/>
                 </h:form>
             </h:panelGroup>
