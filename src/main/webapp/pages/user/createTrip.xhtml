@@ -195,22 +195,7 @@
                                    rendered="#{not tripBean.editableTrip}"/>
                         <h:message for="newlabel" styleClass="error"
                                    rendered="#{tripBean.editableTrip}"/>
-                        <!--
-                        <h:commandButton class="btn btn-success" value="add">
-                            <f:ajax event="click" listener="tripBean.newLabel}"
-                                    execute=":createTrip"/>
-                        </h:commandButton>
-                        -->
-                        <!--
-                        <h:message for="label" styleClass="error"/>
-                        <h:dataTable border="0" value="#tripBean.labels}" var="label">
-                            <h:column>
-                                <div>
-                                    <h:commandLink value="#label.name}"/>
-                                </div>
-                            </h:column>
-                        </h:dataTable>
-                        -->
+
 
                     </h:panelGrid>
                     <h:commandButton type="submit" action="#{tripBean.addTrip}"

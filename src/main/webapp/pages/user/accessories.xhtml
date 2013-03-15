@@ -3,173 +3,175 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:c="http://java.sun.com/jsp/jstl/core">
-    <h:head>
-        <title>Trippy Traveler</title>
-        <!-- css -->
-        <h:outputStylesheet library="css" name="bootstrap.css"/>
-        <h:outputStylesheet library="css" name="bootstrap-responsive.css"/>
-        <h:outputStylesheet library="css" name="main.css"/>
-    </h:head>
-    <h:body>
-        <ui:insert name="header">
-            <ui:include src="../header.xhtml"/>
-        </ui:insert>
-        <div class="container">
-            <div class="row">
+<h:head>
+    <title>Trippy Traveler</title>
+    <!-- css -->
+    <h:outputStylesheet library="css" name="bootstrap.css"/>
+    <h:outputStylesheet library="css" name="bootstrap-responsive.css"/>
+    <h:outputStylesheet library="css" name="main.css"/>
+</h:head>
+<h:body>
+    <ui:insert name="header">
+        <ui:include src="../header.xhtml"/>
+    </ui:insert>
 
-                <!-- trips / my trips -->
-                <ui:insert name="header">
-                    <ui:include src="tripmenu.xhtml"/>
-                </ui:insert>
+    <div class="container">
+        <div class="row">
 
-                <!-- trip info -->
-                <div class="span9">
-                    <div id="tabContainerTrip" class="tabContainer">
-                        <ul>
-                            <!-- Tab buttons -->
+            <!-- trips / my trips -->
+            <ui:insert name="header">
+                <ui:include src="tripmenu.xhtml"/>
+            </ui:insert>
+
+            <!-- trip info -->
+            <div class="span9">
+                <div id="tabContainerTrip" class="tabContainer">
+                    <ul>
+                        <!-- Tab buttons -->
+                        <li>
+                            <h:outputLink class="button" value="trip.xhtml" rendered="#{not tripBean.editableTrip}">
+                                <h:outputText value="#{tripBean.currentTrip.title}"/>
+                            </h:outputLink>
+                            <h:outputLink class="button" value="createTrip.xhtml" rendered="#{tripBean.editableTrip}">
+                                <h:outputText value="#{tripBean.currentTrip.title}"/>
+                            </h:outputLink>
+                        </li>
+                        <h:panelGroup rendered="#{loginBean.loggedIn}">
                             <li>
-                                <h:outputLink class="button" value="trip.xhtml" rendered="#{not tripBean.editableTrip}">
-                                    <h:outputText value="#{tripBean.currentTrip.title}" />
-                                </h:outputLink>
-                                <h:outputLink class="button" value="createTrip.xhtml" rendered="#{tripBean.editableTrip}">
-                                    <h:outputText value="#{tripBean.currentTrip.title}" />
-                                </h:outputLink>
+                                <a class="button" href="stops.xhtml">#{msgs.waypoints}</a>
                             </li>
-                            <h:panelGroup rendered="#{loginBean.loggedIn}">
-                                <li>
-                                    <a class="button" href="stops.xhtml">#{msgs.waypoints}</a>
-                                </li>
-                                <li>
-                                    <a class="button" href="participants.xhtml">#{msgs.participants}</a>
-                                </li>
-                                <li>
-                                    <a class="button active" href="accessories.xhtml">#{msgs.accessories}</a>
-                                </li>
-                                <li>
-                                    <a class="button" href="styling.xhtml">#{msgs.styling}</a>
-                                </li>
-                                <li>
-                                    <a class="button" href="tripCosts.xhtml">#{msgs.costs}</a>
-                                </li>
-                            </h:panelGroup>
-                        </ul>
-                        <!-- Tab content -->
-                        <div class="tabDetails">
+                            <li>
+                                <a class="button" href="participants.xhtml">#{msgs.participants}</a>
+                            </li>
+                            <li>
+                                <a class="button active" href="accessories.xhtml">#{msgs.accessories}</a>
+                            </li>
+                            <li>
+                                <a class="button" href="styling.xhtml">#{msgs.styling}</a>
+                            </li>
+                            <li>
+                                <a class="button" href="tripCosts.xhtml">#{msgs.costs}</a>
+                            </li>
+                        </h:panelGroup>
+                    </ul>
+                    <!-- Tab content -->
+                    <div class="tabDetails">
 
-                            <div id="accesTab" class="tabContentsTrip">
-                                <div class="box">
-                                    <h:form>
+                        <div id="accesTab" class="tabContentsTrip">
+                            <div class="box">
+                                <h:form>
+                                    <c:if test="#{tripBean.currentTrip.tripUser.equals(loginBean.user) }">
                                         <h:inputText styleClass="span2" value="#{accessoryBean.description}"/>
                                         <h:commandButton styleClass="btn btn-success" type="submit"
                                                          action="#{accessoryBean.addAccessory}" value="#{msgs.add}"/>
                                         <hr/>
-                                        <h:dataTable border="0" value="#{accessoryBean.tripaccessories}" var="accessory">
-                                            <h:column>
-                                                <h:panelGrid columns="2">
-                                                    <h:outputLabel styleClass="span2" value="#{accessory.description}"
-                                                                   rendered="#{not accessoryBean.getEditable(accessory)}"/>
+                                    </c:if>
+                                    <h:dataTable border="0" value="#{accessoryBean.tripaccessories}" var="accessory">
+                                        <h:column>
+                                            <h:panelGrid columns="2">
+                                                <h:outputLabel styleClass="span2" value="#{accessory.description}"
+                                                               rendered="#{not accessoryBean.getEditable(accessory)}"/>
 
-                                                    <h:inputText styleClass="span2"
-                                                                 value="#{accessoryBean.newdescription}"
-                                                                 rendered="#{accessoryBean.getEditable(accessory)}"/>
+                                                <h:inputText styleClass="span2"
+                                                             value="#{accessoryBean.newdescription}"
+                                                             rendered="#{accessoryBean.getEditable(accessory)}"/>
 
-                                                    <h:commandLink type="submit"
-                                                                   rendered="#{accessoryBean.getEditable(accessory)}"
-                                                                   action="#{accessoryBean.updateAccessory}"
-                                                                   value="#{msgs.update}"/>
-                                                    <h:commandLink type="submit"
-                                                                   rendered="#{accessoryBean.getEditable(accessory)}"
-                                                                   value="#{msgs.cancel}"
-                                                            action="#{accessoryBean.cancel(accessory)}"/>
-                                                    <h:panelGrid columns="2" rendered="#{ accessoryBean.organizer}">
-                                                        <h:panelGrid columns="2"
-                                                                     rendered="#{not accessoryBean.containsEditable}">
-                                                            <h:commandLink type="submit"
-                                                                           rendered="#{ not accessoryBean.getEditable(accessory)}"
-                                                                           value="#{msgs.edit}"
-                                                                    action="#{accessoryBean.editAccessory(accessory)}"/>
-                                                            <h:commandLink type="submit"
-                                                                           rendered="#{ not accessoryBean.getEditable(accessory)}"
-                                                                           value="#{msgs.delete}"
-                                                                    action="#{accessoryBean.deleteAccessory(accessory)}"/>
-                                                        </h:panelGrid>
-                                                    </h:panelGrid>
-                                                    <!-- panelgrid -->
-                                                    <h:panelGrid columns="3">
-                                                        <h:column>
-                                                            <h:dataTable border="0" value="#{accessory.tripUsers}"
-                                                                         var="user">
-                                                                <h:column>
-                                                                    <h:selectBooleanCheckbox value="#{accessory.checked}"
-                                                                                             disabled="#{ not accessoryBean.isAddedConfirmedUser(accessory)}">
-                                                                        <f:ajax listener="#{accessoryBean.updateChecked(accessory)}"
-                                                                                render="@form"/>
-                                                                    </h:selectBooleanCheckbox>
-
-                                                                    <h:outputLabel
-                                                                            value="#{user.firstName} #{user.lastName}"/>
-                                                                    <h:commandLink type="submit"
-                                                                                   rendered="#{accessoryBean.getEditable(accessory)}"
-                                                                                   value="X"
-                                                                            action="#{accessoryBean.removeUserFromAccessory(accessory)}"/>
-                                                                </h:column>
-                                                            </h:dataTable>
-                                                        </h:column>
-                                                        <h:column>
-                                                            <h:selectOneMenu value="#{accessoryBean.userLastname}"
-                                                                             rendered="#{  accessoryBean.getAdable(accessory)}">
-
-                                                                <f:selectItems
-                                                                        value="#{accessoryBean.addableConfirmedTripUsers(accessory)}"
-                                                                        var="accessoryUser"
-                                                                        itemLabel="#{accessoryUser.firstName} #{accessoryUser.lastName}"
-                                                                        itemValue="#{accessoryUser.lastName}"/>
-
-                                                            </h:selectOneMenu>
-                                                        </h:column>
-                                                        <h:commandButton styleClass="btn btn-success" type="submit"
-                                                                         rendered="#{  accessoryBean.getAdable(accessory)}"
-                                                                         action="#{accessoryBean.addUserToAccessory}"
-                                                                         value="#{msgs.add}"/>
-                                                        <h:panelGroup
-                                                                rendered="#{ accessoryBean.hasAddableTripUsers(accessory)}">
-                                                            <h:panelGroup
-                                                                    rendered="#{  accessoryBean.getEditable(accessory)}">
-                                                                <h:commandButton styleClass="btn btn-success"
-                                                                                 type="submit"
-                                                                                 rendered="#{ not accessoryBean.getAdable(accessory)}"
-                                                                                 value="#{msgs.addUserToAccessory}"
-                                                                        action="#{accessoryBean.changeAddUser(accessory)}"/>
-                                                            </h:panelGroup>
-                                                        </h:panelGroup>
+                                                <h:commandLink type="submit"
+                                                               rendered="#{accessoryBean.getEditable(accessory)}"
+                                                               action="#{accessoryBean.updateAccessory}"
+                                                               value="#{msgs.update}"/>
+                                                <h:commandLink type="submit"
+                                                               rendered="#{accessoryBean.getEditable(accessory)}"
+                                                               value="#{msgs.cancel}"
+                                                               action="#{accessoryBean.cancel(accessory)}"/>
+                                                <h:panelGrid columns="2" rendered="#{ accessoryBean.organizer}">
+                                                    <h:panelGrid columns="2"
+                                                                 rendered="#{not accessoryBean.containsEditable}">
+                                                        <h:commandLink type="submit"
+                                                                       rendered="#{ not accessoryBean.getEditable(accessory)}"
+                                                                       value="#{msgs.edit}"
+                                                                       action="#{accessoryBean.editAccessory(accessory)}"/>
+                                                        <h:commandLink type="submit"
+                                                                       rendered="#{ not accessoryBean.getEditable(accessory)}"
+                                                                       value="#{msgs.delete}"
+                                                                       action="#{accessoryBean.deleteAccessory(accessory)}"/>
                                                     </h:panelGrid>
                                                 </h:panelGrid>
-                                            </h:column>
-                                        </h:dataTable>
-                                    </h:form>
-                                </div>
+                                                <!-- panelgrid -->
+                                                <h:panelGrid columns="3">
+                                                    <h:column>
+                                                        <h:dataTable border="0" value="#{accessory.tripUsers}"
+                                                                     var="user">
+                                                            <h:column>
+                                                                <h:selectBooleanCheckbox value="#{accessory.checked}"
+                                                                                         disabled="#{ not accessoryBean.isAddedConfirmedUser(accessory)}">
+                                                                    <f:ajax listener="#{accessoryBean.updateChecked(accessory)}"
+                                                                            render="@form"/>
+                                                                </h:selectBooleanCheckbox>
+
+                                                                <h:outputLabel
+                                                                        value="#{user.firstName} #{user.lastName}"/>
+                                                                <h:commandLink type="submit"
+                                                                               rendered="#{accessoryBean.getEditable(accessory)}"
+                                                                               value="X"
+                                                                               action="#{accessoryBean.removeUserFromAccessory(accessory)}"/>
+                                                            </h:column>
+                                                        </h:dataTable>
+                                                    </h:column>
+                                                    <h:column>
+                                                        <h:selectOneMenu value="#{accessoryBean.userLastname}"
+                                                                         rendered="#{  accessoryBean.getAdable(accessory)}">
+
+                                                            <f:selectItems
+                                                                    value="#{accessoryBean.addableConfirmedTripUsers(accessory)}"
+                                                                    var="accessoryUser"
+                                                                    itemLabel="#{accessoryUser.firstName} #{accessoryUser.lastName}"
+                                                                    itemValue="#{accessoryUser.lastName}"/>
+
+                                                        </h:selectOneMenu>
+                                                    </h:column>
+                                                    <h:commandButton styleClass="btn btn-success" type="submit"
+                                                                     rendered="#{  accessoryBean.getAdable(accessory)}"
+                                                                     action="#{accessoryBean.addUserToAccessory}"
+                                                                     value="#{msgs.add}"/>
+                                                    <h:panelGroup
+                                                            rendered="#{ accessoryBean.hasAddableTripUsers(accessory)}">
+                                                        <h:panelGroup
+                                                                rendered="#{  accessoryBean.getEditable(accessory)}">
+                                                            <h:commandButton styleClass="btn btn-success"
+                                                                             type="submit"
+                                                                             rendered="#{ not accessoryBean.getAdable(accessory)}"
+                                                                             value="#{msgs.addUserToAccessory}"
+                                                                             action="#{accessoryBean.changeAddUser(accessory)}"/>
+                                                        </h:panelGroup>
+                                                    </h:panelGroup>
+                                                </h:panelGrid>
+                                            </h:panelGrid>
+                                        </h:column>
+                                    </h:dataTable>
+                                </h:form>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
 
-
-
-            <footer>
-                <p>
-                    © Trippy Traveler 2013
-                </p>
-            </footer>
-
         </div>
-        <!-- /container -->
 
-        <!-- javascript
-        ================================================== -->
-        <!-- Placed at the end of the document so the pages load faster -->
-        <h:outputScript name="js/jquery-1.9.0.min.js"/>
-        <h:outputScript name="js/main.js"/>
-    </h:body>
+
+        <footer>
+            <p>
+                © Trippy Traveler 2013
+            </p>
+        </footer>
+
+    </div>
+    <!-- /container -->
+
+    <!-- javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <h:outputScript name="js/jquery-1.9.0.min.js"/>
+    <h:outputScript name="js/main.js"/>
+</h:body>
 </html> 
