@@ -204,7 +204,7 @@
                                      rendered="#{tripBean.editableTrip}"/>
                     <h:commandButton type="submit" action="#{tripBean.cancelUpdate}"
                                      class="btn btn-success" value="#{msgs.cancel} "
-                                     rendered="#{tripBean.editableTrip}"/>
+                                     rendered="#{tripBean.editableTrip}" immediate="true"/>
                 </h:form>
             </h:panelGroup>
         </div>
