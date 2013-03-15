@@ -552,4 +552,9 @@ public class RegisterBean implements Serializable {
         }
 
     }
+
+    public String notRegistered(){
+        registered=false;
+        return "REGISTER";
+    }
 }

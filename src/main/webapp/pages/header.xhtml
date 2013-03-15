@@ -39,7 +39,7 @@
                         <h:inputSecret id="password" styleClass="span2 loginInput" value="#{loginBean.password}"/>
                         <h:commandButton class="btn btn-mini" type="submit" value="#{msgs.login}"
                                          action="#{loginBean.loginUser}"/>
-                        <h:link class="floatRight" outcome="register.xhtml" value="#{msgs.register}"></h:link>
+                        <h:commandLink class="floatRight" action="#{registerBean.notRegistered}" value="#{msgs.register}" immediate="true"></h:commandLink>
                         <h:link class="floatLeft btn-mini" outcome="forgotPassword.xhtml" value="#{msgs.forgotPassword}"></h:link>
                     </h:panelGrid>
 

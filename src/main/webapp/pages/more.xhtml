@@ -1,7 +1,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
 <h:head>
     <title>Trippy Traveler</title>
     <!-- css -->
@@ -26,15 +27,27 @@
             <div class="span9">
                 <div id="tabContainerTrip" class="tabContainer">
                     <ul>
+                        <!-- Tab buttons --> <c:if test="#{tripBean.currentTrip != null}">
                         <li>
-                            <a class="button active" >Register</a>
+                            <a class="button  " href="trip.xhtml">#{tripBean.currentTrip.title}</a>
                         </li>
+                        <li>
+                            <a class="button" href="stops.xhtml">Stops</a>
+                        </li>
+                        <li>
+                            <a class="button " href="accessories.xhtml">Accessories</a>
+                        </li>
+                        <li>
+                            <a class="buttonMore btn-success active" href="more.xhtml">MORE !</a>
+                        </li>
+
+                    </c:if>
                     </ul>
                     <!-- Tab content -->
                     <div class="tabDetails">
                         <div id="registerTab" class="tabContentsTrip">
                             <div class="box">
-                                <h:form >
+                                <h:form>
                                     <h:messages globalOnly="true" errorStyle="color: red" infoStyle="color: green"
                                                 layout="table"/>
                                     <h:panelGrid columns="3" border="0" rendered="#{not registerBean.registered}">
@@ -86,7 +99,8 @@
                                         <h:message for="city" styleClass="error"/>
                                     </h:panelGrid>
                                     <h:commandButton type="submit" action="#{registerBean.addUser}"
-                                                     class="btn btn-success" value="#{msgs.register}" rendered="#{not registerBean.registered}"/>
+                                                     class="btn btn-success" value="#{msgs.register}"
+                                                     rendered="#{not registerBean.registered}"/>
                                 </h:form>
                             </div>
                         </div>

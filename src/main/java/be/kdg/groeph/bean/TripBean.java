@@ -44,7 +44,9 @@ public class TripBean implements Serializable {
     @Qualifier("loginBean")
     @Autowired
     LoginBean loginBean;
-
+    @Qualifier("registerBean")
+        @Autowired
+        RegisterBean registerBean;
     @NotEmpty(message = "{title} {notempty}")
     private String title;
     @NotEmpty(message = "{description} {notempty}")
@@ -348,7 +350,9 @@ public class TripBean implements Serializable {
         try {
             cancelUpdate();
             setCurrentTrip(trip);
-            System.out.println(currentTrip.getId());
+            if(!loginBean.isLoggedIn()) {
+                registerBean.notRegistered();
+            }
             if (loginBean.isLoggedIn()) {
                 return "SETTRIP";
             } else {
