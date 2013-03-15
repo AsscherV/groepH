@@ -78,21 +78,12 @@
         </navigation-case>
     </navigation-rule>
     <navigation-rule>
-        <from-view-id>/pages/index.xhtml</from-view-id>
             <navigation-case>
                 <from-outcome>LOGIN</from-outcome>
                 <to-view-id>/pages/trip.xhtml</to-view-id>
                 <redirect/>
             </navigation-case>
         </navigation-rule>
-    <navigation-rule>
-            <from-view-id>/pages/register.xhtml</from-view-id>
-                <navigation-case>
-                    <from-outcome>LOGIN</from-outcome>
-                    <to-view-id>/pages/trip.xhtml</to-view-id>
-                    <redirect/>
-                </navigation-case>
-            </navigation-rule>
     <navigation-rule>
         <navigation-case>
             <from-action>#{socialBean.login}</from-action>

@@ -33,13 +33,13 @@
                         </li>
 
                         <li>
-                            <a class="button" href="stops.xhtml">Stops</a>
+                            <a class="button" href="stops.xhtml">#{msgs.waypoints}</a>
                         </li>
                         <li>
-                            <a class="button active" href="accessories.xhtml">Accessories</a>
+                            <a class="button active" href="accessories.xhtml">#{msgs.accessories}</a>
                         </li>
                         <li>
-                            <a class="buttonMore btn-success " href="register.xhtml">MORE !</a>
+                            <a class="buttonMore btn-success " href="register.xhtml">#{msgs.more}</a>
                         </li>
                     </ul>
                     <!-- Tab content -->
@@ -47,7 +47,6 @@
 
                         <div id="accesTab" class="tabContentsTrip">
                             <div class="box">
-
 
                                 <h:form>
 
@@ -64,10 +63,10 @@
                                                 <h:commandLink type="submit"
                                                                rendered="#{accessoryBean.getEditable(accessory)}"
                                                                action="#{accessoryBean.updateAccessory}"
-                                                               value="Update"/>
+                                                               value="#{msgs.update}"/>
                                                 <h:commandLink type="submit"
                                                                rendered="#{accessoryBean.getEditable(accessory)}"
-                                                               value="Cancel">
+                                                               value="#{msgs.cancel}">
                                                     <f:ajax listener="#{accessoryBean.cancel(accessory)}"
                                                             render="@form"/>
                                                 </h:commandLink>
@@ -76,13 +75,13 @@
                                                                  rendered="#{not accessoryBean.containsEditable}">
                                                         <h:commandLink type="submit"
                                                                        rendered="#{ not accessoryBean.getEditable(accessory)}"
-                                                                       value="Edit">
+                                                                       value="#{msgs.edit}">
                                                             <f:ajax listener="#{accessoryBean.editAccessory(accessory)}"
                                                                     render="@form"/>
                                                         </h:commandLink>
                                                         <h:commandLink type="submit"
                                                                        rendered="#{ not accessoryBean.getEditable(accessory)}"
-                                                                       value="Delete">
+                                                                       value="#{msgs.delete}">
                                                             <f:ajax listener="#{accessoryBean.deleteAccessory(accessory)}"
                                                                     render="@form"/>
                                                         </h:commandLink>
@@ -126,7 +125,7 @@
                                                     <h:commandButton styleClass="btn btn-success" type="submit"
                                                                      rendered="#{  accessoryBean.getAdable(accessory)}"
                                                                      action="#{accessoryBean.addUser}"
-                                                                     value="add"/>
+                                                                     value="#{msgs.add}"/>
                                                     <h:panelGroup
                                                             rendered="#{ accessoryBean.hasAddableTripUsers(accessory)}">
                                                         <h:panelGroup
@@ -134,7 +133,7 @@
                                                             <h:commandButton styleClass="btn btn-success"
                                                                              type="submit"
                                                                              rendered="#{ not accessoryBean.getAdable(accessory)}"
-                                                                             value="add user to accessory">
+                                                                             value="#{msgs.addUserToAccessory}">
                                                                 <f:ajax listener="#{accessoryBean.changeAddUser(accessory)}"
                                                                         render="@form"/>
                                                             </h:commandButton>

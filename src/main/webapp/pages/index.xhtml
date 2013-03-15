@@ -29,27 +29,18 @@
                     <ul>
                         <!-- Tab buttons -->
                         <h:panelGroup rendered="#{tripBean.hasCurrentTrip}">
-                        <li>
-                            <a class="button active" href="index.xhtml">#{tripBean.currentTrip.title}</a>
-                        </li>
-
                             <li>
-                                <a class="button" href="user/stops.xhtml">#{msgs.waypoints}</a>
+                                <a class="button " href="trip.xhtml">#{tripBean.currentTrip.title}</a>
                             </li>
                             <li>
-                                <a class="button" href="user/participants.xhtml">Participants</a>
+                                <a class="button" href="stops.xhtml">#{msgs.waypoints}</a>
                             </li>
                             <li>
-                                <a class="button" href="user/accessories.xhtml">Accessories</a>
+                                <a class="button active" href="accessories.xhtml">#{msgs.accessories}</a>
                             </li>
                             <li>
-                                <a class="button" href="user/styling.xhtml">Styling</a>
+                                <a class="buttonMore btn-success " href="register.xhtml">#{msgs.more}</a>
                             </li>
-                            <h:panelGroup rendered="#{loginBean.user.admin}">
-                                <li>
-                                    <a class="button" href="admin/costs.xhtml">Costs</a>
-                                </li>
-                            </h:panelGroup>
 
                         </h:panelGroup>
                         <h:panelGroup rendered="#{not tripBean.hasCurrentTrip}">
