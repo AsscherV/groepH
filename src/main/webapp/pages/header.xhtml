@@ -55,7 +55,7 @@
 
 
                     <h:panelGrid rendered="#{loginBean.loggedIn}" columns="2" cellpadding="2">
-                        <h:outputLabel class="welcomeMessage">Welcome </h:outputLabel>
+                        <h:outputLabel class="welcomeMessage">#{msgs.welcome} </h:outputLabel>
                         <h:outputLabel class="welcomeMessage">#{loginBean.user.firstName}</h:outputLabel >
                         <h:commandLink id="login" class="btn btn-mini" type="submit" value="#{msgs.signOff}"
                                          action="#{loginBean.logOut}"/>
