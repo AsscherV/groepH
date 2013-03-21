@@ -47,8 +47,6 @@ public class Trip implements Nullable, Serializable {
     //@Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     private TripType tripType;
 
-
-
     @ManyToOne
     @JoinColumn(name = "tripUser", nullable = false)
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})

@@ -198,17 +198,6 @@ public class TripBean implements Serializable {
         this.label = label;
     }
 
-   /* public List<Label> getLabels() {
-
-        labels = tripService.getLabels(getCurrentTrip());
-
-        return labels;
-    }
-
-    public void setLabels(ArrayList<Label> labels) {
-        this.labels = labels;
-    }   */
-
     public String getTripType() {
         return tripType;
     }
@@ -420,6 +409,7 @@ public class TripBean implements Serializable {
             label = null;
             repetitionType = null;
             numberOfRepetitions = null;
+            isRepeated = false;
             //labels = null;
         } catch (NullPointerException e) {
             logger.error(e.toString());
@@ -569,9 +559,6 @@ public class TripBean implements Serializable {
 
             trip.setDescription(getNewDescription());
             trip.setLabel(getNewLabel());
-            //Label label = new Label(getNewLabel());
-            //trip.addLabel(label);
-
             trip.setTitle(getNewTitle());
             TripType tripType = tripService.getTypeByName(getNewTripType());
             trip.setTripType(tripType);
@@ -664,7 +651,6 @@ public class TripBean implements Serializable {
         try {
             newDescription = currentTrip.getDescription();
             newLabel = currentTrip.getLabel();
-            //newLabel = getCurrentTrip().getLabels().get(0).getName();
             newTripType = getCurrentTrip().getTripType().getType();
             if (!newTripType.toString().equals("Anytime")) {
                 newEndTime = getCurrentTrip().getEndTime();
@@ -672,9 +658,6 @@ public class TripBean implements Serializable {
             }
             newTitle = getCurrentTrip().getTitle();
             newIsPublic = getCurrentTrip().isPublic();
-            if (newTripType.toString().equals("Repeating")) {
-                //newRepetitionType = getCurrentTrip().getTripType().getRepeatingTripType().getRepeatingType();
-            }
             editableTrip = true;
             isRepeated = false;
             changeUpdateTripType();
@@ -712,7 +695,4 @@ public class TripBean implements Serializable {
         }
     }
 
-   /* public void refreshCurrentTrip() {
-        setCurrentTrip(tripService.getTripById(currentTrip.getId()));
-    } */
 }

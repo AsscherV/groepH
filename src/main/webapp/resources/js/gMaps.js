@@ -34,7 +34,7 @@ function addListeners(){
         var lat = event.latLng.lat();
         var lng =event.latLng.lng();
 
-        if($("#editableWaypoint").val() =="false"){
+            if($("#editableWaypoint").val() == "false"){
             document.getElementById("waypointForm:lat").value = lat;
             document.getElementById("waypointForm:lng").value = lng;
         }else{

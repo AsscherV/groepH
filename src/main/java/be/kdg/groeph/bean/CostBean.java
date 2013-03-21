@@ -199,7 +199,6 @@ public class CostBean implements Serializable {
 
     public List<TripUser> getConfirmedTripUsers() {
         List<TripUser> confirmedUsers = tripService.getTripById(getCurrentTrip().getId()).getConfirmedTripUsers();
-        //TODO: organiser needs to be removed, not a confirmed tripuser
         TripUser organiser = getCurrentTrip().getTripUser();
         confirmedUsers.add(organiser);
         return confirmedUsers;

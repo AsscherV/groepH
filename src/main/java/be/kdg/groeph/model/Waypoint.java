@@ -12,26 +12,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name="t_waypoint")
+@Table(name = "t_waypoint")
 public class Waypoint implements Nullable, Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(name="label", nullable = false, length = 100)
+    @Column(name = "label", nullable = false, length = 100)
     private String label;
-    @Column(name="description", nullable = false, length = 200)
+    @Column(name = "description", nullable = false, length = 200)
     private String description;
-    @Column(name="lattitude", nullable = false)
+    @Column(name = "lattitude", nullable = false)
     private double lattitude;
-    @Column(name="longitude", nullable = false)
+    @Column(name = "longitude", nullable = false)
     private double longitude;
-    @Column(name="correctAnswer", nullable = true)
+    @Column(name = "correctAnswer", nullable = true)
     private Integer correctAnswer;
 
 
     @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(mappedBy = "waypoint")     //,fetch = FetchType.EAGER
-    @Cascade({org.hibernate.annotations.CascadeType.DELETE})
+    @Cascade({org.hibernate.annotations.CascadeType.ALL})
     private List<Answer> answers;
 
     @ManyToOne
@@ -44,34 +44,43 @@ public class Waypoint implements Nullable, Serializable {
     private Trip trip;
 
 
-    public Waypoint(){
+    public Waypoint() {
 
     }
 
     public Waypoint(String label, String description, WaypointType waypointType, double lattitude, double longitude) {
-        this.label=label;
-        this.description=description;
-        this.waypointType=waypointType;
-        this.lattitude=lattitude;
-        this.longitude=longitude;
-        answers= new ArrayList<Answer>();
+        this.label = label;
+        this.description = description;
+        this.waypointType = waypointType;
+        this.lattitude = lattitude;
+        this.longitude = longitude;
+        answers = new ArrayList<Answer>();
 
     }
 
-    public Waypoint(String label, WaypointType waypointType, double lattitude, double longitude, String question,  String answer1, String answer2, String answer3, String answer4, int correctAnswer) {
-        this.label=label;
-        this.waypointType=waypointType;
-        this.lattitude=lattitude;
-        this.longitude=longitude;
-        this.description=question;
-        this.correctAnswer=correctAnswer;
-        answers= new ArrayList<Answer>();
-        this.answers.add(new Answer(answer1));
-        this.answers.add(new Answer(answer2));
-        this.answers.add(new Answer(answer3));
-        this.answers.add(new Answer(answer4));
+    public Waypoint(String label, WaypointType waypointType, double lattitude, double longitude, String question, String answer1, String answer2, String answer3, String answer4, int correctAnswer) {
+        this.label = label;
+        this.waypointType = waypointType;
+        this.lattitude = lattitude;
+        this.longitude = longitude;
+        this.description = question;
+        this.correctAnswer = correctAnswer;
+        answers = new ArrayList<Answer>();
+        Answer a1 = new Answer(answer1);
+        a1.setWaypoint(this);
+        Answer a2 = new Answer(answer2);
+        a2.setWaypoint(this);
+        Answer a3 = new Answer(answer3);
+        a3.setWaypoint(this);
+        Answer a4 = new Answer(answer4);
+        a4.setWaypoint(this);
+        this.answers.add(a1);
+        this.answers.add(a2);
+        this.answers.add(a3);
+        this.answers.add(a4);
 
     }
+
     public WaypointType getWaypointType() {
         return waypointType;
     }

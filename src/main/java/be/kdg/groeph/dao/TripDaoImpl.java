@@ -117,16 +117,6 @@ public class TripDaoImpl implements TripDao {
         }
     }
 
-    /*@Override
-    public List<Label> getLabels(Trip trip) {
-        if (trip != null) {
-            Query query = sessionFactory.getCurrentSession().createQuery("from Label where trip=:trip");
-            query.setParameter("trip", trip);
-
-            return (List<Label>) query.list();
-        }
-        return null;
-    }   */
 
     @Override
     public Trip getTripById(int id) {

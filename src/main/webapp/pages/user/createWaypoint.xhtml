@@ -106,7 +106,14 @@
                                                 <h:inputText id="answer4" styleClass="span2" value="#{waypointBean.answer4}" rendered="#{not waypointBean.editableWaypoint}"/>
                                                 <h:inputText id="newanswer4" styleClass="span2" value="#{waypointBean.newanswer4}" rendered="#{waypointBean.editableWaypoint}"/>
 
-                                                <h:selectOneRadio id="radioAnswer" value="#{waypointBean.correctAnswer}">
+                                                <h:selectOneRadio id="radioAnswer" value="#{waypointBean.correctAnswer}" rendered="#{not waypointBean.editableWaypoint}">
+                                                    <f:selectItem itemValue="#{1}" itemLabel="1"/>
+                                                    <f:selectItem itemValue="#{2}" itemLabel="2"/>
+                                                    <f:selectItem itemValue="#{3}" itemLabel="3"/>
+                                                    <f:selectItem itemValue="#{4}" itemLabel="4"/>
+                                                </h:selectOneRadio>
+
+                                                <h:selectOneRadio id="radioAnswer2" value="#{waypointBean.newCorrectAnswer}" rendered="#{waypointBean.editableWaypoint}">
                                                     <f:selectItem itemValue="#{1}" itemLabel="1"/>
                                                     <f:selectItem itemValue="#{2}" itemLabel="2"/>
                                                     <f:selectItem itemValue="#{3}" itemLabel="3"/>

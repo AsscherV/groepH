@@ -36,10 +36,10 @@
                         <!-- Tab buttons -->
                         <li>
                             <h:outputLink class="button" value="trip.xhtml" rendered="#{not tripBean.editableTrip}">
-                                <h:outputText value="#{tripBean.currentTrip.title}" />
+                                <h:outputText value="#{tripBean.currentTrip.title}"/>
                             </h:outputLink>
                             <h:outputLink class="button" value="createTrip.xhtml" rendered="#{tripBean.editableTrip}">
-                                <h:outputText value="#{tripBean.currentTrip.title}" />
+                                <h:outputText value="#{tripBean.currentTrip.title}"/>
                             </h:outputLink>
                         </li>
                         <h:panelGroup rendered="#{tripBean.hasCurrentTrip}">
@@ -79,20 +79,24 @@
                                 <h:panelGrid class="floatLeft marginRight" columns="2" border="0">
                                     <h:outputLabel value="#{msgs.title}"/>
                                     <h:outputLabel value="#{waypointBean.currentWaypoint.label}"/>
-                                    <h:outputLabel value="#{msgs.description}" rendered="#{waypointBean.currentWaypoint.correctAnswer == null}"/>
-                                    <h:outputLabel value="#{msgs.question}" rendered="#{waypointBean.currentWaypoint.correctAnswer != null}"/>
-                                    <h:outputLabel value="#{waypointBean.currentWaypoint.description}"/>
+                                    <h:outputLabel value="#{msgs.description}"
+                                                   rendered="#{waypointBean.currentWaypoint.correctAnswer == 0}"/>
 
-                                        <h:outputLabel value="#{msgs.answer} 1" rendered="#{waypointBean.currentWaypoint.correctAnswer != null}"/>
-                                        <h:outputLabel value="#{waypointBean.currentWaypoint.answer1}" rendered="#{waypointBean.currentWaypoint.correctAnswer != null}"/>
-                                        <h:outputLabel value="#{msgs.answer} 2" rendered="#{waypointBean.currentWaypoint.correctAnswer != null}"/>
-                                        <h:outputLabel value="#{waypointBean.currentWaypoint.answer2}" rendered="#{waypointBean.currentWaypoint.correctAnswer != null}"/>
-                                        <h:outputLabel value="#{msgs.answer} 3" rendered="#{waypointBean.currentWaypoint.correctAnswer != null}"/>
-                                        <h:outputLabel value="#{waypointBean.currentWaypoint.answer3}" rendered="#{waypointBean.currentWaypoint.correctAnswer != null}"/>
-                                        <h:outputLabel value="#{msgs.answer} 4" rendered="#{waypointBean.currentWaypoint.correctAnswer != null}"/>
-                                        <h:outputLabel value="#{waypointBean.currentWaypoint.answer4}" rendered="#{waypointBean.currentWaypoint.correctAnswer != null}"/>
-                                        <h:outputLabel value="#{msgs.correctAnswer}" rendered="#{waypointBean.currentWaypoint.correctAnswer != null}"/>
-                                        <h:outputLabel value="#{waypointBean.currentWaypoint.correctAnswer}" rendered="#{waypointBean.currentWaypoint.correctAnswer != null}"/>
+                                    <h:panelGroup rendered="#{waypointBean.currentWaypoint.correctAnswer != null}">
+                                        <h:outputLabel value="#{msgs.question}"/>
+                                        <h:outputLabel value="#{waypointBean.currentWaypoint.description}"/>
+                                        <h:dataTable value="#{waypointBean.currentWaypoint.answers}" var="answer">
+                                            <h:column>
+                                                <h:outputLabel value="#{msgs.answer}"/>
+                                                <h:outputLabel styleClass="span2" value="#{answer.answer}"/>
+
+                                            </h:column>
+
+                                        </h:dataTable>
+
+                                        <h:outputLabel value="#{msgs.correctAnswer}"/>
+                                        <h:outputLabel value="#{waypointBean.currentWaypoint.correctAnswer}"/>
+                                    </h:panelGroup>
 
                                     <h:outputLabel value="#{msgs.type}"/>
                                     <h:outputLabel value="#{waypointBean.currentWaypoint.waypointType.type}"/>
@@ -102,7 +106,7 @@
                                     <h:outputLabel id="lng" value="#{waypointBean.currentWaypoint.longitude}"/>
 
 
-                                    <h:form>
+                                    <h:form rendered="#{loginBean.user.equals(tripBean.currentTrip.tripUser)}">
                                         <h:commandButton action="#{waypointBean.editWaypoint}"
                                                          value="#{msgs.updateWaypoint}"
                                                          class="btn btn-success" id="editWaypoint"/>
@@ -146,4 +150,4 @@
     <h:outputScript name="js/main.js"/>
     <h:outputScript name="js/gMapUneditable.js"/>
 </h:body>
-</html> 
+</html>

@@ -21,8 +21,8 @@
                 </div>
 
                 <h:form id="loginForm" class="navbar-form pull-right">
-                    <h:inputHidden id="token" value="#{socialBean.access_token}" />
-                    <h:commandButton id="fbLoginButton" action="#{socialBean.login}" style="display: none"/>
+                    <h:inputHidden id="token" value="#{socialBean.access_token}" class="token"/>
+                    <h:commandButton id="fbLoginButton" action="#{socialBean.login}" style="display: none;"/>
                 </h:form>
                 <div class="navbar-form pull-right">
                 <h:form  >

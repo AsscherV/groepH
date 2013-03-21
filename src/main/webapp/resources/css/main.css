@@ -189,3 +189,7 @@ a.trippy:active {
 .smallButton {
     display: inline;
 }
+
+.noDisplay {
+    display: none;
+}
