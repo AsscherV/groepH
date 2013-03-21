@@ -40,7 +40,9 @@
                             <a class="button active" href="accessories.xhtml">#{msgs.accessories}</a>
                         </li>
                         <li>
-                            <a class="buttonMore btn-success " href="register.xhtml">#{msgs.more}</a>
+                            <h:form>
+                            <h:commandLink class="buttonMore btn-success " action="#{registerBean.notRegisteredMore}" value="#{msgs.more}" />
+                            </h:form>
                         </li>
 
                     </ul>

@@ -44,7 +44,10 @@
                             <a class="button" href="accessories.xhtml">#{msgs.accessories}</a>
                         </li>
                         <li>
-                            <a class="buttonMore btn-success " href="more.xhtml">#{msgs.more}</a>
+                            <h:form>
+                                <h:commandLink class="buttonMore btn-success "
+                                               action="#{registerBean.notRegisteredMore}" value="#{msgs.more}"/>
+                            </h:form>
                         </li>
                     </ul>
                     <!-- Tab content -->

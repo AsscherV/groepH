@@ -193,3 +193,6 @@ a.trippy:active {
 .noDisplay {
     display: none;
 }
+label{
+    margin-right: 20px;
+}

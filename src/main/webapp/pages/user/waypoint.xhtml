@@ -1,153 +1,139 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:c="http://java.sun.com/jsp/jstl/core">
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:c="http://java.sun.com/jsp/jstl/core">
 <h:head>
-    <title>Trippy Traveler</title>
-    <!-- css -->
-    <h:outputStylesheet library="css" name="bootstrap.css"/>
-    <h:outputStylesheet library="css" name="bootstrap-responsive.css"/>
-    <h:outputStylesheet library="css" name="jquery-ui.css"/>
-    <h:outputStylesheet library="css" name="main.css"/>
-
-    <script type="text/javascript"
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCmZaUMdD7lz1F48ySOKKlEFdvZNw3keb0&amp;sensor=false">
-    </script>
+<title>Trippy Traveler</title>
+<!-- css -->
+<h:outputStylesheet library="css" name="bootstrap.css"/>
+<h:outputStylesheet library="css" name="bootstrap-responsive.css"/>
+<h:outputStylesheet library="css" name="jquery-ui.css"/>
+<h:outputStylesheet library="css" name="main.css"/>
+<script type="text/javascript"
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCmZaUMdD7lz1F48ySOKKlEFdvZNw3keb0&amp;sensor=false">
+</script>
 </h:head>
 <h:body>
-    <f:loadBundle basename="messages" var="msgs"/>
-    <ui:insert name="header">
-        <ui:include src="../header.xhtml"/>
-    </ui:insert>
-
-    <div class="container">
-        <div class="row">
-
-            <!-- trips / my trips -->
-            <ui:insert name="header">
-                <ui:include src="tripmenu.xhtml"/>
-            </ui:insert>
-
-            <!-- trip info -->
-            <div class="span9">
-                <div id="tabContainerTrip" class="tabContainer">
-                    <ul>
-                        <!-- Tab buttons -->
-                        <li>
-                            <h:outputLink class="button" value="trip.xhtml" rendered="#{not tripBean.editableTrip}">
-                                <h:outputText value="#{tripBean.currentTrip.title}"/>
-                            </h:outputLink>
-                            <h:outputLink class="button" value="createTrip.xhtml" rendered="#{tripBean.editableTrip}">
-                                <h:outputText value="#{tripBean.currentTrip.title}"/>
-                            </h:outputLink>
-                        </li>
-                        <h:panelGroup rendered="#{tripBean.hasCurrentTrip}">
-                            <li>
-                                <a class="button active" href="stops.xhtml">#{msgs.waypoints}</a>
-                            </li>
-                            <li>
-                                <a class="button" href="participants.xhtml">#{msgs.participants}</a>
-                            </li>
-                            <li>
-                                <a class="button" href="accessories.xhtml">#{msgs.accessories}</a>
-                            </li>
-                            <li>
-                                <a class="button" href="styling.xhtml">#{msgs.styling}</a>
-                            </li>
-                            <li>
-                                <a class="button" href="tripCosts.xhtml">#{msgs.costs}</a>
-                            </li>
-                        </h:panelGroup>
-                    </ul>
-                    <!-- Tab content -->
-                    <div class="tabDetails">
-
-                        <div id="accesTab" class="tabContentsTrip">
-                            <div class="box">
-                                <h:form>
-                                    <h:commandButton type="submit" action="#{waypointBean.previousWaypoint}"
-                                                     class="btn btn-success marginRight"
-                                                     value="#{msgs.previous}"/>
-                                    <h:commandButton type="submit" action="#{waypointBean.nextWaypoint}"
-                                                     class="btn btn-success marginRight"
-                                                     value="#{msgs.next}"/>
-                                    <h:commandButton action="STOPS" value="#{msgs.overview}"
-                                                     class="btn btn-success marginRight" id="overviewWaypoint"/>
-
-                                </h:form>
-                                <h:panelGrid class="floatLeft marginRight" columns="2" border="0">
-                                    <h:outputLabel value="#{msgs.title}"/>
-                                    <h:outputLabel value="#{waypointBean.currentWaypoint.label}"/>
-                                    <h:outputLabel value="#{msgs.description}"
-                                                   rendered="#{waypointBean.currentWaypoint.correctAnswer == 0}"/>
-
-                                    <h:panelGroup rendered="#{waypointBean.currentWaypoint.correctAnswer != null}">
-                                        <h:outputLabel value="#{msgs.question}"/>
-                                        <h:outputLabel value="#{waypointBean.currentWaypoint.description}"/>
-                                        <h:dataTable value="#{waypointBean.currentWaypoint.answers}" var="answer">
-                                            <h:column>
-                                                <h:outputLabel value="#{msgs.answer}"/>
-                                                <h:outputLabel styleClass="span2" value="#{answer.answer}"/>
-
-                                            </h:column>
-
-                                        </h:dataTable>
-
-                                        <h:outputLabel value="#{msgs.correctAnswer}"/>
-                                        <h:outputLabel value="#{waypointBean.currentWaypoint.correctAnswer}"/>
-                                    </h:panelGroup>
-
-                                    <h:outputLabel value="#{msgs.type}"/>
-                                    <h:outputLabel value="#{waypointBean.currentWaypoint.waypointType.type}"/>
-                                    <h:outputLabel value="#{msgs.lat}"/>
-                                    <h:outputLabel id="lat" value="#{waypointBean.currentWaypoint.lattitude}"/>
-                                    <h:outputLabel value="#{msgs.lng}"/>
-                                    <h:outputLabel id="lng" value="#{waypointBean.currentWaypoint.longitude}"/>
-
-
-                                    <h:form rendered="#{loginBean.user.equals(tripBean.currentTrip.tripUser)}">
-                                        <h:commandButton action="#{waypointBean.editWaypoint}"
-                                                         value="#{msgs.updateWaypoint}"
-                                                         class="btn btn-success" id="editWaypoint"/>
-                                        <h:commandButton action="#{waypointBean.deleteWaypoint}"
-                                                         value="#{msgs.deleteWaypoint}"
-                                                         class="btn btn-success" id="deleteWaypoint"/>
-                                    </h:form>
-                                </h:panelGrid>
-
-
-                                <div id="map_canvas"></div>
-
-                                <div>
-                                    <h:commandButton value="#{msgs.resetMap}"
-                                                     class="btn btn-success" id="resetMap"/>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-
-        <footer>
-            <p>
-                © Trippy Traveler 2013
-            </p>
-        </footer>
-
-    </div>
-    <!-- /container -->
-
-    <!-- javascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <h:outputScript name="js/jquery-1.9.0.min.js"/>
-    <h:outputScript name="js/jquery-ui.js"/>
-    <h:outputScript name="js/main.js"/>
-    <h:outputScript name="js/gMapUneditable.js"/>
+<f:loadBundle basename="messages" var="msgs"/>
+<ui:insert name="header">
+<ui:include src="../header.xhtml"/>
+</ui:insert>
+<div class="container">
+<div class="row">
+<!-- trips / my trips -->
+<ui:insert name="header">
+<ui:include src="tripmenu.xhtml"/>
+</ui:insert>
+<!-- trip info -->
+<div class="span9">
+<div id="tabContainerTrip" class="tabContainer">
+<ul>
+<!-- Tab buttons -->
+<li>
+<h:outputLink class="button" value="trip.xhtml" rendered="#{not tripBean.editableTrip}">
+<h:outputText value="#{tripBean.currentTrip.title}"/>
+</h:outputLink>
+<h:outputLink class="button" value="createTrip.xhtml" rendered="#{tripBean.editableTrip}">
+<h:outputText value="#{tripBean.currentTrip.title}"/>
+</h:outputLink>
+</li>
+<h:panelGroup rendered="#{tripBean.hasCurrentTrip}">
+<li>
+<a class="button active" href="stops.xhtml">#{msgs.waypoints}</a>
+</li>
+<li>
+<a class="button" href="participants.xhtml">#{msgs.participants}</a>
+</li>
+<li>
+<a class="button" href="accessories.xhtml">#{msgs.accessories}</a>
+</li>
+<li>
+<a class="button" href="styling.xhtml">#{msgs.styling}</a>
+</li>
+<li>
+<a class="button" href="tripCosts.xhtml">#{msgs.costs}</a>
+</li>
+</h:panelGroup>
+</ul>
+<!-- Tab content -->
+<div class="tabDetails">
+<div id="accesTab" class="tabContentsTrip">
+<div class="box">
+<h:form>
+<h:commandButton type="submit" action="#{waypointBean.previousWaypoint}"
+class="btn btn-success marginRight"
+value="#{msgs.previous}"/>
+<h:commandButton type="submit" action="#{waypointBean.nextWaypoint}"
+class="btn btn-success marginRight"
+value="#{msgs.next}"/>
+<h:commandButton action="STOPS" value="#{msgs.overview}"
+class="btn btn-success marginRight" id="overviewWaypoint"/>
+</h:form>
+<h:panelGrid class="floatLeft marginRight" columns="2" border="0">
+<h:outputLabel value="#{msgs.title}"/>
+<h:outputLabel value="#{waypointBean.currentWaypoint.label}"/>
+<h:outputLabel value="#{msgs.description}"
+rendered="#{waypointBean.currentWaypoint.correctAnswer == 0}"/>
+<h:outputLabel rendered="#{waypointBean.currentWaypoint.correctAnswer != null}"
+value="#{msgs.question}"/>
+<h:outputLabel rendered="#{waypointBean.currentWaypoint.correctAnswer != null}"
+value="#{waypointBean.currentWaypoint.description}"/>
+<h:dataTable value="#{waypointBean.currentWaypoint.answers}" var="answer"
+rendered="#{waypointBean.currentWaypoint.correctAnswer != null}">
+<h:column>
+<h:outputLabel styleClass="floatLeft" value="#{msgs.answer}"/>
+</h:column>
+</h:dataTable>
+<h:dataTable value="#{waypointBean.currentWaypoint.answers}" var="answer"
+rendered="#{waypointBean.currentWaypoint.correctAnswer != null}">
+<h:column>
+<h:outputLabel styleClass="floatLeft" value="#{answer.answer}"/>
+</h:column>
+</h:dataTable>
+<h:outputLabel rendered="#{waypointBean.currentWaypoint.correctAnswer != null}"
+value="#{msgs.correctAnswer}"/>
+<h:outputLabel rendered="#{waypointBean.currentWaypoint.correctAnswer != null}"
+value="#{waypointBean.currentWaypoint.correctAnswer}"/>
+<h:outputLabel value="#{msgs.type}"/>
+<h:outputLabel value="#{waypointBean.currentWaypoint.waypointType.type}"/>
+<h:outputLabel value="#{msgs.lat}"/>
+<h:outputLabel id="lat" value="#{waypointBean.currentWaypoint.lattitude}"/>
+<h:outputLabel value="#{msgs.lng}"/>
+<h:outputLabel id="lng" value="#{waypointBean.currentWaypoint.longitude}"/>
+<h:form rendered="#{loginBean.user.equals(tripBean.currentTrip.tripUser)}">
+<h:commandButton action="#{waypointBean.editWaypoint}"
+value="#{msgs.updateWaypoint}"
+class="btn btn-success" id="editWaypoint"/>
+<h:commandButton action="#{waypointBean.deleteWaypoint}"
+value="#{msgs.deleteWaypoint}"
+class="btn btn-success" id="deleteWaypoint"/>
+</h:form>
+</h:panelGrid>
+<div id="map_canvas"></div>
+<div>
+<h:commandButton value="#{msgs.resetMap}"
+class="btn btn-success" id="resetMap"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<footer>
+<p>
+© Trippy Traveler 2013
+</p>
+</footer>
+</div>
+<!-- /container -->
+<!-- javascript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<h:outputScript name="js/jquery-1.9.0.min.js"/>
+<h:outputScript name="js/jquery-ui.js"/>
+<h:outputScript name="js/main.js"/>
+<h:outputScript name="js/gMapUneditable.js"/>
 </h:body>
 </html>

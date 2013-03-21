@@ -147,9 +147,17 @@
             <from-outcome>REGISTER</from-outcome>
             <to-view-id>/pages/register.xhtml</to-view-id>
             <redirect/>
-            <!-- hier nog navigation rule voor failure-->
         </navigation-case>
     </navigation-rule>
+    <navigation-rule>
+            <navigation-case>
+                <from-action>#{registerBean.notRegisteredMore}</from-action>
+                <from-outcome>REGISTER</from-outcome>
+                <to-view-id>/pages/more.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+        </navigation-rule>
+
     <navigation-rule>
         <navigation-case>
             <from-action>#{waypointBean.updateWaypoint}</from-action>
@@ -194,7 +202,6 @@
             <from-outcome>CANCEL</from-outcome>
             <to-view-id>/pages/user/waypoint.xhtml</to-view-id>
             <redirect/>
-            <!-- hier nog navigation rule voor failure-->
         </navigation-case>
     </navigation-rule>
 

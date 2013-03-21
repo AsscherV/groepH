@@ -560,4 +560,8 @@ public class RegisterBean implements Serializable {
         registered = false;
         return "REGISTER";
     }
+    public String notRegisteredMore() {
+            registered = false;
+            return "REGISTER";
+        }
 }
