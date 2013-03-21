@@ -212,13 +212,44 @@ public class TripDaoImpl implements TripDao {
 
     @Override
     public RepeatingTripType getRepetitionTypeByName(String repetitionType) {
-        try  {
+        try {
             Query query = sessionFactory.getCurrentSession().createQuery("from RepeatingTripType where repeatingType=:repetitionType");
             query.setParameter("repetitionType", repetitionType);
             return (RepeatingTripType) query.uniqueResult();
 
         }   catch (NullPointerException e){
             logger.error(e.getMessage());
+            return null;
+        } catch (Exception e) {
+            logger.error(e);
+            return null;
+        }
+    }
+
+    @Override
+    public List<TripUser> getParticipantsByTrip(Trip trip) {
+        try {
+
+
+            Query query = sessionFactory.getCurrentSession().createQuery("from TripUser tripUser left join tripUser.confirmedTrips trips where trips=:id");
+            query.setParameter("id", trip);
+            List<Object[]> tripUsers = query.list();
+
+            List<TripUser> tripUserList = new ArrayList<TripUser>();
+            for (int i = 0; i < tripUsers.size(); i++) {
+
+                Object[] tripArray = tripUsers.get(i);
+                if (TripUser.class == tripArray[0].getClass()) {
+                    TripUser tripUserToAdd = (TripUser) tripArray[0];
+                    tripUserList.add(tripUserToAdd);
+
+                }
+            }
+            return tripUserList;
+
+
+        } catch (Exception e) {
+            logger.error(e.getMessage().toString());
             return null;
         }
     }

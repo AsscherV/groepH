@@ -1,6 +1,7 @@
 package be.kdg.groeph.service;
 
 import be.kdg.groeph.model.Address;
+import be.kdg.groeph.model.Trip;
 import be.kdg.groeph.model.TripUser;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -63,5 +64,21 @@ public class RestService {
         JSONSerializer serializer = new JSONSerializer();
         TripUser user = userService.getUserByEmail(Email);
         return serializer.serialize(tripService.getAllCreatedTripsByUser(user));
+    }
+
+    @GET
+    @Path("/participatingTrips")
+    public String getAllParticipatingTrips(@QueryParam("tripUserEmail") String Email){
+        JSONSerializer serializer = new JSONSerializer();
+        TripUser user = userService.getUserByEmail(Email);
+        return serializer.serialize(tripService.getAllParticipatedTripsByUser(user));
+    }
+
+    @GET
+    @Path("/getParticipantsByTrip")
+    public String getAllParticipantsByTrip(@QueryParam("tripId") String tripId){
+        JSONSerializer serializer = new JSONSerializer();
+        Trip trip = tripService.getTripById(Integer.parseInt(tripId));
+        return serializer.serialize( tripService.getParticipantsByTrip(trip));
     }
 }
