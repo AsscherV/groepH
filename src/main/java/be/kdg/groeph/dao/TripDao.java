@@ -38,4 +38,6 @@ public interface TripDao {
     List<RepeatingTripType> fetchAllRepeatingTripTypes();
 
     RepeatingTripType getRepetitionTypeByName(String repetitionType);
+
+    List<TripUser> getParticipantsByTrip(Trip trip);
 }

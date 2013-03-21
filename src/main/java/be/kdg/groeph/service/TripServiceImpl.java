@@ -182,4 +182,14 @@ public class TripServiceImpl implements TripService {
         }
     }
 
+    @Override
+    public List<TripUser> getParticipantsByTrip(Trip trip) {
+        try{
+            return tripDao.getParticipantsByTrip(trip);
+        }catch (Exception e){
+            logger.error(e.getMessage().toString());
+            return null;
+        }
+    }
+
 }
