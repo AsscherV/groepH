@@ -30,6 +30,8 @@ public class RestService {
     ParticipantsService participantsService;
     @Autowired
     UserService userService;
+    @Autowired
+    AccessoryService accessoryService;
 
     @GET
     @Path("/login")
@@ -79,6 +81,14 @@ public class RestService {
     public String getAllParticipantsByTrip(@QueryParam("tripId") String tripId){
         JSONSerializer serializer = new JSONSerializer();
         Trip trip = tripService.getTripById(Integer.parseInt(tripId));
-        return serializer.serialize( tripService.getParticipantsByTrip(trip));
+        return serializer.serialize(tripService.getParticipantsByTrip(trip));
+    }
+
+    @GET
+    @Path("/getAccessoriesByTrip")
+    public String getAllAccessoriesByTrip(@QueryParam("tripId") String tripId){
+        JSONSerializer serializer = new JSONSerializer();
+        Trip trip = tripService.getTripById(Integer.parseInt(tripId));
+        return serializer.serialize(accessoryService.getAccessoriesByTrip(trip));
     }
 }
