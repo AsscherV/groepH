@@ -2,11 +2,12 @@ package be.kdg.groeph.model;
 
 
 import be.kdg.groeph.model.Null.Nullable;
-import org.hibernate.annotations.*;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+import org.primefaces.model.UploadedFile;
 
 import javax.persistence.*;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +28,10 @@ public class Waypoint implements Nullable, Serializable {
     private double longitude;
     @Column(name = "correctAnswer", nullable = true)
     private Integer correctAnswer;
+    @Column( name = "image" )
+    @Lob
+    private byte[] image;
+
 
 
     @LazyCollection(LazyCollectionOption.FALSE)
@@ -48,17 +53,21 @@ public class Waypoint implements Nullable, Serializable {
 
     }
 
-    public Waypoint(String label, String description, WaypointType waypointType, double lattitude, double longitude) {
+    public Waypoint(String label, String description, WaypointType waypointType, double lattitude, double longitude, UploadedFile image) {
         this.label = label;
         this.description = description;
         this.waypointType = waypointType;
         this.lattitude = lattitude;
         this.longitude = longitude;
         answers = new ArrayList<Answer>();
+        if(image!=null)
+        {
+            this.image=image.getContents();
+        }
 
     }
 
-    public Waypoint(String label, WaypointType waypointType, double lattitude, double longitude, String question, String answer1, String answer2, String answer3, String answer4, int correctAnswer) {
+    public Waypoint(String label, WaypointType waypointType, double lattitude, double longitude, String question, String answer1, String answer2, String answer3, String answer4, int correctAnswer, UploadedFile image) {
         this.label = label;
         this.waypointType = waypointType;
         this.lattitude = lattitude;
@@ -78,8 +87,13 @@ public class Waypoint implements Nullable, Serializable {
         this.answers.add(a2);
         this.answers.add(a3);
         this.answers.add(a4);
-
+        if(image!=null)
+        {
+            this.image=image.getContents();
+        }
     }
+
+
 
     public WaypointType getWaypointType() {
         return waypointType;
@@ -161,6 +175,15 @@ public class Waypoint implements Nullable, Serializable {
     public void setAnswers(List<Answer> answers) {
         this.answers = answers;
     }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
+
 
     @Override
     public boolean equals(Object o) {

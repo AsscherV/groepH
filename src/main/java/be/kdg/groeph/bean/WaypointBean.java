@@ -7,6 +7,9 @@ import be.kdg.groeph.service.WaypointService;
 import be.kdg.groeph.util.Tools;
 import org.apache.log4j.Logger;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
+import org.primefaces.model.UploadedFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -15,6 +18,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.inject.Named;
 import javax.validation.constraints.NotNull;
+import java.io.ByteArrayInputStream;
 import java.io.Serializable;
 import java.util.List;
 
@@ -82,6 +86,9 @@ public class WaypointBean implements Serializable {
     @NotNull(message = "{correctAnswer} {notempty}")
     private Integer newCorrectAnswer;
 
+    private UploadedFile image;
+    private StreamedContent newimage;
+
     public WaypointBean() {
         editableWaypoint = false;
         correctAnswer = 1;
@@ -127,6 +134,14 @@ public class WaypointBean implements Serializable {
         this.newanswer4 = newanswer4;
     }
 
+    public StreamedContent getNewimage() {
+        return newimage;
+    }
+
+    public void setNewimage(StreamedContent newimage) {
+        this.newimage = newimage;
+    }
+
     public String getTitles() {
         titles = "";
         for (Waypoint wp : getTripWaypoints()) {
@@ -155,7 +170,6 @@ public class WaypointBean implements Serializable {
     public void setInteractive(boolean interactive) {
         isInteractive = interactive;
     }
-
     public double getLattitude() {
         return lattitude;
     }
@@ -241,9 +255,9 @@ public class WaypointBean implements Serializable {
         Waypoint waypoint;
         WaypointType type = waypointService.getTypeByName(getWaypointType());
         if (isInteractive) {
-            waypoint = new Waypoint(getLabel(), type, getLattitude(), getLongitude(), getDescription(), getAnswer1(), getAnswer2(), getAnswer3(), getAnswer4(), getCorrectAnswer());
+            waypoint = new Waypoint(getLabel(), type, getLattitude(), getLongitude(), getDescription(), getAnswer1(), getAnswer2(), getAnswer3(), getAnswer4(), getCorrectAnswer(),getImage());
         } else {
-            waypoint = new Waypoint(getLabel(), getDescription(), type, getLattitude(), getLongitude());
+            waypoint = new Waypoint(getLabel(), getDescription(), type, getLattitude(), getLongitude(),getImage());
 
         }
         tripBean.getCurrentTrip().addWaypoint(waypoint);
@@ -254,11 +268,10 @@ public class WaypointBean implements Serializable {
             return SUCCESS;
         } else {
             return FAILURE;
-        }
+        }   
     }
 
     public String editWaypoint() {
-
         newlabel = currentWaypoint.getLabel();
         newdescription = currentWaypoint.getDescription();
         newlattitude = currentWaypoint.getLattitude();
@@ -279,7 +292,6 @@ public class WaypointBean implements Serializable {
         }
 
         editableWaypoint = true;
-
         return "EDITWAYPOINT";
     }
 
@@ -303,12 +315,16 @@ public class WaypointBean implements Serializable {
             waypoint.getAnswers().clear();
             waypoint.setCorrectAnswer(null);
         }
-
+         if(image!=null)
+         {
+             waypoint.setImage(image.getContents());
+         }
         waypoint.setLabel(newlabel);
         waypoint.setDescription(newdescription);
         waypoint.setWaypointType(newtype);
         waypoint.setLattitude(newlattitude);
         waypoint.setLongitude(newlongitude);
+
         editableWaypoint = false;
         if (waypointService.updateWaypoint(waypoint)) {
             clearfield();
@@ -323,7 +339,6 @@ public class WaypointBean implements Serializable {
         clearfield();
         return "CANCEL";
     }
-
     public String deleteWaypoint() {
         Waypoint waypoint = getCurrentWaypoint();
         tripBean.getCurrentTrip().deleteWaypoint(waypoint);
@@ -367,6 +382,7 @@ public class WaypointBean implements Serializable {
         answer2 = null;
         answer3 = null;
         answer4 = null;
+        image=null;
         correctAnswer = 1;
         newanswer1 = null;
 
@@ -450,4 +466,18 @@ public class WaypointBean implements Serializable {
     public void setInitDefaultAnswer() {
         correctAnswer = 1;
     }
+
+    public UploadedFile getImage() {
+        return image;
+    }
+
+    public void setImage(UploadedFile image) {
+        this.image = image;
+    }
+    public StreamedContent getCurrentImage() {
+        return new DefaultStreamedContent(new ByteArrayInputStream(currentWaypoint.getImage()));
+
+    }
+
+
 }
