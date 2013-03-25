@@ -28,4 +28,7 @@ public interface CostDao {
     public Double getTotalCostByTrip(Trip trip);
 
     public Double getTotalCostByUser(Trip trip, TripUser tripUser);
+
+    public List<Cost> getCostByTripByUser(Trip trip, TripUser tripUser);
+    public Double getAverageCostByTrip(Trip trip);
 }

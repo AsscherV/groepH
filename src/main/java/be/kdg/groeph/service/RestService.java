@@ -32,6 +32,8 @@ public class RestService {
     UserService userService;
     @Autowired
     AccessoryService accessoryService;
+    @Autowired
+    WaypointService waypointService;
 
     @GET
     @Path("/login")
@@ -90,5 +92,55 @@ public class RestService {
         JSONSerializer serializer = new JSONSerializer();
         Trip trip = tripService.getTripById(Integer.parseInt(tripId));
         return serializer.serialize(accessoryService.getAccessoriesByTrip(trip));
+    }
+
+    @GET
+    @Path("/getCostsByTrip")
+    public String getCostsByTrip(@QueryParam("tripId") String tripId){
+        JSONSerializer serializer = new JSONSerializer();
+        Trip trip = tripService.getTripById(Integer.parseInt(tripId));
+        return serializer.serialize( costService.getCostsByTrip(trip));
+    }
+    @GET
+    @Path("/getCostsByTripAndTripUser")
+    public String getCostsByTripAndTripUser(@QueryParam("tripId") String tripId, @QueryParam("tripUserId") String tripUserId){
+        JSONSerializer serializer = new JSONSerializer();
+        Trip trip = tripService.getTripById(Integer.parseInt(tripId));
+        TripUser tripUser = userService.getUserByEmail(tripUserId);
+        return serializer.serialize(costService.getCostByTripByUser(trip,tripUser));
+    }
+
+    @GET
+    @Path("/getCostForAUserByTripAndUser")
+    public String getCostForAUserByTripAndUser(@QueryParam("tripId") String tripId, @QueryParam("tripUserId") String tripUserId){
+        JSONSerializer serializer = new JSONSerializer();
+        Trip trip = tripService.getTripById(Integer.parseInt(tripId));
+        TripUser tripUser = userService.getUserByEmail(tripUserId);
+        return serializer.serialize(costService.getCostForAUserByTripAndUser(trip,tripUser));
+    }
+
+    @GET
+    @Path("/getAverageCostForATrip")
+    public String getAverageCostForATrip(@QueryParam("tripId") String tripId){
+        JSONSerializer serializer = new JSONSerializer();
+        Trip trip = tripService.getTripById(Integer.parseInt(tripId));
+        return serializer.serialize(costService.getAverageCostByTrip(trip));
+    }
+
+    @GET
+    @Path("/getTotalCostForATrip")
+    public String getTotalCostForATrip(@QueryParam("tripId") String tripId){
+        JSONSerializer serializer = new JSONSerializer();
+        Trip trip = tripService.getTripById(Integer.parseInt(tripId));
+        return serializer.serialize(costService.getTotalCostByTrip(trip));
+    }
+
+    @GET
+    @Path("/getWaypointsByTripId")
+    public String getWaypointsByTripId(@QueryParam("tripId")String id) {
+        JSONSerializer serializer = new JSONSerializer();
+        Trip trip = tripService.getTripById(Integer.parseInt(id));
+
+        return serializer.serialize(waypointService.getWaypointsByTrip(trip));
     }
 }

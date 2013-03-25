@@ -96,4 +96,30 @@ public class CostServiceImpl implements CostService {
             return null;
         }
     }
+
+    @Override
+    public List<Cost> getCostByTripByUser(Trip trip, TripUser tripUser) {
+        try {
+            return costDao.getCostByTripByUser(trip, tripUser);
+        } catch (NullPointerException e){
+            logger.error(e.getMessage());
+            return null;
+        }
+    }
+
+    @Override
+    public Double getCostForAUserByTripAndUser(Trip trip, TripUser tripUser) {
+        try {
+            return getAverageCostByTrip(trip) - getTotalCostByUser(trip,tripUser);
+        } catch (NullPointerException e){
+            logger.error(e.getMessage());
+            return 0.0;
+        }
+    }
+
+    @Override
+    public Double getAverageCostByTrip(Trip trip) {
+
+        return costDao.getAverageCostByTrip(trip);
+    }
 }

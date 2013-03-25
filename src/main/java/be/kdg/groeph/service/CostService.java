@@ -21,4 +21,7 @@ public interface CostService {
     public Cost getCostByCostId(int id);
     public  Double getTotalCostByTrip(Trip trip);
     public  Double getTotalCostByUser(Trip trip, TripUser tripUser);
+    public List<Cost> getCostByTripByUser(Trip trip, TripUser tripUser);
+    public Double getCostForAUserByTripAndUser(Trip trip, TripUser tripUser);
+    public Double getAverageCostByTrip(Trip trip);
 }

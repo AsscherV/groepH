@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -109,5 +110,27 @@ public class CostDaoImpl implements CostDao {
             logger.error(e.getMessage());
             return null;
         }
+    }
+
+    @Override
+    public List<Cost> getCostByTripByUser(Trip trip, TripUser tripUser) {
+        try {
+            Query query = sessionFactory.getCurrentSession().createQuery("from Cost where trip=:trip and tripUser=:tripUser");
+            query.setParameter("trip", trip);
+            query.setParameter("tripUser", tripUser);
+            return (ArrayList<Cost>) query.list();
+        } catch (NullPointerException e) {
+            logger.error(e.getMessage());
+            return null;
+        }
+    }
+
+    @Override
+    public Double getAverageCostByTrip(Trip trip) {
+
+        Query query = sessionFactory.getCurrentSession().createQuery("select avg(costValue)from Cost where trip=:trip");
+        query.setParameter("trip", trip);
+        return (Double) query.uniqueResult();
+
     }
 }
