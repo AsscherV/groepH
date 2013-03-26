@@ -1,11 +1,8 @@
 package be.kdg.groeph.dao;
 
-import be.kdg.groeph.bean.LoginBean;
 import be.kdg.groeph.model.Cost;
 import be.kdg.groeph.model.Trip;
 import be.kdg.groeph.model.TripUser;
-
-
 import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
@@ -128,9 +125,16 @@ public class CostDaoImpl implements CostDao {
     @Override
     public Double getAverageCostByTrip(Trip trip) {
 
-        Query query = sessionFactory.getCurrentSession().createQuery("select avg(costValue)from Cost where trip=:trip");
+        Query query = sessionFactory.getCurrentSession().createQuery("select SUM(costValue)from Cost where trip=:trip");
+        Query q2 = sessionFactory.getCurrentSession().createQuery("select count(distinct tripUser) from Cost where trip=:trip");
         query.setParameter("trip", trip);
-        return (Double) query.uniqueResult();
+        q2.setParameter("trip", trip);
+
+        Long count = (long) q2.uniqueResult();
+
+        double result = (Double) query.uniqueResult()/count.doubleValue() ;
+        System.out.println("Guntha - cstdoa" + result);
+        return Double.valueOf(Math.round(result));
 
     }
 }
