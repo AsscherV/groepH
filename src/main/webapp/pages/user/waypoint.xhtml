@@ -30,31 +30,16 @@
             <!-- trip info -->
             <div class="span9">
                 <div id="tabContainerTrip" class="tabContainer">
-                    <ul>
-                        <!-- Tab buttons -->
-                        <li>
-                            <h:outputLink class="button" value="trip.xhtml" rendered="#{not tripBean.editableTrip}">
-                                <h:outputText value="#{tripBean.currentTrip.title}"/>
-                            </h:outputLink>
-                            <h:outputLink class="button" value="createTrip.xhtml" rendered="#{tripBean.editableTrip}">
-                                <h:outputText value="#{tripBean.currentTrip.title}"/>
-                            </h:outputLink>
-                        </li>
-                        <h:panelGroup rendered="#{tripBean.hasCurrentTrip}">
-                            <li>
-                                <a class="button active" href="stops.xhtml">#{msgs.waypoints}</a>
-                            </li>
-                            <li>
-                                <a class="button" href="participants.xhtml">#{msgs.participants}</a>
-                            </li>
-                            <li>
-                                <a class="button" href="accessories.xhtml">#{msgs.accessories}</a>
-                            </li>
-                            <li>
-                                <a class="button" href="tripCosts.xhtml">#{msgs.costs}</a>
-                            </li>
-                        </h:panelGroup>
-                    </ul>
+                    <p:tabMenu activeIndex="1" rendered="#{tripBean.hasCurrentTrip}">
+                        <p:menuitem value="#{tripBean.currentTrip.title}" url="trip.xhtml"
+                                    rendered="#{not tripBean.editableTrip}"/>
+                        <p:menuitem value="#{tripBean.currentTrip.title}" url="createTrip.xhtml"
+                                    rendered="#{tripBean.editableTrip}"/>
+                        <p:menuitem value="#{msgs.waypoints}" url="stops.xhtml" />
+                        <p:menuitem value="#{msgs.participants}" url="participants.xhtml"/>
+                        <p:menuitem value="#{msgs.accessories}" url="accessories.xhtml"/>
+                        <p:menuitem value="#{msgs.costs}" url="tripCosts.xhtml"/>
+                    </p:tabMenu>
                     <!-- Tab content -->
                     <div class="tabDetails">
                         <div id="accesTab" class="tabContentsTrip">

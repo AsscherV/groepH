@@ -2,7 +2,8 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:c="http://java.sun.com/jsp/jstl/core">
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui">
 <h:head>
     <title>Trippy Traveler</title>
     <!-- css -->
@@ -17,29 +18,15 @@
 
         <div class="span3">
             <div id="tabContainerTrips" class="tabContainer">
-                <ul>
-
-                    <li>
-                        <a id="trips" class="button" href="#tripsTab">Trips</a>
-                    </li>
-                    <h:panelGroup rendered="#{loginBean.loggedIn}">
-                        <li>
-                            <a id="myTrips" class="button" href="#myTripsTab">#{msgs.organisedTrips}</a>
-                        </li>
-
-                        <li>
-                            <a id="invitedTrips" class="button" href="#invitedTripsTab">#{msgs.invitations}</a>
-                        </li>
-                        <li>
-                            <a id="participatingTrips" class="button"
-                               href="#participatingTripsTab">#{msgs.participatingTrips}</a>
-                        </li>
-
-                    </h:panelGroup>
-                </ul>
+                <p:menu>
+                    <p:menuitem value="Trips" url="#tripsTab"/>
+                    <p:menuitem value="#{msgs.organisedTrips}" url="#myTripsTab" rendered="#{loginBean.loggedIn}"/>
+                    <p:menuitem value="#{msgs.invitations}" url="#invitedTripsTab" rendered="#{loginBean.loggedIn}"/>
+                    <p:menuitem value="#{msgs.participatingTrips}" url="#participatingTripsTab" rendered="#{loginBean.loggedIn}"/>
+                </p:menu>
                 <h:form class="navbar-form" id="tripMenu">
 
-                        <h:inputText type="text" styleClass="span2" value="#{tripBean.filter}" autocomplete="off">
+                        <h:inputText type="text" styleClass="span2 searchfield" value="#{tripBean.filter}" autocomplete="off">
                             <f:ajax render="@form" event="keyup" />
                         </h:inputText>
 

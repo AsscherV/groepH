@@ -2,7 +2,8 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:c="http://java.sun.com/jsp/jstl/core">
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui">
 <h:head>
     <title>Trippy Traveler</title>
     <!-- css -->
@@ -31,25 +32,14 @@
             <!-- trip info -->
             <div class="span9">
                 <div id="tabContainerTrip" class="tabContainer">
-                    <ul>
-                        <!-- Tab buttons -->
-                        <li>
-                            <a class="button " href="trip.xhtml">#{tripBean.currentTrip.title}</a>
-                        </li>
-
-                        <li>
-                            <a class="button active" href="stops.xhtml">#{msgs.waypoints}</a>
-                        </li>
-                        <li>
-                            <a class="button" href="accessories.xhtml">#{msgs.accessories}</a>
-                        </li>
-                        <li>
-                            <h:form>
-                                <h:commandLink class="buttonMore btn-success "
-                                               action="#{registerBean.notRegisteredMore}" value="#{msgs.more}"/>
-                            </h:form>
-                        </li>
-                    </ul>
+                    <h:form>
+                        <p:tabMenu activeIndex="1" rendered="#{tripBean.hasCurrentTrip}">
+                            <p:menuitem value="#{tripBean.currentTrip.title}" url="trip.xhtml"/>
+                            <p:menuitem value="#{msgs.waypoints}" url="stops.xhtml"/>
+                            <p:menuitem value="#{msgs.accessories}" url="accessories.xhtml"/>
+                            <p:menuitem value="#{msgs.more}" action="#{registerBean.notRegisteredMore}" styleClass="moreButton"/>
+                        </p:tabMenu>
+                    </h:form>
                     <!-- Tab content -->
                     <div class="tabDetails">
 

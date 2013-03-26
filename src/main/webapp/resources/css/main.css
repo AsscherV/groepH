@@ -104,10 +104,6 @@ body {
     border: 1px solid #fff;
 }
 
-.tabContentsTrips {
-    padding: 10px
-}
-
 .tabContentsTrip {
     padding: 5px 10px;
     background-color: #eee;
@@ -195,4 +191,11 @@ a.trippy:active {
 }
 label{
     margin-right: 20px;
+}
+
+.moreButton{
+    background-color: rgb(244,165,255);
+}
+.searchfield{
+   margin-top: 10px;
 }
