@@ -155,7 +155,7 @@ public class TestAccessoryBean extends AbstractTransactionalJUnit4SpringContextT
         accessoryBean.addUserToAccessory();
         Trip trip = tripService.getTripById(1);
         assertEquals("The accessory should have 1 user ", 1, trip.getAccessories().get(0).getTripUsers().size());
-        accessoryBean.removeUserFromAccessory(accessoryBean.getCurrentAccessory());
+        accessoryBean.removeUserFromAccessory(accessoryBean.getUser());
         assertEquals("The accessory should have 0 users ", 0, trip.getAccessories().get(0).getTripUsers().size());
     }
 

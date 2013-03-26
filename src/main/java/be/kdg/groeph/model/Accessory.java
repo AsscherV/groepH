@@ -73,6 +73,14 @@ public class Accessory implements Serializable {
     public List<TripUser> getTripUsers() {
         return tripUsers;
     }
+    public boolean getTripUsersIsEmpty() {
+        if(tripUsers.isEmpty()){
+            return true;
+        } else{
+            return false;
+        }
+
+       }
 
     public void setTripUsers(List<TripUser> tripUsers) {
         this.tripUsers = tripUsers;

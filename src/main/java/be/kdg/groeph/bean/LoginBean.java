@@ -128,6 +128,7 @@ public class LoginBean implements Serializable {
                 socialBean.logout();
             }
             tripBean.currentTrip = null;
+            setUser(null);
             logger.info("User: " + user.getEmail() + " logged out");
             return Tools.SUCCESS;
         } catch (NullPointerException e) {

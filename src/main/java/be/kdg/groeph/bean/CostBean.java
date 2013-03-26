@@ -135,7 +135,12 @@ public class CostBean implements Serializable {
         for (TripUser user : thisTripUsers) {
             totalCostByUser = getTotalCostPerUser(user);
             calculatedCostPerUser = averageCostPerUser - totalCostByUser;
-            calculatedCosts.add(new Cost("total cost", calculatedCostPerUser, user, currentTrip));
+            if(calculatedCostPerUser < 0){
+                calculatedCosts.add(new Cost("Refund", calculatedCostPerUser, user, currentTrip));
+            }else {
+                calculatedCosts.add(new Cost("To pay", calculatedCostPerUser, user, currentTrip));
+            }
+
         }
 
         return calculatedCosts;

@@ -113,6 +113,7 @@ public class AccessoryBean implements Serializable {
             currentAccessory.addTripUser(user);
             user.addAccessory(currentAccessory);
             addableAccessories.clear();
+            editableAccessories.clear();
             accessoryService.updateAccessory(currentAccessory);
             logger.info("User: " + user.getEmail() + " added to accessory: " + currentAccessory.getDescription());
         } catch (NullPointerException e) {
@@ -120,12 +121,11 @@ public class AccessoryBean implements Serializable {
         }
     }
 
-    public void removeUserFromAccessory(Accessory accessory) {
+    public void removeUserFromAccessory(TripUser user) {
         try {
-            setCurrentAccessory(accessory);
             currentAccessory.removeTripUser(user);
             accessoryService.updateAccessory(currentAccessory);
-            logger.info("User: " + user.getEmail() + " removed from accessory: " + accessory.getDescription());
+            logger.info("User: " + user.getEmail() + " removed from accessory: " + currentAccessory.getDescription());
         } catch (NullPointerException e) {
             logger.error(e.toString());
         }
