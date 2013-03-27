@@ -475,8 +475,18 @@ public class WaypointBean implements Serializable {
         this.image = image;
     }
     public StreamedContent getCurrentImage() {
-        return new DefaultStreamedContent(new ByteArrayInputStream(currentWaypoint.getImage()));
+        if(currentWaypoint.getImage()!=null)
+        {
+            return new DefaultStreamedContent(new ByteArrayInputStream(currentWaypoint.getImage()));
+        }
+       return null;
 
+    }
+    public void removeImage()
+    {
+        getCurrentWaypoint().setImage(null);
+        setImage(null);
+        setNewimage(null);
     }
 
 
