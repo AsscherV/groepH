@@ -101,13 +101,12 @@ body {
 
 .tabDetails {
     background: #F7F7F7;
-    border: 1px solid #fff;
+
 }
 
 .tabContentsTrip {
     padding: 5px 10px;
     background-color: #eee;
-    min-height: 430px;
 }
 
 footer p {
@@ -189,36 +188,86 @@ a.trippy:active {
 .noDisplay {
     display: none;
 }
-label{
+
+label {
     margin-right: 20px;
 }
 
-.moreButton{
-    background-color: rgb(244,165,255);
-}
-.searchfield{
-   margin-top: 10px;
+.moreButton {
+    background-color: #4dc64f;
 }
 
-.cost-table{
-	border-collapse:collapse;
+.searchfield {
+    margin-top: 10px;
 }
 
-.cost-table-header{
-	text-align:center;
-	background:none repeat scroll 0 0 #E5E5E5;
-	border-bottom:1px solid #BBBBBB;
-	padding:16px;
+.cost-table {
+    border-collapse: collapse;
 }
 
-.cost-table-odd-row{
-	text-align:center;
-	background:none repeat scroll 0 0 #FFFFFF;
-	border-top:1px solid #BBBBBB;
+.cost-table-header {
+    text-align: center;
+    background: none repeat scroll 0 0 #E5E5E5;
+    border-bottom: 1px solid #BBBBBB;
+    padding: 16px;
 }
 
-.cost-table-even-row{
-	text-align:center;
-	background:none repeat scroll 0 0 #F9F9F9;
-	border-top:1px solid #BBBBBB;
+.cost-table-odd-row {
+    text-align: center;
+    background: none repeat scroll 0 0 #FFFFFF;
+    border-top: 1px solid #BBBBBB;
+}
+
+.cost-table-even-row {
+    text-align: center;
+    background: none repeat scroll 0 0 #F9F9F9;
+    border-top: 1px solid #BBBBBB;
+}
+
+form {
+    margin: 0px;
+    padding: 0px;
+}
+
+.ui-tabmenu .ui-tabmenu-nav .ui-tabmenuitem {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.ui-widget-header {
+    background-color: #e5e5e5;
+    text-shadow: none;
+}
+
+.ui-widget-content {
+    border:none;
+}
+
+.ui-state-hover{
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
+#tabContainerTrips .ui-tabmenuitem {
+    width:100%;
+}
+
+
+#tripmenu .box {
+    width: 148px;
+}
+
+.ui-tabmenu .ui-tabmenu-nav {
+    padding: .2em;
+}
+.ui-tabmenu .ui-tabmenu-nav .ui-tabmenuitem a {
+    text-shadow: none;
+
+}
+
+.marginBottom10 {
+    margin-bottom: 10px;
+}
+.marginLink{
+    margin-left:10px;
+    margin-right:10px;
 }

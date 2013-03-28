@@ -13,7 +13,7 @@ public interface TripDao {
 
     void addUserToTrip(Trip trip);
     List<Trip> fetchAllPublicTrips();
-
+    List<Trip> fetchAllPublicAndPublishedTrips();
     List<TripType> fetchAllTripTypes();
 
     TripType getTypeByName(String naam);

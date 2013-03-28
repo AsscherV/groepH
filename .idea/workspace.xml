@@ -2,100 +2,53 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7009435d-9949-4bd5-a126-8be2d5a087e4" name="Default" comment="Updates Costbean + TripBean">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/be/kdg/groeph/model/Accessory.java" afterPath="$PROJECT_DIR$/src/main/java/be/kdg/groeph/model/Accessory.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_fileupload_commons_fileupload_1_2_2.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_io_commons_io_2_4.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_primefaces_primefaces_3_5.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/be/kdg/groeph/bean/AccessoryBean.java" afterPath="$PROJECT_DIR$/src/main/java/be/kdg/groeph/bean/AccessoryBean.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/be/kdg/groeph/bean/CostBean.java" afterPath="$PROJECT_DIR$/src/main/java/be/kdg/groeph/bean/CostBean.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/be/kdg/groeph/bean/LoginBean.java" afterPath="$PROJECT_DIR$/src/main/java/be/kdg/groeph/bean/LoginBean.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__antlr_antlr_2_7_7.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__antlr_antlr_2_7_7.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__aopalliance_aopalliance_1_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__aopalliance_aopalliance_1_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__asm_asm_3_3_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__asm_asm_3_3_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__c3p0_c3p0_0_9_1_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__c3p0_c3p0_0_9_1_2.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__cglib_cglib_2_2_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__cglib_cglib_2_2_2.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_gson_gson_1_7_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_gson_gson_1_7_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_restfb_restfb_1_6_11.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_restfb_restfb_1_6_11.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_sun_faces_jsf_api_2_1_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_sun_faces_jsf_api_2_1_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_sun_faces_jsf_impl_2_1_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_sun_faces_jsf_impl_2_1_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_sun_jersey_contribs_jersey_spring_1_8.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_sun_jersey_contribs_jersey_spring_1_8.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_sun_jersey_jersey_client_1_16.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_sun_jersey_jersey_client_1_16.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_sun_jersey_jersey_core_1_16.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_sun_jersey_jersey_core_1_16.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_sun_jersey_jersey_server_1_16.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_sun_jersey_jersey_server_1_16.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_sun_jersey_jersey_servlet_1_16.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_sun_jersey_jersey_servlet_1_16.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_sun_xml_bind_jaxb_impl_2_1_12.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_sun_xml_bind_jaxb_impl_2_1_12.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_codec_commons_codec_1_3.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_codec_commons_codec_1_3.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_collections_commons_collections_3_2_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_collections_commons_collections_3_2_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_dbcp_commons_dbcp_1_2_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_dbcp_commons_dbcp_1_2_2.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_fileupload_commons_fileupload_1_2_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_fileupload_commons_fileupload_1_2_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_io_commons_io_1_3_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_io_commons_io_1_3_2.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_logging_commons_logging_1_1_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_logging_commons_logging_1_1_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_pool_commons_pool_1_3.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_pool_commons_pool_1_3.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__dom4j_dom4j_1_6_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__dom4j_dom4j_1_6_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__javassist_javassist_3_12_1_GA.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javassist_javassist_3_12_1_GA.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__javax_activation_activation_1_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_activation_activation_1_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__javax_inject_javax_inject_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_inject_javax_inject_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__javax_mail_mail_1_4_3.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_mail_mail_1_4_3.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__javax_servlet_jstl_1_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_servlet_jstl_1_2.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__javax_servlet_servlet_api_2_5.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_servlet_servlet_api_2_5.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__javax_transaction_jta_1_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_transaction_jta_1_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__javax_validation_validation_api_1_0_0_GA.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_validation_validation_api_1_0_0_GA.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__javax_ws_rs_jsr311_api_1_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_ws_rs_jsr311_api_1_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__javax_xml_bind_jaxb_api_2_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_xml_bind_jaxb_api_2_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__javax_xml_stream_stax_api_1_0_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_xml_stream_stax_api_1_0_2.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__junit_junit_4_11.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__junit_junit_4_11.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__log4j_log4j_1_2_16.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__log4j_log4j_1_2_16.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__mysql_mysql_connector_java_5_1_22.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__mysql_mysql_connector_java_5_1_22.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__net_sf_flexjson_flexjson_2_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_sf_flexjson_flexjson_2_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_myfaces_extensions_cdi_bundles_myfaces_extcdi_bundle_jsf20_1_0_5.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_myfaces_extensions_cdi_bundles_myfaces_extcdi_bundle_jsf20_1_0_5.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_codehaus_jackson_jackson_core_asl_1_7_3.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_codehaus_jackson_jackson_core_asl_1_7_3.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_codehaus_jackson_jackson_core_lgpl_1_8_5.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_codehaus_jackson_jackson_core_lgpl_1_8_5.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_codehaus_jackson_jackson_mapper_asl_1_7_3.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_codehaus_jackson_jackson_mapper_asl_1_7_3.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_codehaus_jackson_jackson_mapper_lgpl_1_8_5.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_codehaus_jackson_jackson_mapper_lgpl_1_8_5.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_core_1_3.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_core_1_3.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_common_hibernate_commons_annotations_4_0_1_Final.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_common_hibernate_commons_annotations_4_0_1_Final.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_hibernate_core_4_1_0_Final.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_hibernate_core_4_1_0_Final.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_hibernate_entitymanager_4_1_0_Final.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_hibernate_entitymanager_4_1_0_Final.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_hibernate_validator_4_1_0_Final.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_hibernate_validator_4_1_0_Final.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_javax_persistence_hibernate_jpa_2_0_api_1_0_1_Final.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_javax_persistence_hibernate_jpa_2_0_api_1_0_1_Final.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_javassist_javassist_3_15_0_GA.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_javassist_javassist_3_15_0_GA.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jboss_logging_jboss_logging_3_1_0_CR2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_jboss_logging_jboss_logging_3_1_0_CR2.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jboss_spec_javax_transaction_jboss_transaction_api_1_1_spec_1_0_0_Final.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_jboss_spec_javax_transaction_jboss_transaction_api_1_1_spec_1_0_0_Final.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_api_1_6_4.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_api_1_6_4.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_log4j12_1_6_4.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_log4j12_1_6_4.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_security_spring_security_acl_3_1_1_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_security_spring_security_acl_3_1_1_RELEASE.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_security_spring_security_config_3_1_1_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_security_spring_security_config_3_1_1_RELEASE.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_security_spring_security_core_3_1_1_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_security_spring_security_core_3_1_1_RELEASE.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_security_spring_security_taglibs_3_1_1_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_security_spring_security_taglibs_3_1_1_RELEASE.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_security_spring_security_web_3_1_1_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_security_spring_security_web_3_1_1_RELEASE.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_aop_3_1_1_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_aop_3_1_1_RELEASE.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_asm_3_1_1_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_asm_3_1_1_RELEASE.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_beans_3_1_1_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_beans_3_1_1_RELEASE.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_context_3_1_1_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_context_3_1_1_RELEASE.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_context_support_3_1_1_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_context_support_3_1_1_RELEASE.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_core_3_1_1_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_core_3_1_1_RELEASE.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_expression_3_1_1_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_expression_3_1_1_RELEASE.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_jdbc_3_1_1_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_jdbc_3_1_1_RELEASE.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_orm_3_1_1_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_orm_3_1_1_RELEASE.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_test_3_1_1_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_test_3_1_1_RELEASE.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_tx_3_1_1_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_tx_3_1_1_RELEASE.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_web_3_1_1_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_web_3_1_1_RELEASE.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_webmvc_3_1_1_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_webmvc_3_1_1_RELEASE.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_webflow_spring_binding_2_3_1_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_webflow_spring_binding_2_3_1_RELEASE.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_webflow_spring_faces_2_3_1_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_webflow_spring_faces_2_3_1_RELEASE.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_webflow_spring_js_2_3_1_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_webflow_spring_js_2_3_1_RELEASE.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_webflow_spring_js_resources_2_3_1_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_webflow_spring_js_resources_2_3_1_RELEASE.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_webflow_spring_webflow_2_3_1_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_webflow_spring_webflow_2_3_1_RELEASE.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__xml_apis_xml_apis_1_0_b2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__xml_apis_xml_apis_1_0_b2.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/be/kdg/groeph/bean/TestAccessoryBean.java" afterPath="$PROJECT_DIR$/src/test/java/be/kdg/groeph/bean/TestAccessoryBean.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/be/kdg/groeph/bean/RegisterBean.java" afterPath="$PROJECT_DIR$/src/main/java/be/kdg/groeph/bean/RegisterBean.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/be/kdg/groeph/bean/TripBean.java" afterPath="$PROJECT_DIR$/src/main/java/be/kdg/groeph/bean/TripBean.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/be/kdg/groeph/dao/TripDao.java" afterPath="$PROJECT_DIR$/src/main/java/be/kdg/groeph/dao/TripDao.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/be/kdg/groeph/dao/TripDaoImpl.java" afterPath="$PROJECT_DIR$/src/main/java/be/kdg/groeph/dao/TripDaoImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/be/kdg/groeph/service/TripService.java" afterPath="$PROJECT_DIR$/src/main/java/be/kdg/groeph/service/TripService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/be/kdg/groeph/service/TripServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/be/kdg/groeph/service/TripServiceImpl.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/pages/accessories.xhtml" afterPath="$PROJECT_DIR$/src/main/webapp/pages/accessories.xhtml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/pages/user/accessories.xhtml" afterPath="$PROJECT_DIR$/src/main/webapp/pages/user/accessories.xhtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/resources/css/bootstrap-responsive.css" afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/bootstrap-responsive.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/resources/css/bootstrap.css" afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/bootstrap.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/pages/user/createTrip.xhtml" afterPath="$PROJECT_DIR$/src/main/webapp/pages/user/createTrip.xhtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/pages/user/createWaypoint.xhtml" afterPath="$PROJECT_DIR$/src/main/webapp/pages/user/createWaypoint.xhtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/faces-config.xml" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/faces-config.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/pages/forgotPassword.xhtml" afterPath="$PROJECT_DIR$/src/main/webapp/pages/forgotPassword.xhtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/groepH.iml" afterPath="$PROJECT_DIR$/groepH.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/artifacts/groepH_war_exploded.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/groepH_war_exploded.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/pages/header.xhtml" afterPath="$PROJECT_DIR$/src/main/webapp/pages/header.xhtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/pages/index.xhtml" afterPath="$PROJECT_DIR$/src/main/webapp/pages/index.xhtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/resources/css/jquery-ui.css" afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/jquery-ui.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/resources/css/main.css" afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/main.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/resources/js/main.js" afterPath="$PROJECT_DIR$/src/main/webapp/resources/js/main.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/pages/more.xhtml" afterPath="$PROJECT_DIR$/src/main/webapp/pages/more.xhtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/pages/newPassword.xhtml" afterPath="$PROJECT_DIR$/src/main/webapp/pages/newPassword.xhtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/pages/user/participants.xhtml" afterPath="$PROJECT_DIR$/src/main/webapp/pages/user/participants.xhtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/pages/user/profile.xhtml" afterPath="$PROJECT_DIR$/src/main/webapp/pages/user/profile.xhtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/pages/register.xhtml" afterPath="$PROJECT_DIR$/src/main/webapp/pages/register.xhtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/pages/stops.xhtml" afterPath="$PROJECT_DIR$/src/main/webapp/pages/stops.xhtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/pages/user/stops.xhtml" afterPath="$PROJECT_DIR$/src/main/webapp/pages/user/stops.xhtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/pages/user/styling.xhtml" afterPath="$PROJECT_DIR$/src/main/webapp/pages/user/styling.xhtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/pages/trip.xhtml" afterPath="$PROJECT_DIR$/src/main/webapp/pages/trip.xhtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/pages/user/trip.xhtml" afterPath="$PROJECT_DIR$/src/main/webapp/pages/user/trip.xhtml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/pages/user/tripCosts.xhtml" afterPath="$PROJECT_DIR$/src/main/webapp/pages/user/tripCosts.xhtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/pages/user/tripmenu.xhtml" afterPath="$PROJECT_DIR$/src/main/webapp/pages/user/tripmenu.xhtml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/pages/user/waypoint.xhtml" afterPath="$PROJECT_DIR$/src/main/webapp/pages/user/waypoint.xhtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/pages/user/welcome.xhtml" afterPath="$PROJECT_DIR$/src/main/webapp/pages/user/welcome.xhtml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="OTV_JSF_Spring_Hibernate_Project.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/pom.xml" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1361906383250" ignored="false" />
-    <file path="/applicationContext.xml" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1363876667944" ignored="false" />
+    <file path="/applicationContext.xml" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1364451758051" ignored="false" />
     <file path="$PROJECT_DIR$/src/main/java/be/kdg/groepH/user/dao/IUserDAO.java" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1359934607456" ignored="false" />
     <file path="$PROJECT_DIR$/src/main/java/be/kdg/groepH/bean/UserManagedBean.java" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1359934607456" ignored="false" />
     <file path="$PROJECT_DIR$/src/main/java/be/kdg/groepH/user/service/IUserService.java" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1359934607456" ignored="false" />
@@ -142,11 +95,11 @@
     <file path="$PROJECT_DIR$/../Inf Jo/Software Development/A_GROEPG_WEB/src/main/java/be/kdg/groepg/controllers/CarController.java" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1360093652467" ignored="false" />
     <file path="$USER_HOME$/Desktop/groep met klasse in/groepH/src/main/java/be/kdg/groeph/ManagedBean/UserManagedBean.java" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1360093735565" ignored="false" />
     <file path="$PROJECT_DIR$/../TEAM H - Software development 2013/Lesmateriaal/Documentatie/Logging + Exception Handeling/Voorbeelden logging/Log4J/.idea/scopes/scope_settings.xml" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1360094895822" ignored="false" />
-    <file path="/faces-config.xml" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1363874428654" ignored="false" />
+    <file path="/faces-config.xml" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1364381440138" ignored="false" />
     <file path="$USER_HOME$/Desktop/Software Dev/Spring/Carpool/src/main/webapp/WEB-INF/web.xml" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1360132877883" ignored="false" />
     <file path="/spring-security.xml" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1361203409596" ignored="false" />
     <file path="$USER_HOME$/Desktop/Software Dev/Spring/Carpool/src/main/java/carpool/backingBeans/RegisterBean.java" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1360133956805" ignored="false" />
-    <file path="/Dummy.txt" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1364302400271" ignored="false" />
+    <file path="/Dummy.txt" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1364457391592" ignored="false" />
     <file path="/UserBean.java" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1360670408368" ignored="false" />
     <file path="/UserTest.java" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1360238079941" ignored="false" />
     <file path="/UserMother.java" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1361910071959" ignored="false" />
@@ -159,18 +112,18 @@
     <file path="/TestUserService.java" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1361731026997" ignored="false" />
     <file path="/TestUserBean.java" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1360747407738" ignored="false" />
     <file path="/register.xhtml" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1363338403868" ignored="false" />
-    <file path="/participants.xhtml" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1363264977554" ignored="false" />
-    <file path="/accessories.xhtml" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1364075823854" ignored="false" />
+    <file path="/participants.xhtml" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1364384040478" ignored="false" />
+    <file path="/accessories.xhtml" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1364419471269" ignored="false" />
     <file path="/costs.xhtml" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1360674426234" ignored="false" />
     <file path="/stops.xhtml" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1363340021973" ignored="false" />
     <file path="/TestLoginBean.java" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1361740466251" ignored="false" />
     <file path="/LoginBean.java" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1364143752382" ignored="false" />
     <file path="/LoginService.java" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1360318259842" ignored="false" />
-    <file path="/LoginServiceImpl.java" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1361894182015" ignored="false" />
+    <file path="/LoginServiceImpl.java" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1364392643586" ignored="false" />
     <file path="/LoginMother.java" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1360318579162" ignored="false" />
     <file path="/header.xhtml" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1363874105033" ignored="false" />
-    <file path="/main.css" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1364076425409" ignored="false" />
-    <file path="/TripBean.java" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1363874145783" ignored="false" />
+    <file path="/main.css" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1364394987284" ignored="false" />
+    <file path="/TripBean.java" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1364458677030" ignored="false" />
     <file path="/TestEncrypting.java" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1360338369855" ignored="false" />
     <file path="$USER_HOME$/Desktop/resourcedemo/src/main/webapp/WEB-INF/faces-config.xml" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1360375105690" ignored="false" />
     <file path="$USER_HOME$/Desktop/resourcedemo/.idea/libraries/Maven__asm_asm_3_1.xml" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1360375248218" ignored="false" />
@@ -255,9 +208,9 @@
     <file path="/TestTripBean.java" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1361814733365" ignored="false" />
     <file path="/TripMother.java" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1361034344404" ignored="false" />
     <file path="/TripType.java" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1363288547941" ignored="false" />
-    <file path="/TripServiceImpl.java" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1362152129396" ignored="false" />
-    <file path="/TripDao.java" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1362152134307" ignored="false" />
-    <file path="/TripDaoImpl.java" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1361823844388" ignored="false" />
+    <file path="/TripServiceImpl.java" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1364458666479" ignored="false" />
+    <file path="/TripDao.java" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1364458061930" ignored="false" />
+    <file path="/TripDaoImpl.java" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1364458123647" ignored="false" />
     <file path="/NullTrip.java" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1360687858770" ignored="false" />
     <file path="/TestRegisterBean.java" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1362654141700" ignored="false" />
     <file path="/ValidationMessages_en_US.properties" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1360866237299" ignored="false" />
@@ -266,7 +219,7 @@
     <file path="$PROJECT_DIR$/../test/groepH/src/main/java/be/kdg/groeph/bean/TripBean.java" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1360942239361" ignored="false" />
     <file path="$PROJECT_DIR$/../test/groepH/src/main/java/be/kdg/groeph/model/TripType.java" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1360941015267" ignored="false" />
     <file path="$PROJECT_DIR$/../test/groepH/src/main/java/be/kdg/groeph/model/Trip.java" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1360942257074" ignored="false" />
-    <file path="/createTrip.xhtml" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1363296888379" ignored="false" />
+    <file path="/createTrip.xhtml" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1364401612334" ignored="false" />
     <file path="/TestTripService.java" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1361746606085" ignored="false" />
     <file path="/TestTripDao.java" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1361034475994" ignored="false" />
     <file path="/MailServiceImpl.java" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1362328984965" ignored="false" />
@@ -276,11 +229,11 @@
     <file path="/SocialUserDaoMock.java" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1361190498782" ignored="false" />
     <file path="/TripDaoMock.java" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1361814635464" ignored="false" />
     <file path="/tripmenu_addtrip.xhtml" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1361280128230" ignored="false" />
-    <file path="/tripmenu.xhtml" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1363179653948" ignored="false" />
+    <file path="/tripmenu.xhtml" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1364458686651" ignored="false" />
     <file path="/welcome.xhtml" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1361282223047" ignored="false" />
     <file path="/trip.xhtml" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1363873462313" ignored="false" />
     <file path="$USER_HOME$/Desktop/Software Dev/examenJavaWeb/src/main/webapp/users/cart.xhtml" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1361298697636" ignored="false" />
-    <file path="/main.js" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1361351133592" ignored="false" />
+    <file path="/main.js" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1364422069077" ignored="false" />
     <file path="$PROJECT_DIR$/../../Inf Jo/Software Development/A_GROEPG_WEB/src/test/resources/serviceContext.xml" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1361728782749" ignored="false" />
     <file path="$PROJECT_DIR$/../Vakken Derde jaar_vorig jaar/project carpool/Carpool/src/main/java/carpool/model/User.java" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1361668969776" ignored="false" />
     <file path="$PROJECT_DIR$/../../Inf Jo/Software Development/A_GROEPG_WEB/src/main/resources/log4j.properties" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1361717815938" ignored="false" />
@@ -304,7 +257,7 @@
     <file path="/createWaypoint.xhtml" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1362569030281" ignored="false" />
     <file path="/gMaps.js" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1362575998973" ignored="false" />
     <file path="/SocialBean.java" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1362665851093" ignored="false" />
-    <file path="/TripService.java" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1362152068687" ignored="false" />
+    <file path="/TripService.java" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1364458015228" ignored="false" />
     <file path="$PROJECT_DIR$/../../Inf Jo/Software Development/A_GROEPG_WEB/src/main/java/be/kdg/groepg/model/User.java" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1362188321058" ignored="false" />
     <file path="/WaypointServiceImpl.java" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1362557216609" ignored="false" />
     <file path="/WaypointDao.java" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1362557175754" ignored="false" />
@@ -335,14 +288,14 @@
     <file path="/profile.xhtml" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1362649114657" ignored="false" />
     <file path="/FMessage.java" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1362606984389" ignored="false" />
     <file path="/Accessory.java" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1364067511908" ignored="false" />
-    <file path="/AccessoryBean.java" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1364072259223" ignored="false" />
+    <file path="/AccessoryBean.java" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1364415941730" ignored="false" />
     <file path="/TestAccessoryBean.java" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1364070836277" ignored="false" />
     <file path="/AccessoryService.java" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1362941324338" ignored="false" />
     <file path="/AccessoryServiceImpl.java" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1362941348475" ignored="false" />
     <file path="/AccessoryDao.java" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1362941357904" ignored="false" />
     <file path="/AccessoryDaoImpl.java" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1362941389889" ignored="false" />
-    <file path="/CostBean.java" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1364074013339" ignored="false" />
-    <file path="/tripCosts.xhtml" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1364078190057" ignored="false" />
+    <file path="/CostBean.java" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1364415813025" ignored="false" />
+    <file path="/tripCosts.xhtml" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1364457835612" ignored="false" />
     <file path="/CostDao.java" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1363132375579" ignored="false" />
     <file path="/CostDaoImpl.java" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1363133230568" ignored="false" />
     <file path="/CostServiceImpl.java" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1363133320348" ignored="false" />
@@ -350,6 +303,9 @@
     <file path="/TestCostBean.java" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1363174669322" ignored="false" />
     <file path="/RepeatingTripType.java" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1363288603150" ignored="false" />
     <file path="$PROJECT_DIR$/../../../../../3de jaar/Databanken3/Projects/televisiewereld/.idea/workspace.xml" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1364296442500" ignored="false" />
+    <file path="/jquery-ui.css" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1364376116923" ignored="false" />
+    <file path="/bootstrap.css" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1364377724913" ignored="false" />
+    <file path="/bootstrap-responsive.css" changelist="7009435d-9949-4bd5-a126-8be2d5a087e4" time="1364378117827" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -359,10 +315,10 @@
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/groepH$Glassfish_3_1_2_2.coverage" NAME="Glassfish 3.1.2.2 Coverage Results" MODIFIED="1360332042920" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/groepH$All_in_groepH.coverage" NAME="All in groepH Coverage Results" MODIFIED="1363037374149" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/groepH$TestRest.coverage" NAME="TestRest Coverage Results" MODIFIED="1360243203677" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>be.kdg.groeph.service.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/groepH$All_in_groepH.coverage" NAME="All in groepH Coverage Results" MODIFIED="1363037374149" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="C:\Users\Gunther\Dropbox\INF3\groepH" />
@@ -376,8 +332,8 @@
     <sortChildren value="false" />
   </component>
   <component name="DebuggerManager">
-    <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
+    <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -425,86 +381,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="accessories.xhtml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/pages/user/accessories.xhtml">
+      <file leaf-file-name="tripmenu.xhtml" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/pages/user/tripmenu.xhtml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="176" column="40" selection-start="2697" selection-end="12330" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="accessories.xhtml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/pages/accessories.xhtml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="68" column="0" selection-start="3720" selection-end="3720" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ParticipantsBean.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/groeph/bean/ParticipantsBean.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="13" selection-start="765" selection-end="765" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LoginBean.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/groeph/bean/LoginBean.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="130" column="24" selection-start="3783" selection-end="3783" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TripType.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/groeph/model/TripType.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="30" selection-start="345" selection-end="508" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="header.xhtml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/pages/header.xhtml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="42" column="132" selection-start="2268" selection-end="2374" vertical-scroll-proportion="-7.8461537">
-              <folding>
-                <marker date="1363874371850" expanded="true" signature="1045:1059" placeholder="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="tripCosts.xhtml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/pages/user/tripCosts.xhtml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="1" column="44" selection-start="87" selection-end="132" vertical-scroll-proportion="-0.65384614">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="main.css" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/resources/css/main.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="199" column="0" selection-start="3004" selection-end="3420" vertical-scroll-proportion="0.16545455">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CostBean.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/groeph/bean/CostBean.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="140" column="52" selection-start="3959" selection-end="3959" vertical-scroll-proportion="0.0">
+            <state line="23" column="94" selection-start="1034" selection-end="1034" vertical-scroll-proportion="0.34136546">
               <folding />
             </state>
           </provider>
@@ -513,8 +393,92 @@
       <file leaf-file-name="TripBean.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/groeph/bean/TripBean.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="160" column="19" selection-start="4837" selection-end="4837" vertical-scroll-proportion="0.0">
+            <state line="435" column="83" selection-start="11868" selection-end="11868" vertical-scroll-proportion="0.0">
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TripService.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/groeph/service/TripService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="13" column="29" selection-start="339" selection-end="339" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TripServiceImpl.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/groeph/service/TripServiceImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="67" column="64" selection-start="2041" selection-end="2041" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="e#1559#1589#0" expanded="true" />
+                <element signature="e#1869#1899#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TripDao.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/groeph/dao/TripDao.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="14" column="31" selection-start="368" selection-end="368" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TripDaoImpl.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/groeph/dao/TripDaoImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="84" column="0" selection-start="2604" selection-end="2604" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="e#777#807#0" expanded="true" />
+                <element signature="e#1625#1655#0" expanded="true" />
+                <element signature="e#2624#2654#0" expanded="true" />
+                <element signature="e#2986#3016#0" expanded="true" />
+                <element signature="e#3431#3461#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Trip.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/groeph/model/Trip.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="16" column="13" selection-start="438" selection-end="438" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="applicationContext.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/applicationContext.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="59" column="57" selection-start="3261" selection-end="3267" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="participants.xhtml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/pages/user/participants.xhtml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="45" column="32" selection-start="2070" selection-end="2370" vertical-scroll-proportion="-1.9615384">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="tripCosts.xhtml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/pages/user/tripCosts.xhtml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="189" column="43" selection-start="12527" selection-end="12527" vertical-scroll-proportion="-4.576923">
+              <folding>
+                <marker date="1364457838603" expanded="true" signature="6544:6554" placeholder="{...}" />
+                <marker date="1364457838603" expanded="true" signature="6567:6579" placeholder="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -546,22 +510,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/faces-config.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/be/kdg/groeph/bean/RegisterBean.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/pages/stops.xhtml" />
-        <option value="$PROJECT_DIR$/src/main/webapp/pages/trip.xhtml" />
-        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/applicationContext.xml" />
-        <option value="$PROJECT_DIR$/src/test/resources/daoContext.xml" />
-        <option value="$PROJECT_DIR$/src/main/webapp/pages/user/waypoint.xhtml" />
-        <option value="$PROJECT_DIR$/src/main/java/be/kdg/groeph/model/Accessory.java" />
-        <option value="$PROJECT_DIR$/src/test/java/be/kdg/groeph/bean/TestAccessoryBean.java" />
-        <option value="$PROJECT_DIR$/src/main/java/be/kdg/groeph/bean/AccessoryBean.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/resources/css/main.css" />
+        <option value="$PROJECT_DIR$/src/main/webapp/pages/user/createTrip.xhtml" />
         <option value="$PROJECT_DIR$/src/main/java/be/kdg/groeph/bean/CostBean.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/pages/user/accessories.xhtml" />
-        <option value="$PROJECT_DIR$/src/main/webapp/resources/css/main.css" />
+        <option value="$PROJECT_DIR$/src/main/java/be/kdg/groeph/bean/AccessoryBean.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/resources/css/bootstrap-responsive.css" />
+        <option value="$PROJECT_DIR$/src/main/webapp/resources/js/main.js" />
+        <option value="$PROJECT_DIR$/src/main/java/be/kdg/groeph/bean/RegisterBean.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/applicationContext.xml" />
         <option value="$PROJECT_DIR$/src/main/webapp/pages/user/tripCosts.xhtml" />
-        <option value="$PROJECT_DIR$/src/main/webapp/pages/accessories.xhtml" />
-        <option value="$PROJECT_DIR$/src/main/java/be/kdg/groeph/bean/LoginBean.java" />
+        <option value="$PROJECT_DIR$/src/main/java/be/kdg/groeph/service/TripService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/be/kdg/groeph/dao/TripDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/be/kdg/groeph/dao/TripDaoImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/be/kdg/groeph/service/TripServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/be/kdg/groeph/bean/TripBean.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/pages/user/tripmenu.xhtml" />
       </list>
     </option>
   </component>
@@ -713,6 +677,66 @@
               <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="groepH" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="groepH" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="groeph" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="groepH" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="groepH" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="groeph" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bean" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -733,6 +757,10 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WEB-INF" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -759,6 +787,66 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="groepH" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="groepH" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="groepH" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="groepH" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="css" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -835,6 +923,36 @@
               <option name="myItemId" value="main" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="groepH" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="groepH" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Resource Bundle 'messages'" />
+              <option name="myItemType" value="com.intellij.lang.properties.projectView.ResourceBundleNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -859,6 +977,36 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="groeph" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="groepH" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="groepH" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="groeph" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="service" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -929,16 +1077,16 @@
   <component name="PropertiesComponent">
     <property name="project.structure.last.edited" value="Facets" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="68" />
-    <property name="project.structure.proportion" value="0.15" />
-    <property name="OverrideImplement.combined" value="false" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="68" />
+    <property name="OverrideImplement.combined" value="false" />
+    <property name="project.structure.proportion" value="0.15" />
     <property name="options.splitter.main.proportions" value="0.3" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="68" />
-    <property name="MemberChooser.sorted" value="false" />
-    <property name="recentsLimit" value="5" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
+    <property name="recentsLimit" value="5" />
+    <property name="MemberChooser.sorted" value="false" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="68" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../test/groepH" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="68" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="665" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="664" />
@@ -951,9 +1099,9 @@
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
     <property name="options.splitter.details.proportions" value="0.2" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
-    <property name="GoToFile.includeJavaFiles" value="false" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/src/test/java/be/kdg/groeph" />
+    <property name="GoToFile.includeJavaFiles" value="false" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
@@ -961,8 +1109,8 @@
     <property name="project.structure.side.proportion" value="0.23776224" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="restartRequiresConfirmation" value="true" />
-    <property name="dynamic.classpath" value="false" />
     <property name="options.searchVisible" value="true" />
+    <property name="dynamic.classpath" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -990,7 +1138,7 @@
       <recent name="be.kdg.groeph" />
     </key>
   </component>
-  <component name="RunManager" selected="Glassfish Server.Glassfish 3.1.2.2">
+  <component name="RunManager" selected="JUnit.All in groepH">
     <configuration default="false" name="All in groepH" type="JUnit" factoryName="JUnit" temporary="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="groepH" />
@@ -1019,34 +1167,6 @@
       <RunnerSettings RunnerId="Run" />
       <ConfigurationWrapper RunnerId="Cover" />
       <ConfigurationWrapper RunnerId="Debug" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
-    <configuration default="false" name="TestRegisterBean.testUpdatePassword" type="JUnit" factoryName="JUnit" temporary="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="be.kdg.groeph.bean.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="groepH" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="be.kdg.groeph.bean" />
-      <option name="MAIN_CLASS_NAME" value="be.kdg.groeph.bean.TestRegisterBean" />
-      <option name="METHOD_NAME" value="testUpdatePassword" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <envs />
-      <patterns />
-      <RunnerSettings RunnerId="Run" />
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
@@ -1134,6 +1254,34 @@
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
+    <configuration default="false" name="TestLoginBean" type="JUnit" factoryName="JUnit" temporary="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="be.kdg.groeph.bean.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="groepH" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="be.kdg.groeph.bean" />
+      <option name="MAIN_CLASS_NAME" value="be.kdg.groeph.bean.TestLoginBean" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m" />
@@ -1182,19 +1330,6 @@
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <method />
     </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <method />
-    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="" />
@@ -1221,6 +1356,19 @@
       <envs />
       <properties />
       <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -1266,17 +1414,17 @@
       <patterns />
       <method />
     </configuration>
-    <configuration default="true" type="com.intellij.persistence.run.ConsoleRunConfigurationType" factoryName="Query Language Console">
-      <option name="VM_PARAMETERS" value="" />
-      <option name="USER_CFG_CLASS" />
-      <option name="CONTEXT_PROVIDER" />
-      <method />
-    </configuration>
     <configuration default="true" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local">
       <deployment />
       <server-settings />
       <predefined_log_file id="Tomcat" enabled="true" />
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <method />
+    </configuration>
+    <configuration default="true" type="com.intellij.persistence.run.ConsoleRunConfigurationType" factoryName="Query Language Console">
+      <option name="VM_PARAMETERS" value="" />
+      <option name="USER_CFG_CLASS" />
+      <option name="CONTEXT_PROVIDER" />
       <method />
     </configuration>
     <configuration default="false" name="Glassfish 3.1.2.2" type="GlassfishConfiguration" factoryName="Local" APPLICATION_SERVER_NAME="Glassfish 3.1.2.2">
@@ -1357,18 +1505,18 @@
     <list size="6">
       <item index="0" class="java.lang.String" itemvalue="Glassfish Server.Glassfish 3.1.2.2" />
       <item index="1" class="java.lang.String" itemvalue="JUnit.All in groepH" />
-      <item index="2" class="java.lang.String" itemvalue="JUnit.TestRegisterBean.testUpdatePassword" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.TestAccessoryBean.testAddAccessoryWithUser" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.TestAccessoryBean" />
-      <item index="5" class="java.lang.String" itemvalue="JUnit.TestCostBean" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.TestAccessoryBean.testAddAccessoryWithUser" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.TestAccessoryBean" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.TestCostBean" />
+      <item index="5" class="java.lang.String" itemvalue="JUnit.TestLoginBean" />
     </list>
     <recent_temporary>
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="JUnit.All in groepH" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.TestCostBean" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.TestAccessoryBean" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.TestAccessoryBean.testAddAccessoryWithUser" />
-        <item index="4" class="java.lang.String" itemvalue="JUnit.TestRegisterBean.testUpdatePassword" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.TestLoginBean" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.TestCostBean" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.TestAccessoryBean" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.TestAccessoryBean.testAddAccessoryWithUser" />
       </list>
     </recent_temporary>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
@@ -1714,7 +1862,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1378" height="754" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.36134455" sideWeight="0.4850587" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32962137" sideWeight="0.61460674" order="8" side_tool="false" content_ui="tabs" />
@@ -1725,25 +1873,25 @@
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.62352943" sideWeight="0.49469697" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.10244989" sideWeight="0.6730337" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4420168" sideWeight="0.1590909" order="9" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.43865547" sideWeight="0.16818182" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20374449" sideWeight="0.48719317" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="JSF" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32962137" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3882353" sideWeight="0.4219697" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2583519" sideWeight="0.6730337" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3210084" sideWeight="0.49573106" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30957684" sideWeight="0.6730337" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.10909091" sideWeight="0.897479" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.028115502" sideWeight="0.56302524" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3269663" sideWeight="0.4914621" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14969605" sideWeight="0.6453782" order="4" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.35462186" sideWeight="0.83560604" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21200608" sideWeight="0.56302524" order="4" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.4369748" sideWeight="0.82651514" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="REST Client" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3289183" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3159091" sideWeight="0.22521009" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.38487396" sideWeight="0.49786553" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3882353" sideWeight="0.4219697" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -1844,110 +1992,126 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/pages/user/participants.xhtml">
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/resources/css/bootstrap-responsive.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="83" column="101" selection-start="4432" selection-end="4493" vertical-scroll-proportion="1.7942122" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/groeph/service/MailServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="75" column="19" selection-start="2320" selection-end="2320" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/be/kdg/groeph/bean/TestAccessoryBean.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="157" column="69" selection-start="6687" selection-end="6687" vertical-scroll-proportion="0.0" />
+        <state line="150" column="17" selection-start="2326" selection-end="2326" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/groeph/bean/AccessoryBean.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="115" column="40" selection-start="3671" selection-end="3671" vertical-scroll-proportion="0.0">
+        <state line="134" column="100" selection-start="4612" selection-end="4612" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/groeph/model/Accessory.java">
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/resources/js/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="92" column="16" selection-start="2296" selection-end="2296" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/groeph/bean/TripBean.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="160" column="19" selection-start="4837" selection-end="4837" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/groeph/service/CostService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="22" selection-start="417" selection-end="417" vertical-scroll-proportion="0.44510385" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/groeph/bean/CostBean.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="140" column="52" selection-start="3959" selection-end="3959" vertical-scroll-proportion="0.0">
+        <state line="8" column="68" selection-start="501" selection-end="501" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/pages/user/accessories.xhtml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="176" column="40" selection-start="2697" selection-end="12330" vertical-scroll-proportion="0.0">
+        <state line="31" column="20" selection-start="1094" selection-end="1116" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/pages/accessories.xhtml">
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/pages/register.xhtml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="68" column="0" selection-start="3720" selection-end="3720" vertical-scroll-proportion="0.0">
+        <state line="87" column="93" selection-start="5991" selection-end="5991" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/groeph/bean/ParticipantsBean.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/groeph/bean/RegisterBean.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="13" selection-start="765" selection-end="765" vertical-scroll-proportion="0.0">
+        <state line="404" column="21" selection-start="11396" selection-end="11396" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/groeph/bean/LoginBean.java">
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/applicationContext.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="130" column="24" selection-start="3783" selection-end="3783" vertical-scroll-proportion="0.0">
+        <state line="59" column="57" selection-start="3261" selection-end="3267" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/groeph/model/TripType.java">
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/pages/user/participants.xhtml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="30" selection-start="345" selection-end="508" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/pages/header.xhtml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="132" selection-start="2268" selection-end="2374" vertical-scroll-proportion="-7.8461537">
-          <folding>
-            <marker date="1363874371850" expanded="true" signature="1045:1059" placeholder="{...}" />
-          </folding>
+        <state line="45" column="32" selection-start="2070" selection-end="2370" vertical-scroll-proportion="-1.9615384">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/pages/user/tripCosts.xhtml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="44" selection-start="87" selection-end="132" vertical-scroll-proportion="-0.65384614">
+        <state line="189" column="43" selection-start="12527" selection-end="12527" vertical-scroll-proportion="-4.576923">
+          <folding>
+            <marker date="1364457838603" expanded="true" signature="6544:6554" placeholder="{...}" />
+            <marker date="1364457838603" expanded="true" signature="6567:6579" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/groeph/model/Trip.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="13" selection-start="438" selection-end="438" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/resources/css/main.css">
+    <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/groeph/dao/TripDaoImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="199" column="0" selection-start="3004" selection-end="3420" vertical-scroll-proportion="0.16545455">
+        <state line="84" column="0" selection-start="2604" selection-end="2604" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#777#807#0" expanded="true" />
+            <element signature="e#1625#1655#0" expanded="true" />
+            <element signature="e#2624#2654#0" expanded="true" />
+            <element signature="e#2986#3016#0" expanded="true" />
+            <element signature="e#3431#3461#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/groeph/dao/TripDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="31" selection-start="368" selection-end="368" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/groeph/service/TripServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="67" column="64" selection-start="2041" selection-end="2041" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#1559#1589#0" expanded="true" />
+            <element signature="e#1869#1899#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/groeph/service/TripService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="29" selection-start="339" selection-end="339" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/groeph/bean/TripBean.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="435" column="83" selection-start="11868" selection-end="11868" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/pages/user/tripmenu.xhtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="94" selection-start="1034" selection-end="1034" vertical-scroll-proportion="0.34136546">
           <folding />
         </state>
       </provider>

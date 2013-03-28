@@ -61,6 +61,16 @@ public class TripServiceImpl implements TripService {
             return null;
         }
     }
+    @Override
+        @SuppressWarnings("unchecked")
+        public List<Trip> fetchAllPublicAndPublicTrips() {
+            try {
+                return tripDao.fetchAllPublicAndPublishedTrips();
+            } catch (NullPointerException | HibernateException e) {
+                logger.error(e.getMessage());
+                return null;
+            }
+        }
 
     @Override
     public List<TripType> fetchAllTripTypes() {

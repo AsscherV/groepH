@@ -88,7 +88,7 @@
         <navigation-case>
             <from-action>#{socialBean.login}</from-action>
             <from-outcome>SUCCESS</from-outcome>
-            <to-view-id>/pages/user/welcome.xhtml</to-view-id>
+            <to-view-id>/pages/user/trip.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
@@ -186,7 +186,15 @@
                 <!-- hier nog navigation rule voor failure-->
             </navigation-case>
         </navigation-rule>
-
+    <navigation-rule>
+                <navigation-case>
+                    <from-action>#{tripBean.cancelCreate}</from-action>
+                    <from-outcome>SUCCESS</from-outcome>
+                    <to-view-id>/pages/user/trip.xhtml</to-view-id>
+                    <redirect/>
+                    <!-- hier nog navigation rule voor failure-->
+                </navigation-case>
+            </navigation-rule>
     <navigation-rule>
         <navigation-case>
             <from-action>#{waypointBean.deleteWaypoint}</from-action>

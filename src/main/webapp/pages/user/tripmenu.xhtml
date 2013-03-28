@@ -10,25 +10,38 @@
     <h:outputStylesheet library="css" name="bootstrap.css"/>
     <h:outputStylesheet library="css" name="bootstrap-responsive.css"/>
     <h:outputStylesheet library="css" name="main.css"/>
+    <h:outputStylesheet library="css" name="jquery-ui.css"/>
 </h:head>
 <h:body>
 
     <ui:composition>
         <h:inputHidden id="loggedIn" value="#{loginBean.loggedIn}"/>
 
-        <div class="span3">
-            <div id="tabContainerTrips" class="tabContainer">
-                <p:menu >
-                    <p:menuitem value="Trips" url="#tripsTab" />
-                    <p:menuitem value="#{msgs.organisedTrips}" url="#myTripsTab" rendered="#{loginBean.loggedIn}"/>
-                    <p:menuitem value="#{msgs.invitations}" url="#invitedTripsTab" rendered="#{loginBean.loggedIn}"/>
-                    <p:menuitem value="#{msgs.participatingTrips}" url="#participatingTripsTab" rendered="#{loginBean.loggedIn}"/>
-                </p:menu>
+        <div class="span3" id="tripmenu">
+            <div class="floatLeft" style="width: 170px;">
+                <div id="tabContainerTrips" class="tabContainer">
+                    <p:tabMenu activeIndex="-1" styleClass="marginBottom10">
+                        <p:menuitem value="Open trips  [ #{tripBean.allPublicAndPublishedTrips.size()} ]" url="#tripsTab"/>
+                        <p:menuitem value="#{msgs.organisedTrips} [ #{tripBean.allCreatedTrips.size()} ]" url="#myTripsTab" rendered="#{loginBean.loggedIn}"/>
+                        <p:menuitem value="#{msgs.invitations} [ #{tripBean.allInvitedTrips.size()} ]" url="#invitedTripsTab"
+                                    rendered="#{loginBean.loggedIn}"/>
+                        <p:menuitem value="#{msgs.participatingTrips}  [ #{tripBean.allParticipatedTrips.size()} ]" url="#participatingTripsTab"
+                                    rendered="#{loginBean.loggedIn}"/>
+
+                    </p:tabMenu>
+                    <h:panelGroup rendered="#{loginBean.loggedIn}" class="createTrip">
+                        <a href="../user/createTrip.xhtml">+ #{msgs.createTrip}</a>
+                    </h:panelGroup>
+                </div>
+            </div>
+
+            <div class="floatLeft" style="width: 80px; margin-left: 15px; margin-top:5px;">
                 <h:form class="navbar-form" id="tripMenu">
 
-                        <h:inputText type="text" styleClass="span2 searchfield" value="#{tripBean.filter}" autocomplete="off">
-                            <f:ajax render="@form" event="keyup" />
-                        </h:inputText>
+                    <h:inputText type="text" styleClass="span2 searchfield" value="#{tripBean.filter}"
+                                 autocomplete="off">
+                        <f:ajax render="@form" event="keyup"/>
+                    </h:inputText>
 
 
                     <!-- //Tab buttons -->
@@ -36,47 +49,53 @@
 
                         <div id="tripsTab" class="tabContentsTrips">
                             <div class="box">
-                                    <h:dataTable border="0" value="#{tripBean.allPublicTrips}" var="publicTrip">
-                                        <h:column>
-                                            <div>
-                                                <h:commandLink value="#{publicTrip.title}"
-                                                               rendered="#{publicTrip.visible}"
-                                                               action="#{tripBean.setThisAsCurrentTrip(publicTrip)}"/>
+                                <h:dataTable border="0" value="#{tripBean.allPublicTrips}" var="publicTrip">
+                                    <h:column>
+                                        <div>
+                                            <h:commandLink value="#{publicTrip.title}"
+                                                           rendered="#{publicTrip.visible}"
+                                                           action="#{tripBean.setThisAsCurrentTrip(publicTrip)}"/>
 
-                                            </div>
-                                        </h:column>
-                                    </h:dataTable>
+                                        </div>
+                                    </h:column>
+                                </h:dataTable>
+                                <h:panelGroup rendered="#{tripBean.allPublicTrips.size() == 0}">
+                                    <p>No trips</p>
+                                </h:panelGroup>
                             </div>
-                            <h:panelGroup rendered="#{loginBean.loggedIn}">
-                                <a href="../user/createTrip.xhtml">+ #{msgs.createTrip}</a>
-                            </h:panelGroup>
+
                         </div>
                         <!-- //tripsTab -->
                         <div id="myTripsTab" class="tabContentsTrips">
                             <div class="box">
-                                <h:panelGroup rendered="#{loginBean.loggedIn}">
-                                        <h:dataTable border="0" value="#{tripBean.allCreatedTrips}" var="organised">
-                                            <h:column>
-                                                <div>
-                                                    <h:commandLink value="#{organised.title}"
-                                                                   action="#{tripBean.setThisAsCurrentTrip(organised)}"/>
 
-                                                </div>
-                                            </h:column>
-                                        </h:dataTable>
+                                <h:panelGroup rendered="#{loginBean.loggedIn}">
+                                    <h:dataTable border="0" value="#{tripBean.allCreatedTrips}" var="organised">
+                                        <h:column>
+                                            <div>
+                                                <h:commandLink value="#{organised.title}"
+                                                               action="#{tripBean.setThisAsCurrentTrip(organised)}"/>
+
+                                            </div>
+                                        </h:column>
+                                    </h:dataTable>
+                                    <h:panelGroup rendered="#{tripBean.allCreatedTrips.size() == 0}">
+                                        <p>No trips</p>
+                                    </h:panelGroup>
                                 </h:panelGroup>
+
                             </div>
-                            <h:panelGroup rendered="#{loginBean.loggedIn}">
-                                <a href="createTrip.xhtml">+ #{msgs.createTrip}</a>
-                            </h:panelGroup>
+
+
                         </div>
 
                         <div id="participatingTripsTab" class="tabContentsTrips">
 
 
                             <div class="box">
+                                <h:panelGroup rendered="#{loginBean.loggedIn}">
                                     <h:dataTable border="0" value="#{tripBean.allParticipatedTrips}"
-                                                 var="participatedTrip" rendered="#{loginBean.loggedIn}">
+                                                 var="participatedTrip">
                                         <h:column>
                                             <div>
                                                 <h:commandLink value="#{participatedTrip.title}"
@@ -84,18 +103,22 @@
                                             </div>
                                         </h:column>
                                     </h:dataTable>
+                                    <h:panelGroup rendered="#{tripBean.allParticipatedTrips.size() == 0}">
+                                        <p>No trips</p>
+                                    </h:panelGroup>
+                                </h:panelGroup>
+
                             </div>
-                            <h:panelGroup rendered="#{loginBean.loggedIn}">
-                                <a href="../user/createTrip.xhtml">+ #{msgs.createTrip}</a>
-                            </h:panelGroup>
+
                         </div>
 
                         <div id="invitedTripsTab" class="tabContentsTrips">
 
 
                             <div class="box">
+                                <h:panelGroup rendered="#{loginBean.loggedIn}">
                                     <h:dataTable border="0" value="#{tripBean.allInvitedTrips}"
-                                                 var="invitation" rendered="#{loginBean.loggedIn}">
+                                                 var="invitation">
                                         <h:column>
                                             <div>
                                                 <h:commandLink value="#{invitation.title}"
@@ -103,16 +126,20 @@
                                             </div>
                                         </h:column>
                                     </h:dataTable>
+                                    <h:panelGroup rendered="#{tripBean.allInvitedTrips.size() == 0}">
+                                        <p>No trips</p>
+                                    </h:panelGroup>
+                                </h:panelGroup>
                             </div>
                         </div>
                     </h:panelGroup>
                 </h:form>
-
             </div>
+
         </div>
     </ui:composition>
     <!-- Placed at the end of the document so the pages load faster -->
     <h:outputScript name="js/jquery-1.9.0.min.js"/>
     <h:outputScript name="js/main.js"/>
 </h:body>
-</html> 
+</html>

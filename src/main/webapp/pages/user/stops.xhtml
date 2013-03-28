@@ -10,6 +10,7 @@
     <h:outputStylesheet library="css" name="bootstrap.css"/>
     <h:outputStylesheet library="css" name="bootstrap-responsive.css"/>
     <h:outputStylesheet library="css" name="main.css"/>
+    <h:outputStylesheet library="css" name="jquery-ui.css"/>
 
     <script type="text/javascript"
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCmZaUMdD7lz1F48ySOKKlEFdvZNw3keb0&amp;sensor=false">
@@ -30,7 +31,7 @@
             </ui:insert>
 
             <!-- trip info -->
-            <div class="span9">
+            <div class="span8">
                 <div id="tabContainerTrip" class="tabContainer">
                     <p:tabMenu activeIndex="1" rendered="#{tripBean.hasCurrentTrip}">
                         <p:menuitem value="#{tripBean.currentTrip.title}" url="trip.xhtml"

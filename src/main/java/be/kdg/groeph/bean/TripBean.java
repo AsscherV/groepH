@@ -339,11 +339,15 @@ public class TripBean implements Serializable {
         }
     }
 
-    public String cancelUpdate() {
+    public String cancelCreate() {
         clearFields();
-        editableTrip = false;
         return Tools.SUCCESS;
     }
+    public String cancelUpdate() {
+            clearFields();
+            editableTrip = false;
+            return Tools.SUCCESS;
+        }
 
     public String addTrip() {
         try {
@@ -426,6 +430,17 @@ public class TripBean implements Serializable {
             return null;
         }
     }
+
+    public List<Trip> getAllPublicAndPublishedTrips() {
+            try {
+                List<Trip> publictrips = tripService.fetchAllPublicAndPublicTrips();
+                logger.info("All public trips fetched");
+                return Tools.filter(publictrips, filter);
+            } catch (NullPointerException e) {
+                logger.error(e.toString());
+                return null;
+            }
+        }
 
     public List<TripType> getAllTripTypes() {
         try {

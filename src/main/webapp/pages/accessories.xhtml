@@ -10,6 +10,7 @@
     <h:outputStylesheet library="css" name="bootstrap.css"/>
     <h:outputStylesheet library="css" name="bootstrap-responsive.css"/>
     <h:outputStylesheet library="css" name="main.css"/>
+    <h:outputStylesheet library="css" name="jquery-ui.css"/>
 </h:head>
 <h:body>
     <ui:insert name="header">
@@ -25,7 +26,7 @@
             </ui:insert>
 
             <!-- trip info -->
-            <div class="span9">
+            <div class="span8">
                 <div id="tabContainerTrip" class="tabContainer">
                     <h:form>
                         <p:tabMenu activeIndex="2" rendered="#{tripBean.hasCurrentTrip}">

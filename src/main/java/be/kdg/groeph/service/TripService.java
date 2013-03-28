@@ -12,6 +12,7 @@ public interface TripService {
     boolean addTrip(Trip trip);
 
     List<Trip> fetchAllPublicTrips();
+    List<Trip> fetchAllPublicAndPublicTrips();
 
     List<TripType> fetchAllTripTypes();
 

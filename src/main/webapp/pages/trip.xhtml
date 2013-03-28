@@ -9,6 +9,7 @@
     <!-- css -->
     <h:outputStylesheet library="css" name="bootstrap.css"/>
     <h:outputStylesheet library="css" name="bootstrap-responsive.css"/>
+    <h:outputStylesheet library="css" name="jquery-ui.css"/>
     <h:outputStylesheet library="css" name="main.css"/>
 </h:head>
 <h:body>
@@ -25,16 +26,18 @@
             </ui:insert>
 
             <!-- trip info -->
-            <div class="span9">
+            <div class="span8">
                 <div id="tabContainerTrip" class="tabContainer">
                     <h:form>
                         <p:tabMenu activeIndex="0" rendered="#{tripBean.hasCurrentTrip}">
                             <p:menuitem value="#{tripBean.currentTrip.title}" url="trip.xhtml"/>
                             <p:menuitem value="#{msgs.waypoints}" url="stops.xhtml"/>
                             <p:menuitem value="#{msgs.accessories}" url="accessories.xhtml"/>
+
                             <p:menuitem value="#{msgs.more}" action="#{registerBean.notRegisteredMore}" styleClass="moreButton"/>
-                        </p:tabMenu>
-                    </h:form>
+
+                        </p:tabMenu>  </h:form>
+
                     <!-- Tab content -->
                     <div class="tabDetails">
 

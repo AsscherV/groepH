@@ -10,6 +10,7 @@
     <h:outputStylesheet library="css" name="bootstrap.css"/>
     <h:outputStylesheet library="css" name="bootstrap-responsive.css"/>
     <h:outputStylesheet library="css" name="main.css"/>
+    <h:outputStylesheet library="css" name="jquery-ui.css"/>
 </h:head>
 <h:body>
     <f:loadBundle basename="messages" var="msgs"/>
@@ -26,14 +27,14 @@
             </ui:insert>
 
             <!-- trip info -->
-            <div class="span9">
+            <div class="span8">
                 <div id="tabContainerTrip" class="tabContainer">
                     <p:tabMenu activeIndex="4" rendered="#{tripBean.hasCurrentTrip}">
                         <p:menuitem value="#{tripBean.currentTrip.title}" url="trip.xhtml"
                                     rendered="#{not tripBean.editableTrip}"/>
                         <p:menuitem value="#{tripBean.currentTrip.title}" url="createTrip.xhtml"
                                     rendered="#{tripBean.editableTrip}"/>
-                        <p:menuitem value="#{msgs.waypoints}" url="stops.xhtml" />
+                        <p:menuitem value="#{msgs.waypoints}" url="stops.xhtml"/>
                         <p:menuitem value="#{msgs.participants}" url="participants.xhtml"/>
                         <p:menuitem value="#{msgs.accessories}" url="accessories.xhtml"/>
                         <p:menuitem value="#{msgs.costs}" url="tripCosts.xhtml"/>
@@ -43,7 +44,32 @@
 
                         <div id="partTab" class="tabContentsTrip">
                             <div class="box">
+                                <c:choose>
+                                                                    <c:when test="#{not tripBean.currentTrip.visible}">
+                                                                        <p>#{msgs.tripNotPublished}</p>
+                                                                    </c:when>
+                                                                    <c:when test="#{tripBean.currentTrip.visible}">
                                 <c:if test="#{not tripBean.currentTrip.started}">
+
+                                    <c:if test="#{not tripBean.confirmInvitation }">
+
+                                        <h:form columns="3" border="0">
+                                            <h:outputLabel value="#{msgs.costName} of costs"/>
+                                            <h:inputText id="text" styleClass="span2" value="#{costBean.text}"/>
+                                            <h:message for="text" styleClass="error"/>
+
+
+                                            <h:outputLabel value="#{msgs.costValue} in €"/>
+                                            <h:inputText id="costValue" styleClass="span2"
+                                                         value="#{costBean.costValue}"/>
+                                            <h:message for="costValue" styleClass="error"/>
+                                            <br/>
+                                            <h:commandButton styleClass="btn btn-success" value="#{msgs.add}"
+                                                             type="submit"
+                                                             action="#{costBean.addCost}"/>
+                                        </h:form>
+                                    </c:if>
+                                    <hr/>
                                     <c:if test="#{not costBean.hasCosts}">
                                         <h:outputText value="#{msgs.noCosts}"/>
                                     </c:if>
@@ -76,50 +102,38 @@
                                                 <h:outputText value="#{cost.tripUser.email}"/>
                                             </h:column>
                                             <f:facet
-                                                    name="footer">#{msgs.averageCost} : #{costBean.averageCostPerUser} </f:facet>
+                                                    name="footer">#{msgs.averageCost} : #{costBean.averageCostPerUser} € </f:facet>
                                         </h:dataTable>
-                                        <h:form>
-                                            <h:dataTable value="#{costBean.costs}" var="cost">
+
 
                                         <h3>All costs</h3>
-                                        <h:dataTable value="#{costBean.costs}" var="cost" styleClass="cost-table"
-                                                     headerClass="cost-table-header"
-                                                     footerClass="cost-table-header"
-                                                     rowClasses="cost-table-odd-row,cost-table-even-row">
+                                        <h:messages globalOnly="true" styleClass="marginBottom10"
+                                                    errorStyle="color: red" infoStyle="color: green"
+                                                    layout="table"/>
+                                        <h:form>
+                                            <h:dataTable value="#{costBean.costs}" var="cost" styleClass="cost-table"
+                                                         headerClass="cost-table-header"
+                                                         footerClass="cost-table-header"
+                                                         rowClasses="cost-table-odd-row,cost-table-even-row">
 
-                                            <h:column>
-                                                <f:facet name="header">#{msgs.description}</f:facet>
-                                                <h:outputText value="#{cost.text}"
-                                                              rendered="#{not costBean.getEditable(cost)}"/>
-                                                <h:inputText id="newtext" value="#{costBean.newtext}"
-                                                             rendered="#{costBean.getEditable(cost)}"/>
-                                                <h:message for="newtext" styleClass="error"/>
+                                                <h:column>
+                                                    <f:facet name="header">#{msgs.description}</f:facet>
+                                                    <h:outputText value="#{cost.text}"
+                                                                  rendered="#{not costBean.getEditable(cost)}"/>
+                                                    <h:inputText id="newtext" value="#{costBean.newtext}"
+                                                                 styleClass="span2"
+                                                                 rendered="#{costBean.getEditable(cost)}"/>
+                                                    <h:message for="newtext" styleClass="error"/>
 
-                                            </h:column>
-                                            <h:column>
-                                                <f:facet name="header">#{msgs.valueOfCost}</f:facet>
-                                                <h:outputText value="#{cost.costValue}"
-                                                              rendered="#{not costBean.getEditable(cost)}">
-                                                    <f:convertNumber type="currency" currencySymbol="€"/>
-                                                </h:outputText>
-                                                <h:inputText id="newcostValue" value="#{costBean.newcostValue}"
-                                                             rendered="#{costBean.getEditable(cost)}"/>
-                                                <h:message for="newcostValue" styleClass="error"/>
-                                            </h:column>
-                                            <h:column>
-                                                <f:facet name="header">#{msgs.username}</f:facet>
-                                                <h:outputText value="#{cost.tripUser.firstName}"/>
-                                            </h:column>
-                                            <h:column>
-                                                <f:facet name="header">#{msgs.email}</f:facet>
-                                                <h:outputText value="#{cost.tripUser.email}"/>
-                                            </h:column>
-                                            <h:form>
+                                                </h:column>
                                                 <h:column>
                                                     <f:facet name="header">#{msgs.valueOfCost}</f:facet>
                                                     <h:outputText value="#{cost.costValue}"
-                                                                  rendered="#{not costBean.getEditable(cost)}"/>
+                                                                  rendered="#{not costBean.getEditable(cost)}">
+                                                        <f:convertNumber type="currency" currencySymbol="€"/>
+                                                    </h:outputText>
                                                     <h:inputText id="newcostValue" value="#{costBean.newcostValue}"
+                                                                 styleClass="span1"
                                                                  rendered="#{costBean.getEditable(cost)}"/>
                                                     <h:message for="newcostValue" styleClass="error"/>
                                                 </h:column>
@@ -127,6 +141,11 @@
                                                     <f:facet name="header">#{msgs.username}</f:facet>
                                                     <h:outputText value="#{cost.tripUser.firstName}"/>
                                                 </h:column>
+                                                <h:column>
+                                                    <f:facet name="header">#{msgs.email}</f:facet>
+                                                    <h:outputText value="#{cost.tripUser.email}"/>
+                                                </h:column>
+
                                                 <h:column>
                                                     <h:commandLink type="submit"
                                                                    rendered="#{costBean.getEditable(cost)}"
@@ -140,46 +159,35 @@
                                                                    value="#{msgs.cancel}">
                                                     </h:commandLink>
                                                 </h:column>
+                                                <c:if test="#{costBean.organizer }">
+                                                    <c:if test="#{not costBean.containsEditable}">
+                                                        <h:column>
+                                                            <h:commandLink value="#{msgs.edit}" type="submit"
+                                                                           rendered="#{ not costBean.getEditable(cost)}"
+                                                                           action="#{costBean.editCost(cost)}">
+                                                            </h:commandLink>
+                                                        </h:column>
+                                                        <h:column>
+                                                            <h:commandLink value="#{msgs.delete}" type="submit"
+                                                                           rendered="#{ not costBean.getEditable(cost)}"
+                                                                           action="#{costBean.deleteCost(cost)}">
+                                                            </h:commandLink>
+                                                        </h:column>
 
-                                                <c:if test="#{costBean.organizer and not costBean.containsEditable }">
 
-                                                    <h:column>
-                                                        <h:commandLink value="#{msgs.edit}" type="submit"
-                                                                       rendered="#{ not costBean.getEditable(cost)}"
-                                                                       action="#{costBean.editCost(cost)}">
-                                                        </h:commandLink>
-                                                    </h:column>
-                                                    <h:column>
-                                                        <h:commandLink value="#{msgs.delete}" type="submit"
-                                                                       rendered="#{ not costBean.getEditable(cost)}"
-                                                                       action="#{costBean.deleteCost(cost)}">
-                                                        </h:commandLink>
-                                                    </h:column>
+                                                    </c:if>
                                                 </c:if>
-                                            </h:form>
-                                            <f:facet name="footer">#{msgs.totalCost} : #{costBean.totalCost} </f:facet>
-                                        </h:dataTable>
 
-                                    </c:if>
-
-                                    <hr/>
-                                    <c:if test="#{not tripBean.confirmInvitation }">
-                                        <h:form columns="3" border="0">
-                                            <h:outputLabel value="#{msgs.costName}"/>
-                                            <h:inputText id="text" styleClass="span2" value="#{costBean.text}"/>
-                                            <h:message for="text" styleClass="error"/>
-
-
-                                            <h:outputLabel value="#{msgs.costValue}"/>
-                                            <h:inputText id="costValue" styleClass="span2"
-                                                         value="#{costBean.costValue}"/>
-                                            <h:message for="costValue" styleClass="error"/>
-                                            <br/>
-                                            <h:commandButton value="#{msgs.add}" type="submit"
-                                                             action="#{costBean.addCost}"/>
+                                                <f:facet
+                                                        name="footer">#{msgs.totalCost} : #{costBean.totalCost} € </f:facet>
+                                            </h:dataTable>
                                         </h:form>
                                     </c:if>
+
+
                                 </c:if>
+                                </c:when>
+                                </c:choose>
                             </div>
                         </div>
                     </div>

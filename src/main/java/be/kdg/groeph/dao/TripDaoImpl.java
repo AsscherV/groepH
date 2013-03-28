@@ -70,6 +70,21 @@ public class TripDaoImpl implements TripDao {
     }
 
     @Override
+    public List<Trip> fetchAllPublicAndPublishedTrips() {
+        try {
+                        Query query = sessionFactory.getCurrentSession().createQuery("from Trip where visible=:visible and isPublic=:public");
+                        query.setParameter("public", true);
+                        query.setParameter("visible", true);
+                        return query.list();
+                    } catch (NullPointerException e) {
+                        logger.error(e.getMessage());
+                        return null;
+                    }
+    }
+
+
+
+    @Override
     @SuppressWarnings("unchecked")
     public List<TripType> fetchAllTripTypes() {
         try {

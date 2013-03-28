@@ -4,8 +4,10 @@ import be.kdg.groeph.model.Accessory;
 import be.kdg.groeph.model.TripUser;
 import be.kdg.groeph.service.AccessoryService;
 import be.kdg.groeph.service.TripService;
+import be.kdg.groeph.util.FMessage;
 import be.kdg.groeph.util.Tools;
 import org.apache.log4j.Logger;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -24,7 +26,7 @@ import java.util.Map;
 @RequestScoped
 public class AccessoryBean implements Serializable {
     static Logger logger = Logger.getLogger(AccessoryBean.class);
-
+    @NotEmpty(message = "{notempty}")
     private String description;
     private TripUser user;
     private String userLastname;
@@ -67,6 +69,8 @@ public class AccessoryBean implements Serializable {
                 if (accessoryService.addAccessory(currentAccessory)) {
                     description = "";
                     editableAccessories.clear();
+
+                    FMessage.makeFacesMessage( currentAccessory.getDescription() + " added", "info");
                     logger.info(accessory.getDescription() + "added.");
                     return Tools.SUCCESS;
                 }
@@ -115,6 +119,8 @@ public class AccessoryBean implements Serializable {
             addableAccessories.clear();
             editableAccessories.clear();
             accessoryService.updateAccessory(currentAccessory);
+
+            FMessage.makeFacesMessage(user.getFirstName() + " "+ user.getLastName()+ " added to " + currentAccessory.getDescription(), "info");
             logger.info("User: " + user.getEmail() + " added to accessory: " + currentAccessory.getDescription());
         } catch (NullPointerException e) {
             logger.error(e.toString());
@@ -125,6 +131,8 @@ public class AccessoryBean implements Serializable {
         try {
             currentAccessory.removeTripUser(user);
             accessoryService.updateAccessory(currentAccessory);
+
+            FMessage.makeFacesMessage(user.getFirstName() + " "+ user.getLastName()+ " removed from " + currentAccessory.getDescription(), "info");
             logger.info("User: " + user.getEmail() + " removed from accessory: " + currentAccessory.getDescription());
         } catch (NullPointerException e) {
             logger.error(e.toString());
@@ -164,6 +172,8 @@ public class AccessoryBean implements Serializable {
             currentAccessory.setDescription(newdescription);
             if (accessoryService.updateAccessory(currentAccessory)) {
                 description = null;
+
+                FMessage.makeFacesMessage( currentAccessory.getDescription() + " updated", "info");
                 logger.info("Accessory: " + currentAccessory.getDescription() + " changed");
                 return Tools.SUCCESS;
             }
@@ -196,6 +206,8 @@ public class AccessoryBean implements Serializable {
             editableAccessories.clear();
             tripBean.getCurrentTrip().deleteAccessory(currentAccessory);
             if (accessoryService.deleteAccessory(currentAccessory)) {
+
+                FMessage.makeFacesMessage( currentAccessory.getDescription() + " deleted", "info");
                 logger.info("Accessory: " + accessory.getDescription() + " removed");
                 return Tools.SUCCESS;
             }

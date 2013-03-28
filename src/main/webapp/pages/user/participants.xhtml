@@ -9,6 +9,7 @@
     <!-- css -->
     <h:outputStylesheet library="css" name="bootstrap.css"/>
     <h:outputStylesheet library="css" name="bootstrap-responsive.css"/>
+    <h:outputStylesheet library="css" name="jquery-ui.css"/>
     <h:outputStylesheet library="css" name="main.css"/>
 </h:head>
 <h:body>
@@ -25,14 +26,14 @@
             </ui:insert>
 
             <!-- trip info -->
-            <div class="span9">
+            <div class="span8">
                 <div id="tabContainerTrip" class="tabContainer">
                     <p:tabMenu activeIndex="2" rendered="#{tripBean.hasCurrentTrip}">
                         <p:menuitem value="#{tripBean.currentTrip.title}" url="trip.xhtml"
                                     rendered="#{not tripBean.editableTrip}"/>
                         <p:menuitem value="#{tripBean.currentTrip.title}" url="createTrip.xhtml"
                                     rendered="#{tripBean.editableTrip}"/>
-                        <p:menuitem value="#{msgs.waypoints}" url="stops.xhtml" />
+                        <p:menuitem value="#{msgs.waypoints}" url="stops.xhtml"/>
                         <p:menuitem value="#{msgs.participants}" url="participants.xhtml"/>
                         <p:menuitem value="#{msgs.accessories}" url="accessories.xhtml"/>
                         <p:menuitem value="#{msgs.costs}" url="tripCosts.xhtml"/>
@@ -52,22 +53,33 @@
                                                 <h:inputTextarea value="#{participantsBean.emails}"/>
                                                 <h:commandButton type="submit"
                                                                  action="#{participantsBean.sendInvitations}"
-                                                                 class="btn btn-success" value="#{msgs.sendInvitations}"/>
+                                                                 class="btn btn-success"
+                                                                 value="#{msgs.sendInvitations}"/>
                                                 <h:commandButton class="btn btn-success"
                                                                  action="#{socialBean.sendMessageToFriendsOnFacebook}"
                                                                  value="#{msgs.shareTripWithFriends}"/>
                                             </h:form>
 
                                             <h:panelGroup rendered="#{participantsBean.hasInvalidEmails}">
-                                                <p>#{msgs.invalidEmail}:</p>
-                                                <h:outputText value="#{participantsBean.invalidEmails}"/>
+                                                <strong>#{msgs.invalidEmail}: </strong>
+                                                <h:dataTable value="#{participantsBean.invalidEmails}"
+                                                             var="invalidEmail">
+                                                    <h:column>
+                                                        <h:outputLabel value="#{invalidEmail}"/>
+                                                    </h:column>
+                                                </h:dataTable>
                                             </h:panelGroup>
 
                                         </c:if>
                                         <c:if test="#{not tripBean.currentTrip.tripUsers.isEmpty()}">
 
-                                            <p>#{msgs.invitedUsers}:</p>
-                                            <h:outputText value="#{tripBean.currentTrip.tripUsers}"/>
+                                            <strong> #{msgs.invitedUsers}: </strong>
+                                            <h:dataTable value="#{tripBean.currentTrip.tripUsers}"
+                                                         var="invitedUser">
+                                                <h:column>
+                                                    <h:outputLabel value="#{invitedUser.email}"/>
+                                                </h:column>
+                                            </h:dataTable>
 
                                         </c:if>
 
@@ -79,14 +91,19 @@
 
                                         <c:if test="#{tripBean.currentTrip.confirmedTripUsers.isEmpty()}">
 
-                                            <strong>#{msgs.noConfirmedUsers}</strong>
+                                            <p>#{msgs.noConfirmedUsers}</p>
 
                                         </c:if>
 
                                         <c:if test="#{not tripBean.currentTrip.confirmedTripUsers.isEmpty()}">
 
-                                            <p>#{msgs.confirmedUsers}:</p>
-                                            <h:outputText value="#{tripBean.currentTrip.confirmedTripUsers}"/>
+                                            <strong>#{msgs.confirmedUsers}:</strong>
+                                            <h:dataTable value="#{tripBean.currentTrip.confirmedTripUsers}"
+                                                         var="confirmedTripUser">
+                                                <h:column>
+                                                    <h:outputLabel value="#{confirmedTripUser.email}"/>
+                                                </h:column>
+                                            </h:dataTable>
 
                                         </c:if>
 

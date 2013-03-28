@@ -7,6 +7,7 @@ import be.kdg.groeph.service.CostService;
 //import org.apache.myfaces.custom.fileupload.HtmlInputFileUpload;
 //import org.apache.myfaces.custom.fileupload.UploadedFile;
 import be.kdg.groeph.service.TripService;
+import be.kdg.groeph.util.FMessage;
 import org.apache.log4j.Logger;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -223,6 +224,7 @@ public class CostBean implements Serializable {
             Cost cost = new Cost(text, Double.valueOf(costValue), tripUser, getCurrentTrip());
             costService.addCost(cost);
             setCurrentCost(cost);
+            FMessage.makeFacesMessage("Cost of "+ cost.getText() + " added","info");
             editableCosts.clear();
             text = "";
             costValue = "";
@@ -250,6 +252,8 @@ public class CostBean implements Serializable {
             if (costService.updateCost(currentCost)) {
                 text = null;
                 costValue = null;
+
+                FMessage.makeFacesMessage("Cost of "+ currentCost.getText() + " updated","info");
             }
 
         } catch (NullPointerException e) {
@@ -273,6 +277,7 @@ public class CostBean implements Serializable {
             editableCosts.clear();
             if (costService.deleteCost(currentCost)) {
 
+                FMessage.makeFacesMessage("Cost of "+ currentCost.getText() + " deleted","info");
             }
         } catch (NullPointerException e) {
             logger.error(e.getMessage());

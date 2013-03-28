@@ -27,173 +27,200 @@
 </ui:insert>
 
 <!-- trip info -->
-<div class="span9">
-<div id="tabContainerTrip" class="tabContainer">
-    <p:tabMenu activeIndex="0" rendered="#{tripBean.hasCurrentTrip}">
-        <p:menuitem value="#{tripBean.currentTrip.title}" url="trip.xhtml"
-                    rendered="#{not tripBean.editableTrip}"/>
-        <p:menuitem value="#{tripBean.currentTrip.title}" url="createTrip.xhtml"
-                    rendered="#{tripBean.editableTrip}"/>
-        <p:menuitem value="#{msgs.waypoints}" url="stops.xhtml" />
-        <p:menuitem value="#{msgs.participants}" url="participants.xhtml"/>
-        <p:menuitem value="#{msgs.accessories}" url="accessories.xhtml"/>
-        <p:menuitem value="#{msgs.costs}" url="tripCosts.xhtml"/>
-    </p:tabMenu>
-<!-- Tab content -->
-<div class="tabDetails">
+<div class="span8">
+    <div id="tabContainerTrip" class="tabContainer">
+        <p:tabMenu activeIndex="0" rendered="#{tripBean.hasCurrentTrip}">
+            <p:menuitem value="#{tripBean.currentTrip.title}" url="trip.xhtml"
+                        rendered="#{not tripBean.editableTrip}"/>
+            <p:menuitem value="#{tripBean.currentTrip.title}" url="createTrip.xhtml"
+                        rendered="#{tripBean.editableTrip}"/>
+            <p:menuitem value="#{msgs.waypoints}" url="stops.xhtml"/>
+            <p:menuitem value="#{msgs.participants}" url="participants.xhtml"/>
+            <p:menuitem value="#{msgs.accessories}" url="accessories.xhtml"/>
+            <p:menuitem value="#{msgs.costs}" url="tripCosts.xhtml"/>
+        </p:tabMenu>
+        <!-- Tab content -->
+        <div class="tabDetails">
 
-    <div id="tripTab" class="tabContentsTrip">
-        <div class="box">
-            <h:panelGroup id="createTrip">
-                <h:form id="tripForm">
-                    <h:panelGrid columns="3" border="0">
-                        <h:outputLabel value="#{msgs.title}"/>
-                        <h:inputText id="titel" styleClass="span2" value="#{tripBean.title}"
-                                     rendered="#{not tripBean.editableTrip}"/>
+            <div id="tripTab" class="tabContentsTrip">
+                <div class="box">
+                    <h:panelGroup id="createTrip">
+                        <h:form id="tripForm">
+                            <h:panelGrid columns="3" border="0">
+                                <h:outputLabel value="#{msgs.title}"/>
+                                <h:inputText id="titel" styleClass="span2" value="#{tripBean.title}"
+                                             rendered="#{not tripBean.editableTrip}"/>
 
-                        <h:inputText id="newtitel" styleClass="span2" value="#{tripBean.newTitle}"
-                                     rendered="#{tripBean.editableTrip}"/>
-                        <h:message for="titel" styleClass="error"
-                                   rendered="#{not tripBean.editableTrip}"/>
-                        <h:message for="newtitel" styleClass="error"
-                                   rendered="#{tripBean.editableTrip}"/>
+                                <h:inputText id="newtitel" styleClass="span2" value="#{tripBean.newTitle}"
+                                             rendered="#{tripBean.editableTrip}"/>
+                                <h:message for="titel" styleClass="error"
+                                           rendered="#{not tripBean.editableTrip}"/>
+                                <h:message for="newtitel" styleClass="error"
+                                           rendered="#{tripBean.editableTrip}"/>
 
-                        <h:outputLabel value="#{msgs.description}"/>
-                        <h:inputText id="description" styleClass="span2"
-                                     value="#{tripBean.description}"
-                                     rendered="#{not tripBean.editableTrip}"/>
-                        <h:inputText id="newdescription" styleClass="span2"
-                                     value="#{tripBean.newDescription}"
-                                     rendered="#{tripBean.editableTrip}"/>
-                        <h:message for="description" styleClass="error"
-                                   rendered="#{not tripBean.editableTrip}"/>
-                        <h:message for="newdescription" styleClass="error"
-                                   rendered="#{tripBean.editableTrip}"/>
+                                <h:outputLabel value="#{msgs.description}"/>
+                                <h:inputTextarea id="description" styleClass="span2"
+                                             value="#{tripBean.description}"
+                                             rendered="#{not tripBean.editableTrip}"/>
+                                <h:inputTextarea id="newdescription" styleClass="span2"
+                                             value="#{tripBean.newDescription}"
+                                             rendered="#{tripBean.editableTrip}"/>
+                                <h:message for="description" styleClass="error"
+                                           rendered="#{not tripBean.editableTrip}"/>
+                                <h:message for="newdescription" styleClass="error"
+                                           rendered="#{tripBean.editableTrip}"/>
 
 
-                        <h:selectOneRadio value="#{tripBean.public}"
-                                          rendered="#{not tripBean.editableTrip}">
-                            <f:selectItem itemValue="#{true}" itemLabel="#{msgs.public}"/>
-                            <f:selectItem itemValue="#{false}" itemLabel="#{msgs.private}"/>
-                        </h:selectOneRadio>
+                                <h:selectOneRadio value="#{tripBean.public}"
+                                                  rendered="#{not tripBean.editableTrip}">
+                                    <f:selectItem itemValue="#{true}" itemLabel="#{msgs.public}"/>
+                                    <f:selectItem itemValue="#{false}" itemLabel="#{msgs.private}"/>
+                                </h:selectOneRadio>
 
-                        <h:selectOneRadio value="#{tripBean.newIsPublic}"
-                                          rendered="#{tripBean.editableTrip}">
-                            <f:selectItem itemValue="#{true}" itemLabel="#{msgs.public}"/>
-                            <f:selectItem itemValue="#{false}" itemLabel="#{msgs.private}"/>
-                        </h:selectOneRadio>
-                        <h:column></h:column>
-                        <h:column></h:column>
+                                <h:selectOneRadio value="#{tripBean.newIsPublic}"
+                                                  rendered="#{tripBean.editableTrip}">
+                                    <f:selectItem itemValue="#{true}" itemLabel="#{msgs.public}"/>
+                                    <f:selectItem itemValue="#{false}" itemLabel="#{msgs.private}"/>
+                                </h:selectOneRadio>
+                                <h:column></h:column>
+                                <h:column></h:column>
 
-                        <h:outputLabel value="#{msgs.type}"/>
-                        <h:selectOneMenu value="#{tripBean.tripType}"
-                                         rendered="#{not tripBean.editableTrip}">
-                            <f:selectItems value="#{tripBean.allTripTypes}" var="type"
-                                           itemLabel="#{type.id} : #{type.type}"
-                                           itemValue="#{type.type}"/>
-                            <f:ajax listener="#{tripBean.changeTripType}" render="typeGroup"/>
-                        </h:selectOneMenu>
 
-                        <h:selectOneMenu value="#{tripBean.newTripType}"
-                                         rendered="#{tripBean.editableTrip}">
-                            <f:selectItems value="#{tripBean.allTripTypes}" var="type"
-                                           itemLabel="#{type.id} : #{type.type}"
-                                           itemValue="#{type.type}"/>
-                            <f:ajax listener="#{tripBean.changeUpdateTripType}" render="typeGroup"/>
-                        </h:selectOneMenu>
-                        <h:column></h:column>
+                                <h:selectOneRadio id="radioRepeating" value="#{tripBean.repeated}">
+                                    <f:selectItem itemValue="#{false}" itemLabel="#{msgs.notRepeating}"/>
+                                    <f:selectItem itemValue="#{true}" itemLabel="#{msgs.repeating}"/>
+                                    <f:ajax render="repeatingGroup"/>
+                                </h:selectOneRadio>
+                                <h:column> </h:column>
+                                <h:column> </h:column>
 
-                        <h:selectOneRadio id="radioRepeating" value="#{tripBean.repeated}">
-                            <f:selectItem itemValue="#{false}" itemLabel="#{msgs.notRepeating}"/>
-                            <f:selectItem itemValue="#{true}" itemLabel="#{msgs.repeating}"/>
-                            <f:ajax render="typeGroup"/>
-                        </h:selectOneRadio>
 
-                        <h:panelGroup id="typeGroup">
-                            <h:panelGroup rendered="#{tripBean.repeated}">
-                                <h:outputLabel value="#{msgs.repetitionType}"/>
-                                <h:selectOneMenu value="#{tripBean.repetitionType}"
+                                <h:panelGroup id="repeatingGroup">
+                                    <h:panelGroup rendered="#{tripBean.repeated}">
+                                        <h:outputLabel value="#{msgs.repetitionType}"/>
+                                        <h:selectOneMenu value="#{tripBean.repetitionType}"
+                                                         rendered="#{not tripBean.editableTrip}">
+                                            <f:selectItems value="#{tripBean.allRepeatingTripTypes}"
+                                                           var="repeatingType"
+                                                           itemLabel="#{repeatingType.id} : #{repeatingType.repeatingType}"
+                                                           itemValue="#{repeatingType.repeatingType}"/>
+                                        </h:selectOneMenu>
+
+                                        <h:selectOneMenu value="#{tripBean.newRepetitionType}"
+                                                         rendered="#{tripBean.editableTrip}">
+                                            <f:selectItems value="#{tripBean.allRepeatingTripTypes}"
+                                                           var="repeatingType"
+                                                           itemLabel="#{repeatingType.id} : #{repeatingType.repeatingType}"
+                                                           itemValue="#{repeatingType.repeatingType}"/>
+                                        </h:selectOneMenu>
+
+                                        <h:column> <h:outputLabel value="#{msgs.amountRepeated}: "/> </h:column>
+                                        <h:column rendered="#{not tripBean.editableTrip}">
+                                            <h:inputText id="numberOfRepetitions" styleClass="span2"
+                                                         value="#{tripBean.numberOfRepetitions}"/>
+                                            <h:message for="numberOfRepetitions" styleClass="error"/>
+                                        </h:column>
+
+                                        <h:column rendered="#{tripBean.editableTrip}">
+                                            <h:inputText id="newNumberOfRepetitions" styleClass="span2"
+                                                         value="#{tripBean.newNumberOfRepetitions}"/>
+                                            <h:message for="newNumberOfRepetitions" styleClass="error"/>
+                                        </h:column>
+
+                                    </h:panelGroup>
+                                </h:panelGroup>
+                                <h:column></h:column>
+                                <h:column></h:column>
+                                <h:outputLabel value="#{msgs.type}"/>
+                                <h:selectOneMenu value="#{tripBean.tripType}"
                                                  rendered="#{not tripBean.editableTrip}">
-                                    <f:selectItems value="#{tripBean.allRepeatingTripTypes}" var="repeatingType"
-                                                   itemLabel="#{repeatingType.id} : #{repeatingType.repeatingType}"
-                                                   itemValue="#{repeatingType.repeatingType}"/>
+                                    <f:selectItems value="#{tripBean.allTripTypes}" var="type"
+                                                   itemLabel="#{type.id} : #{type.type}"
+                                                   itemValue="#{type.type}"/>
+                                    <f:ajax listener="#{tripBean.changeTripType}" render="typeGroup"/>
                                 </h:selectOneMenu>
 
-                                <h:column> <h:outputLabel value="#{msgs.amountRepeated}: "/> </h:column>
-                                <h:column>
-                                    <h:inputText id="numberOfRepetitions" styleClass="span2"
-                                                 value="#{tripBean.numberOfRepetitions}"/>
-                                    <h:message for="numberOfRepetitions" styleClass="error"/>
-                                </h:column>
+                                <h:selectOneMenu value="#{tripBean.newTripType}"
+                                                 rendered="#{tripBean.editableTrip}">
+                                    <f:selectItems value="#{tripBean.allTripTypes}" var="type"
+                                                   itemLabel="#{type.id} : #{type.type}"
+                                                   itemValue="#{type.type}"/>
+                                    <f:ajax listener="#{tripBean.changeUpdateTripType}" render="typeGroup"/>
+                                </h:selectOneMenu>
+                                <h:column></h:column>
+                                <h:column></h:column>
+                                <h:panelGroup id="typeGroup">
+                                    <h:panelGroup rendered="#{tripBean.notAnytime}">
+                                        <h:outputLabel value="#{msgs.tripStartTime}"/>
+                                        <h:inputText id="startTime" styleClass="span2 tripStartDatepicker"
+                                                     value="#{tripBean.startTime}"
+                                                     rendered="#{not tripBean.editableTrip}"> <f:convertDateTime
+                                                pattern="dd/MM/yyyy"/> </h:inputText>
 
-                            </h:panelGroup>
+                                        <h:inputText id="newstartTime" styleClass="span2 tripStartDatepicker"
+                                                     value="#{tripBean.newStartTime}"
+                                                     rendered="#{tripBean.editableTrip}"> <f:convertDateTime
+                                                pattern="dd/MM/yyyy"/> </h:inputText>
+                                        <h:message for="startTime" styleClass="error"
+                                                   rendered="#{not tripBean.editableTrip}"/>
+                                        <h:message for="newstartTime" styleClass="error"
+                                                   rendered="#{tripBean.editableTrip}"/>
 
-                            <h:panelGroup rendered="#{tripBean.notAnytime}">
-                                <h:outputLabel value="#{msgs.tripStartTime}"/>
-                                <h:inputText id="startTime" styleClass="span2 tripStartDatepicker"
-                                             value="#{tripBean.startTime}"
-                                             rendered="#{not tripBean.editableTrip}"> <f:convertDateTime
-                                        pattern="dd/MM/yyyy"/> </h:inputText>
 
-                                <h:inputText id="newstartTime" styleClass="span2 tripStartDatepicker"
-                                             value="#{tripBean.newStartTime}"
-                                             rendered="#{tripBean.editableTrip}"> <f:convertDateTime
-                                        pattern="dd/MM/yyyy"/> </h:inputText>
-                                <h:message for="startTime" styleClass="error"
+                                        <h:outputLabel value="#{msgs.tripEndTime}"/>
+                                        <h:inputText id="endTime" styleClass="span2 tripEndDatepicker"
+                                                     value="#{tripBean.endTime}"
+                                                     rendered="#{not tripBean.editableTrip}"> <f:convertDateTime
+                                                pattern="dd/MM/yyyy"/> </h:inputText>
+
+                                        <h:inputText id="newendTime" styleClass="span2 tripEndDatepicker"
+                                                     value="#{tripBean.newEndTime}"
+                                                     rendered="#{tripBean.editableTrip}"> <f:convertDateTime
+                                                pattern="dd/MM/yyyy"/> </h:inputText>
+
+                                        <h:message for="endTime" styleClass="error"
+                                                   rendered="#{not tripBean.editableTrip}"/>
+                                        <h:message for="newendTime" styleClass="error"
+                                                   rendered="#{tripBean.editableTrip}"/>
+
+                                    </h:panelGroup>
+
+
+                                </h:panelGroup>
+                                <h:column></h:column>
+                                <h:outputLabel value="#{msgs.label}"/>
+                                <h:inputText id="label" styleClass="span2" value="#{tripBean.label}"
+                                             rendered="#{not tripBean.editableTrip}"/>
+                                <h:inputText id="newlabel" styleClass="span2" value="#{tripBean.newLabel}"
+                                             rendered="#{tripBean.editableTrip}"/>
+                                <h:message for="label" styleClass="error"
                                            rendered="#{not tripBean.editableTrip}"/>
-                                <h:message for="newstartTime" styleClass="error"
+                                <h:message for="newlabel" styleClass="error"
                                            rendered="#{tripBean.editableTrip}"/>
 
 
-                                <h:outputLabel value="#{msgs.tripEndTime}"/>
-                                <h:inputText id="endTime" styleClass="span2 tripEndDatepicker"
-                                             value="#{tripBean.endTime}"
-                                             rendered="#{not tripBean.editableTrip}"> <f:convertDateTime
-                                        pattern="dd/MM/yyyy"/> </h:inputText>
+                            </h:panelGrid>
+                            <h:commandButton type="submit" action="#{tripBean.addTrip}"
+                                             class="btn btn-success"
+                                             value="#{msgs.addTrip}"
+                                             rendered="#{not tripBean.editableTrip}"/>
 
-                                <h:inputText id="newendTime" styleClass="span2 tripEndDatepicker"
-                                             value="#{tripBean.newEndTime}"
-                                             rendered="#{tripBean.editableTrip}"> <f:convertDateTime
-                                        pattern="dd/MM/yyyy"/> </h:inputText>
+                            <h:commandButton type="submit" action="#{tripBean.updateTrip}"
+                                             class="btn btn-success" value="#{msgs.update}"
+                                             rendered="#{tripBean.editableTrip}"/>
+                            <h:commandButton type="submit" action="#{tripBean.cancelUpdate}"
+                                             class="btn btn-success" value="#{msgs.cancel} "
+                                             rendered="#{tripBean.editableTrip}" immediate="true"/>
 
-                                <h:message for="endTime" styleClass="error"
-                                           rendered="#{not tripBean.editableTrip}"/>
-                                <h:message for="newendTime" styleClass="error"
-                                           rendered="#{tripBean.editableTrip}"/>
-
-                            </h:panelGroup>
-
-                        </h:panelGroup>
-                        <h:column></h:column>
-                        <h:outputLabel value="#{msgs.label}"/>
-                        <h:inputText id="label" styleClass="span2" value="#{tripBean.label}"
-                                     rendered="#{not tripBean.editableTrip}"/>
-                        <h:inputText id="newlabel" styleClass="span2" value="#{tripBean.newLabel}"
-                                     rendered="#{tripBean.editableTrip}"/>
-                        <h:message for="label" styleClass="error"
-                                   rendered="#{not tripBean.editableTrip}"/>
-                        <h:message for="newlabel" styleClass="error"
-                                   rendered="#{tripBean.editableTrip}"/>
-
-
-                    </h:panelGrid>
-                    <h:commandButton type="submit" action="#{tripBean.addTrip}"
-                                     class="btn btn-success"
-                                     value="#{msgs.addTrip}"
-                                     rendered="#{not tripBean.editableTrip}"/>
-
-                    <h:commandButton type="submit" action="#{tripBean.updateTrip}"
-                                     class="btn btn-success" value="#{msgs.update}"
-                                     rendered="#{tripBean.editableTrip}"/>
-                    <h:commandButton type="submit" action="#{tripBean.cancelUpdate}"
-                                     class="btn btn-success" value="#{msgs.cancel} "
-                                     rendered="#{tripBean.editableTrip}" immediate="true"/>
-                </h:form>
-            </h:panelGroup>
+                            <h:commandButton type="submit" action="#{tripBean.cancelCreate}"
+                                             class="btn btn-success" value="#{msgs.cancel} "
+                                             rendered="#{not tripBean.editableTrip}" immediate="true"/>
+                        </h:form>
+                    </h:panelGroup>
+                </div>
+            </div>
         </div>
     </div>
-</div>
-</div>
 </div>
 
 </div>
