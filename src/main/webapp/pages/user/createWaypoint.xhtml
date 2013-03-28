@@ -71,13 +71,17 @@
                                             <h:message for="newdescription" styleClass="error"/>
                                             <h:outputLabel value="#{msgs.image}"/>
                                             <p:graphicImage value="#{waypointBean.currentImage}" rendered="#{waypointBean.editableWaypoint}"/>
-                                            <p:fileUpload value="#{waypointBean.image}"
+                                            <p:fileUpload id="imageupload"
+                                                    value="#{waypointBean.image}"
                                                           mode="simple"
                                                           update="messages"
                                                           sizeLimit="100000"
-                                                          allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+                                                          allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+                                                          />
 
                                             <p:growl id="messages" showDetail="true" />
+                                            <h:commandButton actionListener="#{waypointBean.removeImage}"
+                                                             value="#{msgs.deleteImage}" update="waypointForm" rendered="#{waypointBean.editableWaypoint and waypointBean.currentImage!=null }"/>
 
                                             <h:panelGrid id="quizInput" rendered="#{waypointBean.interactive}">
                                                 <h:outputLabel value="#{msgs.answer} 1"/>
